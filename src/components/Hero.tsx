@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react';
 
 interface HeroProps {
@@ -27,8 +27,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const [activeTab, setActiveTab] = useState('home');
   const [isDocked, setIsDocked] = useState(false);
 
+  const cardRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLDivElement>(null);
+  const [navStyle, setNavStyle] = useState<Record<string, string>>({});
+
   const { scrollY } = useScroll();
 
+  // Typewriter
   useEffect(() => {
     if (phase !== 'typing') return;
     let charIndex = 0;
@@ -56,6 +61,43 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     return () => clearTimeout(timeout);
   }, [phase]);
 
+  // Measure card position and compute nav position
+  const updateNavPosition = useCallback(() => {
+    if (!cardRef.current || !navRef.current) return;
+    const cardRect = cardRef.current.getBoundingClientRect();
+    const navRect = navRef.current.getBoundingClientRect();
+    const navW = navRect.width;
+
+    if (!isDocked) {
+      // Center of card, upper area
+      const cardCenterX = cardRect.left + cardRect.width / 2;
+      const cardTopY = cardRect.top + cardRect.height * 0.08;
+      setNavStyle({
+        position: 'fixed',
+        left: `${cardCenterX - navW / 2}px`,
+        top: `${cardTopY}px`,
+        zIndex: '30',
+      });
+    } else {
+      // Docked at viewport top center
+      setNavStyle({
+        position: 'fixed',
+        left: '50%',
+        top: '16px',
+        transform: 'translateX(-50%)',
+        zIndex: '60',
+      });
+    }
+  }, [isDocked]);
+
+  // Recalculate on dock change and on resize/scroll
+  useEffect(() => {
+    if (phase !== 'main') return;
+    updateNavPosition();
+    window.addEventListener('resize', updateNavPosition);
+    return () => window.removeEventListener('resize', updateNavPosition);
+  }, [phase, updateNavPosition]);
+
   useMotionValueEvent(scrollY, 'change', (latest) => {
     if (phase !== 'main') return;
     if (latest > SCROLL_THRESHOLD && !isDocked) {
@@ -65,6 +107,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     }
   });
 
+  // Track active tab on scroll
   useEffect(() => {
     if (phase !== 'main') return;
     const ids = ['home', 'about', 'work', 'skills', 'contact'];
@@ -175,34 +218,41 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         )}
       </AnimatePresence>
 
-      {/* Docked Top Navbar */}
-      <AnimatePresence>
-        {isMain && isDocked && (
-          <motion.div
-            key="docked-nav"
-            className="fixed top-4 left-1/2 z-[60]"
-            style={{ x: '-50%' }}
-            initial={{ opacity: 0, y: -20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+      {/* Single Flying Navbar Sticker */}
+      {isMain && (
+        <motion.div
+          ref={navRef}
+          className="pointer-events-auto"
+          style={{
+            ...navStyle,
+            transform: navStyle.transform || 'none',
+          }}
+          animate={{
+            scale: isDocked ? 1 : 1,
+            opacity: 1,
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+        >
+          <div
+            className="px-5 sm:px-7 py-2.5"
+            style={{
+              background: isDocked
+                ? 'rgba(255, 255, 255, 0.22)'
+                : 'rgba(255, 255, 255, 0.35)',
+              backdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
+              WebkitBackdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
+              border: '1px solid rgba(255, 255, 255, 0.45)',
+              borderRadius: '14px',
+              boxShadow: isDocked
+                ? '0 4px 20px rgba(0, 0, 0, 0.1)'
+                : '0 4px 15px rgba(0,0,0,0.08)',
+              transition: 'background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s',
+            }}
           >
-            <div
-              className="px-5 sm:px-7 py-2.5"
-              style={{
-                background: 'rgba(255, 255, 255, 0.22)',
-                backdropFilter: 'blur(18px) saturate(180%)',
-                WebkitBackdropFilter: 'blur(18px) saturate(180%)',
-                border: '1px solid rgba(255, 255, 255, 0.45)',
-                borderRadius: '14px',
-                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <NavLinks />
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <NavLinks />
+          </div>
+        </motion.div>
+      )}
 
       {/* Main Content */}
       <div
@@ -218,6 +268,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
         {/* Glass Card */}
         <motion.div
+          ref={cardRef}
           className="relative z-10"
           style={{
             width: 'min(90vw, 1200px)',
@@ -231,42 +282,15 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           transition={{ duration: 0.7, delay: isMain ? 0.05 : 0, ease: 'easeOut' }}
         >
           <div
-            className="w-full h-full flex flex-col items-center justify-center relative"
+            className="w-full h-full relative"
             style={{
               background: 'rgba(255, 255, 255, 0.12)',
               border: '1px solid rgba(255, 255, 255, 0.4)',
               borderRadius: '24px',
               boxShadow: '0 8px 32px 0 rgba(0, 0, 0, 0.08)',
-              overflow: 'visible',
+              overflow: 'hidden',
             }}
           >
-            {/* Navbar Sticker - upper center of card */}
-            <AnimatePresence>
-              {isMain && !isDocked && (
-                <motion.div
-                  key="card-nav"
-                  className="absolute z-20 left-1/2"
-                  style={{ top: '10%', transform: 'translateX(-50%)' }}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                >
-                  <div
-                    className="px-5 sm:px-6 py-2.5"
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.35)',
-                      border: '1px solid rgba(255, 255, 255, 0.5)',
-                      borderRadius: '14px',
-                      boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
-                    }}
-                  >
-                    <NavLinks />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
             {/* Left-aligned Text Content */}
             <div className="absolute left-0 bottom-0 w-full px-8 sm:px-12 md:px-16 pb-24 sm:pb-28 md:pb-32">
               <motion.div
@@ -307,8 +331,8 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     color: BROWN,
-                    fontWeight: 800,
-                    letterSpacing: '0.01em',
+                    fontWeight: 900,
+                    letterSpacing: '0.015em',
                     lineHeight: 1.6,
                   }}
                 >

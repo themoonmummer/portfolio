@@ -1,13 +1,21 @@
-Please refine the Hero card layout, navbar positioning, and text weights:
+Please refactor the portfolio layout by separating the Navbar from Hero.tsx into its own independent component, and fix the card navbar position as follows:
 
-1. Exact Navbar Position:
-   - Position the floating pill navbar sticker at the UPPER CENTER of the card (centered horizontally along the top edge of the card, with comfortable padding inside the top).
-   - Keep the scroll behavior intact: when scrolling down, it smoothly lifts from this upper-center spot, grows, and docks to the top of the browser screen.
+1. Component Separation (Clean Architecture):
+   - Keep `Navbar.tsx` strictly responsible for rendering the navigation links and managing the floating sticker styling/active tab pill state.
+   - Clean up `Hero.tsx` so it only contains the introductory typewriter zoom animation, Mount Fuji background, glass card, and left-aligned text content.
+   - Import and mount `<Navbar />` cleanly inside `Hero.tsx`.
 
-2. Typography & Font Weight Adjustments:
-   - Bio Paragraph: Increase the font weight of the bio text ("I'm a person with a lot of hobbies...") so it is significantly THICKER, bolder, and higher contrast against the clear card background.
-   - Text Hierarchy (Left-Aligned):
-     * Name ("Riya Jha"): Extra Bold, large elegant serif.
-     * Subtitle ("Vibe Coder & Full-Stack Developer"): Bold serif.
-     * Bio Paragraph: Thick, bold, highly legible sans-serif or serif.
-     * Color: Ensure all text remains warm brown (#4A2E2B).
+2. Position Navbar in the Exact Upper Center of the Clear Card:
+   - Move the navbar back into the clear glass card.
+   - Set its positioning inside the card to be centered horizontally along the upper section:
+     `position: absolute; top: 10%; left: 50%; transform: translateX(-50%);`
+   - Ensure it is strictly contained INSIDE the central glass card boundary (NOT on the left side or outside the card frame).
+
+3. Scroll Flight Effect:
+   - When scrolling down, this centered navbar sticker should lift smoothly out of the clear card and stick to the top center of the browser window (`fixed top-4 left-1/2 -translate-x-1/2`).
+   - When scrolling back up, it should unstick and settle smoothly back into the upper-center spot inside the clear glass card.
+
+4. Preserve Design Details:
+   - Left-aligned text in brown (#4A2E2B) for "Riya Jha", "Vibe Coder & Full-Stack Developer", and the thick bio paragraph.
+   - Elegant Cormorant Garamond serif typography.
+   - Transparent, crisp glassmorphism card over the hero.jpeg background.
