@@ -1,9 +1,21 @@
-The app is stuck on the pink page due to a Framer Motion context error ("Cannot read properties of null reading useContext"). 
+Please refine the Hero component styling and transition animations as follows:
 
-Please perform the following fixes:
-1. Fix the Framer Motion / React version mismatch or import issue so components mount without throwing runtime errors. Ensure hooks are imported cleanly from 'react'.
-2. Update the Hero component animation flow:
-   - Start with the pastel pink (#FFD1DC) background and typewriter "hello".
-   - Once "hello" finishes typing, animate its scale up rapidly so "hello" grows super large and zooms past/out of the screen.
-   - As it zooms out, smoothly fade out the pink background and zoom/fade IN the main Mount Fuji (`hero.jpeg`) background with the central glassmorphism card (containing "Riya Jha", "Vibe Coder & Full-Stack Developer" in Cormorant Garamond, and the vertical navbar).
-3. Ensure all animation timers and state transitions complete properly so the layout never gets stuck.
+1. "hello" Text & Zoom Fixes:
+   - Font & Style: Make "hello" bold and set its font-family to 'Times New Roman', Times, serif.
+   - Initial Size: Increase the starting size of "hello" so it is distinctly visible and bold in the center of the screen during the typing animation.
+   - Zoom Effect: When zooming in/out, scale "hello" up exponentially so it expands to consume the ENTIRE screen before fading out into the hero section.
+
+2. Central Glassmorphism Card (Refining the 'frame' design):
+   - Clear Glass Effect: The central card must look like ultra-clear, translucent frosted glass overlaying the Mount Fuji (hero.jpeg) background.
+   - Styling Details:
+     * Background: Semi-transparent white with low opacity (`rgba(255, 255, 255, 0.15)` to `0.25`).
+     * Backdrop Filter: Apply `backdrop-filter: blur(16px) saturate(180%)` (and `-webkit-backdrop-filter`).
+     * Border: A thin, crisp 1px light border (`rgba(255, 255, 255, 0.4)`) with smooth rounded corners (`border-radius: 20px` to `24px`).
+     * Shadow: A soft, subtle elevation shadow (`box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1)`).
+   - Card Layout:
+     * Keep the inside clean and minimal: Left side displays "Riya Jha" (Bold) and "Vibe Coder & Full-Stack Developer" in the elegant serif font.
+     * Right side displays the vertical links: Home, Projects, About, Contact.
+     * Ensure NO photo collage cluster or extra images are present inside or around the card.
+
+3. Transitions:
+   - Smoothly transition from the screen-filling "hello" zoom directly into revealing this polished glass card over the Fuji background.

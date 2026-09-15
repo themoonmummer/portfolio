@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface HeroProps {
   onNavigate?: (section: string) => void;
@@ -7,10 +7,11 @@ interface HeroProps {
 
 const TYPEWRITER_TEXT = 'hello';
 const TYPING_SPEED = 120;
-const PAUSE_AFTER_TYPING = 1000;
+const PAUSE_AFTER_TYPING = 800;
+const ZOOM_DURATION = 600;
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
-  const [phase, setPhase] = useState<'typing' | 'pausing' | 'fading' | 'main'>('typing');
+  const [phase, setPhase] = useState<'typing' | 'pausing' | 'zooming' | 'main'>('typing');
   const [typedText, setTypedText] = useState('');
 
   useEffect(() => {
@@ -32,21 +33,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
   useEffect(() => {
     if (phase !== 'pausing') return;
-
-    const timeout = setTimeout(() => {
-      setPhase('fading');
-    }, PAUSE_AFTER_TYPING);
-
+    const timeout = setTimeout(() => setPhase('zooming'), PAUSE_AFTER_TYPING);
     return () => clearTimeout(timeout);
   }, [phase]);
 
   useEffect(() => {
-    if (phase !== 'fading') return;
-
-    const timeout = setTimeout(() => {
-      setPhase('main');
-    }, 800);
-
+    if (phase !== 'zooming') return;
+    const timeout = setTimeout(() => setPhase('main'), ZOOM_DURATION + 200);
     return () => clearTimeout(timeout);
   }, [phase]);
 
@@ -54,29 +47,43 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     onNavigate?.(section);
   }, [onNavigate]);
 
+  const isZooming = phase === 'zooming';
+  const isMain = phase === 'main';
+
   return (
     <section className="relative min-h-screen overflow-hidden">
+      {/* Intro Pink Overlay */}
       <AnimatePresence>
-        {phase !== 'main' && (
+        {!isMain && (
           <motion.div
             key="intro"
             className="absolute inset-0 z-50 flex items-center justify-center"
             style={{ backgroundColor: '#FFD1DC' }}
             initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
+            animate={{ opacity: isZooming ? 0 : 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
           >
-            <div className="text-center">
-              <h1
-                className="text-5xl sm:text-6xl md:text-7xl font-light tracking-wide"
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  color: '#4a3040',
-                  letterSpacing: '0.05em',
-                }}
-              >
-                {typedText}
+            <motion.h1
+              className="text-5xl sm:text-6xl md:text-7xl font-light tracking-wide"
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                color: '#4a3040',
+                letterSpacing: '0.05em',
+              }}
+              animate={
+                isZooming
+                  ? { scale: 80, opacity: 0 }
+                  : { scale: 1, opacity: 1 }
+              }
+              transition={
+                isZooming
+                  ? { duration: 0.6, ease: 'easeIn' }
+                  : { duration: 0 }
+              }
+            >
+              {typedText}
+              {!isZooming && (
                 <span
                   className="inline-block w-[3px] h-[0.8em] ml-1 align-middle"
                   style={{
@@ -84,18 +91,15 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                     animation: 'blink 1s step-end infinite',
                   }}
                 />
-              </h1>
-            </div>
+              )}
+            </motion.h1>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Main Content */}
-      <motion.div
+      <div
         className="relative min-h-screen w-full flex items-center justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: phase === 'main' ? 1 : 0 }}
-        transition={{ duration: 0.8, ease: 'easeInOut' }}
         style={{
           backgroundImage: 'url(/images/hero.jpeg)',
           backgroundSize: 'cover',
@@ -108,12 +112,12 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         {/* Glassmorphism Card */}
         <motion.div
           className="relative z-10 w-full max-w-5xl mx-4 sm:mx-8"
-          initial={{ scale: 0.95, opacity: 0 }}
+          initial={{ scale: 0.9, opacity: 0 }}
           animate={{
-            scale: phase === 'main' ? 1 : 0.95,
-            opacity: phase === 'main' ? 1 : 0,
+            scale: isMain ? 1 : 0.9,
+            opacity: isMain ? 1 : 0,
           }}
-          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+          transition={{ duration: 0.7, delay: isMain ? 0.1 : 0, ease: 'easeOut' }}
         >
           <div
             className="rounded-3xl overflow-hidden"
@@ -131,10 +135,10 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{
-                    opacity: phase === 'main' ? 1 : 0,
-                    y: phase === 'main' ? 0 : 20,
+                    opacity: isMain ? 1 : 0,
+                    y: isMain ? 0 : 20,
                   }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
+                  transition={{ duration: 0.5, delay: 0.4 }}
                 >
                   <h2
                     className="text-4xl sm:text-5xl md:text-6xl font-semibold mb-4"
@@ -165,10 +169,10 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                 className="flex-1 flex items-center justify-center p-8 sm:p-12 md:p-16 md:border-l border-white/20"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{
-                  opacity: phase === 'main' ? 1 : 0,
-                  x: phase === 'main' ? 0 : 20,
+                  opacity: isMain ? 1 : 0,
+                  x: isMain ? 0 : 20,
                 }}
-                transition={{ duration: 0.6, delay: 0.8 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
               >
                 <nav className="flex flex-col gap-6 sm:gap-8">
                   {['Home', 'Projects', 'About', 'Contact'].map((item, index) => (
@@ -178,10 +182,10 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                       className="text-left group"
                       initial={{ opacity: 0, x: 10 }}
                       animate={{
-                        opacity: phase === 'main' ? 1 : 0,
-                        x: phase === 'main' ? 0 : 10,
+                        opacity: isMain ? 1 : 0,
+                        x: isMain ? 0 : 10,
                       }}
-                      transition={{ duration: 0.4, delay: 0.9 + index * 0.1 }}
+                      transition={{ duration: 0.35, delay: 0.7 + index * 0.08 }}
                       whileHover={{ x: 8 }}
                     >
                       <span
@@ -202,7 +206,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             </div>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
 
       <style>{`
         @keyframes blink {
