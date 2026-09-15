@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Hero } from './components/Hero';
-import { ProjectsMetro } from './components/ProjectsMetro';
+import { ProjectsMetro } from './components/ProjectsSection';
 import { TechStack } from './components/TechStack';
 import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
