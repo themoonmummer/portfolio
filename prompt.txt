@@ -1,21 +1,48 @@
-Please refactor the portfolio layout by separating the Navbar from Hero.tsx into its own independent component, and fix the card navbar position as follows:
+I want to improve the navbar behavior and the intro paragraph styling on my portfolio website.
 
-1. Component Separation (Clean Architecture):
-   - Keep `Navbar.tsx` strictly responsible for rendering the navigation links and managing the floating sticker styling/active tab pill state.
-   - Clean up `Hero.tsx` so it only contains the introductory typewriter zoom animation, Mount Fuji background, glass card, and left-aligned text content.
-   - Import and mount `<Navbar />` cleanly inside `Hero.tsx`.
+Navbar behavior
 
-2. Position Navbar in the Exact Upper Center of the Clear Card:
-   - Move the navbar back into the clear glass card.
-   - Set its positioning inside the card to be centered horizontally along the upper section:
-     `position: absolute; top: 10%; left: 50%; transform: translateX(-50%);`
-   - Ensure it is strictly contained INSIDE the central glass card boundary (NOT on the left side or outside the card frame).
+The navbar is currently fixed, but I don't want it to remain visually stuck at the exact same size/position while scrolling.
 
-3. Scroll Flight Effect:
-   - When scrolling down, this centered navbar sticker should lift smoothly out of the clear card and stick to the top center of the browser window (`fixed top-4 left-1/2 -translate-x-1/2`).
-   - When scrolling back up, it should unstick and settle smoothly back into the upper-center spot inside the clear glass card.
+In the hero/home section, keep the navbar exactly where it currently appears.
 
-4. Preserve Design Details:
-   - Left-aligned text in brown (#4A2E2B) for "Riya Jha", "Vibe Coder & Full-Stack Developer", and the thick bio paragraph.
-   - Elegant Cormorant Garamond serif typography.
-   - Transparent, crisp glassmorphism card over the hero.jpeg background.
+As the user scrolls down from the hero section toward the second section, smoothly transition the navbar:
+
+Increase its height/padding slightly.
+
+Make it visually a little larger and more prominent.
+
+Once the user reaches the second section, the navbar should settle into a normal sticky/fixed position appropriate for the rest of the page.
+
+When the user scrolls back up to the hero section, smoothly reverse the animation so the navbar returns to its original hero-page size and position.
+
+The transition should feel smooth and intentional, not jumpy.
+
+Avoid changing the existing design unnecessarily. Preserve the current colors, typography, spacing, and overall visual style.
+
+Use CSS transitions/transforms where possible and JavaScript/React scroll detection only where necessary.
+
+Make sure the implementation is responsive and works properly on mobile as well.
+
+Intro paragraph
+
+There is a paragraph containing text similar to:
+"I'm a person with..."
+
+This text currently doesn't have enough visual weight and is difficult to read.
+
+Make this paragraph slightly thicker/more prominent.
+
+Prefer adjusting font-weight, font-size, line-height, opacity/color contrast, or font-family if appropriate.
+
+Keep it visually consistent with the rest of the portfolio.
+
+Don't make it excessively bold or oversized.
+
+Make sure it remains readable on different screen sizes.
+
+Important
+
+Before making changes, inspect the existing navbar, hero section, scroll behavior, and typography styles so you can work with the current architecture instead of rewriting components unnecessarily.
+
+Implement the changes directly in the existing codebase. Keep the solution clean, reusable, responsive, and avoid introducing unnecessary dependencies.

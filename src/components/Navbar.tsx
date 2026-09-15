@@ -1,120 +1,133 @@
-import React, { useState } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, useScroll, useMotionValueEvent } from 'motion/react';
 
 interface NavbarProps {
-  onHireClick: () => void;
+  visible: boolean;
+  onNavigate?: (section: string) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onHireClick }) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState('work');
+const NAV_ITEMS = [
+  { label: 'Home', id: 'home' },
+  { label: 'About', id: 'about' },
+  { label: 'Projects', id: 'work' },
+  { label: 'Skills/Languages', id: 'skills' },
+  { label: 'Contact', id: 'contact' },
+];
 
-  const scrollToSection = (id: string) => {
-    setActiveTab(id);
-    setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+const BROWN = '#4A2E2B';
+const SCROLL_THRESHOLD = 100;
+
+export const Navbar: React.FC<NavbarProps> = ({ visible, onNavigate }) => {
+  const [activeTab, setActiveTab] = useState('home');
+  const [isDocked, setIsDocked] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    if (!visible) return;
+    if (latest > SCROLL_THRESHOLD && !isDocked) {
+      setIsDocked(true);
+    } else if (latest <= SCROLL_THRESHOLD && isDocked) {
+      setIsDocked(false);
     }
-  };
+  });
+
+  // Track active tab on scroll
+  useEffect(() => {
+    if (!visible) return;
+    const ids = ['home', 'about', 'work', 'skills', 'contact'];
+    const handleScroll = () => {
+      const pos = window.scrollY + window.innerHeight / 3;
+      for (let i = ids.length - 1; i >= 0; i--) {
+        const el = document.getElementById(ids[i]);
+        if (el && el.offsetTop <= pos) {
+          setActiveTab(ids[i]);
+          return;
+        }
+      }
+      setActiveTab('home');
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [visible]);
+
+  const handleNavClick = useCallback(
+    (id: string) => {
+      setActiveTab(id);
+      onNavigate?.(id);
+    },
+    [onNavigate]
+  );
+
+  if (!visible) return null;
 
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] sm:w-[calc(100%-40px)] max-w-7xl rounded-full border-[0.5px] border-white/60 bg-white/70 backdrop-blur-xl shadow-[0_8px_32px_0_rgba(104,84,141,0.12)] z-50 transition-all duration-300">
-      <nav className="flex justify-between items-center px-6 sm:px-8 py-3 w-full">
-        {/* Brand Logo */}
-        <a 
-          href="#" 
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#1b1b1d] hover:text-[#95406f] transition-colors"
-        >
-          Komorebi Digital
-        </a>
-
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex gap-8 items-center">
-          <button
-            onClick={() => scrollToSection('work')}
-            className={`font-body text-base font-medium transition-all ${
-              activeTab === 'work' 
-                ? 'text-[#95406f] border-b-2 border-[#95406f] pb-0.5 font-semibold' 
-                : 'text-[#524249] hover:text-[#95406f]'
-            }`}
-          >
-            Work
-          </button>
-          <button
-            onClick={() => scrollToSection('about')}
-            className={`font-body text-base font-medium transition-all ${
-              activeTab === 'about' 
-                ? 'text-[#95406f] border-b-2 border-[#95406f] pb-0.5 font-semibold' 
-                : 'text-[#524249] hover:text-[#95406f]'
-            }`}
-          >
-            About
-          </button>
-          <button
-            onClick={() => scrollToSection('contact')}
-            className={`font-body text-base font-medium transition-all ${
-              activeTab === 'contact' 
-                ? 'text-[#95406f] border-b-2 border-[#95406f] pb-0.5 font-semibold' 
-                : 'text-[#524249] hover:text-[#95406f]'
-            }`}
-          >
-            Contact
-          </button>
-
-          {/* Hire Me CTA Button */}
-          <button
-            onClick={onHireClick}
-            className="sunset-glow text-white px-6 py-2 rounded-full font-body text-xs uppercase tracking-widest font-bold hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer"
-          >
-            Hire Me
-          </button>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2 text-[#1b1b1d] hover:text-[#95406f] transition-colors"
-          aria-label="Toggle navigation menu"
-        >
-          <span className="material-symbols-outlined text-2xl">
-            {mobileMenuOpen ? 'close' : 'menu'}
-          </span>
-        </button>
-      </nav>
-
-      {/* Mobile Dropdown Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden px-6 pt-2 pb-6 flex flex-col gap-4 border-t border-white/40 mt-1">
-          <button
-            onClick={() => scrollToSection('work')}
-            className="text-left font-body text-base font-semibold text-[#1b1b1d] py-1"
-          >
-            Work
-          </button>
-          <button
-            onClick={() => scrollToSection('about')}
-            className="text-left font-body text-base font-semibold text-[#1b1b1d] py-1"
-          >
-            About
-          </button>
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="text-left font-body text-base font-semibold text-[#1b1b1d] py-1"
-          >
-            Contact
-          </button>
-          <button
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onHireClick();
-            }}
-            className="w-full sunset-glow text-white py-3 rounded-full font-body text-xs uppercase tracking-widest font-bold text-center mt-2 shadow-md"
-          >
-            Hire Me
-          </button>
-        </div>
-      )}
-    </header>
+    <motion.div
+      ref={containerRef}
+      className="pointer-events-auto"
+      style={{
+        position: 'fixed',
+        top: '95px',
+        left: '35%',
+        transform: 'translateX(-50%)',
+        zIndex: 50,
+      }}
+      initial={{ opacity: 0, y: -20, scale: 0.95 }}
+      animate={{
+        opacity: 1,
+        y: isDocked ? 16 : 0,
+        scale: 1,
+      }}
+      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+    >
+      <div
+        className="px-5 sm:px-7 py-2.5"
+        style={{
+          background: isDocked
+            ? 'rgba(255, 255, 255, 0.22)'
+            : 'rgba(255, 255, 255, 0.35)',
+          backdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
+          WebkitBackdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
+          border: '1px solid rgba(255, 255, 255, 0.45)',
+          borderRadius: '14px',
+          boxShadow: isDocked
+            ? '0 4px 20px rgba(0, 0, 0, 0.1)'
+            : '0 4px 15px rgba(0,0,0,0.08)',
+          transition: 'background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s',
+        }}
+      >
+        <nav className="flex flex-row gap-1 sm:gap-2 items-center relative">
+          {NAV_ITEMS.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
+              className="relative px-3 py-1.5 sm:px-4 sm:py-2 z-10 text-sm sm:text-base whitespace-nowrap"
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                color: activeTab === item.id ? BROWN : 'rgba(74, 46, 43, 0.65)',
+                fontWeight: activeTab === item.id ? 600 : 400,
+                letterSpacing: '0.02em',
+                transition: 'color 0.3s',
+              }}
+            >
+              {activeTab === item.id && (
+                <motion.div
+                  layoutId="navbar-pill"
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.55)',
+                    border: '1px solid rgba(255, 255, 255, 0.6)',
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                  }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{item.label}</span>
+            </button>
+          ))}
+        </nav>
+      </div>
+    </motion.div>
   );
 };

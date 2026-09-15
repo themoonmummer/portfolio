@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Navbar } from './Navbar';
 
 interface HeroProps {
   onNavigate?: (section: string) => void;
@@ -9,31 +10,12 @@ const TYPEWRITER_TEXT = 'hello';
 const TYPING_SPEED = 120;
 const PAUSE_AFTER_TYPING = 800;
 const ZOOM_DURATION = 700;
-const SCROLL_THRESHOLD = 100;
-
-const NAV_ITEMS = [
-  { label: 'Home', id: 'home' },
-  { label: 'About', id: 'about' },
-  { label: 'Projects', id: 'work' },
-  { label: 'Skills/Languages', id: 'skills' },
-  { label: 'Contact', id: 'contact' },
-];
-
 const BROWN = '#4A2E2B';
 
 export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const [phase, setPhase] = useState<'typing' | 'pausing' | 'zooming' | 'main'>('typing');
   const [typedText, setTypedText] = useState('');
-  const [activeTab, setActiveTab] = useState('home');
-  const [isDocked, setIsDocked] = useState(false);
 
-  const cardRef = useRef<HTMLDivElement>(null);
-  const navRef = useRef<HTMLDivElement>(null);
-  const [navStyle, setNavStyle] = useState<Record<string, string>>({});
-
-  const { scrollY } = useScroll();
-
-  // Typewriter
   useEffect(() => {
     if (phase !== 'typing') return;
     let charIndex = 0;
@@ -61,114 +43,8 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
     return () => clearTimeout(timeout);
   }, [phase]);
 
-  // Measure card position and compute nav position
-  const updateNavPosition = useCallback(() => {
-    if (!cardRef.current || !navRef.current) return;
-    const cardRect = cardRef.current.getBoundingClientRect();
-    const navRect = navRef.current.getBoundingClientRect();
-    const navW = navRect.width;
-
-    if (!isDocked) {
-      // Center of card, upper area
-      const cardCenterX = cardRect.left + cardRect.width / 2;
-      const cardTopY = cardRect.top + cardRect.height * 0.08;
-      setNavStyle({
-        position: 'fixed',
-        left: `${cardCenterX - navW / 2}px`,
-        top: `${cardTopY}px`,
-        zIndex: '30',
-      });
-    } else {
-      // Docked at viewport top center
-      setNavStyle({
-        position: 'fixed',
-        left: '50%',
-        top: '16px',
-        transform: 'translateX(-50%)',
-        zIndex: '60',
-      });
-    }
-  }, [isDocked]);
-
-  // Recalculate on dock change and on resize/scroll
-  useEffect(() => {
-    if (phase !== 'main') return;
-    updateNavPosition();
-    window.addEventListener('resize', updateNavPosition);
-    return () => window.removeEventListener('resize', updateNavPosition);
-  }, [phase, updateNavPosition]);
-
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (phase !== 'main') return;
-    if (latest > SCROLL_THRESHOLD && !isDocked) {
-      setIsDocked(true);
-    } else if (latest <= SCROLL_THRESHOLD && isDocked) {
-      setIsDocked(false);
-    }
-  });
-
-  // Track active tab on scroll
-  useEffect(() => {
-    if (phase !== 'main') return;
-    const ids = ['home', 'about', 'work', 'skills', 'contact'];
-    const handleScroll = () => {
-      const pos = window.scrollY + window.innerHeight / 3;
-      for (let i = ids.length - 1; i >= 0; i--) {
-        const el = document.getElementById(ids[i]);
-        if (el && el.offsetTop <= pos) {
-          setActiveTab(ids[i]);
-          return;
-        }
-      }
-      setActiveTab('home');
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [phase]);
-
-  const handleNavClick = useCallback(
-    (id: string) => {
-      setActiveTab(id);
-      onNavigate?.(id);
-    },
-    [onNavigate]
-  );
-
   const isZooming = phase === 'zooming';
   const isMain = phase === 'main';
-
-  const NavLinks = () => (
-    <nav className="flex flex-row gap-1 sm:gap-2 items-center relative">
-      {NAV_ITEMS.map((item) => (
-        <button
-          key={item.id}
-          onClick={() => handleNavClick(item.id)}
-          className="relative px-3 py-1.5 sm:px-4 sm:py-2 z-10 text-sm sm:text-base whitespace-nowrap"
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            color: activeTab === item.id ? BROWN : 'rgba(74, 46, 43, 0.65)',
-            fontWeight: activeTab === item.id ? 600 : 400,
-            letterSpacing: '0.02em',
-            transition: 'color 0.3s',
-          }}
-        >
-          {activeTab === item.id && (
-            <motion.div
-              layoutId="navbar-pill"
-              className="absolute inset-0 rounded-full"
-              style={{
-                background: 'rgba(255, 255, 255, 0.55)',
-                border: '1px solid rgba(255, 255, 255, 0.6)',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-              }}
-              transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            />
-          )}
-          <span className="relative z-10">{item.label}</span>
-        </button>
-      ))}
-    </nav>
-  );
 
   return (
     <section className="relative min-h-screen overflow-hidden">
@@ -218,41 +94,8 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         )}
       </AnimatePresence>
 
-      {/* Single Flying Navbar Sticker */}
-      {isMain && (
-        <motion.div
-          ref={navRef}
-          className="pointer-events-auto"
-          style={{
-            ...navStyle,
-            transform: navStyle.transform || 'none',
-          }}
-          animate={{
-            scale: isDocked ? 1 : 1,
-            opacity: 1,
-          }}
-          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-        >
-          <div
-            className="px-5 sm:px-7 py-2.5"
-            style={{
-              background: isDocked
-                ? 'rgba(255, 255, 255, 0.22)'
-                : 'rgba(255, 255, 255, 0.35)',
-              backdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
-              WebkitBackdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
-              border: '1px solid rgba(255, 255, 255, 0.45)',
-              borderRadius: '14px',
-              boxShadow: isDocked
-                ? '0 4px 20px rgba(0, 0, 0, 0.1)'
-                : '0 4px 15px rgba(0,0,0,0.08)',
-              transition: 'background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s',
-            }}
-          >
-            <NavLinks />
-          </div>
-        </motion.div>
-      )}
+      {/* Navbar - flies between card and viewport top on scroll */}
+      <Navbar visible={isMain} onNavigate={onNavigate} />
 
       {/* Main Content */}
       <div
@@ -268,7 +111,6 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
         {/* Glass Card */}
         <motion.div
-          ref={cardRef}
           className="relative z-10"
           style={{
             width: 'min(90vw, 1200px)',
