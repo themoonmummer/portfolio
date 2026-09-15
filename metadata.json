@@ -1,0 +1,6 @@
+{
+  "name": "Komorebi Digital Portfolio",
+  "description": "A premium animated portfolio featuring Sakura Ethereal glassmorphism, falling petal particles, interactive project metro display, 3D perspective tech stack, and zen aesthetics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

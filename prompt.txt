@@ -1,0 +1,23 @@
+Generate the Home/Hero page for my portfolio with the following sequenced animation and layout. I am a vibe coder and full-stack developer, and my project is focused on my works.
+Initial Load & Animation:
+
+    Background: The page must start as a solid, soft blank pastel pink (#FFD1DC).
+
+    Animation 1 (Typing): On load, start a typewriter animation in the dead center of the screen that types the single word: "hello".
+
+    Animation 2 (Fade Out): After "hello" finishes typing and pauses for 1 second, fade the entire pastel pink page and the "hello" text to pure white, then immediately transition to the main layout.
+
+Main Layout (Post-Animation):
+4.  Full Page Background: The entire browser window background is now set to hero.jpeg (the Mount Fuji image).
+5.  Central Frosted Card (Inspired by frame image):
+*   Place a large, central "glassmorphism" card in the middle of the screen (mimicking the clean card design from the frame reference). It should have a soft blur backdrop filter, a subtle white border, and rounded corners.
+*   Constraint: Do NOT include the small photo collage cluster from the bottom-right of the frame reference; keep the background of the card and the Fuji image clear.
+6.  Left Side (Text): Inside the central glass card on the left side, render the following text. It must use a delicate, stylish serif font that precisely matches the aesthetic of the "delicate jewelry" text from the frame image:
+*   Line 1 (Bold): Riya Jha
+*   Line 2 (Regular): Vibe Coder & Full-Stack Developer
+7.  Right Side (The "Navbar"): The right side of the glass card contains the vertical navigation menu. The menu links should be:
+*   Home
+*   Projects
+*   About (includes Skills & Socials)
+*   Contact
+8.  Vibe: Ensure the transition from the pastel 'hello' to the Fuji glassmorphism card is smooth, elegant, and perfectly timed.
