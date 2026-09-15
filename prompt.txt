@@ -1,45 +1,616 @@
-Add these refinements to the About page requirements:
+You are a senior full-stack developer working on my existing portfolio project.
 
-Visual direction and color palette
+IMPORTANT: Do not rebuild the portfolio, do not create duplicate components, and do not create a new design system. First inspect the existing project and then modify the EXISTING files/components/styles that already control the navbar, routing, Home/Hero section, About section, animations, fonts, and global styling.
 
-The about.jpeg background shows a Japanese bus station with an evening/blue sky atmosphere.
+The goal is to correctly implement the About section immediately after the Home/Hero section and connect it to the existing navbar.
 
-Build the entire About section around the mood and colors already present in `about.jpeg.
+1. Inspect the existing project first
 
-The typography should feel naturally connected to the image — use soft pale blue, muted white, cool gray, or similarly subtle tones sampled/inspired from the background.
+Before making ANY changes, inspect the project structure and identify:
 
-Avoid bright white, harsh colors, or colors that feel disconnected from the evening-blue atmosphere.
+The existing navbar component.
 
-The text should feel like it belongs inside the scene rather than looking like a separate UI layer.
+The existing navbar CSS/styles.
 
-If necessary, add a very subtle dark/blue overlay behind the content to improve readability while preserving the photograph.
+The existing routing/navigation setup.
 
-"About Me" typewriter animation
+The existing Home/Hero component.
 
-The "About Me" heading must appear using a typewriter animation.
+The existing About component/page/section.
 
-It should start typing when the About section enters the viewport or when the About page loads.
+The actual about.jpeg file already present in the project.
 
-The text should be typed naturally from left to right rather than simply fading in.
+Existing global CSS/theme files.
 
-Add a subtle blinking cursor during the typing animation.
+Existing font imports/configuration.
 
-Once "About Me" has finished typing, the cursor can remain briefly and then disappear.
+Existing animation utilities or libraries.
 
-Keep the animation elegant and not overly slow.
+Existing layout/section structure.
 
-Paragraph animation
+Do NOT create replacements if these already exist.
 
-The paragraph should NOT appear line-by-line or word-by-word.
+After identifying them, modify those existing files directly.
 
-After the "About Me" typewriter animation finishes, animate the entire paragraph as one single element.
+Do not create:
 
-Use a smooth combination of fade-in + slight upward movement (or a similarly subtle animation).
+A second navbar.
 
-The whole paragraph should enter together and settle naturally underneath the heading.
+A second About page.
 
-Keep the animation short and smooth so the user doesn't have to wait to read the content.
+A second Home page.
 
-The heading and paragraph animation should feel like one continuous sequence: typewriter heading → smooth paragraph reveal.
+A duplicate about.jpeg.
 
-Overall, the About page should feel calm, atmospheric, and personal, matching the Japanese evening bus-station photograph and its blue/pale color palette. Avoid flashy effects; the animation should enhance the mood rather than distract from the content.
+A separate routing system.
+
+An unrelated CSS/theme system.
+
+A duplicate component that performs the same job.
+
+2. About section must use the EXISTING about.jpeg
+
+There is already an image named:
+
+about.jpeg
+
+Find the actual file in the project and use that exact image.
+
+DO NOT:
+
+Generate a new image.
+
+Download another image.
+
+Replace the image.
+
+Copy the image somewhere else.
+
+Create another background asset.
+
+Use a placeholder.
+
+Use the correct import/path according to the existing project structure.
+
+The About section/page background must visibly use this image.
+
+The image is a Japanese bus station with a blue evening sky, so preserve that atmosphere.
+
+Use the image as a full-width/full-section background with an appropriate equivalent of:
+
+background-size: cover
+
+or the project's existing image/background approach.
+
+Preserve the visual appearance of the image as much as possible.
+
+Do not heavily obscure the Japanese bus station.
+
+If readability requires it, use only a subtle dark-blue/blue-transparent overlay or localized gradient behind the text.
+
+3. About must be directly AFTER Home/Hero
+
+The page structure should be:
+
+Home / Hero
+↓
+About
+↓
+existing remaining sections, if any
+
+The About section must be the next section after the Home/Hero section.
+
+Do not make About a completely separate unrelated page if the existing portfolio is structured as a single-page portfolio.
+
+If the project already uses routes, preserve the existing routing architecture and make sure the About route works correctly.
+
+If it uses section anchors instead of React Router/another router, fix the existing anchor/navigation mechanism instead of introducing a router.
+
+The important behavior is:
+
+Home works.
+
+About works.
+
+Clicking About from the navbar takes the user to the existing About section/page.
+
+About appears immediately after Home.
+
+Browser navigation/scrolling behaves naturally.
+
+Existing navbar links continue working.
+
+4. Fix the existing navbar → About connection
+
+Inspect the CURRENT navbar implementation and determine why About navigation is not working correctly.
+
+Fix the existing link.
+
+Do NOT create another navbar or another navigation mechanism.
+
+The existing navbar should contain a working About link that points to the actual existing About section/page.
+
+For example, if the project uses section IDs, make sure the About section has the correct ID and the navbar points to it.
+
+If the project uses routing, make sure the existing About route is correctly configured.
+
+Use the architecture already present in the project.
+
+Do not break:
+
+Home navigation.
+
+Existing navbar links.
+
+Mobile navigation.
+
+Existing responsive behavior.
+
+5. Existing navbar scroll behavior
+
+Keep the CURRENT navbar implementation.
+
+Do not fake the effect with two separate navbars.
+
+The desired behavior is:
+
+At Home/Hero
+
+The navbar should retain its current appearance, position, sizing, and styling.
+
+While scrolling away from Hero
+
+The existing navbar should smoothly transition into its larger/sticky state.
+
+It can become slightly larger through appropriate:
+
+padding
+
+height
+
+scale
+
+spacing
+
+background
+
+shadow
+
+but do not dramatically redesign it.
+
+At About
+
+The navbar should remain in its intended sticky position.
+
+Scrolling back to Hero
+
+The navbar should smoothly transition back to its original Hero appearance.
+
+Make sure the scroll detection works with the project's ACTUAL layout and routing.
+
+Avoid unnecessary JavaScript if CSS position: sticky, transitions, intersection observers, or the existing implementation can handle the behavior cleanly.
+
+Do not introduce a second fixed navbar.
+
+Make sure the behavior works on desktop and mobile.
+
+6. About layout — LEFT ALIGNED
+
+The entire About content must be LEFT aligned.
+
+Desktop layout should visually resemble:
+
+LEFT SIDE:
+
+About Me
+[paragraph]
+
+RIGHT SIDE:
+
+Japanese bus station / evening background scene
+
+The text should NOT be centered.
+
+The About heading and the entire paragraph must use left alignment.
+
+Give the content comfortable spacing from the left edge.
+
+Do not let the text touch the viewport edge.
+
+Use a sensible max-width so the paragraph remains readable.
+
+The background image should still be clearly visible, especially toward the right side.
+
+Do not put the text in the center of the screen.
+
+On mobile:
+
+Keep everything readable.
+
+Keep the text left aligned.
+
+Adapt spacing and typography naturally.
+
+Do not force a desktop two-column layout that causes overflow.
+
+Allow the background image to remain visually attractive.
+
+7. About text color — BUTTER YELLOW
+
+Use the following content exactly, with the same wording:
+
+"My name is Riya Jha, and I am 21 years old. I am currently pursuing a Bachelor of Computer Applications (BCA), while exploring my interests in technology, creativity, and digital experiences.
+
+I have many hobbies and interests, and coding is one of the things I enjoy most. It is also one of the main reasons I chose this field. I enjoy turning ideas into functional and meaningful digital experiences and continuously learning along the way.
+
+I may not be famous, have a large team, or run a big agency, but as a vibe coder, I am confident in my ability to understand ideas, build useful solutions, and help individuals or small teams bring their projects to life.
+
+I work remotely because I want to build a career that gives me both independence and flexibility. Beyond work, I have dreams of traveling, experiencing new places, and pursuing other things that matter to me. Remote work allows me to earn through my skills while creating the freedom to work toward those dreams as well."
+
+The heading AND paragraph should use a soft butter-yellow / warm creamy yellow color.
+
+Do NOT use harsh neon yellow.
+
+Do NOT use pure white for the main About text.
+
+The color should feel like a warm butter-yellow that contrasts nicely against the blue evening Japanese bus-station background.
+
+Use an elegant, readable butter-yellow shade and maintain sufficient contrast.
+
+If necessary, use a subtle shadow or localized translucent backdrop to improve readability without hiding the image.
+
+8. "About Me" heading typography
+
+The heading should NOT look like a generic bold sans-serif heading.
+
+Inspect the project's existing fonts first.
+
+If the project already has a fun, handwritten, rounded, playful, expressive, or display font available, reuse that font.
+
+Prefer an existing project font over introducing a new font dependency.
+
+The heading should feel:
+
+Fun
+
+Personal
+
+Creative
+
+Slightly playful
+
+Portfolio-appropriate
+
+Professional enough to fit the rest of the website
+
+The paragraph should remain much more readable and conventional.
+
+The heading should be visually distinct from the paragraph.
+
+Do not unnecessarily introduce a completely new font system if the project already has suitable fonts.
+
+9. "About Me" TYPEWRITER animation
+
+This is important.
+
+The heading:
+
+About Me
+
+must ACTUALLY type out using a typewriter animation.
+
+Do NOT simply fade it in.
+
+When the user reaches the About section/page and it becomes visible:
+
+Start the animation.
+
+Characters should appear sequentially from left to right.
+
+Use a natural, reasonably quick typing speed.
+
+Display a subtle blinking cursor while the text is typing.
+
+When "About Me" finishes typing, the cursor should either disappear or become extremely subtle.
+
+Example behavior:
+
+A
+
+Ab
+
+Abo
+
+Abou
+
+About
+
+About M
+
+About Me
+
+Do not animate the entire heading as one opacity transition.
+
+The typewriter animation should trigger when the About section becomes visible rather than immediately on initial page load.
+
+If the user scrolls to About using the navbar, the animation should trigger correctly.
+
+Avoid repeatedly restarting the animation every time the user makes tiny scroll movements.
+
+Use the project's existing animation system if one already exists.
+
+If no animation system exists, implement the smallest clean solution necessary.
+
+10. Paragraph animation
+
+The paragraph must appear ONLY AFTER the typewriter animation finishes.
+
+Sequence:
+
+About section enters viewport
+↓
+"About Me" typewriter starts
+↓
+"About Me" finishes
+↓
+paragraph smoothly fades in + moves upward slightly
+↓
+paragraph remains visible
+
+The paragraph must be animated as ONE complete element.
+
+Do NOT animate:
+
+Individual words.
+
+Individual letters.
+
+Individual lines.
+
+Individual sentences.
+
+The entire paragraph should smoothly reveal as one element.
+
+Use a subtle animation such as:
+
+opacity: 0 → 1
+
+translateY: small positive value → 0
+
+The animation should feel smooth and polished, not dramatic.
+
+11. About section visual style
+
+The About section should visually match the existing about.jpeg.
+
+The image has:
+
+Japanese bus station atmosphere.
+
+Blue evening sky.
+
+Cool blue environment.
+
+Evening lighting.
+
+The butter-yellow text should create a tasteful warm/cool contrast.
+
+Keep the overall design elegant and atmospheric.
+
+Do not cover the entire image with an opaque color.
+
+If an overlay is required for readability, keep it subtle.
+
+Suggested visual hierarchy:
+
+Butter-yellow playful "About Me" heading.
+
+Butter-yellow readable paragraph.
+
+Blue evening Japanese bus-station background.
+
+Subtle shadows/gradient only where necessary.
+
+The image should remain recognizable.
+
+12. Smooth scrolling/navigation
+
+If the project already has smooth scrolling, preserve it.
+
+If the existing About navigation is using an anchor, make sure it scrolls to the actual About section.
+
+The transition from Home to About should feel smooth.
+
+Do not implement a completely new scrolling architecture unless the existing implementation is genuinely broken.
+
+The navbar About button/link must work from the Home/Hero section.
+
+13. Responsive behavior
+
+Desktop:
+
+About fills the appropriate viewport/section.
+
+Background image covers the section.
+
+Content is positioned on the LEFT.
+
+Heading is prominent and playful.
+
+Paragraph has a comfortable readable width.
+
+Right side remains visually dominated by the Japanese bus-station image.
+
+Navbar behavior works correctly.
+
+Tablet:
+
+Maintain left alignment.
+
+Adjust spacing and font sizes appropriately.
+
+Preserve the background image.
+
+Mobile:
+
+About remains readable.
+
+Text stays LEFT aligned.
+
+No horizontal overflow.
+
+Heading scales down appropriately.
+
+Paragraph has comfortable line height.
+
+Background image remains visible and attractive.
+
+Navbar remains responsive.
+
+About navigation works from the mobile navbar as well.
+
+14. Do not unnecessarily modify Home/Hero
+
+The Home/Hero section already has an existing appearance.
+
+Do NOT redesign it.
+
+Only modify what is necessary to correctly connect it to:
+
+the navbar
+
+the About section
+
+the navbar scroll transition
+
+The existing Hero appearance should remain intact.
+
+15. Implementation quality
+
+Use the project's existing architecture and conventions.
+
+Before coding, inspect the existing implementation.
+
+Then make the smallest set of changes required.
+
+Avoid unnecessary dependencies.
+
+Avoid duplicate state.
+
+Avoid duplicate components.
+
+Avoid duplicate CSS.
+
+Avoid unused imports.
+
+Avoid dead code.
+
+Do not leave debugging logs in production code.
+
+Do not change unrelated sections.
+
+Do not replace existing components simply because you prefer a different architecture.
+
+16. Final verification
+
+After implementing the changes, inspect the final project and verify all of the following:
+
+About image
+
+ The actual existing about.jpeg is being used.
+
+ No duplicate image was created.
+
+ The image visibly appears as the About background.
+
+ The image covers the About section appropriately.
+
+ The Japanese bus-station scene remains visible.
+
+Navigation
+
+ Clicking About in the existing navbar works.
+
+ About is directly after Home/Hero.
+
+ Home navigation still works.
+
+ Existing navbar links still work.
+
+ Mobile navigation still works.
+
+Navbar
+
+ Existing navbar component was modified rather than duplicated.
+
+ Hero navbar appearance remains intact.
+
+ Scrolling away from Hero smoothly transitions the navbar.
+
+ Navbar becomes slightly larger/sticky as intended.
+
+ Navbar remains sticky around About.
+
+ Scrolling back to Hero restores the original appearance.
+
+ No second navbar was created.
+
+About content
+
+ "About Me" is on the LEFT.
+
+ Entire paragraph is on the LEFT.
+
+ Text has comfortable left spacing.
+
+ Content is responsive.
+
+ Paragraph wording matches the provided version exactly.
+
+Typography
+
+ "About Me" uses a fun/creative font.
+
+ Existing project fonts were inspected and reused where appropriate.
+
+ Heading is visually different from the body.
+
+ Text is butter-yellow.
+
+ Text remains readable against the image.
+
+Animations
+
+ "About Me" actually types character-by-character.
+
+ Typewriter starts when About becomes visible.
+
+ A subtle cursor appears during typing.
+
+ Cursor disappears/becomes subtle after typing.
+
+ Paragraph waits until typing finishes.
+
+ Paragraph fades/moves upward as ONE element.
+
+ Paragraph is NOT animated word-by-word or line-by-line.
+
+ Animations are smooth and not excessive.
+
+Responsive
+
+ Desktop works.
+
+ Tablet works.
+
+ Mobile works.
+
+ No horizontal overflow.
+
+ About remains left aligned on mobile.
+
+ Navbar/About navigation works on mobile.
+
+Finally, review your changes and remove anything unnecessary that was introduced during implementation.
+
+Most important rule: modify the existing project. Do not rebuild or duplicate it.
