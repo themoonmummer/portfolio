@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ProjectsMetro } from './components/ProjectsMetro';
 import { TechStack } from './components/TechStack';
@@ -25,9 +24,6 @@ export default function App() {
     <div className="min-h-screen bg-[#fbf8fb] text-[#1b1b1d] relative font-body selection:bg-[#ffafd5] selection:text-[#3d0027]">
       {/* Falling Sakura Petals Animation */}
       <PetalBackground />
-
-      {/* Floating Header Navbar */}
-      <Navbar onHireClick={() => scrollToSection('contact')} />
 
       {/* Hero Section */}
       <Hero onNavigate={scrollToSection} />
