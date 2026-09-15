@@ -169,13 +169,13 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                   Vibe Coder & Full-Stack Developer
                 </p>
                 <p
-                  className="text-base sm:text-lg md:text-xl max-w-lg"
+                  className="text-sm sm:text-base md:text-lg max-w-md"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
-                    color: BROWN,
-                    fontWeight: 900,
-                    letterSpacing: '0.015em',
-                    lineHeight: 1.6,
+                    color: '#3B1F1A',
+                    fontWeight: 600,
+                    letterSpacing: '0.02em',
+                    lineHeight: 1.7,
                   }}
                 >
                   I'm a person with a lot of hobbies, and this is one of them where I want to create

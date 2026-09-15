@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'motion/react';
+import { useState, useEffect, useCallback } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'motion/react';
 
 interface NavbarProps {
   visible: boolean;
@@ -15,23 +15,22 @@ const NAV_ITEMS = [
 ];
 
 const BROWN = '#4A2E2B';
-const SCROLL_THRESHOLD = 100;
 
 export const Navbar: React.FC<NavbarProps> = ({ visible, onNavigate }) => {
   const [activeTab, setActiveTab] = useState('home');
-  const [isDocked, setIsDocked] = useState(false);
 
-  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
 
-  useMotionValueEvent(scrollY, 'change', (latest) => {
-    if (!visible) return;
-    if (latest > SCROLL_THRESHOLD && !isDocked) {
-      setIsDocked(true);
-    } else if (latest <= SCROLL_THRESHOLD && isDocked) {
-      setIsDocked(false);
-    }
-  });
+  // Smooth scroll-based transforms (0 = at hero, 1 = fully scrolled past hero)
+  const scrollProgress = useTransform(scrollY, [0, 600], [0, 1]);
+  const [progress, setProgress] = useState(0);
+  useMotionValueEvent(scrollProgress, 'change', (v) => setProgress(v));
+
+  // Interpolate properties based on scroll progress
+  const paddingTop = 2.5 + progress * 4;       // py-2.5 -> py-6.5
+  const paddingSides = 28 + progress * 12;      // px-7 -> px-10
+  const fontSize = 0.875 + progress * 0.125;    // text-sm -> text-base (rem)
+  const navGap = 0.25 + progress * 0.25;        // gap-1 -> gap-2 (rem)
 
   // Track active tab on scroll
   useEffect(() => {
@@ -64,70 +63,64 @@ export const Navbar: React.FC<NavbarProps> = ({ visible, onNavigate }) => {
 
   return (
     <motion.div
-      ref={containerRef}
       className="pointer-events-auto"
       style={{
         position: 'fixed',
-        top: '95px',
+        top: '90px',
         left: '35%',
         transform: 'translateX(-50%)',
         zIndex: 50,
+        paddingTop: `${paddingTop * 4}px`,
+        paddingBottom: `${paddingTop * 4}px`,
+        paddingLeft: `${paddingSides}px`,
+        paddingRight: `${paddingSides}px`,
+        background: `rgba(255, 255, 255, ${0.2 + progress * 0.1})`,
+        backdropFilter: progress > 0.1 ? `blur(${12 + progress * 6}px) saturate(${160 + progress * 20}%)` : 'none',
+        WebkitBackdropFilter: progress > 0.1 ? `blur(${12 + progress * 6}px) saturate(${160 + progress * 20}%)` : 'none',
+        border: '1px solid rgba(255, 255, 255, 0.45)',
+        borderRadius: `${14 + progress * 4}px`,
+        boxShadow: `0 ${4 + progress * 4}px ${15 + progress * 10}px rgba(0, 0, 0, ${0.06 + progress * 0.04})`,
+        transition: 'backdrop-filter 0.1s',
       }}
-      initial={{ opacity: 0, y: -20, scale: 0.95 }}
-      animate={{
-        opacity: 1,
-        y: isDocked ? 16 : 0,
-        scale: 1,
-      }}
-      transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
     >
-      <div
-        className="px-5 sm:px-7 py-2.5"
-        style={{
-          background: isDocked
-            ? 'rgba(255, 255, 255, 0.22)'
-            : 'rgba(255, 255, 255, 0.35)',
-          backdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
-          WebkitBackdropFilter: isDocked ? 'blur(18px) saturate(180%)' : 'none',
-          border: '1px solid rgba(255, 255, 255, 0.45)',
-          borderRadius: '14px',
-          boxShadow: isDocked
-            ? '0 4px 20px rgba(0, 0, 0, 0.1)'
-            : '0 4px 15px rgba(0,0,0,0.08)',
-          transition: 'background 0.3s, box-shadow 0.3s, backdrop-filter 0.3s',
-        }}
+      <nav
+        className="flex flex-row items-center relative"
+        style={{ gap: `${navGap}rem` }}
       >
-        <nav className="flex flex-row gap-1 sm:gap-2 items-center relative">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className="relative px-3 py-1.5 sm:px-4 sm:py-2 z-10 text-sm sm:text-base whitespace-nowrap"
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                color: activeTab === item.id ? BROWN : 'rgba(74, 46, 43, 0.65)',
-                fontWeight: activeTab === item.id ? 600 : 400,
-                letterSpacing: '0.02em',
-                transition: 'color 0.3s',
-              }}
-            >
-              {activeTab === item.id && (
-                <motion.div
-                  layoutId="navbar-pill"
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background: 'rgba(255, 255, 255, 0.55)',
-                    border: '1px solid rgba(255, 255, 255, 0.6)',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                  }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{item.label}</span>
-            </button>
-          ))}
-        </nav>
-      </div>
+        {NAV_ITEMS.map((item) => (
+          <button
+            key={item.id}
+            onClick={() => handleNavClick(item.id)}
+            className="relative z-10 text-sm sm:text-base whitespace-nowrap"
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              color: activeTab === item.id ? BROWN : 'rgba(74, 46, 43, 0.65)',
+              fontWeight: activeTab === item.id ? 600 : 400,
+              letterSpacing: '0.02em',
+              transition: 'color 0.3s',
+              fontSize: `${fontSize}rem`,
+              padding: `${0.375 + progress * 0.25}rem ${0.75 + progress * 0.25}rem`,
+            }}
+          >
+            {activeTab === item.id && (
+              <motion.div
+                layoutId="navbar-pill"
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.55)',
+                  border: '1px solid rgba(255, 255, 255, 0.6)',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                }}
+                transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+              />
+            )}
+            <span className="relative z-10">{item.label}</span>
+          </button>
+        ))}
+      </nav>
     </motion.div>
   );
 };
