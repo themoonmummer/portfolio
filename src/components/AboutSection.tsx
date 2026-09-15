@@ -58,7 +58,7 @@ export const AboutSection: React.FC = () => {
           className="absolute inset-0"
           style={{
             background:
-              'linear-gradient(135deg, rgba(12, 22, 50, 0.7) 0%, rgba(18, 30, 60, 0.55) 50%, rgba(10, 18, 40, 0.65) 100%)',
+              'linear-gradient(135deg, rgba(10, 18, 40, 0.45) 0%, rgba(15, 25, 50, 0.35) 50%, rgba(8, 15, 35, 0.4) 100%)',
           }}
         />
       </div>
@@ -72,7 +72,7 @@ export const AboutSection: React.FC = () => {
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontStyle: 'italic',
-              color: 'rgba(200, 218, 245, 0.95)',
+              color: 'rgba(255, 230, 140, 0.95)',
               letterSpacing: '0.01em',
               textShadow: '0 2px 20px rgba(0, 0, 0, 0.25)',
             }}
@@ -82,7 +82,7 @@ export const AboutSection: React.FC = () => {
               <span
                 className="inline-block w-[3px] h-[0.85em] ml-1 align-middle"
                 style={{
-                  backgroundColor: 'rgba(180, 200, 235, 0.8)',
+                  backgroundColor: 'rgba(255, 230, 140, 0.8)',
                   animation: 'blink 1s step-end infinite',
                 }}
               />
@@ -99,7 +99,7 @@ export const AboutSection: React.FC = () => {
               className="space-y-5"
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
-                color: 'rgba(195, 210, 235, 0.88)',
+                color: 'rgba(255, 225, 120, 0.88)',
                 fontSize: 'clamp(0.95rem, 1.5vw, 1.1rem)',
                 fontWeight: 500,
                 lineHeight: 1.85,
