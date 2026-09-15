@@ -1,72 +1,177 @@
-import React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useInView } from 'motion/react';
 import { ABOUT_DATA } from '../data/portfolioData';
 
+const HEADING_TEXT = 'About Me';
+const TYPING_SPEED = 100;
+
 export const AboutSection: React.FC = () => {
+  const [typedHeading, setTypedHeading] = useState('');
+  const [headingDone, setHeadingDone] = useState(false);
+  const [started, setStarted] = useState(false);
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '-100px' });
+
+  // Start typing when section enters viewport
+  useEffect(() => {
+    if (isInView && !started) {
+      setStarted(true);
+    }
+  }, [isInView, started]);
+
+  // Typewriter for heading
+  useEffect(() => {
+    if (!started) return;
+    let charIndex = 0;
+    const interval = setInterval(() => {
+      if (charIndex < HEADING_TEXT.length) {
+        setTypedHeading(HEADING_TEXT.slice(0, charIndex + 1));
+        charIndex++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => setHeadingDone(true), 400);
+      }
+    }, TYPING_SPEED);
+    return () => clearInterval(interval);
+  }, [started]);
+
   return (
-    <section className="relative py-24 sm:py-32 bg-[#f5f3f5]" id="about">
-      {/* Decorative Background Park Icon Accent */}
-      <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-        <span className="material-symbols-outlined text-[240px] sm:text-[320px] text-[#95406f]">
-          park
-        </span>
+    <section
+      ref={sectionRef}
+      id="about"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Background Image */}
+      <div className="absolute inset-0 -z-10">
+        <img
+          src="/images/about.jpeg"
+          alt="Japanese bus station at evening"
+          className="h-full w-full object-cover"
+        />
+        {/* Dark blue overlay for readability */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'linear-gradient(180deg, rgba(15, 25, 50, 0.55) 0%, rgba(20, 35, 70, 0.65) 50%, rgba(10, 20, 45, 0.75) 100%)',
+          }}
+        />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 sm:gap-20 items-center">
-        
-        {/* Left Column: Portrait & Floating Metric */}
-        <div className="relative flex justify-center">
-          <div className="relative z-10 w-72 sm:w-96 aspect-square rounded-[50%_50%_40%_60%] overflow-hidden border-[10px] sm:border-[12px] border-white shadow-2xl bg-white/40">
-            <img
-              src={ABOUT_DATA.portraitImg}
-              alt="Designer sitting peacefully in a Japanese garden surrounded by cherry blossoms with Mount Fuji in the background"
-              className="w-full h-full object-cover"
+      {/* Content */}
+      <div className="relative z-10 max-w-3xl mx-auto px-6 sm:px-8 py-24 sm:py-32 text-center">
+        {/* Typewriter Heading */}
+        <h2
+          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-8 inline-block"
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            color: 'rgba(200, 215, 240, 0.95)',
+            letterSpacing: '0.03em',
+            textShadow: '0 2px 16px rgba(0, 0, 0, 0.3)',
+          }}
+        >
+          {typedHeading}
+          {started && !headingDone && (
+            <span
+              className="inline-block w-[3px] h-[0.85em] ml-1 align-middle"
+              style={{
+                backgroundColor: 'rgba(200, 215, 240, 0.8)',
+                animation: 'blink 1s step-end infinite',
+              }}
             />
-          </div>
+          )}
+        </h2>
 
-          {/* Decorative Glow Blob */}
-          <div className="absolute -top-6 -left-6 w-28 h-28 sunset-glow rounded-full blur-2xl opacity-50 animate-pulse pointer-events-none"></div>
+        {/* Paragraph — fades in after heading finishes */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={
+            headingDone
+              ? { opacity: 1, y: 0 }
+              : { opacity: 0, y: 24 }
+          }
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <p
+            className="text-base sm:text-lg md:text-xl leading-relaxed mb-6"
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              color: 'rgba(190, 205, 230, 0.9)',
+              fontWeight: 500,
+              letterSpacing: '0.01em',
+              lineHeight: 1.8,
+            }}
+          >
+            {ABOUT_DATA.p1}
+          </p>
+          <p
+            className="text-sm sm:text-base md:text-lg leading-relaxed"
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              color: 'rgba(180, 195, 220, 0.8)',
+              fontWeight: 400,
+              letterSpacing: '0.01em',
+              lineHeight: 1.8,
+            }}
+          >
+            {ABOUT_DATA.p2}
+          </p>
+        </motion.div>
 
-          {/* Floating Metric Badge */}
-          <div className="absolute -bottom-6 -right-2 sm:bottom-0 sm:right-4 p-6 sm:p-8 glass-panel rounded-[28px] sm:rounded-[36px] z-20 text-center shadow-xl border border-white/80 backdrop-blur-xl">
-            <p className="font-display text-3xl sm:text-4xl font-extrabold text-[#95406f]">
-              {ABOUT_DATA.yearsCrafting}
-            </p>
-            <p className="font-body text-xs font-semibold uppercase tracking-widest text-[#524249]">
-              Years Crafting
-            </p>
-          </div>
-        </div>
-
-        {/* Right Column: Narrative & Philosophy */}
-        <div className="space-y-8">
-          <h2 className="font-display text-3xl sm:text-5xl font-bold text-[#1b1b1d] leading-tight">
-            {ABOUT_DATA.title} <span className="italic text-[#95406f]">{ABOUT_DATA.highlightTitle}</span>
-          </h2>
-
-          <div className="space-y-4 font-body text-base sm:text-lg text-[#524249] leading-relaxed">
-            <p>{ABOUT_DATA.p1}</p>
-            <p>{ABOUT_DATA.p2}</p>
-          </div>
-
-          {/* Philosophy & Location Cards */}
-          <div className="grid grid-cols-2 gap-4 pt-2">
-            {ABOUT_DATA.philosophies.map((item, idx) => (
-              <div key={idx} className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/80 space-y-1">
-                <span className="material-symbols-outlined text-[#95406f] text-2xl mb-1">
-                  {item.icon}
-                </span>
-                <h4 className="font-display font-bold text-[#1b1b1d] text-base">
-                  {item.title}
-                </h4>
-                <p className="font-body text-xs sm:text-sm text-[#524249]">
-                  {item.subtitle}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        {/* Philosophy & Location Cards */}
+        <motion.div
+          className="grid grid-cols-2 gap-4 mt-12 max-w-md mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={headingDone ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+        >
+          {ABOUT_DATA.philosophies.map((item, idx) => (
+            <div
+              key={idx}
+              className="p-5 sm:p-6 rounded-2xl text-center"
+              style={{
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+              }}
+            >
+              <span
+                className="material-symbols-outlined text-2xl mb-2 block"
+                style={{ color: 'rgba(160, 190, 230, 0.8)' }}
+              >
+                {item.icon}
+              </span>
+              <h4
+                className="font-bold text-base mb-1"
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  color: 'rgba(200, 215, 240, 0.95)',
+                }}
+              >
+                {item.title}
+              </h4>
+              <p
+                className="text-xs sm:text-sm"
+                style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  color: 'rgba(180, 195, 220, 0.75)',
+                }}
+              >
+                {item.subtitle}
+              </p>
+            </div>
+          ))}
+        </motion.div>
       </div>
+
+      <style>{`
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+      `}</style>
     </section>
   );
 };
