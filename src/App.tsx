@@ -30,10 +30,7 @@ export default function App() {
       <Navbar onHireClick={() => scrollToSection('contact')} />
 
       {/* Hero Section */}
-      <Hero
-        onExploreClick={() => scrollToSection('work')}
-        onContactClick={() => scrollToSection('contact')}
-      />
+      <Hero onNavigate={scrollToSection} />
 
       {/* Work Showcase: Metro Window View */}
       <ProjectsMetro
