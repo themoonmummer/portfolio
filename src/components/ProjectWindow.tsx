@@ -1,22 +1,22 @@
-import type { Project } from '../data/projects';
+import type { Project } from '../types';
 
 interface ProjectWindowProps {
   project: Project;
+  onSelectProject?: (project: Project) => void;
 }
 
-export const ProjectWindow = ({ project }: ProjectWindowProps) => {
+export const ProjectWindow = ({ project, onSelectProject }: ProjectWindowProps) => {
   const inner = (
-    <div className="flex-shrink-0 w-[280px] sm:w-[380px] lg:w-[460px] rounded-[2.5rem] p-[12px] sm:p-[14px] relative" style={{ backgroundColor: '#3a3330' }}>
+    <div
+      className="flex-shrink-0 w-[280px] sm:w-[380px] lg:w-[460px] rounded-[2.5rem] p-[12px] sm:p-[14px] relative cursor-pointer"
+      style={{ backgroundColor: '#3a3330' }}
+      onClick={() => onSelectProject?.(project)}
+    >
       <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden bg-black">
-        {project.videoSrc ? (
-          <video
-            src={project.videoSrc}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={project.posterSrc}
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.alt}
             className="absolute inset-0 w-full h-full object-cover"
           />
         ) : (
@@ -55,19 +55,6 @@ export const ProjectWindow = ({ project }: ProjectWindowProps) => {
       </div>
     </div>
   );
-
-  if (project.href) {
-    return (
-      <a
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block rounded-[2.5rem] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#ffe68c] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a1228]"
-      >
-        {inner}
-      </a>
-    );
-  }
 
   return inner;
 };

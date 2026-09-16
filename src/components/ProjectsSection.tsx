@@ -1,7 +1,12 @@
-import { projects } from '../data/projects';
 import { ProjectWindow } from './ProjectWindow';
+import { Project } from '../types';
 
-export const ProjectsSection = () => {
+interface ProjectsMetroProps {
+  projects: Project[];
+  onSelectProject: (project: Project) => void;
+}
+
+export const ProjectsMetro = ({ projects, onSelectProject }: ProjectsMetroProps) => {
   return (
     <section
       id="projects"
@@ -45,11 +50,11 @@ export const ProjectsSection = () => {
               transform: 'translateZ(0)',
             }}
           >
-            {projects.map((project) => (
-              <ProjectWindow key={project.id} project={project} />
+            {projects.map((project: Project) => (
+              <ProjectWindow key={project.id} project={project} onSelectProject={onSelectProject} />
             ))}
-            {projects.map((project) => (
-              <ProjectWindow key={`dup-${project.id}`} project={project} />
+            {projects.map((project: Project) => (
+              <ProjectWindow key={`dup-${project.id}`} project={project} onSelectProject={onSelectProject} />
             ))}
           </div>
         </div>
@@ -85,4 +90,4 @@ export const ProjectsSection = () => {
   );
 };
 
-export default ProjectsSection;
+export default ProjectsMetro;

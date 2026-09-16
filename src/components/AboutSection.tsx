@@ -1,368 +1,387 @@
 import { useState, useEffect, useRef } from 'react';
-import { motion, useInView } from 'motion/react';
+import { motion, AnimatePresence, useInView } from 'motion/react';
 
-const HEADING_TEXT = 'About Me';
-const TYPING_SPEED = 90;
+type Category = 'about' | 'education' | 'experience';
 
-const ABOUT_PARAGRAPH = `My name is Riya Jha, and I am 21 years old. I am currently pursuing a Bachelor of Computer Applications (BCA), while exploring my interests in technology, creativity, and digital experiences.
+interface CabinData {
+  id: Category;
+  label: string;
+  angle: number;
+}
 
-I have many hobbies and interests, and coding is one of the things I enjoy most. It is also one of the main reasons I chose this field. I enjoy turning ideas into functional and meaningful digital experiences and continuously learning along the way.
+const CABINS: CabinData[] = [
+  { id: 'about', label: 'About Me', angle: 0 },
+  { id: 'education', label: 'Education', angle: 120 },
+  { id: 'experience', label: 'Experience', angle: 240 },
+];
 
-I may not be famous, have a large team, or run a big agency, but as a vibe coder, I am confident in my ability to understand ideas, build useful solutions, and help individuals or small teams bring their projects to life.
+const CONTENT: Record<Category, { title: string; items: string[] }> = {
+  about: {
+    title: 'About Me',
+    items: [
+      "I'm a person with a lot of hobbies, and this is one of them where I want to create and earn through it so I can support my other hobbies and dreams too.",
+    ],
+  },
+  education: {
+    title: 'Education',
+    items: [
+      'Degree: Bachelor of Computer Applications (BCA)',
+      'Institution: [Your University Name]',
+      'Timeline: 2022 - 2025',
+      'Focus: Software Development, Web Technologies, UI/UX',
+    ],
+  },
+  experience: {
+    title: 'Experience',
+    items: [
+      'Role: Frontend Developer & Creative Coder',
+      'Projects Built: Neo-Zen Dashboard, Sakura Flow Wellness',
+      'Key Skills: React, TypeScript, Tailwind CSS, Framer Motion',
+      'Approach: Remote-first, independent contributor',
+    ],
+  },
+};
 
-I work remotely because I want to build a career that gives me both independence and flexibility. Beyond work, I have dreams of traveling, experiencing new places, and pursuing other things that matter to me. Remote work allows me to earn through my skills while creating the freedom to work toward those dreams as well.`;
+const WHEEL_SIZE = 340;
+const WHEEL_RADIUS = WHEEL_SIZE / 2 - 20;
+const CABIN_RADIUS = 22;
 
-const PARAGRAPHS = ABOUT_PARAGRAPH.split('\n\n');
+const PASTEL_PINK = '#FFD1DC';
+const PASTEL_BLUE = '#BDE0FE';
+const PASTEL_YELLOW = '#FFFBAC';
+const PASTEL_LILAC = '#E2C2F0';
+
+const CABIN_COLORS: Record<Category, string> = {
+  about: PASTEL_PINK,
+  education: PASTEL_BLUE,
+  experience: PASTEL_LILAC,
+};
 
 export const AboutSection: React.FC = () => {
-  const [typedHeading, setTypedHeading] = useState('');
-  const [headingDone, setHeadingDone] = useState(false);
-  const [imageFailed, setImageFailed] = useState(false);
-
+  const [activeCabin, setActiveCabin] = useState<Category | null>(null);
+  const [hoveredCabin, setHoveredCabin] = useState<Category | null>(null);
+  const [rotation, setRotation] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
 
-  /*
-   * Start the animation when the About section becomes visible.
-   * This also works when About is already visible after refresh.
-   */
-  const isInView = useInView(sectionRef, {
-    once: true,
-    amount: 0.15,
-  });
-
-  /*
-   * Respect reduced-motion preferences.
-   */
   const prefersReducedMotion =
     typeof window !== 'undefined' &&
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-  /*
-   * Typewriter animation
-   */
   useEffect(() => {
-    if (!isInView) return;
+    if (prefersReducedMotion || !isInView) return;
 
-    if (prefersReducedMotion) {
-      setTypedHeading(HEADING_TEXT);
-      setHeadingDone(true);
-      return;
-    }
+    let rafId: number;
+    let lastTime = performance.now();
 
-    let charIndex = 0;
-    let doneTimer: ReturnType<typeof setTimeout>;
+    const animate = (now: number) => {
+      const delta = now - lastTime;
+      lastTime = now;
 
-    setTypedHeading('');
-    setHeadingDone(false);
-
-    const interval = setInterval(() => {
-      charIndex += 1;
-
-      setTypedHeading(
-        HEADING_TEXT.slice(0, charIndex)
-      );
-
-      if (charIndex >= HEADING_TEXT.length) {
-        clearInterval(interval);
-
-        doneTimer = setTimeout(() => {
-          setHeadingDone(true);
-        }, 250);
+      if (!isPaused) {
+        setRotation((prev) => (prev + (delta * 0.015)) % 360);
       }
-    }, TYPING_SPEED);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(doneTimer);
+      rafId = requestAnimationFrame(animate);
     };
-  }, [isInView, prefersReducedMotion]);
 
-  const typingActive =
-    isInView &&
-    !headingDone &&
-    !prefersReducedMotion;
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [isPaused, prefersReducedMotion, isInView]);
+
+  const getCabinPosition = (baseAngle: number) => {
+    const angleRad = ((baseAngle + rotation) * Math.PI) / 180;
+    const x = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.cos(angleRad);
+    const y = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.sin(angleRad);
+    return { x, y };
+  };
+
+  const handleCabinClick = (id: Category) => {
+    setActiveCabin(activeCabin === id ? null : id);
+  };
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="
-        relative
-        w-full
-        overflow-hidden
-      "
+      className="relative w-full overflow-hidden py-16 sm:py-24"
       style={{
-        backgroundColor: '#0a1228',
+        background: `linear-gradient(160deg, #FFF5F7 0%, #F0E6FF 40%, #E6F0FF 70%, #FFFBAC 100%)`,
       }}
     >
-      {/* =====================================================
-          NATURAL IMAGE
-
-          The image is NOT using object-cover.
-          It keeps its natural aspect ratio and full composition.
-          No blur, no scaling transform, no filter, no overlay.
-          ===================================================== */}
-
-      {!imageFailed ? (
-        <img
-          src="/images/about.jpeg"
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          decoding="async"
-          onError={() => setImageFailed(true)}
-          className="
-            block
-            w-full
-            h-auto
-            max-w-none
-          "
-          style={{
-            filter: 'none',
-            transform: 'none',
-            opacity: 1,
-          }}
-        />
-      ) : (
-        <div
-          className="w-full min-h-[70vh]"
-          style={{
-            backgroundColor: '#0a1228',
-          }}
-        />
-      )}
-
-      {/* =====================================================
-          CONTENT OVER IMAGE
-
-          The content is positioned over the natural image
-          without changing the image dimensions.
-          ===================================================== */}
-
-      <div
-        className="
-          absolute
-          inset-0
-          z-10
-
-          flex
-          items-start
-          text-right
-
-          px-5
-          sm:px-8
-          md:px-12
-          lg:px-16
-
-          pt-[18%]
-          sm:pt-[11%]
-          md:pt-[9%]
-
-         md:translate-x-[13cm]
-
-        "
-      >
-        {/* =================================================
-            WIDE RECTANGULAR CONTENT AREA
-
-            Wider than the previous version so the final
-            paragraphs don't become a tall narrow block.
-            ================================================= */}
-
-        <div
-          className="
-            w-full
-
-            max-w-3xl
-            lg:max-w-4xl
-            xl:max-w-5xl
-
-            mr-auto
-          "
-        >
-          {/* =================================================
-              HEADING
-              ================================================= */}
-
-          <h2
-            aria-label={HEADING_TEXT}
-            className="
-              text-4xl
-              sm:text-5xl
-              md:text-6xl
-
-              font-bold
-              italic
-
-              mb-3
-              sm:mb-4
-
-              inline-block
-              min-h-[1.2em]
-            "
-            style={{
-              fontFamily:
-                "'Plus Jakarta Sans', system-ui, sans-serif",
-
-              /*
-               * Deep navy blue.
-               */
-              color: '#082B59',
-
-              letterSpacing: '0.01em',
-
-              /*
-               * No border / no stroke.
-               */
-              textShadow:
-                '0 1px 5px rgba(255, 255, 255, 0.18)',
-            }}
-          >
-            <span aria-hidden="true">
-              {typedHeading}
-            </span>
-
-            {/* Typewriter cursor */}
-            {typingActive && (
-              <span
-                aria-hidden="true"
-                className="
-                  inline-block
-                  w-[2px]
-                  sm:w-[3px]
-                  h-[0.8em]
-                  ml-1
-                  align-middle
-                "
-                style={{
-                  backgroundColor: '#082B59',
-                  animation:
-                    'about-blink 1s step-end infinite',
-                }}
-              />
-            )}
-          </h2>
-
-          {/* =================================================
-              BODY TEXT
-              ================================================= */}
-
+      {/* Cherry blossom decorative accents */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(8)].map((_, i) => (
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 10,
+            key={i}
+            className="absolute text-lg sm:text-2xl opacity-30"
+            style={{
+              left: `${10 + i * 12}%`,
+              top: `${5 + (i % 3) * 30}%`,
             }}
-            animate={
-              headingDone
-                ? {
-                    opacity: 1,
-                    y: 0,
-                  }
-                : {
-                    opacity: 0,
-                    y: 10,
-                  }
-            }
+            animate={{
+              y: [0, -15, 0],
+              rotate: [0, 10, -5, 0],
+              opacity: [0.2, 0.4, 0.2],
+            }}
             transition={{
-              duration: 0.55,
-              ease: 'easeOut',
+              duration: 4 + i * 0.5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: i * 0.3,
             }}
           >
-            <div
-              className="
-                space-y-1.5
-                sm:space-y-2
-                md:space-y-2.5
-              "
-              style={{
-                fontFamily:
-                  "'Cormorant Garamond', Georgia, serif",
-
-                /*
-                 * Same deep navy as the heading.
-                 */
-                color: '#082B59',
-
-                /*
-                 * One step larger than before,
-                 * but still compact.
-                 */
-                fontSize:
-  'clamp(0.95rem, 1.2vw, 1.08rem)',
-                /*
-                 * Bold paragraph text.
-                 */
-                fontWeight: 700,
-
-                /*
-                 * Tight line spacing.
-                 */
-                lineHeight: 1.42,
-
-                letterSpacing: '0.003em',
-
-                /*
-                 * NO stroke / NO border.
-                 */
-                textShadow:
-                  '0 1px 5px rgba(255, 255, 255, 0.16)',
-              }}
-            >
-              {PARAGRAPHS.map((para, i) => (
-                <motion.p
-                  key={i}
-                  initial={{
-                    opacity: 0,
-                    y: 6,
-                  }}
-                  animate={
-                    headingDone
-                      ? {
-                          opacity: 1,
-                          y: 0,
-                        }
-                      : {
-                          opacity: 0,
-                          y: 6,
-                        }
-                  }
-                  transition={{
-                    duration: 0.5,
-                    delay: i * 0.08,
-                    ease: 'easeOut',
-                  }}
-                >
-                  {para}
-                </motion.p>
-              ))}
-            </div>
+            {i % 2 === 0 ? '🌸' : '✿'}
           </motion.div>
-        </div>
+        ))}
       </div>
 
-      {/* =====================================================
-          TYPEWRITER CURSOR
-          ===================================================== */}
+      {/* Section heading */}
+      <motion.div
+        className="text-center mb-8 sm:mb-12 px-4"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+      >
+        <h2
+          className="text-3xl sm:text-4xl md:text-5xl font-bold italic"
+          style={{
+            fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+            color: '#5a3d6a',
+            letterSpacing: '0.01em',
+          }}
+        >
+          Explore My World
+        </h2>
+        <p
+          className="mt-2 text-sm sm:text-base"
+          style={{
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            color: '#7a6088',
+          }}
+        >
+          Spin the wheel or click a cabin to learn more
+        </p>
+      </motion.div>
 
-      <style>{`
-        @keyframes about-blink {
-          0%, 100% {
-            opacity: 1;
-          }
+      {/* Ferris wheel container */}
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-4">
+        {/* Wheel */}
+        <motion.div
+          className="relative flex-shrink-0"
+          style={{ width: WHEEL_SIZE, height: WHEEL_SIZE }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Outer ring */}
+          <svg
+            width={WHEEL_SIZE}
+            height={WHEEL_SIZE}
+            className="absolute inset-0"
+            viewBox={`0 0 ${WHEEL_SIZE} ${WHEEL_SIZE}`}
+          >
+            {/* Main wheel circle */}
+            <circle
+              cx={WHEEL_RADIUS}
+              cy={WHEEL_RADIUS}
+              r={WHEEL_RADIUS * 0.75}
+              fill="none"
+              stroke={PASTEL_PINK}
+              strokeWidth="3"
+              opacity="0.6"
+            />
+            <circle
+              cx={WHEEL_RADIUS}
+              cy={WHEEL_RADIUS}
+              r={WHEEL_RADIUS * 0.72}
+              fill="none"
+              stroke={PASTEL_LILAC}
+              strokeWidth="1.5"
+              opacity="0.4"
+              strokeDasharray="8 4"
+            />
 
-          50% {
-            opacity: 0;
-          }
-        }
+            {/* Spokes */}
+            {CABINS.map((cabin) => {
+              const angleRad = ((cabin.angle + rotation) * Math.PI) / 180;
+              const x2 = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.cos(angleRad);
+              const y2 = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.sin(angleRad);
+              return (
+                <line
+                  key={cabin.id}
+                  x1={WHEEL_RADIUS}
+                  y1={WHEEL_RADIUS}
+                  x2={x2}
+                  y2={y2}
+                  stroke={CABIN_COLORS[cabin.id]}
+                  strokeWidth="1.5"
+                  opacity="0.5"
+                />
+              );
+            })}
 
-        @media (prefers-reduced-motion: reduce) {
-          @keyframes about-blink {
-            0%, 100% {
-              opacity: 1;
-            }
-          }
-        }
-      `}</style>
+            {/* Center hub */}
+            <circle
+              cx={WHEEL_RADIUS}
+              cy={WHEEL_RADIUS}
+              r={14}
+              fill={PASTEL_YELLOW}
+              stroke={PASTEL_PINK}
+              strokeWidth="2"
+            />
+            <circle
+              cx={WHEEL_RADIUS}
+              cy={WHEEL_RADIUS}
+              r={6}
+              fill="#fff"
+              opacity="0.8"
+            />
+          </svg>
+
+          {/* Cabins */}
+          {CABINS.map((cabin) => {
+            const pos = getCabinPosition(cabin.angle);
+            const isActive = activeCabin === cabin.id;
+            const isHovered = hoveredCabin === cabin.id;
+
+            return (
+              <motion.button
+                key={cabin.id}
+                className="absolute flex items-center justify-center rounded-full cursor-pointer border-2 shadow-lg"
+                style={{
+                  width: CABIN_RADIUS * 2,
+                  height: CABIN_RADIUS * 2,
+                  left: pos.x - CABIN_RADIUS,
+                  top: pos.y - CABIN_RADIUS,
+                  backgroundColor: CABIN_COLORS[cabin.id],
+                  borderColor: isActive ? '#5a3d6a' : 'rgba(255,255,255,0.8)',
+                  zIndex: isActive || isHovered ? 20 : 10,
+                }}
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+                animate={{
+                  scale: isActive ? 1.2 : 1,
+                  boxShadow: isActive
+                    ? '0 0 20px rgba(90,61,106,0.4)'
+                    : '0 4px 12px rgba(0,0,0,0.1)',
+                }}
+                onClick={() => handleCabinClick(cabin.id)}
+                onMouseEnter={() => setHoveredCabin(cabin.id)}
+                onMouseLeave={() => setHoveredCabin(null)}
+                aria-label={cabin.label}
+              >
+                <span
+                  className="text-[10px] sm:text-xs font-bold text-center leading-tight px-1"
+                  style={{
+                    fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+                    color: '#3d2a50',
+                  }}
+                >
+                  {cabin.label}
+                </span>
+              </motion.button>
+            );
+          })}
+
+          {/* Support stand */}
+          <div
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-10 rounded-full"
+            style={{ backgroundColor: PASTEL_LILAC, opacity: 0.6 }}
+          />
+          <div
+            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-3 rounded-full"
+            style={{ backgroundColor: PASTEL_PINK, opacity: 0.4 }}
+          />
+        </motion.div>
+
+        {/* Content panel */}
+        <div className="w-full max-w-lg min-h-[280px]">
+          <AnimatePresence mode="wait">
+            {activeCabin ? (
+              <motion.div
+                key={activeCabin}
+                className="rounded-3xl p-6 sm:p-8 backdrop-blur-xl border shadow-xl"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.65)',
+                  borderColor: 'rgba(255, 255, 255, 0.8)',
+                  boxShadow: '0 8px 32px rgba(90, 61, 106, 0.12)',
+                }}
+                initial={{ opacity: 0, x: 30, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: -20, scale: 0.95 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: CABIN_COLORS[activeCabin] }}
+                  />
+                  <h3
+                    className="text-xl sm:text-2xl font-bold"
+                    style={{
+                      fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+                      color: '#3d2a50',
+                    }}
+                  >
+                    {CONTENT[activeCabin].title}
+                  </h3>
+                </div>
+
+                <div className="space-y-3">
+                  {CONTENT[activeCabin].items.map((item, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex items-start gap-2 text-sm sm:text-base"
+                      style={{
+                        fontFamily: "'Cormorant Garamond', Georgia, serif",
+                        color: '#4a3560',
+                        lineHeight: 1.5,
+                      }}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.08, duration: 0.3 }}
+                    >
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: CABIN_COLORS[activeCabin] }} />
+                      {item}
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Decorative corner accents */}
+                <div className="absolute top-3 right-3 opacity-20 text-lg">✿</div>
+                <div className="absolute bottom-3 left-3 opacity-20 text-lg">🌸</div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="placeholder"
+                className="rounded-3xl p-6 sm:p-8 backdrop-blur-xl border flex items-center justify-center min-h-[280px]"
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                  borderColor: 'rgba(255, 255, 255, 0.6)',
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <p
+                  className="text-center text-sm sm:text-base italic"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    color: '#8a7098',
+                  }}
+                >
+                  Click a cabin on the wheel to explore
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
     </section>
   );
 };

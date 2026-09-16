@@ -1,65 +1,27 @@
+Please complete the following two tasks in the project:
 
+TASK 1: Fix App.tsx Module Import Error
+- Resolve the runtime error: "Uncaught SyntaxError: The requested module '/src/components/ProjectsSection.tsx' does not provide an export named 'ProjectsMetro'".
+- Update `src/App.tsx` line 3 to use default import: `import ProjectsMetro from "./components/ProjectsSection";` (or ensure `ProjectsSection.tsx` correctly exports `ProjectsMetro` as a named export).
+- Ensure explicit TypeScript typing for any callback parameters (such as `project: any` or `project: Project`) to eliminate TS7006 implicit 'any' warnings.
 
-Build into existing Projects section for my React + TypeScript + Tailwind portfolio. Create these files:
+TASK 2: Implement Interactive Ferris Wheel About Section
+Replace/update the About component to match the visual aesthetic and interaction pattern from `assets/inspo/From Klickpin.com- Fresh tiny apartment decor that combine popular trends with useful details you can actually use for your next inspiration board.gif`:
 
-Then import and render `<ProjectsSection />` in `src/App.tsx` directly after `<AboutSection />`.
+1. Visual Theme & Color Palette:
+   - Palette: Soft pastel pink (#FFD1DC), pastel blue, pastel yellow, and soft lilac/purple with subtle Japanese aesthetic details (cherry blossom accents, minimal line art, vaporwave/lo-fi vibe).
+   - Graphic Element: Build an interactive, spinning animated Ferris Wheel (replacing a bicycle wheel layout) in the center/side of the section using SVG/Framer Motion.
 
-## Concept
+2. Ferris Wheel Interactive Nodes / Cabins:
+   - Attach clickable interactive nodes/cabins on the Ferris wheel corresponding to three main categories:
+     1. "About Me"
+     2. "Education"
+     3. "Experience"
+   - Add continuous smooth rotation to the wheel. Hovering over a cabin pauses/highlights it, and clicking a cabin activates that category.
 
-A horizontal row of train windows that scrolls continuously to the left, like watching a train pass. Each window contains one of my projects playing as a looping video. The scroll never pauses, never stops at an end, and loops seamlessly — after the last project the first one comes around again with no visible jump or reset.
-
-## `src/data/projects.ts`
-
-```ts
-export type Project = {
-  id: string;
-  title: string;
-  description: string;
-  videoSrc?: string;   // e.g. "/videos/socialy.mp4" — leave undefined for now
-  posterSrc?: string;  // e.g. "/images/projects/socialy.jpg"
-  href?: string;
-};
-
-export const projects: Project[] = [ /* 5 placeholder entries */ ];
-```
-
-Give me 5 placeholder projects with real-sounding titles and one-line descriptions. Leave `videoSrc` undefined on all of them — I'll add the videos later.
-
-## `ProjectWindow.tsx`
-
-One train window. Props: `project: Project`.
-
-- Outer frame: rounded rectangle with generously rounded corners (roughly `rounded-[2.5rem]`), a thick visible frame border (about 12–14px) in a warm dark metal tone, plus a thin inner lip so it reads as a real frame and not a card with a border.
-- Fixed size, responsive: about 280px wide on mobile, 380px on sm, 460px on lg, with a 4:3 aspect ratio. The windows must not shrink — use `flex-shrink-0`.
-- Inside the frame, a black inset "glass" area holding the media, clipped with `overflow-hidden` and matching inner radius.
-- Media: if `project.videoSrc` exists, render `<video src autoPlay muted loop playsInline preload="metadata" poster={posterSrc}>` filling the area with `object-cover`. If it does not exist, render a placeholder panel — subtle dark gradient plus the project title centred in muted type — so the layout looks finished before the videos exist.
-- Glass treatment over the media: a soft diagonal white highlight at very low opacity (around 6–10%) across the top-left, and a faint vignette at the edges. Keep it `pointer-events-none`.
-- Caption strip below the glass, still inside the frame: title and description, small type, muted.
-
-## `ProjectsSection.tsx`
-
-- `<section id="projects">`, `min-h-screen`, dark background consistent with my About section (base `#0a1228`).
-- Heading: "Projects", styled to match my About heading — Plus Jakarta Sans, italic, bold, colour `rgba(255, 230, 140, 0.95)`.
-- Below the heading, the moving train strip.
-
-### Marquee implementation — important
-
-Do **not** use an index-based carousel or Framer Motion for this. Use a pure CSS transform loop:
-
-1. Render the `projects` array **twice** inside a single flex track (`<div className="flex gap-8 w-max">`), with the duplicate marked `aria-hidden="true"`.
-2. Animate the track with `@keyframes` from `translateX(0)` to `translateX(-50%)`, `linear`, `infinite`, duration around 40s (expose it as a CSS variable `--train-duration` so I can tune the speed).
-3. Because the content is duplicated, `-50%` lands exactly where the loop began — that's what makes it seamless. Do not use a JS `setInterval` or scroll listener.
-4. Add `will-change: transform` and `transform: translateZ(0)` on the track.
-5. Do **not** pause on hover — it should never stop.
-6. Under `@media (prefers-reduced-motion: reduce)`, stop the animation and let the strip scroll horizontally with `overflow-x: auto`.
-
-Keep the keyframes in a scoped `<style>` block inside the component, and prefix the animation name (`train-scroll`) so it can't collide with anything global.
-
-### Extras
-
-- Fade masks on the left and right edges of the strip so windows fade out rather than getting cut off — use `mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent)` with the `-webkit-` prefix too.
-- Optional but nice: a very slow, subtle vertical bob (2–3px, ~6s) on the whole track to suggest train motion. Keep it barely perceptible.
-- If a project has `href`, wrap the window in an anchor with a visible keyboard focus ring.
-- TypeScript strict-safe, no `any`, no unused imports.
-
-Show me the full contents of each new file and the exact diff for `App.tsx`. use existing files at first priority
+3. Content Panel Overlay / Drawer (Triggered on Click):
+   - Clicking a node opens a clear pastel glass modal/card displaying the content:
+     * About Me: Include the bio paragraph: "I'm a person with a lot of hobbies, and this is one of them where I want to create and earn through it so I can support my other hobbies and dreams too."
+     * Education: Add structured placeholder items (e.g., Degree, Institution, Timeline) ready for editing.
+     * Experience: Add structured placeholder items (e.g., Role, Projects Built, Key Skills applied) ready for editing.
+   - Match the exact motion timing, smooth entry/exit transitions, and tiny decorative detail aesthetic seen in the reference GIF file.
