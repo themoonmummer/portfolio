@@ -11,6 +11,8 @@ export const HERO_DATA = {
 export const PROJECTS: Project[] = [
   {
     id: "neo-zen",
+    demoUrl: "", // TODO: paste your Vercel URL here
+    videoSrc: "", // TODO: e.g. "/videos/neo-zen.mp4"
     title: "Neo-Zen Dashboard",
     subtitle: "Currently Passing",
     category: "Productivity System",
@@ -33,6 +35,8 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "sakura-flow",
+    demoUrl: "", // TODO: paste your Vercel URL here
+    videoSrc: "", // TODO: e.g. "/videos/sakura-flow.mp4"
     title: "Sakura Flow Wellness",
     subtitle: "Next Destination",
     category: "Health & Mindfulness",
@@ -55,6 +59,8 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "komorebi-analytics",
+    demoUrl: "", // TODO: paste your Vercel URL here
+    videoSrc: "", // TODO: e.g. "/videos/komorebi-analytics.mp4"
     title: "Komorebi Financial Hub",
     subtitle: "In Transit",
     category: "Fintech Platform",

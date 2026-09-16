@@ -11,7 +11,7 @@ export const TechStack: React.FC = () => {
   const currentTech = TECH_STACK[activeIndex];
 
   return (
-    <section className="py-24 sm:py-32 bg-[#fbf8fb] relative overflow-hidden">
+    <section id="skills" className="py-24 sm:py-32 bg-[#fbf8fb] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 sm:gap-16 items-center">
           

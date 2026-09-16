@@ -1,389 +1,422 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useInView } from 'motion/react';
 
-type Category = 'about' | 'education' | 'experience';
+/* ------------------------------------------------------------------ *
+ *  EDIT YOUR CONTENT HERE
+ * ------------------------------------------------------------------ */
+type PanelId = 'about' | 'education' | 'experience';
 
-interface CabinData {
-  id: Category;
-  label: string;
-  angle: number;
+interface Panel {
+  id: PanelId;
+  index: string;     // number shown on the cabin + card
+  label: string;     // nav label
+  kicker: string;    // small line above the title
+  title: string;     // big serif title
+  body: string[];    // paragraphs / bullet lines — add your own text
 }
 
-const CABINS: CabinData[] = [
-  { id: 'about', label: 'About Me', angle: 0 },
-  { id: 'education', label: 'Education', angle: 120 },
-  { id: 'experience', label: 'Experience', angle: 240 },
+const PANELS: Panel[] = [
+  {
+    id: 'about',
+    index: '01',
+    label: 'About Me',
+    kicker: 'The person behind the code',
+    title: 'About Me',
+    body: [
+      'Write your intro here.',
+      'A second paragraph if you want one.',
+    ],
+  },
+  {
+    id: 'education',
+    index: '02',
+    label: 'Education',
+    kicker: 'What I studied',
+    title: 'Education',
+    body: [
+      'Degree — add here.',
+      'Institution — add here.',
+      'Timeline — add here.',
+    ],
+  },
+  {
+    id: 'experience',
+    index: '03',
+    label: 'Experience',
+    kicker: 'What I have built',
+    title: 'Experience',
+    body: [
+      'Role — add here.',
+      'Projects — add here.',
+      'Skills — add here.',
+    ],
+  },
 ];
 
-const CONTENT: Record<Category, { title: string; items: string[] }> = {
-  about: {
-    title: 'About Me',
-    items: [
-      "I'm a person with a lot of hobbies, and this is one of them where I want to create and earn through it so I can support my other hobbies and dreams too.",
-    ],
-  },
-  education: {
-    title: 'Education',
-    items: [
-      'Degree: Bachelor of Computer Applications (BCA)',
-      'Institution: [Your University Name]',
-      'Timeline: 2022 - 2025',
-      'Focus: Software Development, Web Technologies, UI/UX',
-    ],
-  },
-  experience: {
-    title: 'Experience',
-    items: [
-      'Role: Frontend Developer & Creative Coder',
-      'Projects Built: Neo-Zen Dashboard, Sakura Flow Wellness',
-      'Key Skills: React, TypeScript, Tailwind CSS, Framer Motion',
-      'Approach: Remote-first, independent contributor',
-    ],
-  },
-};
+/* ------------------------------------------------------------------ *
+ *  Palette — Japanese night festival
+ * ------------------------------------------------------------------ */
+const INK = '#070d1c';
+const NIGHT = '#0a1228';
+const GOLD = '#ffe68c';
+const GOLD_SOFT = 'rgba(255, 230, 140, 0.62)';
+const SAKURA = '#f5a8c0';
+const CREAM = '#f3ece0';
 
-const WHEEL_SIZE = 340;
-const WHEEL_RADIUS = WHEEL_SIZE / 2 - 20;
-const CABIN_RADIUS = 22;
-
-const PASTEL_PINK = '#FFD1DC';
-const PASTEL_BLUE = '#BDE0FE';
-const PASTEL_YELLOW = '#FFFBAC';
-const PASTEL_LILAC = '#E2C2F0';
-
-const CABIN_COLORS: Record<Category, string> = {
-  about: PASTEL_PINK,
-  education: PASTEL_BLUE,
-  experience: PASTEL_LILAC,
-};
+const SPIN_SECONDS = 70;   // ferris wheel revolution time — higher is slower
+const AUTO_ADVANCE_MS = 7000;
 
 export const AboutSection: React.FC = () => {
-  const [activeCabin, setActiveCabin] = useState<Category | null>(null);
-  const [hoveredCabin, setHoveredCabin] = useState<Category | null>(null);
-  const [rotation, setRotation] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [active, setActive] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
+  const isInView = useInView(sectionRef, { amount: 0.25 });
 
   const prefersReducedMotion =
     typeof window !== 'undefined' &&
     window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
+  // Auto-advance while the section is on screen
   useEffect(() => {
-    if (prefersReducedMotion || !isInView) return;
+    if (!isInView || prefersReducedMotion) return;
+    const t = setInterval(() => {
+      setActive((prev) => (prev + 1) % PANELS.length);
+    }, AUTO_ADVANCE_MS);
+    return () => clearInterval(t);
+  }, [isInView, prefersReducedMotion]);
 
-    let rafId: number;
-    let lastTime = performance.now();
+  const select = useCallback((i: number) => setActive(i), []);
 
-    const animate = (now: number) => {
-      const delta = now - lastTime;
-      lastTime = now;
-
-      if (!isPaused) {
-        setRotation((prev) => (prev + (delta * 0.015)) % 360);
-      }
-
-      rafId = requestAnimationFrame(animate);
-    };
-
-    rafId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafId);
-  }, [isPaused, prefersReducedMotion, isInView]);
-
-  const getCabinPosition = (baseAngle: number) => {
-    const angleRad = ((baseAngle + rotation) * Math.PI) / 180;
-    const x = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.cos(angleRad);
-    const y = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.sin(angleRad);
-    return { x, y };
-  };
-
-  const handleCabinClick = (id: Category) => {
-    setActiveCabin(activeCabin === id ? null : id);
-  };
+  const panel = PANELS[active];
 
   return (
     <section
       ref={sectionRef}
       id="about"
-      className="relative w-full overflow-hidden py-16 sm:py-24"
+      className="relative min-h-screen w-full overflow-hidden"
       style={{
-        background: `linear-gradient(160deg, #FFF5F7 0%, #F0E6FF 40%, #E6F0FF 70%, #FFFBAC 100%)`,
+        background: `radial-gradient(120% 90% at 15% 20%, #142145 0%, ${NIGHT} 45%, ${INK} 100%)`,
       }}
     >
-      {/* Cherry blossom decorative accents */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
+      {/* Stars */}
+      <div className="pointer-events-none absolute inset-0 opacity-70">
+        {STARS.map((s, i) => (
+          <span
             key={i}
-            className="absolute text-lg sm:text-2xl opacity-30"
+            className="absolute rounded-full"
             style={{
-              left: `${10 + i * 12}%`,
-              top: `${5 + (i % 3) * 30}%`,
+              left: `${s.x}%`,
+              top: `${s.y}%`,
+              width: s.r,
+              height: s.r,
+              background: '#fff6d8',
+              opacity: s.o,
+              animation: `about-twinkle ${s.d}s ease-in-out ${s.delay}s infinite`,
             }}
-            animate={{
-              y: [0, -15, 0],
-              rotate: [0, 10, -5, 0],
-              opacity: [0.2, 0.4, 0.2],
-            }}
-            transition={{
-              duration: 4 + i * 0.5,
-              repeat: Infinity,
-              ease: 'easeInOut',
-              delay: i * 0.3,
-            }}
-          >
-            {i % 2 === 0 ? '🌸' : '✿'}
-          </motion.div>
+          />
         ))}
       </div>
 
-      {/* Section heading */}
-      <motion.div
-        className="text-center mb-8 sm:mb-12 px-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6 }}
+      {/* Drifting sakura petals */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {PETALS.map((p, i) => (
+          <span
+            key={i}
+            className="absolute"
+            style={{
+              left: `${p.x}%`,
+              top: '-6%',
+              width: p.s,
+              height: p.s,
+              background: SAKURA,
+              opacity: 0.35,
+              borderRadius: '150% 0 150% 0',
+              animation: `about-petal ${p.d}s linear ${p.delay}s infinite`,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* ---------------- Ferris wheel ---------------- */}
+      <div
+        className="pointer-events-none absolute top-1/2 right-[-42%] w-[130vw] max-w-[1050px] -translate-y-1/2 sm:right-[-30%] lg:right-[-18%]"
+        aria-hidden="true"
       >
-        <h2
-          className="text-3xl sm:text-4xl md:text-5xl font-bold italic"
+        <div
+          className="relative aspect-square w-full"
           style={{
-            fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-            color: '#5a3d6a',
-            letterSpacing: '0.01em',
+            animation: prefersReducedMotion
+              ? undefined
+              : `about-wheel-spin ${SPIN_SECONDS}s linear infinite`,
           }}
         >
-          Explore My World
-        </h2>
-        <p
-          className="mt-2 text-sm sm:text-base"
-          style={{
-            fontFamily: "'Cormorant Garamond', Georgia, serif",
-            color: '#7a6088',
-          }}
-        >
-          Spin the wheel or click a cabin to learn more
-        </p>
-      </motion.div>
+          <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full">
+            {/* rims */}
+            <circle cx="50" cy="50" r="44" fill="none" stroke={GOLD} strokeWidth="0.5" opacity="0.55" />
+            <circle cx="50" cy="50" r="41" fill="none" stroke={GOLD} strokeWidth="0.22" opacity="0.35" />
+            <circle cx="50" cy="50" r="24" fill="none" stroke={SAKURA} strokeWidth="0.18" opacity="0.3" />
 
-      {/* Ferris wheel container */}
-      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-16 px-4">
-        {/* Wheel */}
-        <motion.div
-          className="relative flex-shrink-0"
-          style={{ width: WHEEL_SIZE, height: WHEEL_SIZE }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
-          {/* Outer ring */}
-          <svg
-            width={WHEEL_SIZE}
-            height={WHEEL_SIZE}
-            className="absolute inset-0"
-            viewBox={`0 0 ${WHEEL_SIZE} ${WHEEL_SIZE}`}
-          >
-            {/* Main wheel circle */}
-            <circle
-              cx={WHEEL_RADIUS}
-              cy={WHEEL_RADIUS}
-              r={WHEEL_RADIUS * 0.75}
-              fill="none"
-              stroke={PASTEL_PINK}
-              strokeWidth="3"
-              opacity="0.6"
-            />
-            <circle
-              cx={WHEEL_RADIUS}
-              cy={WHEEL_RADIUS}
-              r={WHEEL_RADIUS * 0.72}
-              fill="none"
-              stroke={PASTEL_LILAC}
-              strokeWidth="1.5"
-              opacity="0.4"
-              strokeDasharray="8 4"
-            />
-
-            {/* Spokes */}
-            {CABINS.map((cabin) => {
-              const angleRad = ((cabin.angle + rotation) * Math.PI) / 180;
-              const x2 = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.cos(angleRad);
-              const y2 = WHEEL_RADIUS + WHEEL_RADIUS * 0.72 * Math.sin(angleRad);
+            {/* spokes */}
+            {Array.from({ length: 18 }).map((_, i) => {
+              const a = (i * 20 * Math.PI) / 180;
               return (
                 <line
-                  key={cabin.id}
-                  x1={WHEEL_RADIUS}
-                  y1={WHEEL_RADIUS}
-                  x2={x2}
-                  y2={y2}
-                  stroke={CABIN_COLORS[cabin.id]}
-                  strokeWidth="1.5"
-                  opacity="0.5"
+                  key={i}
+                  x1={50}
+                  y1={50}
+                  x2={50 + 44 * Math.cos(a)}
+                  y2={50 + 44 * Math.sin(a)}
+                  stroke={GOLD}
+                  strokeWidth="0.16"
+                  opacity="0.28"
                 />
               );
             })}
 
-            {/* Center hub */}
-            <circle
-              cx={WHEEL_RADIUS}
-              cy={WHEEL_RADIUS}
-              r={14}
-              fill={PASTEL_YELLOW}
-              stroke={PASTEL_PINK}
-              strokeWidth="2"
-            />
-            <circle
-              cx={WHEEL_RADIUS}
-              cy={WHEEL_RADIUS}
-              r={6}
-              fill="#fff"
-              opacity="0.8"
-            />
+            {/* lantern bulbs on the rim */}
+            {Array.from({ length: 36 }).map((_, i) => {
+              const a = (i * 10 * Math.PI) / 180;
+              return (
+                <circle
+                  key={i}
+                  cx={50 + 44 * Math.cos(a)}
+                  cy={50 + 44 * Math.sin(a)}
+                  r="0.55"
+                  fill={i % 3 === 0 ? SAKURA : GOLD}
+                  opacity="0.75"
+                  style={{ animation: `about-twinkle ${2 + (i % 5) * 0.4}s ease-in-out ${i * 0.08}s infinite` }}
+                />
+              );
+            })}
+
+            {/* hub */}
+            <circle cx="50" cy="50" r="3.2" fill={NIGHT} stroke={GOLD} strokeWidth="0.5" />
+            <circle cx="50" cy="50" r="1.2" fill={GOLD} opacity="0.9" />
           </svg>
 
-          {/* Cabins */}
-          {CABINS.map((cabin) => {
-            const pos = getCabinPosition(cabin.angle);
-            const isActive = activeCabin === cabin.id;
-            const isHovered = hoveredCabin === cabin.id;
-
+          {/* Gondolas — ride the rim, stay upright */}
+          {PANELS.map((p, i) => {
+            const angle = ((i * 120 - 90) * Math.PI) / 180;
+            const left = 50 + 44 * Math.cos(angle);
+            const top = 50 + 44 * Math.sin(angle);
+            const isActive = i === active;
             return (
-              <motion.button
-                key={cabin.id}
-                className="absolute flex items-center justify-center rounded-full cursor-pointer border-2 shadow-lg"
+              <div
+                key={p.id}
+                className="absolute"
                 style={{
-                  width: CABIN_RADIUS * 2,
-                  height: CABIN_RADIUS * 2,
-                  left: pos.x - CABIN_RADIUS,
-                  top: pos.y - CABIN_RADIUS,
-                  backgroundColor: CABIN_COLORS[cabin.id],
-                  borderColor: isActive ? '#5a3d6a' : 'rgba(255,255,255,0.8)',
-                  zIndex: isActive || isHovered ? 20 : 10,
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  transform: 'translate(-50%, -50%)',
                 }}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.95 }}
-                animate={{
-                  scale: isActive ? 1.2 : 1,
-                  boxShadow: isActive
-                    ? '0 0 20px rgba(90,61,106,0.4)'
-                    : '0 4px 12px rgba(0,0,0,0.1)',
-                }}
-                onClick={() => handleCabinClick(cabin.id)}
-                onMouseEnter={() => setHoveredCabin(cabin.id)}
-                onMouseLeave={() => setHoveredCabin(null)}
-                aria-label={cabin.label}
               >
-                <span
-                  className="text-[10px] sm:text-xs font-bold text-center leading-tight px-1"
+                <div
                   style={{
-                    fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                    color: '#3d2a50',
+                    animation: prefersReducedMotion
+                      ? undefined
+                      : `about-wheel-spin-reverse ${SPIN_SECONDS}s linear infinite`,
                   }}
                 >
-                  {cabin.label}
-                </span>
-              </motion.button>
-            );
-          })}
-
-          {/* Support stand */}
-          <div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-10 rounded-full"
-            style={{ backgroundColor: PASTEL_LILAC, opacity: 0.6 }}
-          />
-          <div
-            className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-3 rounded-full"
-            style={{ backgroundColor: PASTEL_PINK, opacity: 0.4 }}
-          />
-        </motion.div>
-
-        {/* Content panel */}
-        <div className="w-full max-w-lg min-h-[280px]">
-          <AnimatePresence mode="wait">
-            {activeCabin ? (
-              <motion.div
-                key={activeCabin}
-                className="rounded-3xl p-6 sm:p-8 backdrop-blur-xl border shadow-xl"
-                style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.65)',
-                  borderColor: 'rgba(255, 255, 255, 0.8)',
-                  boxShadow: '0 8px 32px rgba(90, 61, 106, 0.12)',
-                }}
-                initial={{ opacity: 0, x: 30, scale: 0.95 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: -20, scale: 0.95 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-              >
-                <div className="flex items-center gap-3 mb-4">
                   <div
-                    className="w-3 h-3 rounded-full"
-                    style={{ backgroundColor: CABIN_COLORS[activeCabin] }}
-                  />
-                  <h3
-                    className="text-xl sm:text-2xl font-bold"
+                    className="pointer-events-auto flex h-16 w-16 cursor-pointer items-center justify-center rounded-2xl text-center transition-all duration-500 sm:h-20 sm:w-20"
+                    onClick={() => select(i)}
                     style={{
-                      fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-                      color: '#3d2a50',
+                      background: isActive
+                        ? 'linear-gradient(160deg, rgba(255,230,140,0.9), rgba(245,168,192,0.75))'
+                        : 'rgba(10,18,40,0.72)',
+                      border: `1px solid ${isActive ? GOLD : 'rgba(255,230,140,0.35)'}`,
+                      boxShadow: isActive
+                        ? '0 0 34px rgba(255,230,140,0.45)'
+                        : '0 6px 18px rgba(0,0,0,0.45)',
+                      backdropFilter: 'blur(4px)',
                     }}
                   >
-                    {CONTENT[activeCabin].title}
-                  </h3>
+                    <span
+                      className="text-lg font-bold sm:text-xl"
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+                        color: isActive ? INK : GOLD_SOFT,
+                      }}
+                    >
+                      {p.index}
+                    </span>
+                  </div>
                 </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-                <div className="space-y-3">
-                  {CONTENT[activeCabin].items.map((item, i) => (
-                    <motion.div
+      {/* ---------------- Content ---------------- */}
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center gap-10 px-6 py-24 sm:px-10 md:px-16 lg:gap-14">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.35em]" style={{ color: GOLD_SOFT }}>
+            Ride the wheel
+          </p>
+          <h2
+            className="mt-3 text-4xl font-bold italic sm:text-5xl md:text-6xl"
+            style={{
+              fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+              color: GOLD,
+              textShadow: '0 2px 24px rgba(0,0,0,0.45)',
+            }}
+          >
+            About
+          </h2>
+        </div>
+
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-16">
+          {/* Nav list */}
+          <nav className="flex shrink-0 flex-row gap-5 lg:w-48 lg:flex-col lg:gap-4">
+            {PANELS.map((p, i) => {
+              const isActive = i === active;
+              return (
+                <button
+                  key={p.id}
+                  onClick={() => select(i)}
+                  className="group flex items-center gap-3 text-left transition-colors duration-300"
+                  aria-current={isActive ? 'true' : undefined}
+                >
+                  <span
+                    className="text-[11px] tabular-nums transition-opacity"
+                    style={{ color: GOLD, opacity: isActive ? 1 : 0.45 }}
+                  >
+                    {p.index}
+                  </span>
+                  <span
+                    className="text-sm sm:text-base"
+                    style={{
+                      fontFamily: "'Cormorant Garamond', Georgia, serif",
+                      color: isActive ? CREAM : 'rgba(243,236,224,0.45)',
+                      letterSpacing: '0.04em',
+                    }}
+                  >
+                    {p.label}
+                  </span>
+                  <span
+                    className="hidden h-px transition-all duration-500 lg:block"
+                    style={{
+                      width: isActive ? 40 : 14,
+                      background: isActive ? GOLD : 'rgba(255,230,140,0.3)',
+                    }}
+                  />
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Card */}
+          <div className="relative w-full max-w-xl">
+            <AnimatePresence mode="wait">
+              <motion.article
+                key={panel.id}
+                initial={{ opacity: 0, y: 26 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="relative overflow-hidden rounded-3xl p-7 sm:p-10"
+                style={{
+                  background: 'rgba(8, 14, 32, 0.55)',
+                  border: '1px solid rgba(255, 230, 140, 0.22)',
+                  backdropFilter: 'blur(14px)',
+                  WebkitBackdropFilter: 'blur(14px)',
+                  boxShadow: '0 24px 60px rgba(0,0,0,0.45)',
+                }}
+              >
+                <p className="text-[10px] uppercase tracking-[0.3em]" style={{ color: GOLD_SOFT }}>
+                  {panel.kicker}
+                </p>
+
+                <h3
+                  className="mt-3 text-3xl italic sm:text-4xl"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', Georgia, serif",
+                    color: GOLD,
+                    fontWeight: 600,
+                    letterSpacing: '0.01em',
+                  }}
+                >
+                  {panel.title}
+                </h3>
+
+                <div className="mt-6 space-y-4">
+                  {panel.body.map((line, i) => (
+                    <motion.p
                       key={i}
-                      className="flex items-start gap-2 text-sm sm:text-base"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.12 + i * 0.08, duration: 0.4 }}
                       style={{
                         fontFamily: "'Cormorant Garamond', Georgia, serif",
-                        color: '#4a3560',
-                        lineHeight: 1.5,
+                        color: 'rgba(243, 236, 224, 0.82)',
+                        fontSize: 'clamp(1rem, 1.4vw, 1.12rem)',
+                        lineHeight: 1.8,
+                        letterSpacing: '0.012em',
                       }}
-                      initial={{ opacity: 0, y: 8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: i * 0.08, duration: 0.3 }}
                     >
-                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: CABIN_COLORS[activeCabin] }} />
-                      {item}
-                    </motion.div>
+                      {line}
+                    </motion.p>
                   ))}
                 </div>
 
-                {/* Decorative corner accents */}
-                <div className="absolute top-3 right-3 opacity-20 text-lg">✿</div>
-                <div className="absolute bottom-3 left-3 opacity-20 text-lg">🌸</div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key="placeholder"
-                className="rounded-3xl p-6 sm:p-8 backdrop-blur-xl border flex items-center justify-center min-h-[280px]"
-                style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.4)',
-                  borderColor: 'rgba(255, 255, 255, 0.6)',
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                <p
-                  className="text-center text-sm sm:text-base italic"
+                <span
+                  className="pointer-events-none absolute right-6 bottom-4 text-5xl tabular-nums sm:text-6xl"
                   style={{
                     fontFamily: "'Cormorant Garamond', Georgia, serif",
-                    color: '#8a7098',
+                    color: 'rgba(255, 230, 140, 0.16)',
+                    fontWeight: 600,
                   }}
                 >
-                  Click a cabin on the wheel to explore
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  {panel.index}
+                  <span className="text-lg">/0{PANELS.length}</span>
+                </span>
+              </motion.article>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes about-wheel-spin {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(360deg); }
+        }
+        @keyframes about-wheel-spin-reverse {
+          from { transform: rotate(0deg); }
+          to   { transform: rotate(-360deg); }
+        }
+        @keyframes about-twinkle {
+          0%, 100% { opacity: 0.25; }
+          50%      { opacity: 1; }
+        }
+        @keyframes about-petal {
+          0%   { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 0; }
+          10%  { opacity: 0.35; }
+          90%  { opacity: 0.35; }
+          100% { transform: translate3d(60px, 112vh, 0) rotate(320deg); opacity: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [id="about"] * { animation: none !important; }
+        }
+      `}</style>
     </section>
   );
 };
+
+const STARS = Array.from({ length: 46 }).map((_, i) => ({
+  x: (i * 37) % 100,
+  y: (i * 53) % 100,
+  r: i % 5 === 0 ? 2 : 1.2,
+  o: 0.3 + ((i % 4) * 0.15),
+  d: 2.5 + (i % 5) * 0.7,
+  delay: (i % 7) * 0.4,
+}));
+
+const PETALS = Array.from({ length: 10 }).map((_, i) => ({
+  x: (i * 11 + 5) % 100,
+  s: 7 + (i % 3) * 3,
+  d: 12 + (i % 4) * 4,
+  delay: i * 1.6,
+}));
 
 export default AboutSection;
