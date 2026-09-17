@@ -101,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       <div
         className="relative min-h-screen w-full flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/images/hero.jpeg)',
+          backgroundImage: 'url(../../assets/inspo/hero.jpeg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
