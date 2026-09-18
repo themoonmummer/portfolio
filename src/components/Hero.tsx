@@ -152,6 +152,8 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                     fontWeight: 800,
                     letterSpacing: '0.01em',
                     lineHeight: 1.1,
+                    transform: 'translate(60px,-65px)',
+
                   }}
                 >
                   Riya Jha
@@ -164,23 +166,29 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                     fontWeight: 700,
                     letterSpacing: '0.02em',
                     lineHeight: 1.3,
+                    transform: 'translate(60px,-55px)',
+
                   }}
                 >
                   Vibe Coder & Full-Stack Developer
                 </p>
-                <p
-                  className="text-sm sm:text-base md:text-lg max-w-md"
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    color: '#3B1F1A',
-                    fontWeight: 600,
-                    letterSpacing: '0.02em',
-                    lineHeight: 1.7,
-                  }}
-                >
-                  I'm a person with a lot of hobbies, and this is one of them where I want to create
-                  and earn through it so I can support my other hobbies and dreams too.
-                </p>
+               <p
+  className="text-sm sm:text-base md:text-lg max-w-md"
+  style={{
+    fontFamily: "'Cormorant Garamond', serif",
+    color: '#241310',
+    fontWeight: 900,
+    letterSpacing: '0.02em',
+    lineHeight: 2,
+    WebkitTextStroke: '0.25px #241310',
+    transform: 'translate(60px, -65px)',
+
+  }}
+>
+  I'm a person with a lot of hobbies, and this is one of them where I want to create
+  and earn through it so I can support my other hobbies and dreams too.
+</p>
+
               </motion.div>
             </div>
           </div>

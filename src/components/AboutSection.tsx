@@ -41,9 +41,7 @@ const About: React.FC = () => {
   const [isClosing, setIsClosing] = useState<boolean>(false);
   const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
 
-  // Sync title changes precisely when card reaches front position (18s total / 3 cards = 6s step)
   useEffect(() => {
-    // 1 second offset accounts for animation ease-in-out curve
     const initialTimer = setTimeout(() => {
       setActiveCardIndex((prev) => (prev + 1) % CARDS.length);
 
@@ -67,6 +65,7 @@ const About: React.FC = () => {
     e.stopPropagation();
 
     setIsClosing(true);
+
     setTimeout(() => {
       setActiveCard(null);
       setIsClosing(false);
@@ -77,7 +76,10 @@ const About: React.FC = () => {
 
   return (
     <section className="about" id="about">
-      {/* Background decoration */}
+
+      {/* =====================================================
+          BACKGROUND PETALS
+      ===================================================== */}
       <div className="about__petals" aria-hidden="true">
         <span className="petal petal--1" />
         <span className="petal petal--2" />
@@ -86,33 +88,79 @@ const About: React.FC = () => {
         <span className="petal petal--5" />
       </div>
 
-      {/* TOP-RIGHT FLUSH CORNER STAMPS */}
+      {/* =====================================================
+          TOP-RIGHT TRIANGLE STAMPS
+          
+          6 → 5 → 4 → 3 → 2 → 1
+      ===================================================== */}
       <div className="about__stamp-corner" aria-hidden="true">
-        {/* Top-row extension (sticked to top screen edge) */}
-        <div className="stamp-extension-row">
-          <div className="about__stamp"><span>桜</span></div>
-          <div className="about__stamp"><span>桜</span></div>
-        </div>
+        <div className="stamp-triangle">
 
-        {/* Core 3x3 Stamp Matrix */}
-        <div className="stamp-matrix-3x3">
-          {Array.from({ length: 9 }).map((_, i) => (
-            <div key={i} className="about__stamp">
+          {/* Row 1 — 6 stamps */}
+          <div className="stamp-row">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div className="about__stamp" key={`row1-${i}`}>
+                <span>桜</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 2 — 5 stamps */}
+          <div className="stamp-row">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div className="about__stamp" key={`row2-${i}`}>
+                <span>桜</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 3 — 4 stamps */}
+          <div className="stamp-row">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div className="about__stamp" key={`row3-${i}`}>
+                <span>桜</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 4 — 3 stamps */}
+          <div className="stamp-row">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div className="about__stamp" key={`row4-${i}`}>
+                <span>桜</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 5 — 2 stamps */}
+          <div className="stamp-row">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div className="about__stamp" key={`row5-${i}`}>
+                <span>桜</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Row 6 — 1 stamp */}
+          <div className="stamp-row">
+            <div className="about__stamp">
               <span>桜</span>
             </div>
-          ))}
-        </div>
+          </div>
 
-        {/* Bottom-column extension (sticked to right screen edge) */}
-        <div className="stamp-extension-col">
-          <div className="about__stamp"><span>桜</span></div>
-          <div className="about__stamp"><span>桜</span></div>
         </div>
       </div>
 
-      {/* FERRIS WHEEL */}
+      {/* =====================================================
+          FERRIS WHEEL
+      ===================================================== */}
       <div className="ferris-wheel" aria-hidden="true">
+
+        {/* Large dusty-pink circle behind the Ferris wheel */}
+        <div className="ferris-wheel__background-circle" />
+
         <div className="ferris-wheel__rim">
+
           <span className="ferris-wheel__spoke ferris-wheel__spoke--1" />
           <span className="ferris-wheel__spoke ferris-wheel__spoke--2" />
           <span className="ferris-wheel__spoke ferris-wheel__spoke--3" />
@@ -123,10 +171,12 @@ const About: React.FC = () => {
           <span className="ferris-wheel__spoke ferris-wheel__spoke--8" />
 
           <div className="ferris-wheel__hub" />
+
         </div>
 
         {/* THREE PHOTO CARDS */}
         <div className="ferris-wheel__cards">
+
           {CARDS.map((card, idx) => (
             <div
               key={card.id}
@@ -144,28 +194,53 @@ const About: React.FC = () => {
               </div>
             </div>
           ))}
+
         </div>
       </div>
 
-      {/* RIGHT SIDE CONTENT */}
+      {/* =====================================================
+          RIGHT SIDE CONTENT
+      ===================================================== */}
       <div className="about__content">
+
         <h1 className="about__title" key={currentTitle}>
           {currentTitle}
         </h1>
-        <p className="about__subtitle">Click card to know more</p>
+
+        <p className="about__subtitle">
+          Click card to know more
+        </p>
+
       </div>
 
-      {/* EXPANDING / COLLAPSING MODAL */}
+      {/* =====================================================
+          EXPANDING / COLLAPSING MODAL
+      ===================================================== */}
       {activeCard && (
-        <div className={`card-modal ${isClosing ? "card-modal--closing" : ""}`}>
+        <div
+          className={`card-modal ${
+            isClosing ? "card-modal--closing" : ""
+          }`}
+        >
           <div className="card-modal__hero">
-            <img src={activeCard.image} alt={activeCard.title} />
+            <img
+              src={activeCard.image}
+              alt={activeCard.title}
+            />
           </div>
+
           <div className="card-modal__body">
+
             <div>
-              <h2 className="card-modal__title">{activeCard.title}</h2>
-              <p className="card-modal__text">{activeCard.description}</p>
+              <h2 className="card-modal__title">
+                {activeCard.title}
+              </h2>
+
+              <p className="card-modal__text">
+                {activeCard.description}
+              </p>
             </div>
+
             <button
               type="button"
               className="card-modal__back"
@@ -173,9 +248,11 @@ const About: React.FC = () => {
             >
               &larr; back to section
             </button>
+
           </div>
         </div>
       )}
+
     </section>
   );
 };

@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({ visible, onNavigate }) => {
       className="pointer-events-auto"
       style={{
         position: 'fixed',
-        top: '95px',
+        top: `${95 - progress * 55}px`,
         left: '35%',
         transform: 'translateX(-50%)',
         zIndex: 50,

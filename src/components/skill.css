@@ -1,0 +1,583 @@
+/* =========================================================
+   SKILLS / LANGUAGES SECTION
+   ========================================================= */
+
+.skills-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url("../../assets/inspo/skills.jpeg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  color: #efd6d2;
+}
+
+
+/* =========================================================
+   DARK OVERLAY
+   ========================================================= */
+
+.skills-section::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  background: rgba(35, 18, 20, 0.16);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.skills-overlay {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 30px;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.skills-cards {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: clamp(20px, 3vw, 42px);
+
+  width: 100%;
+  max-width: 760px;
+}
+
+
+/* =========================================================
+   INDIVIDUAL CARD
+   ========================================================= */
+.skills-card {
+  position: relative;
+
+  width: clamp(230px, 30vw, 340px);
+  height: clamp(150px, 17vw, 205px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  /* Almost transparent */
+  background: rgba(255, 245, 245, 0.08);
+
+  /* Soft frosted glass */
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+
+  /* Very subtle edge */
+  border: 1px solid rgba(255, 235, 232, 0.38);
+
+  border-radius: 18px;
+
+  /* Keep the shadow very soft */
+  box-shadow:
+    0 8px 25px rgba(30, 15, 18, 0.12),
+    inset 0 0 20px rgba(255, 245, 245, 0.04);
+
+  cursor: pointer;
+
+  color: #f1d9d5;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* =========================================================
+   NUMBER
+   ========================================================= */
+
+.skills-card__number {
+  position: absolute;
+
+  top: 18px;
+  left: 20px;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  font-size: 0.65rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+
+  color: rgba(239, 214, 210, 0.62);
+}
+
+
+/* =========================================================
+   CARD TITLE
+   ========================================================= */
+
+.skills-card h2 {
+  margin: 0;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+
+  font-weight: 400;
+
+  letter-spacing: -0.025em;
+
+  color: #f0d8d4;
+
+  text-shadow:
+    0 2px 8px rgba(35, 15, 18, 0.35);
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+.skills-card:hover {
+  transform: translateY(-6px);
+
+  background: rgba(255, 245, 245, 0.13);
+
+  border-color: rgba(255, 235, 232, 0.55);
+
+  box-shadow:
+    0 14px 32px rgba(30, 15, 18, 0.16),
+    inset 0 0 25px rgba(255, 245, 245, 0.06);
+}
+
+
+.skills-card:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+
+/* =========================================================
+   HINT UNDER CARDS
+   ========================================================= */
+
+.skills-hint {
+  margin: 24px 0 0;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  /*
+    Increased slightly from the previous version.
+  */
+
+  font-size: 0.78rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.15em;
+
+  color: rgba(239, 214, 210, 0.78);
+
+  text-transform: lowercase;
+
+  text-shadow:
+    0 1px 5px rgba(30, 12, 15, 0.5);
+}
+
+
+/* =========================================================
+   EXPANDED PAGE
+   ========================================================= */
+.skills-expanded {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 20;
+
+  width: 100%;
+  height: 100%;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: clamp(40px, 8vw, 100px);
+
+  /*
+    CLEAR / FROSTED EXPANDED PAGE
+    The original skills.jpeg remains visible.
+  */
+  background: rgba(255, 235, 235, 0.08);
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  transform-origin: center center;
+
+  animation:
+    skillsExpand
+    0.55s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   REVERSE ANIMATION
+   ========================================================= */
+
+.skills-expanded--closing {
+  animation:
+    skillsCollapse
+    0.5s
+    cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
+}
+
+
+/* =========================================================
+   EXPANDED CONTENT
+   ========================================================= */
+
+.skills-expanded__content {
+  width: min(900px, 100%);
+
+  color: #f0d8d4;
+}
+
+
+/* Number */
+
+.skills-expanded__number {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  font-size: 0.75rem;
+
+  letter-spacing: 0.2em;
+
+  color: rgba(240, 216, 212, 0.6);
+}
+
+
+/* Heading */
+
+.skills-expanded h1 {
+  margin: 0 0 20px;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: clamp(3.5rem, 8vw, 7rem);
+
+  font-weight: 400;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.05em;
+
+  color: #f2d9d5;
+}
+
+
+/* Introduction */
+
+.skills-expanded__intro {
+  max-width: 620px;
+
+  margin: 0 0 45px;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+
+  line-height: 1.7;
+
+  color: rgba(240, 216, 212, 0.78);
+}
+
+
+/* =========================================================
+   SKILLS LIST
+   ========================================================= */
+
+.skills-list {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 0;
+
+  max-width: 750px;
+
+  border-top: 1px solid rgba(240, 216, 212, 0.2);
+}
+
+
+.skill-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 18px 12px 18px 0;
+
+  border-bottom: 1px solid rgba(240, 216, 212, 0.2);
+}
+
+
+.skill-item span {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  font-size: 0.65rem;
+
+  letter-spacing: 0.1em;
+
+  color: rgba(240, 216, 212, 0.45);
+}
+
+
+.skill-item p {
+  margin: 0;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  font-size: 0.95rem;
+
+  color: rgba(240, 216, 212, 0.9);
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.skills-back {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 45px;
+
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+
+  font-size: 0.82rem;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  color: rgba(240, 216, 212, 0.78);
+
+  cursor: pointer;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+
+.skills-back span {
+  font-size: 1.2rem;
+
+  transition: transform 0.25s ease;
+}
+
+
+.skills-back:hover {
+  color: #f2d9d5;
+
+  transform: translateX(-3px);
+}
+
+
+.skills-back:hover span {
+  transform: translateX(-4px);
+}
+
+
+/* =========================================================
+   EXPANSION ANIMATION
+   ========================================================= */
+
+@keyframes skillsExpand {
+  0% {
+    opacity: 0;
+
+    transform:
+      scale(0.35);
+
+    border-radius: 22px;
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      scale(1);
+
+    border-radius: 0;
+  }
+}
+
+
+/* =========================================================
+   COLLAPSE ANIMATION
+   ========================================================= */
+
+@keyframes skillsCollapse {
+  0% {
+    opacity: 1;
+
+    transform:
+      scale(1);
+
+    border-radius: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      scale(0.35);
+
+    border-radius: 22px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .skills-overlay {
+    padding: 30px 20px;
+  }
+
+  .skills-cards {
+    gap: 16px;
+  }
+
+  .skills-card {
+    width: 42vw;
+    height: 145px;
+
+    border-radius: 16px;
+  }
+
+  .skills-card h2 {
+    font-size: clamp(1.7rem, 6vw, 2.4rem);
+  }
+
+  .skills-expanded {
+    padding: 40px 28px;
+  }
+
+  .skills-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .skills-cards {
+    flex-direction: column;
+
+    gap: 14px;
+
+    max-width: 330px;
+  }
+
+  .skills-card {
+    width: 100%;
+    height: 130px;
+
+    border-radius: 15px;
+  }
+
+  .skills-card h2 {
+    font-size: 2rem;
+  }
+
+  .skills-card__number {
+    top: 14px;
+    left: 16px;
+  }
+
+  .skills-hint {
+    margin-top: 18px;
+
+    font-size: 0.72rem;
+  }
+
+  .skills-expanded {
+    padding: 35px 22px;
+  }
+
+  .skills-expanded h1 {
+    font-size: clamp(3rem, 15vw, 4.5rem);
+  }
+
+  .skills-expanded__intro {
+    margin-bottom: 30px;
+  }
+}

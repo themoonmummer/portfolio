@@ -12,6 +12,10 @@ ABOUT SECTION
   --brown-dark: #593b35;
   --brown-light: #8b655b;
 
+  /* Dusty pink decoration */
+  --dusty-pink: #d7a1a4;
+  --dusty-pink-soft: rgba(215, 161, 164, 0.34);
+
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -49,88 +53,181 @@ BACKGROUND PETALS
 
 .petal {
   position: absolute;
+
   width: 14px;
   height: 20px;
+
   background: rgba(255, 247, 246, 0.5);
+
   border-radius: 100% 0 100% 0;
+
   transform: rotate(45deg);
-  animation: petalFloat 8s ease-in-out infinite;
+
+  animation:
+    petalFloat 8s ease-in-out infinite;
 }
 
-.petal--1 { top: 15%; right: 13%; animation-delay: -2s; }
-.petal--2 { top: 35%; right: 31%; width: 10px; height: 15px; animation-delay: -5s; }
-.petal--3 { top: 68%; right: 18%; width: 12px; height: 17px; animation-delay: -1s; }
-.petal--4 { top: 82%; right: 40%; width: 9px; height: 14px; animation-delay: -6s; }
-.petal--5 { top: 24%; right: 48%; width: 8px; height: 12px; animation-delay: -3s; }
+.petal--1 {
+  top: 15%;
+  right: 13%;
+  animation-delay: -2s;
+}
+
+.petal--2 {
+  top: 35%;
+  right: 31%;
+  width: 10px;
+  height: 15px;
+  animation-delay: -5s;
+}
+
+.petal--3 {
+  top: 68%;
+  right: 18%;
+  width: 12px;
+  height: 17px;
+  animation-delay: -1s;
+}
+
+.petal--4 {
+  top: 82%;
+  right: 40%;
+  width: 9px;
+  height: 14px;
+  animation-delay: -6s;
+}
+
+.petal--5 {
+  top: 24%;
+  right: 48%;
+  width: 8px;
+  height: 12px;
+  animation-delay: -3s;
+}
 
 @keyframes petalFloat {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) rotate(45deg);
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      rotate(45deg);
     opacity: 0.3;
   }
+
   50% {
-    transform: translate3d(15px, 30px, 0) rotate(80deg);
+    transform:
+      translate3d(15px, 30px, 0)
+      rotate(80deg);
     opacity: 0.7;
   }
 }
 
 /* =========================================================
-FLUSH TOP-RIGHT STAMP MATRIX
+TOP-RIGHT TRIANGLE STAMP DECORATION
 ========================================================= */
+
+/*
+   Shape:
+
+   ┌──────────────────────────────┐
+   │ □ □ □ □ □ □                 │
+   │   □ □ □ □ □                 │
+   │     □ □ □ □                 │
+   │       □ □ □                 │
+   │         □ □                 │
+   │           □                 │
+   └──────────────────────────────┘
+
+   The RIGHT edge stays flush with the screen.
+*/
 
 .about__stamp-corner {
   position: absolute;
+
   top: 0;
   right: 0;
+
   z-index: 4;
+
   pointer-events: none;
+
+  width: max-content;
+}
+
+/* =========================================================
+STAMP TRIANGLE
+========================================================= */
+
+.stamp-triangle {
   display: flex;
+
   flex-direction: column;
+
   align-items: flex-end;
+
+  gap: 5px;
 }
 
-/* 2 stamps extending left along upper edge */
-.stamp-extension-row {
+.stamp-row {
   display: flex;
-  margin-right: 144px; /* Align to left of 3x3 matrix (44px * 3 + 12px gap) */
+
+  justify-content: flex-end;
+
+  gap: 5px;
 }
 
-/* Core 3x3 Stamp Matrix sticked to top and right borders */
-.stamp-matrix-3x3 {
-  display: grid;
-  grid-template-columns: repeat(3, 44px);
-  gap: 4px;
-}
-
-/* 2 stamps extending down along right edge */
-.stamp-extension-col {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 4px;
-}
+/* =========================================================
+INDIVIDUAL STAMP
+========================================================= */
 
 .about__stamp {
-  width: 44px;
-  height: 44px;
+  width: 60px;
+  height: 60px;
+
+  flex: 0 0 60px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(89, 59, 53, 0.45);
-  color: var(--brown-dark);
-  font-family: serif;
-  font-size: 1.1rem;
+
   box-sizing: border-box;
+
   position: relative;
-  background: rgba(249, 231, 227, 0.2);
-  opacity: 0.8;
+
+  border:
+    1px solid
+    rgba(112, 79, 70, 0.30);
+
+  background:
+    rgba(217, 163, 165, 0.30);
+
+  color:
+    rgba(89, 59, 53, 0.72);
+
+  font-family: serif;
+
+  font-size: 1.4rem;
+
+  opacity: 0.78;
 }
+
+/* Inner stamp border */
 
 .about__stamp::before {
   content: "";
+
   position: absolute;
-  inset: 3px;
-  border: 1px solid rgba(89, 59, 53, 0.25);
+
+  inset: 5px;
+
+  border:
+    1px solid
+    rgba(112, 79, 70, 0.20);
+}
+
+.about__stamp span {
+  opacity: 0.78;
 }
 
 /* =========================================================
@@ -139,65 +236,220 @@ FERRIS WHEEL
 
 .ferris-wheel {
   position: absolute;
+
   left: -45vw;
   top: 50%;
+
   width: 170vw;
   height: 170vw;
+
   max-width: 1400px;
   max-height: 1400px;
-  transform: translateY(-50%);
+
+  transform:
+    translateY(-50%);
+
   z-index: 2;
+
   pointer-events: none;
 }
 
+/* =========================================================
+LARGE DUSTY-PINK CIRCLE
+========================================================= */
+
+/*
+   This circle is BEHIND the Ferris wheel.
+
+   It is intentionally large so that roughly 15%
+   of its overall area/shape enters the visible
+   screen area from the left side.
+
+   Because it is inside .ferris-wheel but has a
+   lower z-index than the rim/cards, the wheel
+   remains visible over it.
+*/
+
+.ferris-wheel__background-circle {
+  position: absolute;
+
+  /*
+    Move the circle toward the visible edge.
+  */
+  left: 55%;
+  top: 50%;
+
+  width: 62vw;
+  height: 62vw;
+
+  max-width: none;
+  max-height: none;
+
+  min-width: 0px;
+  min-height: 0px;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    rgba(164, 95, 108, 0.25);
+
+  border:
+    1px solid
+    rgba(112, 79, 70, 0.12);
+
+  box-shadow:
+    0 0 60px
+    rgba(215, 161, 164, 0.16);
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+FERRIS WHEEL RIM
+========================================================= */
+
 .ferris-wheel__rim {
   position: absolute;
+
   inset: 0;
-  border: clamp(5px, 0.55vw, 9px) solid var(--brown);
+
+  border:
+    clamp(5px, 0.55vw, 9px)
+    solid
+    var(--brown);
+
   border-radius: 50%;
-  animation: ferrisWheelRotate 18s ease-in-out infinite;
+
+  animation:
+    ferrisWheelRotate
+    18s ease-in-out infinite;
+
   transform-origin: center center;
+
+  z-index: 2;
 }
 
 .ferris-wheel__rim::before {
   content: "";
+
   position: absolute;
+
   inset: 4.5%;
-  border: clamp(2px, 0.25vw, 4px) solid rgba(112, 79, 70, 0.5);
+
+  border:
+    clamp(2px, 0.25vw, 4px)
+    solid
+    rgba(112, 79, 70, 0.5);
+
   border-radius: 50%;
 }
+
+/* =========================================================
+FERRIS WHEEL SPOKES
+========================================================= */
 
 .ferris-wheel__spoke {
   position: absolute;
+
   left: 50%;
   top: 50%;
+
   width: 8px;
   height: 50%;
+
   transform-origin: center bottom;
+
   background: var(--brown);
+
   opacity: 0.85;
 }
 
-.ferris-wheel__spoke--1 { transform: translate(-50%, -100%) rotate(0deg); }
-.ferris-wheel__spoke--2 { transform: translate(-50%, -100%) rotate(45deg); }
-.ferris-wheel__spoke--3 { transform: translate(-50%, -100%) rotate(90deg); }
-.ferris-wheel__spoke--4 { transform: translate(-50%, -100%) rotate(135deg); }
-.ferris-wheel__spoke--5 { transform: translate(-50%, -100%) rotate(180deg); }
-.ferris-wheel__spoke--6 { transform: translate(-50%, -100%) rotate(225deg); }
-.ferris-wheel__spoke--7 { transform: translate(-50%, -100%) rotate(270deg); }
-.ferris-wheel__spoke--8 { transform: translate(-50%, -100%) rotate(315deg); }
+.ferris-wheel__spoke--1 {
+  transform:
+    translate(-50%, -100%)
+    rotate(0deg);
+}
+
+.ferris-wheel__spoke--2 {
+  transform:
+    translate(-50%, -100%)
+    rotate(45deg);
+}
+
+.ferris-wheel__spoke--3 {
+  transform:
+    translate(-50%, -100%)
+    rotate(90deg);
+}
+
+.ferris-wheel__spoke--4 {
+  transform:
+    translate(-50%, -100%)
+    rotate(135deg);
+}
+
+.ferris-wheel__spoke--5 {
+  transform:
+    translate(-50%, -100%)
+    rotate(180deg);
+}
+
+.ferris-wheel__spoke--6 {
+  transform:
+    translate(-50%, -100%)
+    rotate(225deg);
+}
+
+.ferris-wheel__spoke--7 {
+  transform:
+    translate(-50%, -100%)
+    rotate(270deg);
+}
+
+.ferris-wheel__spoke--8 {
+  transform:
+    translate(-50%, -100%)
+    rotate(315deg);
+}
+
+/* =========================================================
+FERRIS WHEEL HUB
+========================================================= */
 
 .ferris-wheel__hub {
   position: absolute;
+
   left: 50%;
   top: 50%;
-  width: clamp(32px, 4vw, 65px);
-  height: clamp(32px, 4vw, 65px);
-  transform: translate(-50%, -50%);
+
+  width:
+    clamp(32px, 4vw, 65px);
+
+  height:
+    clamp(32px, 4vw, 65px);
+
+  transform:
+    translate(-50%, -50%);
+
   border-radius: 50%;
-  background: var(--brown);
-  border: clamp(5px, 0.5vw, 8px) solid var(--pink-light);
-  box-shadow: 0 0 0 clamp(3px, 0.35vw, 6px) var(--brown);
+
+  background:
+    var(--brown);
+
+  border:
+    clamp(5px, 0.5vw, 8px)
+    solid
+    var(--pink-light);
+
+  box-shadow:
+    0 0 0
+    clamp(3px, 0.35vw, 6px)
+    var(--brown);
 }
 
 /* =========================================================
@@ -206,275 +458,564 @@ CARDS
 
 .ferris-wheel__cards {
   position: absolute;
+
   inset: 0;
-  animation: ferrisWheelRotate 18s ease-in-out infinite;
+
+  animation:
+    ferrisWheelRotate
+    18s ease-in-out infinite;
+
   transform-origin: center center;
+
   z-index: 10;
 }
 
-.ferris-card--1 { --card-angle: 0deg; }
-.ferris-card--2 { --card-angle: 120deg; }
-.ferris-card--3 { --card-angle: 240deg; }
+.ferris-card--1 {
+  --card-angle: 0deg;
+}
+
+.ferris-card--2 {
+  --card-angle: 120deg;
+}
+
+.ferris-card--3 {
+  --card-angle: 240deg;
+}
 
 .ferris-card {
   position: absolute;
+
   left: 50%;
   top: 50%;
-  width: clamp(200px, 22vw, 340px);
-  height: clamp(140px, 15vw, 230px);
+
+  width:
+    clamp(200px, 22vw, 340px);
+
+  height:
+    clamp(140px, 15vw, 230px);
+
   transform-origin: center center;
-  transform: translate(-50%, -50%) rotate(var(--card-angle)) translateX(min(85vw, 700px));
+
+  transform:
+    translate(-50%, -50%)
+    rotate(var(--card-angle))
+    translateX(min(85vw, 700px));
+
   cursor: pointer;
+
   pointer-events: auto;
 }
 
 .ferris-card__inner {
   position: relative;
+
   width: 100%;
   height: 100%;
-  background: var(--pink-light);
-  border: 3px solid var(--brown);
+
+  background:
+    var(--pink-light);
+
+  border:
+    3px solid
+    var(--brown);
+
   border-radius: 12px;
+
   overflow: hidden;
-  box-shadow: 8px 10px 0 rgba(89, 59, 53, 0.15);
+
+  box-shadow:
+    8px 10px 0
+    rgba(89, 59, 53, 0.15);
+
   transform-origin: center center;
-  animation: ferrisCardUpright 18s ease-in-out infinite;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  animation:
+    ferrisCardUpright
+    18s ease-in-out infinite;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .ferris-card:hover .ferris-card__inner {
-  box-shadow: 10px 14px 0 rgba(89, 59, 53, 0.25);
+  box-shadow:
+    10px 14px 0
+    rgba(89, 59, 53, 0.25);
 }
 
 .ferris-card__image {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+
   display: block;
 }
 
+/* =========================================================
+FERRIS WHEEL ANIMATION
+========================================================= */
+
 @keyframes ferrisWheelRotate {
-  0%, 28% { transform: rotate(0deg); }
-  33.33%, 61.33% { transform: rotate(-120deg); }
-  66.66%, 94.66% { transform: rotate(-240deg); }
-  100% { transform: rotate(-360deg); }
+  0%,
+  28% {
+    transform: rotate(0deg);
+  }
+
+  33.33%,
+  61.33% {
+    transform: rotate(-120deg);
+  }
+
+  66.66%,
+  94.66% {
+    transform: rotate(-240deg);
+  }
+
+  100% {
+    transform: rotate(-360deg);
+  }
 }
 
 @keyframes ferrisCardUpright {
-  0%, 28% { transform: rotate(calc(-1 * var(--card-angle) + 0deg)); }
-  33.33%, 61.33% { transform: rotate(calc(-1 * var(--card-angle) + 120deg)); }
-  66.66%, 94.66% { transform: rotate(calc(-1 * var(--card-angle) + 240deg)); }
-  100% { transform: rotate(calc(-1 * var(--card-angle) + 360deg)); }
+  0%,
+  28% {
+    transform:
+      rotate(
+        calc(-1 * var(--card-angle) + 0deg)
+      );
+  }
+
+  33.33%,
+  61.33% {
+    transform:
+      rotate(
+        calc(-1 * var(--card-angle) + 120deg)
+      );
+  }
+
+  66.66%,
+  94.66% {
+    transform:
+      rotate(
+        calc(-1 * var(--card-angle) + 240deg)
+      );
+  }
+
+  100% {
+    transform:
+      rotate(
+        calc(-1 * var(--card-angle) + 360deg)
+      );
+  }
 }
 
 /* =========================================================
-ABOUT CONTENT (RIGHT SIDE)
+ABOUT CONTENT
 ========================================================= */
 
 .about__content {
   position: relative;
+
   z-index: 5;
-  width: min(600px, 42vw);
+
+  width:
+    min(600px, 42vw);
+
   margin-left: auto;
+
   margin-right: 10vw;
+
   padding: 80px 0;
 }
 
 .about__title {
   margin: 0;
-  color: var(--brown-dark);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3.5rem, 6vw, 6.5rem);
+
+  color:
+    var(--brown-dark);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(3.5rem, 6vw, 6.5rem);
+
   font-weight: 400;
+
   line-height: 0.95;
+
   letter-spacing: -0.04em;
-  animation: titleFadeIn 0.35s ease forwards;
+
+  animation:
+    titleFadeIn
+    0.35s ease
+    forwards;
 }
 
 .about__subtitle {
   margin: 16px 0 0;
-  color: var(--brown);
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(0.85rem, 1vw, 1rem);
+
+  color:
+    var(--brown);
+
+  font-family:
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(0.85rem, 1vw, 1rem);
+
   font-weight: 500;
+
   letter-spacing: 0.05em;
+
   opacity: 0.85;
 }
 
 @keyframes titleFadeIn {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform:
+      translateY(6px);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform:
+      translateY(0);
   }
 }
 
 /* =========================================================
-EXPANDING & COLLAPSING MODAL VIEW
+MODAL
 ========================================================= */
 
 .card-modal {
   position: absolute;
+
   inset: 0;
+
   z-index: 100;
+
   display: flex;
+
   flex-direction: column;
-  background: var(--pink-light);
+
+  background:
+    var(--pink-light);
+
   width: 100%;
   height: 100%;
-  transform-origin: 20% 50%;
-  animation: smoothExpand 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+
+  transform-origin:
+    20% 50%;
+
+  animation:
+    smoothExpand
+    0.45s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+
+  will-change:
+    transform,
+    opacity;
 }
 
 .card-modal--closing {
-  animation: smoothCollapse 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation:
+    smoothCollapse
+    0.35s
+    cubic-bezier(0.4, 0, 0.2, 1)
+    forwards;
 }
 
 .card-modal__hero {
   width: 100%;
+
   height: 35vh;
+
   min-height: 200px;
+
   overflow: hidden;
 }
 
 .card-modal__hero img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+
   object-position: center;
+
   display: block;
 }
 
 .card-modal__body {
   flex: 1;
-  background: #fdf8f5;
-  color: var(--brown-dark);
-  padding: clamp(30px, 5vw, 60px);
+
+  background:
+    #fdf8f5;
+
+  color:
+    var(--brown-dark);
+
+  padding:
+    clamp(30px, 5vw, 60px);
+
   display: flex;
+
   flex-direction: column;
+
   justify-content: space-between;
+
   align-items: flex-start;
+
   box-sizing: border-box;
+
   overflow-y: auto;
 }
 
 .card-modal__title {
-  font-family: Georgia, serif;
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
-  margin: 0 0 16px;
-  color: var(--brown-dark);
+  font-family:
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(2rem, 3.5vw, 3.2rem);
+
+  margin:
+    0 0 16px;
+
+  color:
+    var(--brown-dark);
 }
 
 .card-modal__text {
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: clamp(1rem, 1.15vw, 1.2rem);
+  font-family:
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size:
+    clamp(1rem, 1.15vw, 1.2rem);
+
   line-height: 1.85;
+
   max-width: 680px;
-  margin: 0 0 30px;
-  color: var(--brown-dark);
+
+  margin:
+    0 0 30px;
+
+  color:
+    var(--brown-dark);
 }
 
 .card-modal__back {
-  background: transparent;
+  background:
+    transparent;
+
   border: none;
-  color: var(--brown-dark);
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 0.92rem;
+
+  color:
+    var(--brown-dark);
+
+  font-family:
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+
+  font-size:
+    0.92rem;
+
   font-weight: 700;
+
   cursor: pointer;
-  padding: 8px 0;
-  letter-spacing: 0.05em;
-  transition: opacity 0.2s, transform 0.2s;
+
+  padding:
+    8px 0;
+
+  letter-spacing:
+    0.05em;
+
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 }
 
 .card-modal__back:hover {
   opacity: 0.7;
-  transform: translateX(-4px);
+
+  transform:
+    translateX(-4px);
 }
+
+/* =========================================================
+MODAL ANIMATIONS
+========================================================= */
 
 @keyframes smoothExpand {
   0% {
     opacity: 0;
-    transform: scale(0.3);
-    border-radius: 24px;
+
+    transform:
+      scale(0.3);
+
+    border-radius:
+      24px;
   }
+
   100% {
     opacity: 1;
-    transform: scale(1);
-    border-radius: 0px;
+
+    transform:
+      scale(1);
+
+    border-radius:
+      0;
   }
 }
 
 @keyframes smoothCollapse {
   0% {
     opacity: 1;
-    transform: scale(1);
-    border-radius: 0px;
+
+    transform:
+      scale(1);
+
+    border-radius:
+      0;
   }
+
   100% {
     opacity: 0;
-    transform: scale(0.3);
-    border-radius: 24px;
+
+    transform:
+      scale(0.3);
+
+    border-radius:
+      24px;
   }
 }
 
 /* =========================================================
-RESPONSIVE STYLES
+RESPONSIVE — TABLET
 ========================================================= */
 
 @media (max-width: 1000px) {
   .ferris-wheel {
     width: 85vw;
     height: 85vw;
+
     left: -42vw;
     top: 50%;
   }
 
   .about__content {
-    width: min(560px, 50vw);
-    margin-right: 7vw;
+    width:
+      min(560px, 50vw);
+
+    margin-right:
+      7vw;
   }
 
-  .stamp-matrix-3x3 {
-    grid-template-columns: repeat(3, 36px);
-  }
+  /* Smaller stamps */
 
   .about__stamp {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9rem;
+    width: 48px;
+    height: 48px;
+
+    flex-basis: 48px;
+
+    font-size:
+      1.1rem;
   }
 
-  .stamp-extension-row {
-    margin-right: 120px;
+  .stamp-triangle {
+    gap: 4px;
+  }
+
+  .stamp-row {
+    gap: 4px;
+  }
+
+  /* Smaller background circle */
+
+  .ferris-wheel__background-circle {
+    width: 50vw;
+    height: 50vw;
+
+    min-width: 220px;
+    min-height: 220px;
   }
 }
+
+/* =========================================================
+RESPONSIVE — MOBILE
+========================================================= */
 
 @media (max-width: 700px) {
   .about {
     min-height: 100svh;
+
     align-items: flex-end;
   }
 
   .ferris-wheel {
     width: 115vw;
     height: 115vw;
+
     left: -72vw;
     top: 50%;
   }
 
   .about__content {
     width: auto;
+
     margin: 0;
-    padding: 0 28px 70px;
+
+    padding:
+      0 28px 70px;
+
     z-index: 10;
   }
 
   .about__title {
-    font-size: clamp(3rem, 12vw, 4.5rem);
+    font-size:
+      clamp(3rem, 12vw, 4.5rem);
+  }
+
+  /* Mobile stamp size */
+
+  .about__stamp {
+    width: 36px;
+    height: 36px;
+
+    flex-basis: 36px;
+
+    font-size:
+      0.85rem;
+  }
+
+  .stamp-triangle {
+    gap: 3px;
+  }
+
+  .stamp-row {
+    gap: 3px;
+  }
+
+  /* Mobile dusty-pink circle */
+
+  .ferris-wheel__background-circle {
+    width: 55vw;
+    height: 55vw;
+
+    min-width: 180px;
+    min-height: 180px;
   }
 }
