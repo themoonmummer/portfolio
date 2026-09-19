@@ -54,7 +54,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <motion.div
             key="intro"
             className="absolute inset-0 z-50 flex items-center justify-center"
-            style={{ backgroundColor: '#FFD1DC' }}
+            style={{ backgroundColor: '#d1e3ff' }}
             initial={{ opacity: 1 }}
             animate={{ opacity: isZooming ? 0 : 1 }}
             exit={{ opacity: 0 }}
