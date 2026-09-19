@@ -1,22 +1,24 @@
 /* =========================================================
    SOCIAL SECTION — LinkedIn / GitHub connect card
-   Palette: dusky pastel pink (see tokens below), tying into
-   the same Plus Jakarta Sans / Cormorant Garamond pairing
-   used across the rest of the site.
-   Inspired by the inspo poster: keeps wave, fret, blossom,
-   dots, menu and vertical title — but replaces the red circle
-   + girl with a dusky-pink rectangle showing followers/
-   connections. No red is used; all accents are dusky pink.
+   Palette: dark brown as dark as text (#2b1a0f family), per request.
+   Background seigaiha triple-nested semi-circles kept exact.
+   Corner fret is an L-shaped thunder pattern — exact replica
+   of the red fret in the inspo poster, now in dark brown.
+   Center rectangle (very dark coffee brown, as dark as text)
+   replaces the red circle + girl.
+   Big Japanese stamp watermark and dense cherry blossom
+   exactly as in social media.jpeg.
+   Slight faint arcs removed for a clean look.
    ========================================================= */
 
 .social-section {
-  --blush-mist: #fbf0ee;
-  --blush-petal: #f2d9dd;
-  --dusk-rose: #d98fa1;
-  --dusk-rose-deep: #c26f89;
-  --mauve-bark: #8c5064;
-  --plum-ink: #3c2430;
-  --cream: #fdf6f2;
+  --blush-mist: #fdfaf6;
+  --blush-petal: #f0e6d8;
+  --dusk-rose: #2b1a0f;
+  --dusk-rose-deep: #1a0a04;
+  --mauve-bark: #2b1a0f;
+  --plum-ink: #1a0a04;
+  --cream: #fffbf5;
 
   position: relative;
   width: 100%;
@@ -26,67 +28,68 @@
   color: var(--plum-ink);
 }
 
-/* ---------- background wave pattern (seigaiha) ---------- */
+/* ---------- background seigaiha wave — exact replica of inspo's semi-circles with nested sub-arcs ----------
+   Inspo shows triple concentric semicircles (outer 16px + middle 11px + inner 6px) repeated in a brick layout.
+   Recreated with the same 64×32 tile, same brick offset, recoloured to dark brown #2b1a0f (as dark as text). */
 .social-bg-pattern {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSczMic+CjxnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2M5OGE5Yycgc3Ryb2tlLXdpZHRoPScxLjEnIG9wYWNpdHk9JzAuNTUnPgo8cGF0aCBkPSdNLTE2IDMyIEExNiAxNiAwIDAgMSAxNiAzMicvPgo8cGF0aCBkPSdNMTYgMzIgQTE2IDE2IDAgMCAxIDQ4IDMyJy8+CjxwYXRoIGQ9J000OCAzMiBBMTYgMTYgMCAwIDEgODAgMzInLz4KPHBhdGggZD0nTTAgMTYgQTE2IDE2IDAgMCAxIDMyIDE2Jy8+CjxwYXRoIGQ9J00zMiAxNiBBMTYgMTYgMCAwIDEgNjQgMTYnLz4KPHBhdGggZD0nTS0xNiAxNiBBMTYgMTYgMCAwIDEgMTYgMTYnIG9wYWNpdHk9JzAuMzUnLz4KPC9nPgo8L3N2Zz4=");
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSIzMiI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmIxYTBmIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iMC41NSI+PHBhdGggZD0iTS0xNiAzMiBBMTYgMTYgMCAwIDEgMTYgMzIiLz48cGF0aCBkPSJNLTExIDMyIEExMSAxMSAwIDAgMSAxMSAzMiIgb3BhY2l0eT0iMC43NSIgc3Ryb2tlLXdpZHRoPSIwLjk1Ii8+PHBhdGggZD0iTS02IDMyIEE2IDYgMCAwIDEgNiAzMiIgb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9IjAuOCIvPjxwYXRoIGQ9Ik0xNiAzMiBBMTYgMTYgMCAwIDEgNDggMzIiLz48cGF0aCBkPSJNMjEgMzIgQTExIDExIDAgMCAxIDQzIDMyIiBvcGFjaXR5PSIwLjc1IiBzdHJva2Utd2lkdGg9IjAuOTUiLz48cGF0aCBkPSJNMjYgMzIgQTYgNiAwIDAgMSAzOCAzMiIgb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9IjAuOCIvPjxwYXRoIGQ9Ik00OCAzMiBBMTYgMTYgMCAwIDEgODAgMzIiLz48cGF0aCBkPSJNNTMgMzIgQTExIDExIDAgMCAxIDc1IDMyIiBvcGFjaXR5PSIwLjc1IiBzdHJva2Utd2lkdGg9IjAuOTUiLz48cGF0aCBkPSJNNTggMzIgQTYgNiAwIDAgMSA3MCAzMiIgb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9IjAuOCIvPjxwYXRoIGQ9Ik0wIDE2IEExNiAxNiAwIDAgMSAzMiAxNiIvPjxwYXRoIGQ9Ik01IDE2IEExMSAxMSAwIDAgMSAyNyAxNiIgb3BhY2l0eT0iMC43NSIgc3Ryb2tlLXdpZHRoPSIwLjk1Ii8+PHBhdGggZD0iTTEwIDE2IEE2IDYgMCAwIDEgMjIgMTYiIG9wYWNpdHk9IjAuOSIgc3Ryb2tlLXdpZHRoPSIwLjgiLz48cGF0aCBkPSJNMzIgMTYgQTE2IDE2IDAgMCAxIDY0IDE2Ii8+PHBhdGggZD0iTTM3IDE2IEExMSAxMSAwIDAgMSA1OSAxNiIgb3BhY2l0eT0iMC43NSIgc3Ryb2tlLXdpZHRoPSIwLjk1Ii8+PHBhdGggZD0iTTQyIDE2IEE2IDYgMCAwIDEgNTQgMTYiIG9wYWNpdHk9IjAuOSIgc3Ryb2tlLXdpZHRoPSIwLjgiLz48cGF0aCBkPSJNLTE2IDE2IEExNiAxNiAwIDAgMSAxNiAxNiIgb3BhY2l0eT0iMC4zNSIvPjxwYXRoIGQ9Ik0tMTEgMTYgQTExIDExIDAgMCAxIDExIDE2IiBvcGFjaXR5PSIwLjQ1IiBzdHJva2Utd2lkdGg9IjAuOTUiLz48cGF0aCBkPSJNLTYgMTYgQTYgNiAwIDAgMSA2IDE2IiBvcGFjaXR5PSIwLjU1IiBzdHJva2Utd2lkdGg9IjAuOCIvPjwvZz48L3N2Zz4=");
   background-repeat: repeat;
   background-size: 160px 80px;
-  opacity: 0.5;
+  opacity: 0.42;
   pointer-events: none;
 }
 
-/* ---------- faint halo behind top copy — dusky-pink version of the inspo's beige oval ---------- */
-.social-halo {
-  position: absolute;
-  z-index: 0;
-  top: clamp(56px, 10vh, 96px);
-  left: clamp(28px, 9vw, 140px);
-  width: clamp(260px, 32vw, 420px);
-  height: clamp(260px, 32vw, 420px);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(217,143,161,0.18) 0%, rgba(217,143,161,0.10) 42%, rgba(217,143,161,0) 72%);
-  pointer-events: none;
-}
-
-/* ---------- large faint kanji watermark behind center — same idea as grey kanji in inspo ---------- */
+/* ---------- big Japanese stamp watermark — exact replica of the large faint vertical kanji behind the blossom in the inspo ----------
+   In bottom.png this is a 4-char vertical block (一期一会 style) at bottom center, light grey, behind the sakura and red circle.
+   Recreated with the same placement, vertical-rl, very low opacity, now in dark brown as dark as text. */
 .social-watermark {
   position: absolute;
   z-index: 1;
-  top: 52%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(8rem, 18vw, 18rem);
+  bottom: clamp(56px, 14vh, 128px);
+  left: 48%;
+  transform: translateX(-50%);
+  font-family: "Shippori Mincho", "Noto Serif JP", "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(5.2rem, 13vw, 10rem);
   font-weight: 700;
   line-height: 1;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.14em;
   color: var(--mauve-bark);
-  opacity: 0.055;
+  opacity: 0.065;
   writing-mode: vertical-rl;
   pointer-events: none;
   user-select: none;
+  white-space: nowrap;
 }
 .social-watermark span {
   display: block;
 }
 
-/* ---------- corner ornaments (Greek-key fret) — recoloured to mauve-bark dusky pink ---------- */
+/* ---------- corner ornaments — exact L-shaped thunder fret from inspo's top-right / bottom-left ----------
+   Inspo's fret is not a square frame but an L that hugs the corner edges: 4 nested L's stepped inward.
+   Recoloured from red to dark brown #2b1a0f (as dark as text) per request. */
 .social-corner {
   position: absolute;
-  z-index: 1;
-  width: clamp(44px, 6vw, 72px);
-  height: clamp(44px, 6vw, 72px);
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc3MicgaGVpZ2h0PSc3Micgdmlld0JveD0nMCAwIDcyIDcyJz4KPGcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOGM1MDY0JyBzdHJva2Utd2lkdGg9JzIuNCcgc3Ryb2tlLWxpbmVjYXA9J3NxdWFyZSc+CjxyZWN0IHg9JzQnIHk9JzQnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcvPgo8cmVjdCB4PScxNCcgeT0nMTQnIHdpZHRoPSc0NCcgaGVpZ2h0PSc0NCcvPgo8cGF0aCBkPSdNMTQgMzAgSDI0IFYyNCBIMzAnLz4KPHBhdGggZD0nTTQyIDE0IFYyNCBINDggVjMwJy8+CjxwYXRoIGQ9J001OCA0MiBINDggVjQ4IEg0MicvPgo8cGF0aCBkPSdNMzAgNTggVjQ4IEgyNCBWNDInLz4KPC9nPgo8L3N2Zz4=");
+  z-index: 2;
+  width: clamp(56px, 7.5vw, 88px);
+  height: clamp(56px, 7.5vw, 88px);
   background-repeat: no-repeat;
   background-size: contain;
-  opacity: 0.6;
+  opacity: 0.88;
   pointer-events: none;
 }
-.social-corner--tr { top: clamp(20px, 3vw, 36px); right: clamp(20px, 3vw, 36px); }
-.social-corner--bl { bottom: clamp(20px, 3vw, 36px); left: clamp(20px, 3vw, 36px); }
+.social-corner--tr {
+  top: clamp(14px, 2vw, 24px);
+  right: clamp(14px, 2vw, 24px);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NCIgaGVpZ2h0PSI4NCIgdmlld0JveD0iMCAwIDg0IDg0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMyYjFhMGYiIHN0cm9rZS13aWR0aD0iMi4zIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48cGF0aCBkPSJNOCA4IEg4NCBWMzYgSDY4IFYyMCBINTIgVjggSDgiIG9wYWNpdHk9IjAuOTUiLz48cGF0aCBkPSJNMTYgMTYgSDc2IFY0NCBINjAgVjI4IEg0NCBWMTYgSDE2IiBvcGFjaXR5PSIwLjg1Ii8+PHBhdGggZD0iTTI0IDI0IEg2OCBWNTIgSDUyIFYzNiBIMzYgVjI0IEgyNCIgb3BhY2l0eT0iMC43NSIvPjxwYXRoIGQ9Ik0zMiAzMiBINjAgVjYwIEg0NCBWNDQgSDMyIFYzMiIgb3BhY2l0eT0iMC42NSIvPjwvZz48L3N2Zz4=");
+}
+.social-corner--bl {
+  bottom: clamp(14px, 2vw, 24px);
+  left: clamp(14px, 2vw, 24px);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4NCIgaGVpZ2h0PSI4NCIgdmlld0JveD0iMCAwIDg0IDg0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMyYjFhMGYiIHN0cm9rZS13aWR0aD0iMi4zIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIiBzdHJva2UtbGluZWpvaW49Im1pdGVyIj48cGF0aCBkPSJNNzYgNzYgSDAgVjQ4IEgxNiBWNjQgSDMyIFY3NiBINzYiIG9wYWNpdHk9IjAuOTUiLz48cGF0aCBkPSJNNjggNjggSDggVjQwIEgyNCBWNTYgSDQwIFY2OCBINjgiIG9wYWNpdHk9IjAuODUiLz48cGF0aCBkPSJNNjAgNjAgSDE2IFYzMiBIMzIgVjQ4IEg0OCBWNjAgSDYwIiBvcGFjaXR5PSIwLjc1Ii8+PHBhdGggZD0iTTUyIDUyIEgyNCBWMjQgSDQwIFY0MCBINTIgVjUyIiBvcGFjaXR5PSIwLjY1Ii8+PC9nPjwvc3ZnPg==");
+}
 
 /* ---------- top dot indicator ---------- */
 .social-dots {
@@ -107,37 +110,69 @@
 }
 .social-dot--active { opacity: 0.85; }
 
-/* ---------- sakura branch flourish — same watercolor sakura as inspo, dusky pink petals ---------- */
+/* ---------- blossom branch flourish — dense sakura exactly as in the inspo (bottom center, overlapping the watermark/lower-halo) ----------
+   In bottom.png/stamp.png the trunk sits at bottom center, branches fan up-left with ~9 blossom clusters, dense pink.
+   Recreated with the same trunk curve, 7 side branches, 9 clusters, now in dark brown #2b1a0f as dark as text per request. */
 .social-blossom {
   position: absolute;
-  z-index: 2;
-  left: clamp(-12px, 2vw, 16px);
+  z-index: 3;
+  left: 50%;
   bottom: 0;
-  width: clamp(160px, 18vw, 220px);
-  height: clamp(175px, 20vw, 240px);
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMjAnIGhlaWdodD0nMjQwJyB2aWV3Qm94PScwIDAgMjIwIDI0MCc+CjxwYXRoIGQ9J00xMCAyMzAgQyA0MCAxOTAsIDMwIDE1MCwgNzAgMTIwIEMgMTAwIDk4LCAxMjAgOTAsIDE1MCA2MCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOGM1MDY0JyBzdHJva2Utd2lkdGg9JzMnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNNzAgMTIwIEMgNjAgMTA4LCA0NSAxMDQsIDM0IDk2JyBmaWxsPSdub25lJyBzdHJva2U9JyM4YzUwNjQnIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00xMTAgMTAwIEMgMTE4IDg4LCAxMTYgNzYsIDEyNCA2NCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOGM1MDY0JyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8ZyBmaWxsPScjZTZhOWJiJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMzQsOTQpJz4KPGNpcmNsZSBjeD0nMCcgY3k9Jy03JyByPSc2Jy8+PGNpcmNsZSBjeD0nNicgY3k9Jy0yJyByPSc2Jy8+PGNpcmNsZSBjeD0nNCcgY3k9JzYnIHI9JzYnLz48Y2lyY2xlIGN4PSctNCcgY3k9JzYnIHI9JzYnLz48Y2lyY2xlIGN4PSctNicgY3k9Jy0yJyByPSc2Jy8+CjxjaXJjbGUgY3g9JzAnIGN5PScwJyByPSczJyBmaWxsPScjZDk4ZmExJy8+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTI0LDYyKSBzY2FsZSgwLjg1KSc+CjxjaXJjbGUgY3g9JzAnIGN5PSctNycgcj0nNicvPjxjaXJjbGUgY3g9JzYnIGN5PSctMicgcj0nNicvPjxjaXJjbGUgY3g9JzQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTYnIGN5PSctMicgcj0nNicvPgo8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nMycgZmlsbD0nI2Q5OGZhMScvPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE1MCw1OCkgc2NhbGUoMC42KSc+CjxjaXJjbGUgY3g9JzAnIGN5PSctNycgcj0nNicvPjxjaXJjbGUgY3g9JzYnIGN5PSctMicgcj0nNicvPjxjaXJjbGUgY3g9JzQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTYnIGN5PSctMicgcj0nNicvPgo8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nMycgZmlsbD0nI2Q5OGZhMScvPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDkwLDEzMikgc2NhbGUoMC43KSc+CjxjaXJjbGUgY3g9JzAnIGN5PSctNycgcj0nNicvPjxjaXJjbGUgY3g9JzYnIGN5PSctMicgcj0nNicvPjxjaXJjbGUgY3g9JzQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTYnIGN5PSctMicgcj0nNicvPgo8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nMycgZmlsbD0nI2Q5OGZhMScvPgo8L2c+CjwvZz4KPC9zdmc+");
+  transform: translateX(-22%);
+  width: clamp(210px, 26vw, 320px);
+  height: clamp(220px, 28vw, 340px);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyODAiIGhlaWdodD0iMzIwIiB2aWV3Qm94PSIwIDAgMjgwIDMyMCI+PHBhdGggZD0iTTcwIDMxMCBDIDYwIDI2MCwgNTUgMjAwLCA4NSAxNTAgQyAxMDUgMTEwLCAxMjUgODAsIDE1NSA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmIxYTBmIiBzdHJva2Utd2lkdGg9IjMuMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTg1IDE1MCBDIDcwIDEzNSwgNTAgMTI4LCAzMiAxMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJiMWEwZiIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik0xMDUgMTEwIEMgOTAgOTUsIDc1IDg4LCA1OCA4MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmIxYTBmIiBzdHJva2Utd2lkdGg9IjEuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEyNSA4MCBDIDExNSA3MCwgMTA1IDYyLCA5NSA1MiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmIxYTBmIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTE1NSA0MCBDIDE0NSAzMCwgMTM1IDIyLCAxMjUgMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJiMWEwZiIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik04NSAxNTAgQyA5MiAxMzAsIDEwMCAxMTUsIDEwOCA5OCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmIxYTBmIiBzdHJva2Utd2lkdGg9IjEuNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEwOCA5OCBDIDExOCA4NSwgMTIyIDcyLCAxMzAgNTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJiMWEwZiIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxnIGZpbGw9IiMyYjFhMGYiIG9wYWNpdHk9IjAuOTIiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMyLDExOCkiPjxjaXJjbGUgY3g9IjAiIGN5PSItNyIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjQiIGN5PSI1LjUiIHI9IjUuNSIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iNS41IiByPSI1LjUiLz48Y2lyY2xlIGN4PSItNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjYiIGZpbGw9IiMxYTBhMDQiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTgsODIpIHNjYWxlKDAuOSkiPjxjaXJjbGUgY3g9IjAiIGN5PSItNyIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjQiIGN5PSI1LjUiIHI9IjUuNSIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iNS41IiByPSI1LjUiLz48Y2lyY2xlIGN4PSItNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjYiIGZpbGw9IiMxYTBhMDQiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOTUsNTIpIHNjYWxlKDAuOCkiPjxjaXJjbGUgY3g9IjAiIGN5PSItNyIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjQiIGN5PSI1LjUiIHI9IjUuNSIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iNS41IiByPSI1LjUiLz48Y2lyY2xlIGN4PSItNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjYiIGZpbGw9IiMxYTBhMDQiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTI1LDE4KSBzY2FsZSgwLjc1KSI+PGNpcmNsZSBjeD0iMCIgY3k9Ii03IiByPSI1LjUiLz48Y2lyY2xlIGN4PSI1LjUiIGN5PSItMiIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iNCIgY3k9IjUuNSIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iLTQiIGN5PSI1LjUiIHI9IjUuNSIvPjxjaXJjbGUgY3g9Ii01LjUiIGN5PSItMiIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIuNiIgZmlsbD0iIzFhMGEwNCIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMzAsNTgpIHNjYWxlKDAuODUpIj48Y2lyY2xlIGN4PSIwIiBjeT0iLTciIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjUuNSIgY3k9Ii0yIiByPSI1LjUiLz48Y2lyY2xlIGN4PSI0IiBjeT0iNS41IiByPSI1LjUiLz48Y2lyY2xlIGN4PSItNCIgY3k9IjUuNSIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iLTUuNSIgY3k9Ii0yIiByPSI1LjUiLz48Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMi42IiBmaWxsPSIjMWEwYTA0Ii8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwOCw5OCkgc2NhbGUoMC45KSI+PGNpcmNsZSBjeD0iMCIgY3k9Ii03IiByPSI1LjUiLz48Y2lyY2xlIGN4PSI1LjUiIGN5PSItMiIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iNCIgY3k9IjUuNSIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iLTQiIGN5PSI1LjUiIHI9IjUuNSIvPjxjaXJjbGUgY3g9Ii01LjUiIGN5PSItMiIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIuNiIgZmlsbD0iIzFhMGEwNCIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NSwxNjUpIHNjYWxlKDAuODUpIj48Y2lyY2xlIGN4PSIwIiBjeT0iLTciIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjUuNSIgY3k9Ii0yIiByPSI1LjUiLz48Y2lyY2xlIGN4PSI0IiBjeT0iNS41IiByPSI1LjUiLz48Y2lyY2xlIGN4PSItNCIgY3k9IjUuNSIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iLTUuNSIgY3k9Ii0yIiByPSI1LjUiLz48Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMi42IiBmaWxsPSIjMWEwYTA0Ii8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDcwLDE5MCkgc2NhbGUoMC43OCkiPjxjaXJjbGUgY3g9IjAiIGN5PSItNyIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjQiIGN5PSI1LjUiIHI9IjUuNSIvPjxjaXJjbGUgY3g9Ii00IiBjeT0iNS41IiByPSI1LjUiLz48Y2lyY2xlIGN4PSItNS41IiBjeT0iLTIiIHI9IjUuNSIvPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIyLjYiIGZpbGw9IiMxYTBhMDQiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDUsMTQ1KSBzY2FsZSgwLjcyKSI+PGNpcmNsZSBjeD0iMCIgY3k9Ii03IiByPSI1LjUiLz48Y2lyY2xlIGN4PSI1LjUiIGN5PSItMiIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iNCIgY3k9IjUuNSIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iLTQiIGN5PSI1LjUiIHI9IjUuNSIvPjxjaXJjbGUgY3g9Ii01LjUiIGN5PSItMiIgcj0iNS41Ii8+PGNpcmNsZSBjeD0iMCIgY3k9IjAiIHI9IjIuNiIgZmlsbD0iIzFhMGEwNCIvPjwvZz48L2c+PC9zdmc+");
   background-repeat: no-repeat;
   background-size: contain;
   opacity: 0.92;
   pointer-events: none;
 }
 
-/* ---------- menu icon, bottom-right ---------- */
+/* ---------- right-lower faint circular backdrop — exact replica of the pale circle behind the III in inspo's right lower side ---------- */
+.social-lower-halo {
+  position: absolute;
+  z-index: 1;
+  right: clamp(-48px, -2vw, -16px);
+  bottom: clamp(-48px, -2vw, -16px);
+  width: clamp(260px, 30vw, 400px);
+  height: clamp(260px, 30vw, 400px);
+  border-radius: 50%;
+  background: #f5ede4;
+  border: 1px solid rgba(43, 26, 15, 0.06);
+  overflow: hidden;
+  opacity: 0.88;
+  pointer-events: none;
+}
+.social-lower-halo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSIzMiI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMmIxYTBmIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iMC41NSI+PHBhdGggZD0iTS0xNiAzMiBBMTYgMTYgMCAwIDEgMTYgMzIiLz48cGF0aCBkPSJNLTExIDMyIEExMSAxMSAwIDAgMSAxMSAzMiIgb3BhY2l0eT0iMC43NSIgc3Ryb2tlLXdpZHRoPSIwLjk1Ii8+PHBhdGggZD0iTS02IDMyIEE2IDYgMCAwIDEgNiAzMiIgb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9IjAuOCIvPjxwYXRoIGQ9Ik0xNiAzMiBBMTYgMTYgMCAwIDEgNDggMzIiLz48cGF0aCBkPSJNMjEgMzIgQTExIDExIDAgMCAxIDQzIDMyIiBvcGFjaXR5PSIwLjc1IiBzdHJva2Utd2lkdGg9IjAuOTUiLz48cGF0aCBkPSJNMjYgMzIgQTYgNiAwIDAgMSAzOCAzMiIgb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9IjAuOCIvPjxwYXRoIGQ9Ik00OCAzMiBBMTYgMTYgMCAwIDEgODAgMzIiLz48cGF0aCBkPSJNNTMgMzIgQTExIDExIDAgMCAxIDc1IDMyIiBvcGFjaXR5PSIwLjc1IiBzdHJva2Utd2lkdGg9IjAuOTUiLz48cGF0aCBkPSJNNTggMzIgQTYgNiAwIDAgMSA3MCAzMiIgb3BhY2l0eT0iMC45IiBzdHJva2Utd2lkdGg9IjAuOCIvPjxwYXRoIGQ9Ik0wIDE2IEExNiAxNiAwIDAgMSAzMiAxNiIvPjxwYXRoIGQ9Ik01IDE2IEExMSAxMSAwIDAgMSAyNyAxNiIgb3BhY2l0eT0iMC43NSIgc3Ryb2tlLXdpZHRoPSIwLjk1Ii8+PHBhdGggZD0iTTEwIDE2IEE2IDYgMCAwIDEgMjIgMTYiIG9wYWNpdHk9IjAuOSIgc3Ryb2tlLXdpZHRoPSIwLjgiLz48cGF0aCBkPSJNMzIgMTYgQTE2IDE2IDAgMCAxIDY0IDE2Ii8+PHBhdGggZD0iTTM3IDE2IEExMSAxMSAwIDAgMSA1OSAxNiIgb3BhY2l0eT0iMC43NSIgc3Ryb2tlLXdpZHRoPSIwLjk1Ii8+PHBhdGggZD0iTTQyIDE2IEE2IDYgMCAwIDEgNTQgMTYiIG9wYWNpdHk9IjAuOSIgc3Ryb2tlLXdpZHRoPSIwLjgiLz48cGF0aCBkPSJNLTE2IDE2IEExNiAxNiAwIDAgMSAxNiAxNiIgb3BhY2l0eT0iMC4zNSIvPjxwYXRoIGQ9Ik0tMTEgMTYgQTExIDExIDAgMCAxIDExIDE2IiBvcGFjaXR5PSIwLjQ1IiBzdHJva2Utd2lkdGg9IjAuOTUiLz48cGF0aCBkPSJNLTYgMTYgQTYgNiAwIDAgMSA2IDE2IiBvcGFjaXR5PSIwLjU1IiBzdHJva2Utd2lkdGg9IjAuOCIvPjwvZz48L3N2Zz4=");
+  background-repeat: repeat;
+  background-size: 160px 80px;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+/* ---------- III icon, bottom-right — exact replica of the three vertical bars in inspo's right lower side ---------- */
 .social-menu-icon {
   position: absolute;
   z-index: 5;
-  bottom: clamp(20px, 3vw, 32px);
-  right: clamp(20px, 3vw, 36px);
+  bottom: clamp(22px, 3vw, 36px);
+  right: clamp(22px, 3vw, 42px);
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 }
 .social-menu-icon span {
   display: block;
-  width: 20px;
-  height: 2px;
+  width: 4px;
+  height: 28px;
   background: var(--mauve-bark);
-  opacity: 0.7;
+  opacity: 0.88;
+  border-radius: 1px;
 }
 
 /* ---------- container / grid ---------- */
@@ -152,11 +187,15 @@
   padding: clamp(72px, 9vw, 108px) clamp(24px, 6vw, 72px) clamp(64px, 8vw, 96px);
 }
 
-/* ---------- LEFT: sideline + bio (mirrors left vertical + About block in inspo) ---------- */
+/* ---------- LEFT: now holds the vertical LINKEDIN title (per request: instead of About) ---------- */
 .social-left {
   position: relative;
   padding-left: clamp(36px, 4vw, 52px);
   min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
 }
 
 .social-sideline-text {
@@ -178,37 +217,14 @@
   white-space: nowrap;
 }
 
-.social-info {
+.social-vertical-header--left {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 34ch;
-}
-.social-tag {
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  color: var(--dusk-rose-deep);
-}
-.social-about-title {
-  margin: 0;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-weight: 600;
-  font-style: italic;
-  font-size: clamp(2.4rem, 4vw, 3.4rem);
-  color: var(--mauve-bark);
-  line-height: 1;
-}
-.social-bio {
-  margin: 0;
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
-  font-size: 0.95rem;
-  line-height: 1.75;
-  color: rgba(60, 36, 48, 0.72);
+  align-items: center;
+  gap: 14px;
 }
 
-/* ---------- CENTER: dusky-pink rectangle — direct replacement for the red circle + girl ---------- */
+/* ---------- CENTER: very dark brown rectangle (as dark as text) — replaces the red circle + girl ----------
+   No faint arcs — solid dark brown for a clean look. */
 .social-card-wrapper {
   display: flex;
   justify-content: center;
@@ -224,20 +240,10 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  background: linear-gradient(160deg, var(--dusk-rose) 0%, var(--dusk-rose-deep) 62%, #a85a75 100%);
-  box-shadow: 0 28px 56px rgba(140, 80, 100, 0.32), inset 0 1px 0 rgba(255,255,255,0.22);
+  background: linear-gradient(160deg, #2b1a0f 0%, #1a0a04 62%, #0f0502 100%);
+  box-shadow: 0 28px 56px rgba(26, 10, 4, 0.45), inset 0 1px 0 rgba(255,255,255,0.08);
   color: var(--cream);
-  border: 1px solid rgba(253, 246, 242, 0.14);
-}
-.social-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSczMic+CjxnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2M5OGE5Yycgc3Ryb2tlLXdpZHRoPScxLjEnIG9wYWNpdHk9JzAuNTUnPgo8cGF0aCBkPSdNLTE2IDMyIEExNiAxNiAwIDAgMSAxNiAzMicvPgo8cGF0aCBkPSdNMTYgMzIgQTE2IDE2IDAgMCAxIDQ4IDMyJy8+CjxwYXRoIGQ9J000OCAzMiBBMTYgMTYgMCAwIDEgODAgMzInLz4KPHBhdGggZD0nTTAgMTYgQTE2IDE2IDAgMCAxIDMyIDE2Jy8+CjxwYXRoIGQ9J00zMiAxNiBBMTYgMTYgMCAwIDEgNjQgMTYnLz4KPHBhdGggZD0nTS0xNiAxNiBBMTYgMTYgMCAwIDEgMTYgMTYnIG9wYWNpdHk9JzAuMzUnLz4KPC9nPgo8L3N2Zz4=");
-  background-size: 120px 60px;
-  opacity: 0.11;
-  mix-blend-mode: overlay;
-  pointer-events: none;
+  border: 1px solid rgba(255, 251, 245, 0.08);
 }
 
 .social-card-header {
@@ -252,7 +258,7 @@
   font-size: 0.65rem;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(253, 246, 242, 0.72);
+  color: rgba(255, 251, 245, 0.62);
 }
 .social-card-name {
   margin: 4px 0 0;
@@ -265,7 +271,14 @@
 .social-card-handle {
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.78rem;
-  color: rgba(253, 246, 242, 0.78);
+  color: rgba(255, 251, 245, 0.68);
+}
+.social-card-bio {
+  margin: 10px 0 0;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: rgba(255, 251, 245, 0.72);
 }
 
 .social-stats-grid {
@@ -274,7 +287,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin: clamp(22px, 3vw, 30px) 0;
+  margin: clamp(18px, 2.5vw, 24px) 0;
 }
 .social-stat-item {
   display: flex;
@@ -283,8 +296,8 @@
   text-align: center;
   padding: 14px 6px;
   border-radius: 16px;
-  background: rgba(253, 246, 242, 0.13);
-  border: 1px solid rgba(253, 246, 242, 0.10);
+  background: rgba(255, 251, 245, 0.07);
+  border: 1px solid rgba(255, 251, 245, 0.07);
 }
 .social-stat-value {
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -298,7 +311,7 @@
   font-weight: 600;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: rgba(253, 246, 242, 0.80);
+  color: rgba(255, 251, 245, 0.72);
 }
 
 .social-card-btn {
@@ -310,7 +323,7 @@
   gap: 6px;
   padding: 13px 20px;
   border-radius: 999px;
-  border: 1.5px solid rgba(253, 246, 242, 0.58);
+  border: 1.5px solid rgba(255, 251, 245, 0.45);
   font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   font-size: 0.83rem;
   font-weight: 700;
@@ -325,7 +338,7 @@
   border-color: var(--cream);
 }
 
-/* ---------- RIGHT: giant vertical title + tabs (mirrors FEEDS/STORIES/TYPOGRAPHY bar in inspo) ---------- */
+/* ---------- RIGHT: platform switcher + big stamp is the watermark behind blossom, so right keeps only tabs ---------- */
 .social-right {
   position: relative;
   display: flex;
@@ -360,8 +373,8 @@
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: 1.05rem;
   letter-spacing: 0.4em;
-  color: var(--dusk-rose-deep);
-  opacity: 0.85;
+  color: var(--mauve-bark);
+  opacity: 0.78;
 }
 
 .social-tabs {
@@ -382,14 +395,14 @@
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.18em;
-  color: rgba(60, 36, 48, 0.55);
+  color: rgba(26, 10, 4, 0.55);
   transition: background 0.3s ease, color 0.3s ease;
 }
 .social-tab:hover {
   color: var(--mauve-bark);
 }
 .social-tab--active {
-  background: var(--dusk-rose-deep);
+  background: var(--mauve-bark);
   color: var(--cream);
 }
 
@@ -402,11 +415,14 @@
     gap: 48px;
     padding-top: 96px;
   }
-  .social-left { padding-left: 0; min-height: auto; }
+  .social-left { padding-left: 0; min-height: auto; align-items: center; }
   .social-sideline-text { display: none; }
-  .social-info { max-width: 46ch; align-items: center; }
-  .social-halo { left: 50%; transform: translateX(-50%); top: 78px; }
-  .social-watermark { font-size: clamp(6rem, 22vw, 12rem); top: 50%; }
+  .social-vertical-header--left { justify-content: center; }
+  .social-corner { width: clamp(40px, 10vw, 56px); height: clamp(40px, 10vw, 56px); }
+  .social-lower-halo { width: clamp(180px, 48vw, 260px); height: clamp(180px, 48vw, 260px); right: -24px; bottom: -24px; }
+  .social-menu-icon { gap: 8px; bottom: 18px; right: 18px; }
+  .social-menu-icon span { height: 22px; width: 3px; }
+  .social-watermark { font-size: clamp(5rem, 18vw, 8rem); bottom: 12%; }
   .social-right { align-items: center; flex-direction: row; justify-content: center; min-height: auto; }
   .social-vertical-header,
   .social-title-primary,
@@ -417,7 +433,7 @@
   }
   .social-vertical-header { flex-direction: column; align-items: center; }
   .social-tabs { flex-direction: row; }
-  .social-blossom { opacity: 0.5; width: 140px; height: 150px; }
+  .social-blossom { opacity: 0.5; width: 150px; height: 170px; left: 50%; transform: translateX(-50%); }
 }
 
 @media (max-width: 560px) {

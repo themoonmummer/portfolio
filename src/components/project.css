@@ -1,0 +1,648 @@
+/* =========================================================
+   PROJECTS — MOVING METRO
+   ========================================================= */
+
+.projects-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #080d18;
+  color: #f4eee4;
+}
+
+/* =========================================================
+   MOVING TRAIN
+   ========================================================= */
+
+.projects-train-track {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  display: flex;
+
+  /*
+   * Two identical train images sit beside each other.
+   * Moving exactly one viewport width creates a seamless loop.
+   */
+  width: 200vw;
+  height: 100%;
+
+  animation: projects-train-move 26s linear infinite;
+
+  will-change: transform;
+}
+
+.projects-train-panel {
+  position: relative;
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.projects-train-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  /*
+   * The metro image fills the entire screen.
+   */
+  object-fit: cover;
+  object-position: center;
+
+  display: block;
+
+  filter:
+    saturate(0.88)
+    brightness(0.82)
+    contrast(1.02);
+
+  user-select: none;
+  pointer-events: none;
+}
+
+/*
+ * Train moves from LEFT -> RIGHT.
+ *
+ * Since there are two copies of the same image,
+ * the second one replaces the first one seamlessly.
+ */
+@keyframes projects-train-move {
+  0% {
+    transform: translate3d(-100vw, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* =========================================================
+   ATMOSPHERE
+   ========================================================= */
+
+.projects-atmosphere {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 10, 20, 0.72) 0%,
+      rgba(5, 10, 20, 0.12) 20%,
+      transparent 42%,
+      transparent 58%,
+      rgba(5, 10, 20, 0.12) 80%,
+      rgba(5, 10, 20, 0.72) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(5, 10, 20, 0.52) 0%,
+      transparent 25%,
+      transparent 72%,
+      rgba(5, 10, 20, 0.72) 100%
+    );
+}
+
+/* =========================================================
+   PROJECT WINDOW POSITION
+   ========================================================= */
+
+.projects-window-position {
+  position: absolute;
+  z-index: 5;
+
+  /*
+   * This is the only project window.
+   * It stays attached to the train scene while
+   * its contents change.
+   */
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: min(58vw, 760px);
+}
+
+/* =========================================================
+   OUTER WINDOW
+   ========================================================= */
+
+.projects-window {
+  display: block;
+
+  width: 100%;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  text-align: left;
+
+  outline: none;
+}
+
+/* =========================================================
+   METAL WINDOW FRAME
+   ========================================================= */
+
+.projects-window-frame {
+  position: relative;
+
+  display: block;
+
+  padding: 16px;
+
+  border-radius: 34px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e4ded1 0%,
+      #b9b1a1 25%,
+      #777164 58%,
+      #aaa292 78%,
+      #625e53 100%
+    );
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.58),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.42);
+
+  transition:
+    transform 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+/* Four tiny metallic rivets */
+
+.projects-window-frame::before,
+.projects-window-frame::after {
+  content: "";
+
+  position: absolute;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      #fff8e8 0%,
+      #a59d8c 45%,
+      #5b564c 100%
+    );
+
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.projects-window-frame::before {
+  top: 8px;
+  left: 11px;
+}
+
+.projects-window-frame::after {
+  top: 8px;
+  right: 11px;
+}
+
+/* =========================================================
+   INNER WINDOW LIP
+   ========================================================= */
+
+.projects-window-glass {
+  position: relative;
+
+  display: block;
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  overflow: hidden;
+
+  border-radius: 24px;
+
+  background: #050912;
+
+  border: 4px solid #464239;
+
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.12),
+    inset 0 0 60px rgba(0, 0, 0, 0.65);
+}
+
+/* =========================================================
+   PROJECT IMAGE / VIDEO
+   ========================================================= */
+
+.projects-window-media {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    opacity 0.7s ease,
+    transform 1s ease;
+
+  animation: projects-window-enter 0.8s ease both;
+}
+
+@keyframes projects-window-enter {
+  from {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   PROJECT PLACEHOLDER
+   ========================================================= */
+
+.projects-window-placeholder {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #17243d,
+      #080d18
+    );
+
+  color: rgba(255, 230, 140, 0.85);
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size: clamp(1rem, 2vw, 1.5rem);
+
+  font-weight: 700;
+
+  text-align: center;
+}
+
+/* =========================================================
+   GLASS REFLECTION
+   ========================================================= */
+
+.projects-window-reflection {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      116deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.07) 18%,
+      transparent 42%
+    );
+
+  mix-blend-mode: screen;
+}
+
+/* =========================================================
+   WINDOW VIGNETTE
+   ========================================================= */
+
+.projects-window-vignette {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  box-shadow:
+    inset 0 0 70px rgba(0, 0, 0, 0.62),
+    inset 0 -35px 45px rgba(0, 0, 0, 0.38);
+}
+
+/* =========================================================
+   PROJECT LABEL
+   ========================================================= */
+
+.projects-window-label {
+  position: absolute;
+
+  left: 24px;
+  right: 24px;
+  bottom: 20px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  pointer-events: none;
+}
+
+.projects-window-number {
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size: 10px;
+
+  letter-spacing: 0.22em;
+
+  color: rgba(255, 230, 140, 0.78);
+}
+
+.projects-window-title {
+  max-width: 60%;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size: clamp(0.8rem, 1.4vw, 1rem);
+
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  color: #fff8e9;
+
+  text-align: right;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.75);
+}
+
+/* =========================================================
+   WINDOW HOVER
+   ========================================================= */
+
+.projects-window:hover .projects-window-frame,
+.projects-window:focus-visible .projects-window-frame {
+  transform: translateY(-6px);
+
+  box-shadow:
+    0 45px 100px rgba(0, 0, 0, 0.68),
+    inset 0 2px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -4px 8px rgba(0, 0, 0, 0.42);
+}
+
+.projects-window:focus-visible {
+  outline: none;
+}
+
+.projects-window:focus-visible .projects-window-frame {
+  outline: 2px solid #ffe68c;
+  outline-offset: 8px;
+}
+
+/* =========================================================
+   PROJECT INDICATORS
+   ========================================================= */
+
+.projects-indicators {
+  position: absolute;
+
+  z-index: 10;
+
+  left: 50%;
+  bottom: 32px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  pointer-events: none;
+}
+
+.projects-indicator {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 230, 140, 0.38);
+
+  transition:
+    width 0.35s ease,
+    background 0.35s ease;
+}
+
+.projects-indicator--active {
+  width: 24px;
+
+  border-radius: 999px;
+
+  background: #ffe68c;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.projects-title {
+  position: absolute;
+
+  z-index: 8;
+
+  top: clamp(32px, 7vh, 76px);
+  left: clamp(24px, 6vw, 90px);
+
+  pointer-events: none;
+}
+
+.projects-eyebrow {
+  display: block;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.38em;
+
+  color: rgba(255, 230, 140, 0.72);
+}
+
+.projects-title h2 {
+  margin: 8px 0 0;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(2.4rem, 5vw, 5rem);
+
+  font-style: italic;
+
+  font-weight: 600;
+
+  line-height: 0.95;
+
+  color: rgba(255, 246, 226, 0.94);
+}
+
+.projects-title p {
+  margin: 10px 0 0;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+
+  color: rgba(255, 230, 140, 0.62);
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .projects-train-image {
+    object-position: center;
+  }
+
+  .projects-window-position {
+    width: min(72vw, 650px);
+  }
+
+  .projects-window-frame {
+    padding: 12px;
+
+    border-radius: 28px;
+  }
+
+  .projects-window-glass {
+    border-radius: 20px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .projects-section {
+    min-height: 100svh;
+  }
+
+  .projects-train-panel {
+    height: 100svh;
+  }
+
+  .projects-train-image {
+    width: 100%;
+    height: 100%;
+
+    /*
+     * Slightly zoom the metro image on mobile
+     * so the scene still fills the screen.
+     */
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .projects-window-position {
+    width: calc(100vw - 42px);
+  }
+
+  .projects-window-frame {
+    padding: 8px;
+
+    border-radius: 22px;
+  }
+
+  .projects-window-glass {
+    border-width: 3px;
+    border-radius: 16px;
+  }
+
+  .projects-window-label {
+    left: 14px;
+    right: 14px;
+    bottom: 12px;
+  }
+
+  .projects-title {
+    top: 28px;
+    left: 24px;
+  }
+
+  .projects-title h2 {
+    font-size: 2.6rem;
+  }
+
+  .projects-title p {
+    max-width: 220px;
+  }
+
+  .projects-indicators {
+    bottom: 22px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .projects-train-track {
+    animation: none;
+    transform: translateX(-100vw);
+  }
+
+  .projects-window-media {
+    animation: none;
+  }
+
+  .projects-window-frame {
+    transition: none;
+  }
+}

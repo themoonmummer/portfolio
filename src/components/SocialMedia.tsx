@@ -49,12 +49,9 @@ export const SocialMedia: React.FC = () => {
       {/* Background wave pattern — same seigaiha as inspo image */}
       <div className="social-bg-pattern" aria-hidden="true" />
 
-      {/* Faint halo behind top-left copy — replaces faded beige oval in inspo, now in dusky-pink tint */}
-      <div className="social-halo" aria-hidden="true" />
-
-      {/* Large faint kanji watermark behind center card — same placement as big grey kanji in inspo */}
+      {/* Big Japanese stamp watermark — exact replica of the large faint vertical kanji behind the blossom in the inspo (bottom center) */}
       <div className="social-watermark" aria-hidden="true">
-        <span>{activePlatform === 'linkedin' ? '繋' : '創'}</span>
+        <span>一期一会</span>
       </div>
 
       {/* Slide indicator dots, top center */}
@@ -74,7 +71,10 @@ export const SocialMedia: React.FC = () => {
       {/* Sakura branch flourish — same position as inspo, overlaps bottom of center rectangle */}
       <div className="social-blossom" aria-hidden="true" />
 
-      {/* Decorative menu icon, bottom-right */}
+      {/* Right-lower faint circular backdrop — exact replica of the pale beige circle behind the III in the inspo's right lower side, now in dark brown tint */}
+      <div className="social-lower-halo" aria-hidden="true" />
+
+      {/* Decorative III icon, bottom-right — exact replica of the three vertical bars in the inspo's right lower side, now in dark brown */}
       <div className="social-menu-icon" aria-hidden="true">
         <span />
         <span />
@@ -82,29 +82,33 @@ export const SocialMedia: React.FC = () => {
       </div>
 
       <div className="social-container">
-        {/* Left Side: Bio & Details */}
+        {/* Left Side: now shows the LinkedIn vertical title that was previously on the right (per request: instead of About) */}
         <div className="social-left">
           <div className="social-sideline-text">
             <span>Follow my journey &bull; {current.handle}</span>
           </div>
 
-          <div className="social-info">
-            <span className="social-tag">SOCIAL CONNECT</span>
-            <h3 className="social-about-title">About</h3>
-            <p className="social-bio">{current.bio}</p>
+          <div className="social-vertical-header social-vertical-header--left">
+            <h2 className="social-title-primary">
+              {activePlatform === 'linkedin' ? 'LINKEDIN.' : 'GITHUB.'}
+            </h2>
+            <span className="social-title-kanji">
+              {activePlatform === 'linkedin' ? 'つながり' : 'コード'}
+            </span>
           </div>
         </div>
 
-        {/* Center: Dusky-pink rectangle — 1:1 replacement for the red circle + girl */}
+        {/* Center: Coffee-brown rectangle — 1:1 replacement for the red circle + girl */}
         <div className="social-card-wrapper">
           <div className="social-card">
             <div className="social-card-header">
               <span className="social-card-sub">Platform Overview</span>
               <h2 className="social-card-name">{current.name}</h2>
               <span className="social-card-handle">{current.handle}</span>
+              <p className="social-card-bio">{current.bio}</p>
             </div>
 
-            {/* Followers / Connections — rendered prominently inside the dusky-pink rectangle */}
+            {/* Followers / Connections — rendered prominently inside the coffee-brown rectangle */}
             <div className="social-stats-grid">
               {current.metrics.map((m, idx) => (
                 <div key={idx} className="social-stat-item">
@@ -126,17 +130,8 @@ export const SocialMedia: React.FC = () => {
           </div>
         </div>
 
-        {/* Right Side: Vertical Title & Platform Switcher */}
+        {/* Right Side: Platform Switcher — LinkedIn vertical title now on left, so right keeps only tabs and the big stamp is the watermark behind blossom */}
         <div className="social-right">
-          <div className="social-vertical-header">
-            <h2 className="social-title-primary">
-              {activePlatform === 'linkedin' ? 'LINKEDIN.' : 'GITHUB.'}
-            </h2>
-            <span className="social-title-kanji">
-              {activePlatform === 'linkedin' ? 'つながり' : 'コード'}
-            </span>
-          </div>
-
           <div className="social-tabs">
             <button
               type="button"
