@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import './social.css';
 
 interface PlatformData {
@@ -23,6 +24,7 @@ const PLATFORMS: Record<'linkedin' | 'github', PlatformData> = {
     ],
     bio: 'Connecting across tech and web development. Building high-performance web interfaces and engaging digital experiences.',
   },
+
   github: {
     id: 'github',
     name: 'themoonmummer',
@@ -37,118 +39,258 @@ const PLATFORMS: Record<'linkedin' | 'github', PlatformData> = {
   },
 };
 
+const PLATFORM_ORDER: Array<'linkedin' | 'github'> = [
+  'linkedin',
+  'github',
+];
+
+const AUTO_SWITCH_TIME = 5000;
+
 export const SocialMedia: React.FC = () => {
-  const [activePlatform, setActivePlatform] = useState<'linkedin' | 'github'>('linkedin');
+  const [activePlatform, setActivePlatform] =
+    useState<'linkedin' | 'github'>('linkedin');
 
   const current = PLATFORMS[activePlatform];
-  const platformOrder: Array<'linkedin' | 'github'> = ['linkedin', 'github'];
-  const activeIndex = platformOrder.indexOf(activePlatform);
+  const activeIndex = PLATFORM_ORDER.indexOf(activePlatform);
+
+  /*
+   * Automatically switch between LinkedIn and GitHub.
+   * The card fades out and the next card fades in.
+   */
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActivePlatform((currentPlatform) => {
+        const currentIndex = PLATFORM_ORDER.indexOf(currentPlatform);
+        const nextIndex =
+          (currentIndex + 1) % PLATFORM_ORDER.length;
+
+        return PLATFORM_ORDER[nextIndex];
+      });
+    }, AUTO_SWITCH_TIME);
+
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <section className="social-section" id="social">
-      {/* Background wave pattern — same seigaiha as inspo image */}
+      {/* Background pattern */}
       <div className="social-bg-pattern" aria-hidden="true" />
 
-      {/* Big Japanese stamp watermark — exact replica of the large faint vertical kanji behind the blossom in the inspo (bottom center) */}
+      {/* Large faint Japanese watermark */}
       <div className="social-watermark" aria-hidden="true">
         <span>一期一会</span>
       </div>
 
-      {/* Slide indicator dots, top center */}
+      {/* Decorative circle — left side */}
+      <div
+        className="social-left-halo"
+        aria-hidden="true"
+      />
+
+      {/* Decorative circle — right side */}
+      <div
+        className="social-lower-halo"
+        aria-hidden="true"
+      />
+
+      {/* Corner decorations */}
+      <div
+        className="social-corner social-corner--tr"
+        aria-hidden="true"
+      />
+
+      <div
+        className="social-corner social-corner--bl"
+        aria-hidden="true"
+      />
+
+      {/* Sakura decoration */}
+      <div
+        className="social-blossom"
+        aria-hidden="true"
+      />
+
+      {/* Top indicator */}
       <div className="social-dots" aria-hidden="true">
-        {platformOrder.map((id, i) => (
+        {PLATFORM_ORDER.map((id, index) => (
           <span
             key={id}
-            className={`social-dot ${i === activeIndex ? 'social-dot--active' : ''}`}
+            className={`social-dot ${
+              index === activeIndex
+                ? 'social-dot--active'
+                : ''
+            }`}
           />
         ))}
       </div>
 
-      {/* Corner ornaments — same Greek-key fret as inspo, recoloured to dusky pink */}
-      <div className="social-corner social-corner--tr" aria-hidden="true" />
-      <div className="social-corner social-corner--bl" aria-hidden="true" />
-
-      {/* Sakura branch flourish — same position as inspo, overlaps bottom of center rectangle */}
-      <div className="social-blossom" aria-hidden="true" />
-
-      {/* Right-lower faint circular backdrop — exact replica of the pale beige circle behind the III in the inspo's right lower side, now in dark brown tint */}
-      <div className="social-lower-halo" aria-hidden="true" />
-
-      {/* Decorative III icon, bottom-right — exact replica of the three vertical bars in the inspo's right lower side, now in dark brown */}
-      <div className="social-menu-icon" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-      </div>
-
       <div className="social-container">
-        {/* Left Side: now shows the LinkedIn vertical title that was previously on the right (per request: instead of About) */}
-        <div className="social-left">
-          <div className="social-sideline-text">
-            <span>Follow my journey &bull; {current.handle}</span>
-          </div>
 
-          <div className="social-vertical-header social-vertical-header--left">
-            <h2 className="social-title-primary">
-              {activePlatform === 'linkedin' ? 'LINKEDIN.' : 'GITHUB.'}
-            </h2>
-            <span className="social-title-kanji">
-              {activePlatform === 'linkedin' ? 'つながり' : 'コード'}
+        {/* =================================================
+            LEFT SIDE — CARD
+            ================================================= */}
+        <div className="social-card-area">
+
+          <div className="social-sideline-text">
+            <span>
+              Follow my journey • {current.handle}
             </span>
           </div>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activePlatform}
+              className="social-card-wrapper"
+              initial={{
+                opacity: 0,
+                y: 25,
+                scale: 0.97,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                scale: 1,
+              }}
+              exit={{
+                opacity: 0,
+                y: -20,
+                scale: 0.97,
+              }}
+              transition={{
+                duration: 0.65,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <div className="social-card">
+
+                <div className="social-card-header">
+                  <span className="social-card-sub">
+                    Platform Overview
+                  </span>
+
+                  <h2 className="social-card-name">
+                    {current.name}
+                  </h2>
+
+                  <span className="social-card-handle">
+                    {current.handle}
+                  </span>
+
+                  <p className="social-card-bio">
+                    {current.bio}
+                  </p>
+                </div>
+
+                <div className="social-stats-grid">
+                  {current.metrics.map((metric) => (
+                    <div
+                      key={metric.label}
+                      className="social-stat-item"
+                    >
+                      <span className="social-stat-value">
+                        {metric.value}
+                      </span>
+
+                      <span className="social-stat-label">
+                        {metric.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                <a
+                  href={current.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-card-btn"
+                  aria-label={`Visit ${current.id} profile`}
+                >
+                  Visit{' '}
+                  {current.id === 'linkedin'
+                    ? 'LinkedIn Profile'
+                    : 'GitHub Profile'}
+                  <span>→</span>
+                </a>
+
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* Center: Coffee-brown rectangle — 1:1 replacement for the red circle + girl */}
-        <div className="social-card-wrapper">
-          <div className="social-card">
-            <div className="social-card-header">
-              <span className="social-card-sub">Platform Overview</span>
-              <h2 className="social-card-name">{current.name}</h2>
-              <span className="social-card-handle">{current.handle}</span>
-              <p className="social-card-bio">{current.bio}</p>
-            </div>
+        {/* =================================================
+            RIGHT SIDE — PLATFORM TITLE
+            ================================================= */}
+        <div className="social-right">
 
-            {/* Followers / Connections — rendered prominently inside the coffee-brown rectangle */}
-            <div className="social-stats-grid">
-              {current.metrics.map((m, idx) => (
-                <div key={idx} className="social-stat-item">
-                  <span className="social-stat-value">{m.value}</span>
-                  <span className="social-stat-label">{m.label}</span>
-                </div>
+          <div className="social-right-content">
+
+            <span className="social-right-eyebrow">
+              CONNECT / BUILD / SHARE
+            </span>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activePlatform}
+                initial={{
+                  opacity: 0,
+                  x: 30,
+                }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  x: -30,
+                }}
+                transition={{
+                  duration: 0.5,
+                }}
+                className="social-platform-title"
+              >
+                <h2>
+                  {activePlatform === 'linkedin'
+                    ? 'LINKEDIN.'
+                    : 'GITHUB.'}
+                </h2>
+
+                <span>
+                  {activePlatform === 'linkedin'
+                    ? 'つながり'
+                    : 'コード'}
+                </span>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="social-tabs">
+              {PLATFORM_ORDER.map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  className={`social-tab ${
+                    activePlatform === id
+                      ? 'social-tab--active'
+                      : ''
+                  }`}
+                  onClick={() => setActivePlatform(id)}
+                >
+                  {id.toUpperCase()}
+                </button>
               ))}
             </div>
 
-            <a
-              href={current.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="social-card-btn"
-              aria-label={`Visit ${current.id} profile`}
-            >
-              Visit {current.id === 'linkedin' ? 'LinkedIn Profile' : 'GitHub Profile'} &rarr;
-            </a>
           </div>
         </div>
+      </div>
 
-        {/* Right Side: Platform Switcher — LinkedIn vertical title now on left, so right keeps only tabs and the big stamp is the watermark behind blossom */}
-        <div className="social-right">
-          <div className="social-tabs">
-            <button
-              type="button"
-              className={`social-tab ${activePlatform === 'linkedin' ? 'social-tab--active' : ''}`}
-              onClick={() => setActivePlatform('linkedin')}
-            >
-              LINKEDIN
-            </button>
-            <button
-              type="button"
-              className={`social-tab ${activePlatform === 'github' ? 'social-tab--active' : ''}`}
-              onClick={() => setActivePlatform('github')}
-            >
-              GITHUB
-            </button>
-          </div>
-        </div>
+      {/* Bottom-right menu mark */}
+      <div
+        className="social-menu-icon"
+        aria-hidden="true"
+      >
+        <span />
+        <span />
+        <span />
       </div>
     </section>
   );

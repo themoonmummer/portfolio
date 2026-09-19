@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Project } from '../types';
 import './project.css';
-import fuji2 from '../../assets/inspo/fuji2.jpeg';
+import fuji2 from '../../assets/inspo/metro.jpeg';
 
 interface ProjectsMetroProps {
   projects: Project[];
