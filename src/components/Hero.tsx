@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './Navbar';
+import fuji3 from '../../assets/inspo/fuji3.jpeg';
 
 interface HeroProps {
   onNavigate?: (section: string) => void;
@@ -148,24 +149,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           ===================================================== */}
 
       <div
-        className="relative min-h-screen w-full flex items-center justify-center"
-        style={{
-          /*
-           * fuji3.jpeg must be here:
-           *
-           * public/
-           *   assets/
-           *     inspo/
-           *       fuji3.jpeg
-           *
-           * Files inside public are referenced from the root.
-           */
-          backgroundImage: 'url(/assets/inspo/fuji3.jpeg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-        }}
-      >
+  className="relative min-h-screen w-full flex items-center justify-center"
+  style={{
+    backgroundImage: `url("${fuji3}")`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+  }}
+>
 
         {/* ===================================================
             GLASS CARD
