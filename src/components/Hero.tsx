@@ -101,7 +101,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
       <div
         className="relative min-h-screen w-full flex items-center justify-center"
         style={{
-          backgroundImage: 'url(../../assets/inspo/hero.jpeg)',
+          backgroundImage: 'url(../../assets/inspo/fuji3.jpeg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
@@ -148,7 +148,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                   className="text-5xl sm:text-6xl md:text-7xl mb-2"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
-                    color: BROWN,
+                    color: '#F3E9D7',
                     fontWeight: 800,
                     letterSpacing: '0.01em',
                     lineHeight: 1.1,
@@ -162,7 +162,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                   className="text-xl sm:text-2xl md:text-3xl mb-4"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
-                    color: BROWN,
+                   color: '#F3E9D7',
                     fontWeight: 700,
                     letterSpacing: '0.02em',
                     lineHeight: 1.3,
@@ -176,7 +176,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   className="text-sm sm:text-base md:text-lg max-w-md"
   style={{
     fontFamily: "'Cormorant Garamond', serif",
-    color: '#241310',
+  color: '#F3E9D7',
     fontWeight: 900,
     letterSpacing: '0.02em',
     lineHeight: 2,

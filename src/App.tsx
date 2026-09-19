@@ -5,7 +5,6 @@ import  TechStack  from './components/TechStack';
 import  AboutSection  from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
-import { PetalBackground } from './components/PetalBackground';
 import { SocialMedia } from './components/SocialMedia';
 import { PROJECTS } from './data/portfolioData';
 import { Project } from './types';
@@ -19,8 +18,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#fbf8fb] text-[#1b1b1d] relative font-body selection:bg-[#ffafd5] selection:text-[#3d0027]">
-      <PetalBackground />
-
+    
       {/* 1. Home */}
       <Hero onNavigate={scrollToSection} />
 
