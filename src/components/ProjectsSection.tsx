@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Project } from '../types';
 import './project.css';
+import fuji2 from '../../assets/inspo/fuji2.jpeg';
 
 interface ProjectsMetroProps {
   projects: Project[];
@@ -40,17 +41,17 @@ export const ProjectsMetro = ({
 
       <div className="projects-train-track" aria-hidden="true">
         <div className="projects-train-panel">
-          <img
-            src="/assets/inspo/fuji2.jpeg"
-            alt=""
-            className="projects-train-image"
-          />
+         <img
+  src={fuji2}
+  alt=""
+  className="projects-train-image"
+/>
         </div>
 
         {/* Duplicate keeps the movement seamless */}
         <div className="projects-train-panel">
           <img
-            src="/assets/inspo/fuji2.jpeg"
+            src={fuji2}
             alt=""
             className="projects-train-image"
           />
