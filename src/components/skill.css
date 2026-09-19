@@ -1,14 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
 /* =========================================================
-   SKILLS / LANGUAGES SECTION
-   ========================================================= */
+   SKILLS SECTION
+========================================================= */
 
 .skills-section {
   position: relative;
-
   width: 100%;
   min-height: 100vh;
-
   overflow: hidden;
+  background: #241716;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+
+/* =========================================================
+   LANDING PAGE
+========================================================= */
+
+.skills-landing {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
 
   display: flex;
   align-items: center;
@@ -16,208 +29,150 @@
 
   background-image: url("../../assets/inspo/skills.jpeg");
   background-size: cover;
-  background-position: center center;
+  background-position: center;
   background-repeat: no-repeat;
 
-  color: #efd6d2;
+  transition:
+    opacity 0.5s ease,
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.skills-landing--hidden {
+  opacity: 0;
+  transform: scale(1.08);
+  pointer-events: none;
 }
 
 
 /* =========================================================
-   DARK OVERLAY
-   ========================================================= */
+   IMAGE PROTECTION
+========================================================= */
 
-.skills-section::before {
-  content: "";
-
+.skills-overlay {
   position: absolute;
   inset: 0;
 
-  background: rgba(35, 18, 20, 0.16);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(42, 24, 25, 0.16),
+      rgba(25, 16, 17, 0.08)
+    );
 
   pointer-events: none;
 }
 
 
 /* =========================================================
-   MAIN CONTENT
-   ========================================================= */
+   LANDING CONTENT
+========================================================= */
 
-.skills-overlay {
+.skills-landing-content {
   position: relative;
   z-index: 2;
 
-  width: 100%;
-  min-height: 100vh;
+  width: min(820px, 86vw);
 
   display: flex;
   flex-direction: column;
-
   align-items: center;
-  justify-content: center;
-
-  padding: 40px 30px;
-
-  box-sizing: border-box;
 }
 
 
 /* =========================================================
-   CARDS
-   ========================================================= */
+   CHOICE CARDS
+========================================================= */
 
-.skills-cards {
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
-  gap: clamp(20px, 3vw, 42px);
-
+.skills-choice-grid {
   width: 100%;
-  max-width: 760px;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: clamp(20px, 3vw, 38px);
 }
 
 
-/* =========================================================
-   INDIVIDUAL CARD
-   ========================================================= */
-.skills-card {
+.skills-choice-card {
   position: relative;
 
-  width: clamp(230px, 30vw, 340px);
-  height: clamp(150px, 17vw, 205px);
+  height: clamp(145px, 16vw, 195px);
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  box-sizing: border-box;
+  border: 1px solid rgba(255, 240, 237, 0.46);
+  border-radius: 18px;
 
-  /* Almost transparent */
-  background: rgba(255, 245, 245, 0.08);
+  background: rgba(255, 240, 237, 0.065);
 
-  /* Soft frosted glass */
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
 
-  /* Very subtle edge */
-  border: 1px solid rgba(255, 235, 232, 0.38);
-
-  border-radius: 18px;
-
-  /* Keep the shadow very soft */
   box-shadow:
-    0 8px 25px rgba(30, 15, 18, 0.12),
-    inset 0 0 20px rgba(255, 245, 245, 0.04);
+    0 12px 35px rgba(20, 10, 12, 0.15),
+    inset 0 0 25px rgba(255, 240, 237, 0.035);
+
+  color: #ffffff;
 
   cursor: pointer;
-
-  color: #f1d9d5;
 
   transition:
     transform 0.3s ease,
     background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+    border-color 0.3s ease;
 }
 
-/* =========================================================
-   NUMBER
-   ========================================================= */
-
-.skills-card__number {
-  position: absolute;
-
-  top: 18px;
-  left: 20px;
-
-  font-family: "Helvetica Neue", Arial, sans-serif;
-
-  font-size: 0.65rem;
-
-  font-weight: 600;
-
-  letter-spacing: 0.16em;
-
-  color: rgba(239, 214, 210, 0.62);
-}
-
-
-/* =========================================================
-   CARD TITLE
-   ========================================================= */
-
-.skills-card h2 {
-  margin: 0;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: clamp(2rem, 3.5vw, 3.2rem);
-
-  font-weight: 400;
-
-  letter-spacing: -0.025em;
-
-  color: #f0d8d4;
-
-  text-shadow:
-    0 2px 8px rgba(35, 15, 18, 0.35);
-}
-
-
-/* =========================================================
-   CARD HOVER
-   ========================================================= */
-.skills-card:hover {
+.skills-choice-card:hover {
   transform: translateY(-6px);
 
-  background: rgba(255, 245, 245, 0.13);
+  background: rgba(255, 255, 255, 0.12);
 
-  border-color: rgba(255, 235, 232, 0.55);
-
-  box-shadow:
-    0 14px 32px rgba(30, 15, 18, 0.16),
-    inset 0 0 25px rgba(255, 245, 245, 0.06);
+  border-color: rgba(255, 255, 255, 0.65);
 }
 
 
-.skills-card:active {
-  transform: translateY(-2px) scale(0.99);
-}
-
-
-/* =========================================================
-   HINT UNDER CARDS
-   ========================================================= */
-
-.skills-hint {
-  margin: 24px 0 0;
-
-  font-family: "Helvetica Neue", Arial, sans-serif;
-
-  /*
-    Increased slightly from the previous version.
-  */
-
-  font-size: 0.78rem;
+.skills-choice-title {
+  font-size: clamp(2.1rem, 4vw, 3.3rem);
 
   font-weight: 500;
 
-  letter-spacing: 0.15em;
+  letter-spacing: -0.025em;
 
-  color: rgba(239, 214, 210, 0.78);
-
-  text-transform: lowercase;
+  color: #ffffff;
 
   text-shadow:
-    0 1px 5px rgba(30, 12, 15, 0.5);
+    0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================================
+   CLICK NOTE
+========================================================= */
+
+.skills-click-note {
+  margin: 25px 0 0;
+
+  color: #ffffff;
+
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+
+  font-weight: 500;
+
+  letter-spacing: 0.06em;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 
 /* =========================================================
    EXPANDED PAGE
-   ========================================================= */
+   ---------------------------------------------------------
+   KEEPING CURRENT WORKING GLASS EFFECT
+========================================================= */
+
 .skills-expanded {
   position: absolute;
 
@@ -228,182 +183,784 @@
   width: 100%;
   height: 100%;
 
+  overflow: hidden;
+
   box-sizing: border-box;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: clamp(40px, 8vw, 100px);
-
-  /*
-    CLEAR / FROSTED EXPANDED PAGE
-    The original skills.jpeg remains visible.
-  */
-  background: rgba(255, 235, 235, 0.08);
-
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: transparent !important;
 
   transform-origin: center center;
 
   animation:
     skillsExpand
-    0.55s
+    0.6s
     cubic-bezier(0.16, 1, 0.3, 1)
     forwards;
 }
 
 
 /* =========================================================
-   REVERSE ANIMATION
-   ========================================================= */
+   EXPANDED BACKGROUND IMAGE
+========================================================= */
 
-.skills-expanded--closing {
+.skills-expanded::before {
+  content: "";
+
+  position: absolute;
+
+  inset: -25px;
+
+  z-index: 0;
+
+  background-image:
+    url("../../assets/inspo/skills.jpeg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  filter: blur(12px);
+
+  transform: scale(1.04);
+
+  opacity: 1;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   SUBTLE GLASS LAYER
+========================================================= */
+
+.skills-expanded::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background: rgba(255, 255, 255, 0.018);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   DISABLE OLD BACKDROP
+========================================================= */
+
+.skills-expanded-backdrop {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  background: transparent !important;
+  background-image: none !important;
+
+  filter: none !important;
+
+  opacity: 0 !important;
+
+  pointer-events: none !important;
+}
+
+
+/* =========================================================
+   EXPANDED ANIMATION
+========================================================= */
+
+@keyframes skillsExpand {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      scale(0.94);
+
+    border-radius: 24px;
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      scale(1);
+
+    border-radius: 0;
+  }
+}
+
+
+/* =========================================================
+   EXPANDED INNER LAYOUT
+========================================================= */
+
+.skills-expanded-inner {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(1250px, 90vw);
+  height: 100%;
+
+  margin: 0 auto;
+
+  transform: translateX(60px);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.75fr)
+    minmax(430px, 1fr);
+
+  grid-template-rows: 1fr auto;
+
+  column-gap: clamp(55px, 8vw, 125px);
+
+  align-items: center;
+
+  box-sizing: border-box;
+
+  padding:
+    clamp(50px, 8vh, 100px)
+    0
+    clamp(40px, 7vh, 80px);
+}
+
+
+/* =========================================================
+   CATEGORY COPY
+========================================================= */
+
+.skills-category-copy {
+  align-self: center;
+
+  max-width: 400px;
+
+  z-index: 5;
+
+  color: #ffffff;
+}
+
+
+.skills-category-label {
+  display: block;
+
+  margin-bottom: 10px;
+
+  color: #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.2em;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+
+.skills-category-copy h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2.3rem, 4vw, 4.3rem);
+
+  font-weight: 500;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
+
+  text-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.55);
+}
+
+
+/* =========================================================
+   CATEGORY HEADING COLORS
+========================================================= */
+
+/* Web Development */
+.skills-expanded--web .skills-category-copy h2 {
+  color: #ffffff;
+}
+
+/* Soft Skills */
+.skills-expanded--soft .skills-category-copy h2 {
+  color: #ffffff;
+}
+
+/* Programming Languages — warm brown */
+.skills-expanded--programming .skills-category-copy h2 {
+  color: #d9a06b;
+}
+
+/* Database & Computer Science — green */
+.skills-expanded--database .skills-category-copy h2 {
+  color: #91b99f;
+}
+
+/* Vibe Coding Toolkit — ochre/yellow */
+.skills-expanded--vibe .skills-category-copy h2 {
+  color: #d5a84f;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.skills-description {
+  margin-top: 28px;
+
+  display: flex;
+
+  gap: 16px;
+
+  color: #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: clamp(0.82rem, 1vw, 0.96rem);
+
+  line-height: 1.65;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5);
+
   animation:
-    skillsCollapse
-    0.5s
-    cubic-bezier(0.4, 0, 0.2, 1)
+    descriptionIn
+    0.38s
+    ease
     forwards;
 }
 
 
+@keyframes descriptionIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.skills-description--changing {
+  opacity: 0;
+}
+
+
+.skills-description-number {
+  flex-shrink: 0;
+
+  color: #ffffff;
+
+  font-size: 0.7rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.1em;
+
+  padding-top: 3px;
+}
+
+
+.skills-description ul {
+  margin: 0;
+
+  padding: 0;
+
+  list-style: none;
+}
+
+
+.skills-description li {
+  position: relative;
+
+  margin-bottom: 8px;
+
+  padding-left: 14px;
+
+  color: #ffffff;
+}
+
+
+.skills-description li::before {
+  content: "—";
+
+  position: absolute;
+
+  left: 0;
+
+  color: #ffffff;
+}
+
+
 /* =========================================================
-   EXPANDED CONTENT
-   ========================================================= */
+   CATEGORY DESCRIPTION ACCENTS
+========================================================= */
 
-.skills-expanded__content {
-  width: min(900px, 100%);
-
-  color: #f0d8d4;
+.skills-expanded--programming .skills-description-number,
+.skills-expanded--programming .skills-description li::before {
+  color: #d9a06b;
 }
 
-
-/* Number */
-
-.skills-expanded__number {
-  display: block;
-
-  margin-bottom: 12px;
-
-  font-family: "Helvetica Neue", Arial, sans-serif;
-
-  font-size: 0.75rem;
-
-  letter-spacing: 0.2em;
-
-  color: rgba(240, 216, 212, 0.6);
+.skills-expanded--database .skills-description-number,
+.skills-expanded--database .skills-description li::before {
+  color: #91b99f;
 }
 
-
-/* Heading */
-
-.skills-expanded h1 {
-  margin: 0 0 20px;
-
-  font-family: Georgia, "Times New Roman", serif;
-
-  font-size: clamp(3.5rem, 8vw, 7rem);
-
-  font-weight: 400;
-
-  line-height: 0.95;
-
-  letter-spacing: -0.05em;
-
-  color: #f2d9d5;
-}
-
-
-/* Introduction */
-
-.skills-expanded__intro {
-  max-width: 620px;
-
-  margin: 0 0 45px;
-
-  font-family: "Helvetica Neue", Arial, sans-serif;
-
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
-
-  line-height: 1.7;
-
-  color: rgba(240, 216, 212, 0.78);
+.skills-expanded--vibe .skills-description-number,
+.skills-expanded--vibe .skills-description li::before {
+  color: #d5a84f;
 }
 
 
 /* =========================================================
-   SKILLS LIST
-   ========================================================= */
+   SOFT DESCRIPTION
+========================================================= */
 
-.skills-list {
-  display: grid;
+.skills-expanded--soft .skills-description {
+  color: #ffffff;
+}
 
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.skills-expanded--soft .skills-description-number {
+  color: #ffffff;
+}
 
-  gap: 0;
-
-  max-width: 750px;
-
-  border-top: 1px solid rgba(240, 216, 212, 0.2);
+.skills-expanded--soft .skills-description li::before {
+  color: #ffffff;
 }
 
 
-.skill-item {
+/* =========================================================
+   CARD STACK AREA
+========================================================= */
+
+.skill-stack-area {
+  position: relative;
+
+  transform: translateX(80px);
+
+  width: 100%;
+
+  height: clamp(430px, 62vh, 590px);
+
   display: flex;
 
   align-items: center;
 
-  gap: 18px;
+  justify-content: flex-start;
 
-  padding: 18px 12px 18px 0;
-
-  border-bottom: 1px solid rgba(240, 216, 212, 0.2);
+  overflow: visible;
 }
 
 
-.skill-item span {
-  font-family: "Helvetica Neue", Arial, sans-serif;
+/* =========================================================
+   VERTICAL CARDS
+========================================================= */
 
-  font-size: 0.65rem;
+.skill-stack-card {
+  position: absolute;
+
+  width: clamp(245px, 25vw, 340px);
+
+  height: clamp(370px, 53vh, 500px);
+
+  box-sizing: border-box;
+
+  border-radius: 5px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 35px;
+
+  text-align: center;
+
+  font-family:
+    'Cormorant Garamond',
+    Georgia,
+    serif;
+
+  font-size: clamp(1.45rem, 2.3vw, 2.35rem);
+
+  font-weight: 600;
+
+  letter-spacing: -0.015em;
+
+  cursor: pointer;
+
+  overflow: hidden;
+transition:
+    transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.42s ease,
+    box-shadow 0.42s ease;
+}
+
+
+/* =========================================================
+   BROWN CARDS — WEB
+========================================================= */
+
+.skills-expanded--web .skill-stack-card {
+  background: #593b35;
+
+  border: 1px solid rgba(255, 239, 235, 0.15);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 24px 55px rgba(25, 12, 13, 0.32);
+}
+
+
+/* =========================================================
+   GREEN CARDS — SOFT
+========================================================= */
+
+.skills-expanded--soft .skill-stack-card {
+  background: #102820;
+
+  border: 1px solid rgba(220, 240, 232, 0.14);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 24px 55px rgba(7, 18, 14, 0.32);
+}
+
+
+/* =========================================================
+   PROGRAMMING LANGUAGE CARDS — BROWN
+========================================================= */
+
+.skills-expanded--programming .skill-stack-card {
+  background: #593b35;
+
+  border: 1px solid rgba(255, 239, 235, 0.15);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 24px 55px rgba(25, 12, 13, 0.32);
+}
+
+
+/* =========================================================
+   DATABASE / CS CARDS — GREEN
+========================================================= */
+
+.skills-expanded--database .skill-stack-card {
+  background: #102820;
+
+  border: 1px solid rgba(220, 240, 232, 0.14);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 24px 55px rgba(7, 18, 14, 0.32);
+}
+
+
+/* =========================================================
+   VIBE CODING CARDS — OCHRE
+========================================================= */
+
+.skills-expanded--vibe .skill-stack-card {
+  background: #6b5428;
+
+  border: 1px solid rgba(255, 235, 175, 0.18);
+
+  color: #ffffff;
+
+  box-shadow:
+    0 24px 55px rgba(35, 25, 10, 0.32);
+}
+
+
+/* =========================================================
+   CARD TEXT
+========================================================= */
+
+.skill-stack-card span {
+  display: block;
+
+  width: 90%;
+
+  line-height: 1.05;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =========================================================
+   FRONT CARD
+========================================================= */
+
+.skill-stack-card--active {
+  left: 0;
+
+  z-index: 5;
+
+  transform:
+    translateX(0)
+    translateY(0)
+    scale(1);
+
+  opacity: 1;
+
+  filter: brightness(1);
+}
+
+
+/* =========================================================
+   NEXT CARD
+   ---------------------------------------------------------
+   Slightly separated from active card so the stack
+   visibly has a two-finger-ish gap.
+========================================================= */
+
+.skill-stack-card--next {
+  left: 0;
+
+  z-index: 3;
+
+  transform:
+    translateX(92px)
+    translateY(28px)
+    scale(0.90);
+
+  opacity: 0.38;
+
+  filter: brightness(0.65);
+}
+
+
+/* =========================================================
+   ACTIVE CARD LEAVES TO LEFT
+========================================================= */
+
+.skill-stack-card--active-leaving {
+  z-index: 2;
+
+ animation:
+    cardExitLeft
+    0.32s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+
+@keyframes cardExitLeft {
+
+  0% {
+    transform:
+      translateX(0)
+      translateY(0)
+      scale(1);
+
+    opacity: 1;
+  }
+
+  45% {
+    transform:
+      translateX(-75px)
+      translateY(15px)
+      scale(0.94);
+
+    opacity: 0.7;
+  }
+
+  100% {
+    transform:
+      translateX(-390px)
+      translateY(35px)
+      scale(0.82);
+
+    opacity: 0;
+  }
+}
+
+
+/* =========================================================
+   NEXT CARD MOVES INTO FRONT
+========================================================= */
+
+.skill-stack-card--next-moving {
+  z-index: 4;
+
+  animation:
+    cardMoveLeft
+    0.32s
+    cubic-bezier(0.16, 1, 0.3, 1)
+    forwards;
+}
+
+
+@keyframes cardMoveLeft {
+
+  0% {
+    transform:
+      translateX(92px)
+      translateY(28px)
+      scale(0.90);
+
+    opacity: 0.38;
+
+    filter: brightness(0.65);
+  }
+
+  45% {
+    transform:
+      translateX(42px)
+      translateY(12px)
+      scale(0.95);
+
+    opacity: 0.72;
+
+    filter: brightness(0.82);
+  }
+
+  100% {
+    transform:
+      translateX(0)
+      translateY(0)
+      scale(1);
+
+    opacity: 1;
+
+    filter: brightness(1);
+  }
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.skills-progress {
+  grid-column: 2;
+
+  width: clamp(300px, 34vw, 500px);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  align-self: end;
+
+  margin-bottom: 4px;
+
+  color: #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 0.7rem;
 
   letter-spacing: 0.1em;
 
-  color: rgba(240, 216, 212, 0.45);
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 
-.skill-item p {
-  margin: 0;
+.skills-progress-line {
+  flex: 1;
 
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  height: 2px;
 
-  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.22);
 
-  color: rgba(240, 216, 212, 0.9);
+  overflow: hidden;
+}
+
+
+.skills-progress-fill {
+  height: 100%;
+
+  background: rgba(255, 255, 255, 0.82);
+
+  transition:
+    width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =========================================================
+   PROGRESS ACCENTS
+========================================================= */
+
+.skills-expanded--soft .skills-progress-fill,
+.skills-expanded--database .skills-progress-fill {
+  background: rgba(145, 185, 159, 0.9);
+}
+
+.skills-expanded--web .skills-progress-fill,
+.skills-expanded--programming .skills-progress-fill {
+  background: rgba(217, 160, 107, 0.9);
+}
+
+.skills-expanded--vibe .skills-progress-fill {
+  background: rgba(213, 168, 79, 0.9);
 }
 
 
 /* =========================================================
    BACK BUTTON
-   ========================================================= */
+========================================================= */
 
-.skills-back {
-  display: inline-flex;
+.skills-back-button {
+  position: absolute;
 
-  align-items: center;
+  left: 0;
 
-  gap: 10px;
-
-  margin-top: 45px;
-
-  padding: 0;
+  bottom: clamp(30px, 5vh, 55px);
 
   border: none;
 
   background: transparent;
 
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #ffffff;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
   font-size: 0.82rem;
 
@@ -411,9 +968,12 @@
 
   letter-spacing: 0.08em;
 
-  color: rgba(240, 216, 212, 0.78);
-
   cursor: pointer;
+
+  padding: 7px 0;
+
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.5);
 
   transition:
     color 0.25s ease,
@@ -421,163 +981,253 @@
 }
 
 
-.skills-back span {
-  font-size: 1.2rem;
+.skills-back-button:hover {
+  color: #ffffff;
 
-  transition: transform 0.25s ease;
-}
-
-
-.skills-back:hover {
-  color: #f2d9d5;
-
-  transform: translateX(-3px);
-}
-
-
-.skills-back:hover span {
-  transform: translateX(-4px);
+  transform: translateX(-5px);
 }
 
 
 /* =========================================================
-   EXPANSION ANIMATION
-   ========================================================= */
+   SOFT BACK BUTTON
+========================================================= */
 
-@keyframes skillsExpand {
-  0% {
-    opacity: 0;
-
-    transform:
-      scale(0.35);
-
-    border-radius: 22px;
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 1;
-
-    transform:
-      scale(1);
-
-    border-radius: 0;
-  }
+.skills-expanded--soft .skills-back-button {
+  color: #ffffff;
 }
 
-
-/* =========================================================
-   COLLAPSE ANIMATION
-   ========================================================= */
-
-@keyframes skillsCollapse {
-  0% {
-    opacity: 1;
-
-    transform:
-      scale(1);
-
-    border-radius: 0;
-  }
-
-  40% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-
-    transform:
-      scale(0.35);
-
-    border-radius: 22px;
-  }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 700px) {
-
-  .skills-overlay {
-    padding: 30px 20px;
-  }
-
-  .skills-cards {
-    gap: 16px;
-  }
-
-  .skills-card {
-    width: 42vw;
-    height: 145px;
-
-    border-radius: 16px;
-  }
-
-  .skills-card h2 {
-    font-size: clamp(1.7rem, 6vw, 2.4rem);
-  }
-
-  .skills-expanded {
-    padding: 40px 28px;
-  }
-
-  .skills-list {
-    grid-template-columns: 1fr;
-  }
+.skills-expanded--soft .skills-back-button:hover {
+  color: #ffffff;
 }
 
 
 /* =========================================================
    MOBILE
-   ========================================================= */
+========================================================= */
 
-@media (max-width: 480px) {
+@media (max-width: 850px) {
 
-  .skills-cards {
-    flex-direction: column;
-
-    gap: 14px;
-
-    max-width: 330px;
+  .skills-landing-content {
+    width: min(88vw, 600px);
   }
 
-  .skills-card {
-    width: 100%;
-    height: 130px;
 
-    border-radius: 15px;
+  .skills-choice-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
   }
 
-  .skills-card h2 {
-    font-size: 2rem;
+
+  .skills-choice-card {
+    height: 145px;
   }
 
-  .skills-card__number {
-    top: 14px;
-    left: 16px;
+
+  .skills-expanded-inner {
+    width: 88vw;
+
+    grid-template-columns: 1fr;
+
+    grid-template-rows: auto auto auto;
+
+    row-gap: 20px;
+
+    padding:
+      70px 0
+      70px;
+
+    transform: translateX(0);
   }
 
-  .skills-hint {
+
+  .skills-category-copy {
+    max-width: 100%;
+
+    text-align: center;
+  }
+
+
+  .skills-category-copy h2 {
+    font-size: clamp(2.3rem, 9vw, 3.7rem);
+  }
+
+
+  .skills-description {
     margin-top: 18px;
 
-    font-size: 0.72rem;
+    text-align: left;
+
+    max-width: 600px;
+
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  .skills-expanded {
-    padding: 35px 22px;
+
+  .skill-stack-area {
+    height: 440px;
+
+    justify-content: center;
+
+    transform: translateX(0);
   }
 
-  .skills-expanded h1 {
-    font-size: clamp(3rem, 15vw, 4.5rem);
+
+  .skill-stack-card {
+    width: min(68vw, 310px);
+
+    height: 390px;
   }
 
-  .skills-expanded__intro {
-    margin-bottom: 30px;
+
+  .skill-stack-card--active,
+  .skill-stack-card--next {
+    left: 50%;
+
+    transform-origin: center center;
+  }
+
+
+  .skill-stack-card--active {
+    transform:
+      translateX(-50%)
+      translateY(0)
+      scale(1);
+  }
+
+
+  .skill-stack-card--next {
+    transform:
+      translateX(calc(-50% + 72px))
+      translateY(25px)
+      scale(0.90);
+  }
+
+
+  @keyframes cardExitLeft {
+
+    0% {
+      transform:
+        translateX(-50%)
+        translateY(0)
+        scale(1);
+
+      opacity: 1;
+    }
+
+    45% {
+      transform:
+        translateX(calc(-50% - 70px))
+        translateY(15px)
+        scale(0.94);
+
+      opacity: 0.7;
+    }
+
+    100% {
+      transform:
+        translateX(calc(-50% - 360px))
+        translateY(35px)
+        scale(0.82);
+
+      opacity: 0;
+    }
+  }
+
+
+  @keyframes cardMoveLeft {
+
+    0% {
+      transform:
+        translateX(calc(-50% + 72px))
+        translateY(25px)
+        scale(0.90);
+
+      opacity: 0.38;
+
+      filter: brightness(0.65);
+    }
+
+    45% {
+      transform:
+        translateX(calc(-50% + 30px))
+        translateY(12px)
+        scale(0.95);
+
+      opacity: 0.72;
+
+      filter: brightness(0.82);
+    }
+
+    100% {
+      transform:
+        translateX(-50%)
+        translateY(0)
+        scale(1);
+
+      opacity: 1;
+
+      filter: brightness(1);
+    }
+  }
+
+
+  .skills-progress {
+    grid-column: 1;
+
+    width: min(88vw, 480px);
+
+    margin: 0 auto;
+  }
+
+
+  .skills-back-button {
+    left: 0;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+  .skills-choice-title {
+    font-size: 2.3rem;
+  }
+
+
+  .skills-click-note {
+    font-size: 1.12rem;
+  }
+
+
+  .skills-description {
+    font-size: 0.8rem;
+
+    line-height: 1.55;
+  }
+
+
+  .skill-stack-area {
+    height: 410px;
+  }
+
+
+  .skill-stack-card {
+    width: min(72vw, 285px);
+
+    height: 365px;
+
+    padding: 24px;
+
+    font-size: 1.7rem;
+  }
+
+
+  .skills-expanded-inner {
+    padding-top: 60px;
   }
 }

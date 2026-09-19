@@ -1,0 +1,430 @@
+/* =========================================================
+   SOCIAL SECTION — LinkedIn / GitHub connect card
+   Palette: dusky pastel pink (see tokens below), tying into
+   the same Plus Jakarta Sans / Cormorant Garamond pairing
+   used across the rest of the site.
+   Inspired by the inspo poster: keeps wave, fret, blossom,
+   dots, menu and vertical title — but replaces the red circle
+   + girl with a dusky-pink rectangle showing followers/
+   connections. No red is used; all accents are dusky pink.
+   ========================================================= */
+
+.social-section {
+  --blush-mist: #fbf0ee;
+  --blush-petal: #f2d9dd;
+  --dusk-rose: #d98fa1;
+  --dusk-rose-deep: #c26f89;
+  --mauve-bark: #8c5064;
+  --plum-ink: #3c2430;
+  --cream: #fdf6f2;
+
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(175deg, var(--blush-mist) 0%, var(--blush-petal) 100%);
+  color: var(--plum-ink);
+}
+
+/* ---------- background wave pattern (seigaiha) ---------- */
+.social-bg-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSczMic+CjxnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2M5OGE5Yycgc3Ryb2tlLXdpZHRoPScxLjEnIG9wYWNpdHk9JzAuNTUnPgo8cGF0aCBkPSdNLTE2IDMyIEExNiAxNiAwIDAgMSAxNiAzMicvPgo8cGF0aCBkPSdNMTYgMzIgQTE2IDE2IDAgMCAxIDQ4IDMyJy8+CjxwYXRoIGQ9J000OCAzMiBBMTYgMTYgMCAwIDEgODAgMzInLz4KPHBhdGggZD0nTTAgMTYgQTE2IDE2IDAgMCAxIDMyIDE2Jy8+CjxwYXRoIGQ9J00zMiAxNiBBMTYgMTYgMCAwIDEgNjQgMTYnLz4KPHBhdGggZD0nTS0xNiAxNiBBMTYgMTYgMCAwIDEgMTYgMTYnIG9wYWNpdHk9JzAuMzUnLz4KPC9nPgo8L3N2Zz4=");
+  background-repeat: repeat;
+  background-size: 160px 80px;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ---------- faint halo behind top copy — dusky-pink version of the inspo's beige oval ---------- */
+.social-halo {
+  position: absolute;
+  z-index: 0;
+  top: clamp(56px, 10vh, 96px);
+  left: clamp(28px, 9vw, 140px);
+  width: clamp(260px, 32vw, 420px);
+  height: clamp(260px, 32vw, 420px);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%, rgba(217,143,161,0.18) 0%, rgba(217,143,161,0.10) 42%, rgba(217,143,161,0) 72%);
+  pointer-events: none;
+}
+
+/* ---------- large faint kanji watermark behind center — same idea as grey kanji in inspo ---------- */
+.social-watermark {
+  position: absolute;
+  z-index: 1;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(8rem, 18vw, 18rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  color: var(--mauve-bark);
+  opacity: 0.055;
+  writing-mode: vertical-rl;
+  pointer-events: none;
+  user-select: none;
+}
+.social-watermark span {
+  display: block;
+}
+
+/* ---------- corner ornaments (Greek-key fret) — recoloured to mauve-bark dusky pink ---------- */
+.social-corner {
+  position: absolute;
+  z-index: 1;
+  width: clamp(44px, 6vw, 72px);
+  height: clamp(44px, 6vw, 72px);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc3MicgaGVpZ2h0PSc3Micgdmlld0JveD0nMCAwIDcyIDcyJz4KPGcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOGM1MDY0JyBzdHJva2Utd2lkdGg9JzIuNCcgc3Ryb2tlLWxpbmVjYXA9J3NxdWFyZSc+CjxyZWN0IHg9JzQnIHk9JzQnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcvPgo8cmVjdCB4PScxNCcgeT0nMTQnIHdpZHRoPSc0NCcgaGVpZ2h0PSc0NCcvPgo8cGF0aCBkPSdNMTQgMzAgSDI0IFYyNCBIMzAnLz4KPHBhdGggZD0nTTQyIDE0IFYyNCBINDggVjMwJy8+CjxwYXRoIGQ9J001OCA0MiBINDggVjQ4IEg0MicvPgo8cGF0aCBkPSdNMzAgNTggVjQ4IEgyNCBWNDInLz4KPC9nPgo8L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.social-corner--tr { top: clamp(20px, 3vw, 36px); right: clamp(20px, 3vw, 36px); }
+.social-corner--bl { bottom: clamp(20px, 3vw, 36px); left: clamp(20px, 3vw, 36px); }
+
+/* ---------- top dot indicator ---------- */
+.social-dots {
+  position: absolute;
+  top: clamp(20px, 3vw, 32px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+}
+.social-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--mauve-bark);
+  opacity: 0.35;
+}
+.social-dot--active { opacity: 0.85; }
+
+/* ---------- sakura branch flourish — same watercolor sakura as inspo, dusky pink petals ---------- */
+.social-blossom {
+  position: absolute;
+  z-index: 2;
+  left: clamp(-12px, 2vw, 16px);
+  bottom: 0;
+  width: clamp(160px, 18vw, 220px);
+  height: clamp(175px, 20vw, 240px);
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScyMjAnIGhlaWdodD0nMjQwJyB2aWV3Qm94PScwIDAgMjIwIDI0MCc+CjxwYXRoIGQ9J00xMCAyMzAgQyA0MCAxOTAsIDMwIDE1MCwgNzAgMTIwIEMgMTAwIDk4LCAxMjAgOTAsIDE1MCA2MCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOGM1MDY0JyBzdHJva2Utd2lkdGg9JzMnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8cGF0aCBkPSdNNzAgMTIwIEMgNjAgMTA4LCA0NSAxMDQsIDM0IDk2JyBmaWxsPSdub25lJyBzdHJva2U9JyM4YzUwNjQnIHN0cm9rZS13aWR0aD0nMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJy8+CjxwYXRoIGQ9J00xMTAgMTAwIEMgMTE4IDg4LCAxMTYgNzYsIDEyNCA2NCcgZmlsbD0nbm9uZScgc3Ryb2tlPScjOGM1MDY0JyBzdHJva2Utd2lkdGg9JzInIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcvPgo8ZyBmaWxsPScjZTZhOWJiJz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMzQsOTQpJz4KPGNpcmNsZSBjeD0nMCcgY3k9Jy03JyByPSc2Jy8+PGNpcmNsZSBjeD0nNicgY3k9Jy0yJyByPSc2Jy8+PGNpcmNsZSBjeD0nNCcgY3k9JzYnIHI9JzYnLz48Y2lyY2xlIGN4PSctNCcgY3k9JzYnIHI9JzYnLz48Y2lyY2xlIGN4PSctNicgY3k9Jy0yJyByPSc2Jy8+CjxjaXJjbGUgY3g9JzAnIGN5PScwJyByPSczJyBmaWxsPScjZDk4ZmExJy8+CjwvZz4KPGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMTI0LDYyKSBzY2FsZSgwLjg1KSc+CjxjaXJjbGUgY3g9JzAnIGN5PSctNycgcj0nNicvPjxjaXJjbGUgY3g9JzYnIGN5PSctMicgcj0nNicvPjxjaXJjbGUgY3g9JzQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTYnIGN5PSctMicgcj0nNicvPgo8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nMycgZmlsbD0nI2Q5OGZhMScvPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDE1MCw1OCkgc2NhbGUoMC42KSc+CjxjaXJjbGUgY3g9JzAnIGN5PSctNycgcj0nNicvPjxjaXJjbGUgY3g9JzYnIGN5PSctMicgcj0nNicvPjxjaXJjbGUgY3g9JzQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTYnIGN5PSctMicgcj0nNicvPgo8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nMycgZmlsbD0nI2Q5OGZhMScvPgo8L2c+CjxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDkwLDEzMikgc2NhbGUoMC43KSc+CjxjaXJjbGUgY3g9JzAnIGN5PSctNycgcj0nNicvPjxjaXJjbGUgY3g9JzYnIGN5PSctMicgcj0nNicvPjxjaXJjbGUgY3g9JzQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTQnIGN5PSc2JyByPSc2Jy8+PGNpcmNsZSBjeD0nLTYnIGN5PSctMicgcj0nNicvPgo8Y2lyY2xlIGN4PScwJyBjeT0nMCcgcj0nMycgZmlsbD0nI2Q5OGZhMScvPgo8L2c+CjwvZz4KPC9zdmc+");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.92;
+  pointer-events: none;
+}
+
+/* ---------- menu icon, bottom-right ---------- */
+.social-menu-icon {
+  position: absolute;
+  z-index: 5;
+  bottom: clamp(20px, 3vw, 32px);
+  right: clamp(20px, 3vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.social-menu-icon span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--mauve-bark);
+  opacity: 0.7;
+}
+
+/* ---------- container / grid ---------- */
+.social-container {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 0.95fr 1.15fr 0.8fr;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  min-height: 100vh;
+  padding: clamp(72px, 9vw, 108px) clamp(24px, 6vw, 72px) clamp(64px, 8vw, 96px);
+}
+
+/* ---------- LEFT: sideline + bio (mirrors left vertical + About block in inspo) ---------- */
+.social-left {
+  position: relative;
+  padding-left: clamp(36px, 4vw, 52px);
+  min-height: 260px;
+}
+
+.social-sideline-text {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+.social-sideline-text span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  color: var(--mauve-bark);
+  opacity: 0.65;
+  white-space: nowrap;
+}
+
+.social-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 34ch;
+}
+.social-tag {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--dusk-rose-deep);
+}
+.social-about-title {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 600;
+  font-style: italic;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  color: var(--mauve-bark);
+  line-height: 1;
+}
+.social-bio {
+  margin: 0;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(60, 36, 48, 0.72);
+}
+
+/* ---------- CENTER: dusky-pink rectangle — direct replacement for the red circle + girl ---------- */
+.social-card-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.social-card {
+  position: relative;
+  width: clamp(300px, 30vw, 380px);
+  aspect-ratio: 4 / 5.1;
+  border-radius: 28px;
+  padding: clamp(26px, 3vw, 34px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--dusk-rose) 0%, var(--dusk-rose-deep) 62%, #a85a75 100%);
+  box-shadow: 0 28px 56px rgba(140, 80, 100, 0.32), inset 0 1px 0 rgba(255,255,255,0.22);
+  color: var(--cream);
+  border: 1px solid rgba(253, 246, 242, 0.14);
+}
+.social-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSczMic+CjxnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2M5OGE5Yycgc3Ryb2tlLXdpZHRoPScxLjEnIG9wYWNpdHk9JzAuNTUnPgo8cGF0aCBkPSdNLTE2IDMyIEExNiAxNiAwIDAgMSAxNiAzMicvPgo8cGF0aCBkPSdNMTYgMzIgQTE2IDE2IDAgMCAxIDQ4IDMyJy8+CjxwYXRoIGQ9J000OCAzMiBBMTYgMTYgMCAwIDEgODAgMzInLz4KPHBhdGggZD0nTTAgMTYgQTE2IDE2IDAgMCAxIDMyIDE2Jy8+CjxwYXRoIGQ9J00zMiAxNiBBMTYgMTYgMCAwIDEgNjQgMTYnLz4KPHBhdGggZD0nTS0xNiAxNiBBMTYgMTYgMCAwIDEgMTYgMTYnIG9wYWNpdHk9JzAuMzUnLz4KPC9nPgo8L3N2Zz4=");
+  background-size: 120px 60px;
+  opacity: 0.11;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.social-card-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.social-card-sub {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(253, 246, 242, 0.72);
+}
+.social-card-name {
+  margin: 4px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.75rem, 2.4vw, 2.2rem);
+  line-height: 1.05;
+}
+.social-card-handle {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: rgba(253, 246, 242, 0.78);
+}
+
+.social-stats-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: clamp(22px, 3vw, 30px) 0;
+}
+.social-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  padding: 14px 6px;
+  border-radius: 16px;
+  background: rgba(253, 246, 242, 0.13);
+  border: 1px solid rgba(253, 246, 242, 0.10);
+}
+.social-stat-value {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.45rem, 1.9vw, 1.75rem);
+  line-height: 1;
+}
+.social-stat-label {
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.60rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(253, 246, 242, 0.80);
+}
+
+.social-card-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 13px 20px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(253, 246, 242, 0.58);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.83rem;
+  font-weight: 700;
+  color: var(--cream);
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.social-card-btn:hover,
+.social-card-btn:focus-visible {
+  background: var(--cream);
+  color: var(--mauve-bark);
+  border-color: var(--cream);
+}
+
+/* ---------- RIGHT: giant vertical title + tabs (mirrors FEEDS/STORIES/TYPOGRAPHY bar in inspo) ---------- */
+.social-right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(28px, 4vw, 44px);
+  height: 100%;
+  min-height: 420px;
+}
+
+.social-vertical-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.social-title-primary {
+  margin: 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  color: var(--mauve-bark);
+}
+.social-title-kanji {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.4em;
+  color: var(--dusk-rose-deep);
+  opacity: 0.85;
+}
+
+.social-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+}
+.social-tab {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 14px 8px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(60, 36, 48, 0.55);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.social-tab:hover {
+  color: var(--mauve-bark);
+}
+.social-tab--active {
+  background: var(--dusk-rose-deep);
+  color: var(--cream);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .social-container {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 48px;
+    padding-top: 96px;
+  }
+  .social-left { padding-left: 0; min-height: auto; }
+  .social-sideline-text { display: none; }
+  .social-info { max-width: 46ch; align-items: center; }
+  .social-halo { left: 50%; transform: translateX(-50%); top: 78px; }
+  .social-watermark { font-size: clamp(6rem, 22vw, 12rem); top: 50%; }
+  .social-right { align-items: center; flex-direction: row; justify-content: center; min-height: auto; }
+  .social-vertical-header,
+  .social-title-primary,
+  .social-title-kanji,
+  .social-tab {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  .social-vertical-header { flex-direction: column; align-items: center; }
+  .social-tabs { flex-direction: row; }
+  .social-blossom { opacity: 0.5; width: 140px; height: 150px; }
+}
+
+@media (max-width: 560px) {
+  .social-card { width: min(88vw, 340px); }
+  .social-stats-grid { gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-card-btn { transition: none; }
+}

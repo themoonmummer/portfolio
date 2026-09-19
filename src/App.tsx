@@ -6,7 +6,7 @@ import  AboutSection  from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { PetalBackground } from './components/PetalBackground';
-import { CaseStudyModal } from './components/CaseStudyModal';
+import { SocialMedia } from './components/SocialMedia';
 import { PROJECTS } from './data/portfolioData';
 import { Project } from './types';
 
@@ -36,15 +36,13 @@ export default function App() {
       {/* 4. Skills / Languages */}
       <TechStack />
 
-      {/* 5. Contact */}
+      {/* 5. Social Connect — dusky-pink rectangle replaces red circle+girl from inspo */}
+      <SocialMedia />
+
+      {/* 6. Contact */}
       <ContactSection />
 
       <Footer />
-
-      <CaseStudyModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
     </div>
   );
 }
