@@ -23,13 +23,19 @@
   display: flex;
 
   /*
-   * Two identical train images sit beside each other.
-   * Moving exactly one viewport width creates a seamless loop.
+   * 8 project panels + 8 duplicated project panels.
+   *
+   * Each panel is 100vw.
+   * Total width = 16 × 100vw = 1600vw.
    */
-  width: 200vw;
+  width: 1600vw;
   height: 100%;
 
-  animation: projects-train-move 26s linear infinite;
+  /*
+   * Each project stays visible for 26 seconds.
+   * 8 projects × 26 seconds = 208 seconds.
+   */
+  animation: projects-train-move 208s linear infinite;
 
   will-change: transform;
 }
@@ -40,43 +46,263 @@
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #080d18;
 }
 
+/* =========================================================
+   METRO IMAGE
+   ========================================================= */
+
 .projects-train-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  z-index: 1;
+  filter:
+    saturate(0.88)
+    brightness(0.82)
+    contrast(1.02);
+  user-select: none;
+  pointer-events: none;
+  border-radius: 0;
+}
+
+/* =========================================================
+   VIDEO / LIVE PROJECT WINDOW
+   ========================================================= */
+
+.projects-video-window {
+  position: absolute;
+
+  /* Window interior — measured from 1280x881 source */
+  left: 18%;
+  top: 3.5%;
+  width: 71.5%;
+  height: 75.3%;
+
+  z-index: 2;
+  overflow: hidden;
+
+  border-radius: 72px;
+
+  background: #050a18;
+
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.08),
+    inset 0 0 30px rgba(0,0,0,0.35);
+}
+
+.projects-video-click {
   position: absolute;
   inset: 0;
 
   width: 100%;
   height: 100%;
 
-  /*
-   * The metro image fills the entire screen.
-   */
-  
+  padding: 0;
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  display: block;
+
+  overflow: hidden;
+
+  border-radius: inherit;
+
+  outline: none;
+}
+
+.projects-video-click:focus-visible {
+  outline: 2px solid #ffe68c;
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   PROJECT PREVIEW
+   ========================================================= */
+
+.projects-video-media {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center top;
+
+  background: #0b1220;
+
+  transition:
+    transform 0.7s ease,
+    filter 0.4s ease;
+}
+
+/*
+ * The live Vercel iframe must NOT receive the click.
+ * The parent button handles the click and opens the exact
+ * demoUrl belonging to that project.
+ */
+.projects-project-preview {
+  pointer-events: none;
+  border: 0;
+}
+
+.projects-video-click:hover .projects-video-media,
+.projects-video-click:focus-visible .projects-video-media {
+  transform: scale(1.04);
+  filter: brightness(1.04) saturate(1.05);
+}
+
+/* =========================================================
+   FALLBACK IMAGE
+   ========================================================= */
+
+.projects-video-fallback {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
 
   object-fit: cover;
   object-position: center;
 
   display: block;
-
-  filter:
-    saturate(0.88)
-    brightness(0.82)
-    contrast(1.02);
-
-  user-select: none;
-  pointer-events: none;
 }
 
-/*
- * Train moves from LEFT -> RIGHT.
- *
- * Since there are two copies of the same image,
- * the second one replaces the first one seamlessly.
- */
+/* =========================================================
+   GLASS REFLECTION
+   ========================================================= */
+
+.projects-video-glass {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      118deg,
+      rgba(255,255,255,0.14) 0%,
+      rgba(255,255,255,0.03) 28%,
+      transparent 52%
+    );
+
+  mix-blend-mode: screen;
+
+  z-index: 1;
+}
+
+/* =========================================================
+   POLES — ABOVE VIDEO
+   ========================================================= */
+
+.projects-pole {
+  position: absolute;
+
+  top: 3.5%;
+  bottom: 10.5%;
+
+  width: clamp(8px, 1.1vw, 14px);
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7a7a7a 0%,
+      #c8c8c8 18%,
+      #f0f0f0 34%,
+      #a8a8a8 52%,
+      #d8d8d8 68%,
+      #8a8a8a 100%
+    );
+
+  box-shadow:
+    0 2px 10px rgba(0,0,0,0.38),
+    inset 1px 0 1px rgba(255,255,255,0.75),
+    inset -1px 0 1px rgba(0,0,0,0.25);
+}
+
+.projects-pole--left {
+  left: 15.35%;
+}
+
+.projects-pole--right {
+  right: 16.95%;
+}
+
+/* Horizontal top rail highlight */
+.projects-pole::before {
+  content: "";
+
+  position: absolute;
+
+  top: -1.5%;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 1px;
+  height: 4%;
+
+  background: rgba(255,255,255,0);
+}
+
+/* =========================================================
+   8-PROJECT METRO LOOP
+   =========================================================
+
+   The track contains:
+
+   Project 1
+   Project 2
+   Project 3
+   Project 4
+   Project 5
+   Project 6
+   Project 7
+   Project 8
+
+   followed by:
+
+   Project 1
+   Project 2
+   Project 3
+   Project 4
+   Project 5
+   Project 6
+   Project 7
+   Project 8
+
+   The animation starts on the duplicated set at -800vw
+   and finishes at 0vw on the original set.
+
+   This creates:
+
+   1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 1 → ...
+   ========================================================= */
+
 @keyframes projects-train-move {
   0% {
-    transform: translate3d(-100vw, 0, 0);
+    transform: translate3d(-800vw, 0, 0);
   }
 
   100% {
@@ -122,11 +348,6 @@
   position: absolute;
   z-index: 5;
 
-  /*
-   * This is the only project window.
-   * It stays attached to the train scene while
-   * its contents change.
-   */
   left: 50%;
   top: 50%;
 
@@ -551,6 +772,19 @@
     object-position: center;
   }
 
+  .projects-metro-stage {
+    width: min(94vw, 860px);
+    max-height: 68vh;
+  }
+
+  .projects-video-window {
+    border-radius: clamp(14px, 3vw, 32px);
+  }
+
+  .projects-pole {
+    width: clamp(7px, 1vw, 12px);
+  }
+
   .projects-window-position {
     width: min(72vw, 650px);
   }
@@ -579,16 +813,32 @@
     height: 100svh;
   }
 
+  .projects-metro-stage {
+    width: 94vw;
+    max-height: 56svh;
+  }
+
   .projects-train-image {
     width: 100%;
     height: 100%;
 
-    /*
-     * Slightly zoom the metro image on mobile
-     * so the scene still fills the screen.
-     */
     object-fit: cover;
     object-position: center;
+  }
+
+  .projects-video-window {
+    border-radius: 18px;
+
+    left: 17.1%;
+    top: 19.7%;
+    width: 72.6%;
+    height: 49.2%;
+  }
+
+  .projects-pole {
+    width: 8px;
+    top: 5%;
+    bottom: 12%;
   }
 
   .projects-window-position {
@@ -637,7 +887,11 @@
 @media (prefers-reduced-motion: reduce) {
   .projects-train-track {
     animation: none;
-    transform: translateX(-100vw);
+
+    /*
+     * Show the beginning of the original 8-project sequence.
+     */
+    transform: translateX(-800vw);
   }
 
   .projects-window-media {

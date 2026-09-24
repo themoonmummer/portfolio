@@ -10,75 +10,195 @@ export const HERO_DATA = {
 
 export const PROJECTS: Project[] = [
   {
-    id: "neo-zen",
-    demoUrl: "", // TODO: paste your Vercel URL here
-    videoSrc: "", // TODO: e.g. "/videos/neo-zen.mp4"
-    title: "Neo-Zen Dashboard",
+    id: "art-mail-club",
+    demoUrl: "https://art-mail-club.vercel.app/",
+    videoSrc: "/videos/art-mail-club.mp4",
+    title: "Art Mail Club",
     subtitle: "Currently Passing",
-    category: "Productivity System",
-    description: "A productivity hub inspired by Japanese minimalism and the rhythm of urban Tokyo.",
-    longDescription: "Neo-Zen Dashboard integrates ambient pomodoro timing, kanban flows, and task analytics into a single translucent, glassmorphic layout.",
-    tags: ["React", "Three.js", "Tailwind CSS", "Motion"],
-    image: "https://lh3.googleusercontent.com/aida-public/AB6AXuBJfDRDA_T6joCTLyrCbfSs8J4u3D6zEyGoSDg_afim2PGvkOrNl_Z9ETjXjlUaBU3TeJW8mhWstuPFzcw2Zj-4bmBBaIXZQRqGm7oZSMh-0uOufDxshCO2TLnrNqUV01qWX-lVbuiiZLRAKehvN03cj1UgrA4xPhnNnO-mCevHpIyNu1OO-GMxBYT_CwlFiMLvOwYf71Ms7zXPyZKERNHv5Zv96x8-X6Yt0vfgIabzqZIXkq5pfFbs",
-    alt: "High-fidelity UI showing a minimalist zen dashboard with soft pink glass widgets and a tranquil mountain landscape background.",
+    category: "E-Commerce / Art",
+    description: "Curated art drops and mail club experience with seamless checkout.",
+    longDescription: "Art Mail Club brings limited edition prints and community curation into a fast, tactile shop.",
+    tags: ["React", "Next.js", "Tailwind CSS"],
+    image: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1200&auto=format&fit=crop",
+    alt: "Art Mail Club website preview",
     caseStudy: {
-      overview: "Designed for modern remote professionals who seek calm focus amid high-volume task orchestration.",
-      challenge: "Standard dashboards induce cognitive fatigue through intense visual noise and harsh dark contrast.",
-      solution: "Engineered a soft glassmorphic visual tier using Japanese typography hierarchy, ambient lighting, and spring physics animations.",
+      overview: "Subscription art platform with drop culture.",
+      challenge: "High image load with smooth browsing.",
+      solution: "Optimized gallery with lazy loading and glass UI.",
       metrics: [
-        { label: "Focus Duration", value: "+42%" },
-        { label: "Task Satisfaction", value: "98%" },
-        { label: "Render Time", value: "<16ms" }
+        { label: "Load Time", value: "<1.2s" },
+        { label: "Conversion", value: "+18%" },
+        { label: "Render", value: "<16ms" }
       ],
-      techUsed: ["React 19", "Three.js", "Tailwind CSS v4", "Framer Motion", "TypeScript"]
+      techUsed: ["Next.js", "Tailwind CSS", "Vercel"]
     }
   },
   {
-    id: "sakura-flow",
-    demoUrl: "", // TODO: paste your Vercel URL here
-    videoSrc: "", // TODO: e.g. "/videos/sakura-flow.mp4"
-    title: "Sakura Flow Wellness",
-    subtitle: "Next Destination",
-    category: "Health & Mindfulness",
-    description: "A wellness application focusing on meditation cycles, diaphragmatic breathing, and serene audio synthesis.",
-    longDescription: "Features real-time biometrics rendering through fluid SVG shaders and generative calming ambient sounds.",
-    tags: ["React", "Web Audio API", "Framer Motion", "WebGL"],
-    image: "https://images.unsplash.com/photo-1528164344705-475426879e0d?q=80&w=1200&auto=format&fit=crop",
-    alt: "Mobile application interface for wellness, featuring organic fluid shapes in lavender and pink hues, high-translucency glass buttons, and elegant typography.",
+    id: "thetechartist",
+    demoUrl: "https://thetechartist-website.vercel.app/",
+    videoSrc: "/videos/thetechartist.mp4",
+    title: "The Tech Artist",
+    subtitle: "Next Station",
+    category: "Portfolio / Creative",
+    description: "Portfolio for a tech-artist merging code, visuals and interaction.",
+    longDescription: "A creative portfolio showcasing experimental works and case studies.",
+    tags: ["React", "Framer Motion", "Three.js"],
+    image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?q=80&w=1200&auto=format&fit=crop",
+    alt: "The Tech Artist website preview",
     caseStudy: {
-      overview: "Combining breathing exercises with visual feedback loops for stress relief.",
-      challenge: "Creating smooth 60fps organic wave render loops on mobile browsers without draining battery.",
-      solution: "Utilized lightweight custom Canvas WebGL shaders wrapped in React hooks with hardware acceleration.",
+      overview: "Artist portfolio with immersive visuals.",
+      challenge: "Balancing motion with performance.",
+      solution: "GPU accelerated layers and code-split routes.",
       metrics: [
-        { label: "Daily Active Users", value: "120K+" },
-        { label: "Session Completion", value: "89%" },
-        { label: "App Rating", value: "4.9/5" }
+        { label: "LCP", value: "1.4s" },
+        { label: "Engagement", value: "+42%" },
+        { label: "FPS", value: "60" }
       ],
-      techUsed: ["React", "WebGL", "Tailwind CSS", "Canvas API", "AudioContext"]
+      techUsed: ["React", "Three.js", "Framer Motion"]
     }
   },
   {
-    id: "komorebi-analytics",
-    demoUrl: "", // TODO: paste your Vercel URL here
-    videoSrc: "", // TODO: e.g. "/videos/komorebi-analytics.mp4"
-    title: "Komorebi Financial Hub",
+    id: "wtsp",
+    demoUrl: "https://wtsp-mbkrclb9i-moonlab1.vercel.app/",
+    videoSrc: "/videos/wtsp.mp4",
+    title: "WTSP Studio",
     subtitle: "In Transit",
-    category: "Fintech Platform",
-    description: "Ethereal wealth tracking suite turning complex financial telemetry into crystal-clear visual stories.",
-    longDescription: "An elegant portfolio suite designed for high-net-worth individual management with real-time currency conversion and asset allocation visualizers.",
-    tags: ["TypeScript", "Recharts", "D3.js", "Tailwind CSS"],
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-    alt: "Financial analytics platform with glass cards, pink gradient line charts, and high contrast typography.",
+    category: "Landing / Studio",
+    description: "Studio landing with bold type and smooth scroll storytelling.",
+    longDescription: "A studio site focused on conversion through narrative scroll.",
+    tags: ["Next.js", "Tailwind CSS", "Motion"],
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop",
+    alt: "WTSP website preview",
     caseStudy: {
-      overview: "Simplifying dense financial data through airy layouts and high-legibility typographic scales.",
-      challenge: "Rendering thousands of dynamic market data points while preserving gentle visual aesthetic.",
-      solution: "Virtualized chart series paired with glass-backed tooltip popovers.",
+      overview: "Studio marketing site.",
+      challenge: "Storytelling without heavy JS.",
+      solution: "Intersection observers and optimized fonts.",
       metrics: [
-        { label: "Data Throughput", value: "10k/sec" },
-        { label: "Latency", value: "<12ms" },
-        { label: "User Retention", value: "94%" }
+        { label: "Bounce", value: "-22%" },
+        { label: "SEO", value: "98" },
+        { label: "TTI", value: "1.1s" }
       ],
-      techUsed: ["React", "TypeScript", "D3.js", "Recharts", "Tailwind CSS"]
+      techUsed: ["Next.js", "Tailwind", "Vercel"]
+    }
+  },
+  {
+    id: "emilyartshop",
+    demoUrl: "https://emilyartshop.vercel.app/",
+    videoSrc: "/videos/emilyartshop.mp4",
+    title: "Emily Art Shop",
+    subtitle: "Approaching",
+    category: "E-Commerce / Boutique",
+    description: "Boutique art shop with delicate curation and soft commerce flow.",
+    longDescription: "Emily Art Shop focuses on handcrafted pieces with intimate product storytelling.",
+    tags: ["React", "Tailwind CSS", "Stripe"],
+    image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=1200&auto=format&fit=crop",
+    alt: "Emily Art Shop website preview",
+    caseStudy: {
+      overview: "Boutique shop for art products.",
+      challenge: "Emotional purchase journey.",
+      solution: "Soft micro-interactions and fast cart.",
+      metrics: [
+        { label: "AOV", value: "+15%" },
+        { label: "Cart", value: "92%" },
+        { label: "Perf", value: "96" }
+      ],
+      techUsed: ["Next.js", "Stripe", "Tailwind"]
+    }
+  },
+  {
+    id: "lunacalmstudio",
+    demoUrl: "https://lunacalmstudio.vercel.app/",
+    videoSrc: "/videos/lunacalmstudio.mp4",
+    title: "Luna Calm Studio",
+    subtitle: "Coastal View",
+    category: "Wellness / Brand",
+    description: "Calm studio brand with serene palettes and breathing space.",
+    longDescription: "Luna Calm Studio embodies mindfulness through whitespace and gentle motion.",
+    tags: ["React", "Next.js", "Tailwind"],
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1200&auto=format&fit=crop",
+    alt: "Luna Calm Studio website preview",
+    caseStudy: {
+      overview: "Wellness brand site.",
+      challenge: "Calm without being empty.",
+      solution: "Airy grid and subtle shaders.",
+      metrics: [
+        { label: "Dwell", value: "+31%" },
+        { label: "Return", value: "88%" },
+        { label: "CLS", value: "0.02" }
+      ],
+      techUsed: ["React", "Tailwind", "Framer Motion"]
+    }
+  },
+  {
+    id: "house-of-tasya",
+    demoUrl: "https://house-of-tasya.vercel.app/",
+    videoSrc: "/videos/house-of-tasya.mp4",
+    title: "House of Tasya",
+    subtitle: "Ocean Window",
+    category: "Fashion / Lifestyle",
+    description: "House of Tasya — refined fashion house with editorial elegance.",
+    longDescription: "A fashion e-commerce experience with lookbooks, story and boutique checkout.",
+    tags: ["React", "Next.js", "Tailwind CSS"],
+    image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=1200&auto=format&fit=crop",
+    alt: "House of Tasya website preview",
+    caseStudy: {
+      overview: "Fashion house e-commerce.",
+      challenge: "Editorial feel with fast shop.",
+      solution: "Lookbook + headless commerce.",
+      metrics: [
+        { label: "Speed", value: "1.3s" },
+        { label: "CR", value: "+19%" },
+        { label: "Perf", value: "97" }
+      ],
+      techUsed: ["Next.js", "Tailwind", "Vercel"]
+    }
+  },
+  {
+    id: "silver-shades",
+    demoUrl: "https://silver-shades.vercel.app/",
+    videoSrc: "/videos/silver-shades.mp4",
+    title: "Silver Shades",
+    subtitle: "Harbour Light",
+    category: "Jewelry / Luxury",
+    description: "Silver Shades — luxury silver jewelry with minimal, reflective UI.",
+    longDescription: "High-end jewelry store with macro imagery and quiet luxury.",
+    tags: ["React", "Next.js", "Tailwind"],
+    image: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1200&auto=format&fit=crop",
+    alt: "Silver Shades website preview",
+    caseStudy: {
+      overview: "Luxury jewelry e-commerce.",
+      challenge: "Showcase shine without glare.",
+      solution: "Soft lightbox and 3D hover.",
+      metrics: [
+        { label: "Zoom", value: "4K" },
+        { label: "Engage", value: "+28%" },
+        { label: "LCP", value: "1.2s" }
+      ],
+      techUsed: ["React", "Tailwind", "Three.js"]
+    }
+  },
+  {
+    id: "ecommerce-demo",
+    demoUrl: "https://ecommerce-demo-liart-iota.vercel.app/",
+    videoSrc: "/videos/ecommerce-demo.mp4",
+    title: "E-Commerce Demo",
+    subtitle: "Next Departure",
+    category: "E-Commerce / Demo",
+    description: "Full-stack e-commerce demo with cart, filters and checkout.",
+    longDescription: "A demo store covering catalog, search and conversion funnels.",
+    tags: ["React", "Next.js", "Tailwind"],
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1200&auto=format&fit=crop",
+    alt: "E-Commerce demo website preview",
+    caseStudy: {
+      overview: "Demo commerce platform.",
+      challenge: "Complex flows simple.",
+      solution: "Clean state and optimistic cart.",
+      metrics: [
+        { label: "Flow", value: "3 steps" },
+        { label: "Perf", value: "98" },
+        { label: "Cart", value: "94%" }
+      ],
+      techUsed: ["Next.js", "TypeScript", "Tailwind"]
     }
   }
 ];
