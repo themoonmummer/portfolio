@@ -35,13 +35,16 @@
 
 .social-bg-pattern {
   position: absolute;
+
   inset: 0;
 
   z-index: 0;
 
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSIzMiI+PGcgc3Ryb2tlPSIjMmIxYTBmIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNLTE2IDMyIEExNiAxNiAwIDAgMSAxNiAzMiIvPjxwYXRoIGQ9Ik0tMTEgMzIgQTExIDExIDAgMCAxIDExIDMyIi8+PHBhdGggZD0iTS02IDMyIEE2IDYgMCAwIDEgNiAzMiIvPjxwYXRoIGQ9Ik0xNiAzMiBBMTYgMTYgMCAwIDEgNDggMzIiLz48cGF0aCBkPSJNMjEgMzIgQTExIDExIDAgMCAxIDQzIDMyIi8+PHBhdGggZD0iTTI2IDMyIEE2IDYgMCAwIDEgMzggMzIiLz48cGF0aCBkPSJNMzIgMTYgQTE2IDE2IDAgMCAxIDY0IDE2Ii8+PHBhdGggZD0iTTM3IDE2IEExMSAxMSAwIDAgMSA1OSAxNiIvPjxwYXRoIGQ9Ik00MiAxNiBBNiA2IDAgMCAxIDU0IDE2Ii8+PC9nPjwvc3ZnPg==");
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='80' viewBox='0 0 160 80'%3E%3Cg fill='none' stroke='%232b1a0f' stroke-width='1.1' opacity='0.4'%3E%3Cpath d='M-40 40 A40 40 0 0 1 40 40'/%3E%3Cpath d='M40 40 A40 40 0 0 1 120 40'/%3E%3Cpath d='M120 40 A40 40 0 0 1 200 40'/%3E%3Cpath d='M0 80 A40 40 0 0 1 80 80'/%3E%3Cpath d='M80 80 A40 40 0 0 1 160 80'/%3E%3Cpath d='M160 80 A40 40 0 0 1 240 80'/%3E%3Cpath d='M-20 40 A20 20 0 0 1 20 40'/%3E%3Cpath d='M60 40 A20 20 0 0 1 100 40'/%3E%3Cpath d='M140 40 A20 20 0 0 1 180 40'/%3E%3Cpath d='M20 80 A20 20 0 0 1 60 80'/%3E%3Cpath d='M100 80 A20 20 0 0 1 140 80'/%3E%3Cpath d='M180 80 A20 20 0 0 1 220 80'/%3E%3C/g%3E%3C/svg%3E");
 
   background-repeat: repeat;
+
   background-size: 160px 80px;
 
   opacity: 0.3;
@@ -51,7 +54,7 @@
 
 
 /* =========================================================
-   JAPANESE WATERMARK
+   JAPANESE WATERMARK / STAMP
    ========================================================= */
 
 .social-watermark {
@@ -69,7 +72,11 @@
     Georgia,
     serif;
 
-  font-size: clamp(6rem, 13vw, 12rem);
+  /*
+   * Slightly larger than before while preserving
+   * the same location and vertical orientation.
+   */
+  font-size: clamp(7rem, 15vw, 14rem);
 
   font-weight: 700;
 
@@ -79,7 +86,14 @@
 
   color: var(--brown);
 
-  opacity: 0.055;
+  /*
+   * Previous opacity:
+   * 0.055
+   *
+   * Increased by 0.2:
+   * 0.255
+   */
+  opacity: 0.075;
 
   writing-mode: vertical-rl;
 
@@ -231,68 +245,18 @@
 
 
 /* =========================================================
-   SAKURA
-   ========================================================= */
+   SAKURA / BOTTOM DECORATION
+   =========================================================
+
+   Removed.
+
+   The React element can remain in the JSX safely, but it is
+   hidden here so the decorative dots and stick underneath
+   the LinkedIn / GitHub area no longer appear.
+   */
 
 .social-blossom {
-  position: absolute;
-
-  z-index: 2;
-
-  left: 47%;
-  bottom: -30px;
-
-  width: 280px;
-  height: 300px;
-
-  opacity: 0.25;
-
-  pointer-events: none;
-
-  transform: rotate(-8deg);
-}
-
-.social-blossom::before,
-.social-blossom::after {
-  content: "";
-
-  position: absolute;
-
-  border-radius: 50%;
-
-  background: var(--brown);
-}
-
-.social-blossom::before {
-  width: 10px;
-  height: 10px;
-
-  left: 45%;
-  top: 25%;
-
-  box-shadow:
-    35px 25px 0 var(--brown),
-    70px 5px 0 var(--brown),
-    105px 40px 0 var(--brown),
-    15px 75px 0 var(--brown),
-    55px 100px 0 var(--brown),
-    95px 80px 0 var(--brown);
-}
-
-.social-blossom::after {
-  width: 4px;
-  height: 230px;
-
-  left: 45%;
-  bottom: 0;
-
-  transform: rotate(25deg);
-
-  transform-origin: bottom;
-
-  box-shadow:
-    30px -90px 0 -1px var(--brown),
-    55px -135px 0 -1px var(--brown);
+  display: none;
 }
 
 
@@ -1035,9 +999,7 @@
   }
 
   .social-blossom {
-    opacity: 0.15;
-
-    left: 50%;
+    display: none;
   }
 
   .social-menu-icon {
