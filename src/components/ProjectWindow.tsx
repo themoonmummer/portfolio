@@ -8,7 +8,7 @@ interface ProjectWindowProps {
 
 /**
  * A single train-carriage window.
- * The media area is reserved for a looping project video (project.videoSrc).
+ * The media area displays project image.
  * Clicking the window opens project.demoUrl (your Vercel link) in a new tab.
  * If there is no demoUrl, it falls back to the case-study modal.
  */
@@ -40,7 +40,7 @@ export const ProjectWindow = ({ project, onSelectProject }: ProjectWindowProps) 
             open();
           }
         }}
-        className="group relative cursor-pointer rounded-[2.25rem] p-[10px] sm:p-[13px] outline-none transition-transform duration-500 focus-visible:ring-2 focus-visible:ring-[#ffe68c] focus-visible:ring-offset-4 focus-visible:ring-offset-[#2f4a3f] hover:-translate-y-1"
+        className="group relative cursor-pointer rounded-[2.25rem] p-[10px] sm:p-[13px] outline-none transition-transform duration-500 focus-visible:ring-2 focus-visible:ring-[#ffe68c] focus-visible:ring-offset-4 focus-visible:ring-offset-[#2f4a3f] hover:-translate_y-1"
         style={{
           background: 'linear-gradient(160deg, #d9d3c4 0%, #b3ab99 45%, #8e8878 100%)',
           boxShadow:
@@ -69,21 +69,9 @@ export const ProjectWindow = ({ project, onSelectProject }: ProjectWindowProps) 
           className="relative rounded-[1.65rem] p-[3px]"
           style={{ background: 'linear-gradient(180deg, #6f6a5c, #3d3a33)' }}
         >
-          {/* Glass area — VIDEO GOES HERE */}
+          {/* Glass area — IMAGE GOES HERE */}
           <div className="relative w-full aspect-[16/10] overflow-hidden rounded-[1.5rem] bg-black">
-            {project.videoSrc ? (
-              <video
-                ref={videoRef}
-                src={project.videoSrc}
-                poster={project.image}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            ) : project.image ? (
+            {project.image ? (
               <img
                 src={project.image}
                 alt={project.alt}
@@ -99,7 +87,7 @@ export const ProjectWindow = ({ project, onSelectProject }: ProjectWindowProps) 
                   {project.title}
                 </span>
                 <span className="text-xs tracking-[0.25em] text-[#8ea0c4] uppercase">
-                  video coming soon
+                  image coming soon
                 </span>
               </div>
             )}

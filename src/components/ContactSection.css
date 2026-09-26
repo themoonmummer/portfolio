@@ -1,0 +1,1116 @@
+/* =========================================================
+   CONTACT SECTION
+   ========================================================= */
+
+.contact-section {
+  --contact-bg-light: #e8ddd1;
+  --contact-bg-dark: #d9cabe;
+
+  --contact-brown: #2b1a0f;
+  --contact-cream: #f8f0e5;
+
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--contact-bg-light) 0%,
+      var(--contact-bg-dark) 100%
+    );
+
+  color: var(--contact-brown);
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   SEMI-CIRCLE PATTERN
+   
+   IMPORTANT:
+   This is intentionally OFFSET compared with
+   the Social Media first row.
+
+   Contact:
+   ROW 1 = offset / second Social row
+   ROW 2 = original / first Social row
+   ROW 3 = offset
+   ROW 4 = original
+   ========================================================= */
+
+.contact-bg-pattern {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -2;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='80' viewBox='0 0 160 80'%3E%3Cg fill='none' stroke='%232b1a0f' stroke-width='1.1' opacity='0.4'%3E%3Cpath d='M-20 40 A40 40 0 0 1 60 40'/%3E%3Cpath d='M60 40 A40 40 0 0 1 140 40'/%3E%3Cpath d='M140 40 A40 40 0 0 1 220 40'/%3E%3Cpath d='M20 80 A40 40 0 0 1 100 80'/%3E%3Cpath d='M100 80 A40 40 0 0 1 180 80'/%3E%3Cpath d='M180 80 A40 40 0 0 1 260 80'/%3E%3Cpath d='M0 40 A20 20 0 0 1 40 40'/%3E%3Cpath d='M80 40 A20 20 0 0 1 120 40'/%3E%3Cpath d='M160 40 A20 20 0 0 1 200 40'/%3E%3Cpath d='M40 80 A20 20 0 0 1 80 80'/%3E%3Cpath d='M120 80 A20 20 0 0 1 160 80'/%3E%3Cpath d='M200 80 A20 20 0 0 1 240 80'/%3E%3C/g%3E%3C/svg%3E");
+
+  background-repeat: repeat;
+
+  /*
+   * Keep the pattern at a fixed geometric ratio.
+   * It scales gently on larger screens without
+   * stretching the individual semi-circles.
+   */
+  background-size:
+    clamp(140px, 10vw, 190px)
+    clamp(70px, 5vw, 95px);
+
+  opacity: 0.27;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   NATURAL BLENDING
+   ========================================================= */
+
+.contact-bg-softness {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(248, 240, 229, 0.20) 0%,
+      rgba(248, 240, 229, 0.06) 45%,
+      transparent 75%
+    );
+
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   CORNERS
+   ========================================================= */
+
+.contact-corner {
+  position: absolute;
+
+  width: clamp(40px, 5vw, 70px);
+  height: clamp(40px, 5vw, 70px);
+
+  opacity: 0.55;
+
+  pointer-events: none;
+
+  z-index: 5;
+}
+
+.contact-corner--tr {
+  top: 20px;
+  right: 20px;
+
+  border-top:
+    2px solid
+    var(--contact-brown);
+
+  border-right:
+    2px solid
+    var(--contact-brown);
+}
+
+.contact-corner--tr::before {
+  content: "";
+
+  position: absolute;
+
+  top: 8px;
+  right: 8px;
+
+  width: 65%;
+  height: 65%;
+
+  border-top:
+    1px solid
+    var(--contact-brown);
+
+  border-right:
+    1px solid
+    var(--contact-brown);
+}
+
+.contact-corner--bl {
+  left: 20px;
+  bottom: 20px;
+
+  border-left:
+    2px solid
+    var(--contact-brown);
+
+  border-bottom:
+    2px solid
+    var(--contact-brown);
+}
+
+.contact-corner--bl::before {
+  content: "";
+
+  position: absolute;
+
+  left: 8px;
+  bottom: 8px;
+
+  width: 65%;
+  height: 65%;
+
+  border-left:
+    1px solid
+    var(--contact-brown);
+
+  border-bottom:
+    1px solid
+    var(--contact-brown);
+}
+
+
+/* =========================================================
+   TOP LABEL
+   ========================================================= */
+
+.contact-top-label {
+  position: absolute;
+
+  top: 24px;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size: 0.52rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.25em;
+
+  color:
+    var(--contact-brown);
+
+  opacity: 0.45;
+
+  white-space: nowrap;
+
+  z-index: 5;
+}
+
+.contact-top-label span {
+  width: 18px;
+  height: 1px;
+
+  background:
+    var(--contact-brown);
+
+  opacity: 0.4;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.contact-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding:
+    clamp(60px, 7vh, 90px)
+    clamp(16px, 4vw, 60px)
+    clamp(50px, 6vh, 80px);
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CLEAR GLASS PANEL
+
+   Much more transparent than previous version.
+   ========================================================= */
+
+.contact-panel {
+  width:
+    min(
+      clamp(520px, 50vw, 760px),
+      calc(100vw - 32px)
+    );
+
+  /*
+   * Responsive vertical sizing.
+   * Prevents the panel from becoming huge on
+   * larger screens.
+   */
+  min-height: 0;
+
+  padding:
+    clamp(28px, 3vw, 44px)
+    clamp(24px, 3.5vw, 50px);
+
+  border-radius:
+    clamp(20px, 2.5vw, 32px);
+
+  /*
+   * CLEAR GLASS
+   */
+  background:
+    rgba(248, 240, 229, 0.25);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.5);
+
+  box-shadow:
+    0 20px 50px
+    rgba(43, 26, 15, 0.08),
+
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.6);
+
+  backdrop-filter:
+    blur(10px);
+
+  -webkit-backdrop-filter:
+    blur(10px);
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.contact-header {
+  text-align: center;
+
+  margin-bottom:
+    clamp(20px, 2.5vw, 32px);
+}
+
+.contact-eyebrow {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(0.45rem, 0.6vw, 0.55rem);
+
+  font-weight: 700;
+
+  letter-spacing: 0.22em;
+
+  color:
+    var(--contact-brown);
+
+  opacity: 0.5;
+}
+
+.contact-title {
+  margin: 0;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  /*
+   * Smaller and more controlled.
+   */
+  font-size:
+    clamp(2.25rem, 4.5vw, 4rem);
+
+  line-height: 0.95;
+
+  font-weight: 700;
+
+  letter-spacing: -0.03em;
+
+  color:
+    var(--contact-brown);
+}
+
+.contact-subtitle {
+  max-width: 480px;
+
+  margin:
+    10px auto 0;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(0.65rem, 0.9vw, 0.75rem);
+
+  line-height: 1.6;
+
+  color:
+    rgba(43, 26, 15, 0.58);
+}
+
+
+/* =========================================================
+   FORM
+   ========================================================= */
+
+.contact-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap:
+    clamp(14px, 1.8vw, 20px);
+}
+
+.contact-form-row {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap:
+    clamp(10px, 1.5vw, 16px);
+}
+
+.contact-field {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.contact-field label {
+  padding-left: 3px;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(0.48rem, 0.6vw, 0.55rem);
+
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.15em;
+
+  color:
+    var(--contact-brown);
+
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   INPUT WRAPPERS
+   ========================================================= */
+
+.contact-input-wrap,
+.contact-textarea-wrap {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  background:
+    rgba(255, 251, 245, 0.3);
+
+  border:
+    1px solid
+    rgba(43, 26, 15, 0.12);
+
+  border-radius:
+    12px;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.contact-input-wrap:hover,
+.contact-textarea-wrap:hover {
+  background:
+    rgba(255, 251, 245, 0.38);
+}
+
+.contact-input-wrap:focus-within,
+.contact-textarea-wrap:focus-within {
+  background:
+    rgba(255, 251, 245, 0.48);
+
+  border-color:
+    rgba(43, 26, 15, 0.28);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(43, 26, 15, 0.03);
+}
+
+.contact-field-number {
+  flex-shrink: 0;
+
+  margin-left: 12px;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    0.45rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  color:
+    var(--contact-brown);
+
+  opacity: 0.25;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.contact-input-wrap input,
+.contact-textarea-wrap textarea {
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(0.65rem, 0.85vw, 0.72rem);
+
+  color:
+    var(--contact-brown);
+}
+
+.contact-input-wrap input {
+  padding:
+    11px 12px 11px 8px;
+}
+
+.contact-textarea-wrap {
+  align-items: flex-start;
+}
+
+.contact-textarea-wrap .contact-field-number {
+  margin-top: 14px;
+}
+
+.contact-textarea-wrap textarea {
+  min-height:
+    clamp(90px, 11vh, 120px);
+
+  resize: vertical;
+
+  padding:
+    12px 12px 12px 8px;
+
+  line-height: 1.5;
+}
+
+.contact-input-wrap input::placeholder,
+.contact-textarea-wrap textarea::placeholder {
+  color:
+    rgba(43, 26, 15, 0.3);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+   ========================================================= */
+
+.contact-submit {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 4px;
+
+  padding:
+    clamp(12px, 1.2vw, 15px)
+    20px;
+
+  border:
+    1px solid
+    var(--contact-brown);
+
+  border-radius: 999px;
+
+  background:
+    var(--contact-brown);
+
+  color:
+    var(--contact-cream);
+
+  cursor: pointer;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    clamp(0.6rem, 0.75vw, 0.68rem);
+
+  font-weight: 700;
+
+  letter-spacing: 0.06em;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.contact-submit:hover:not(:disabled) {
+  transform:
+    translateY(-2px);
+
+  background:
+    #3a2418;
+
+  box-shadow:
+    0 10px 24px
+    rgba(43, 26, 15, 0.15);
+}
+
+.contact-submit:active:not(:disabled) {
+  transform:
+    translateY(0);
+}
+
+.contact-submit:disabled {
+  opacity: 0.55;
+
+  cursor: wait;
+}
+
+.contact-submit-arrow {
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(248, 240, 229, 0.1);
+
+  transition:
+    transform 0.25s ease;
+}
+
+.contact-submit:hover:not(:disabled)
+.contact-submit-arrow {
+  transform:
+    translateX(3px);
+}
+
+.contact-submit-note {
+  margin:
+    -6px 0 0;
+
+  text-align: center;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    0.48rem;
+
+  line-height: 1.4;
+
+  color:
+    rgba(43, 26, 15, 0.35);
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.contact-success {
+  min-height:
+    clamp(220px, 30vh, 280px);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+.contact-success-mark {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 14px;
+
+  border-radius: 50%;
+
+  background:
+    var(--contact-brown);
+
+  color:
+    var(--contact-cream);
+
+  box-shadow:
+    0 10px 24px
+    rgba(43, 26, 15, 0.12);
+}
+
+.contact-success-mark span {
+  font-size: 1.15rem;
+
+  font-weight: 700;
+}
+
+.contact-success-eyebrow {
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    0.48rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.2em;
+
+  color:
+    var(--contact-brown);
+
+  opacity: 0.45;
+}
+
+.contact-success h3 {
+  margin:
+    6px 0 0;
+
+  font-family:
+    "Cormorant Garamond",
+    Georgia,
+    serif;
+
+  font-size:
+    clamp(1.6rem, 3vw, 2.4rem);
+
+  line-height: 1;
+
+  color:
+    var(--contact-brown);
+}
+
+.contact-success p {
+  max-width: 380px;
+
+  margin:
+    8px auto 0;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    0.68rem;
+
+  line-height: 1.5;
+
+  color:
+    rgba(43, 26, 15, 0.52);
+}
+
+.contact-reset-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 16px;
+
+  padding:
+    7px 12px;
+
+  border: none;
+
+  background: transparent;
+
+  color:
+    var(--contact-brown);
+
+  cursor: pointer;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    0.52rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+.contact-reset-btn:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================================
+   BOTTOM DETAILS
+   ========================================================= */
+
+.contact-bottom-left,
+.contact-bottom-right {
+  position: absolute;
+
+  bottom: 24px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  font-family:
+    "Plus Jakarta Sans",
+    system-ui,
+    sans-serif;
+
+  font-size:
+    0.42rem;
+
+  line-height: 1.3;
+
+  letter-spacing: 0.12em;
+
+  color:
+    var(--contact-brown);
+
+  opacity: 0.4;
+
+  z-index: 5;
+}
+
+.contact-bottom-left {
+  left: 24px;
+}
+
+.contact-bottom-right {
+  right: 24px;
+
+  text-align: right;
+}
+
+.contact-bottom-left strong,
+.contact-bottom-right strong {
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   TABLET LANDSCAPE / SMALL DESKTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .contact-container {
+    padding: clamp(50px, 6vh, 70px) clamp(20px, 4vw, 40px) clamp(40px, 5vh, 60px);
+  }
+
+  .contact-panel {
+    width: min(clamp(500px, 55vw, 700px), calc(100vw - 40px));
+    padding: clamp(26px, 3vw, 40px) clamp(22px, 3vw, 44px);
+    border-radius: clamp(18px, 2.5vw, 28px);
+  }
+
+  .contact-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+  }
+}
+
+
+/* =========================================================
+   TABLET PORTRAIT
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .contact-container {
+    padding: clamp(50px, 7vh, 70px) clamp(16px, 3vw, 30px) clamp(40px, 5vh, 60px);
+  }
+
+  .contact-panel {
+    width: min(600px, calc(100vw - 32px));
+    padding: 32px 28px;
+    border-radius: 24px;
+  }
+
+  .contact-bottom-left,
+  .contact-bottom-right {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+  .contact-section {
+    min-height: auto;
+  }
+
+  .contact-container {
+    min-height: auto;
+
+    padding:
+      clamp(40px, 6vh, 60px)
+      12px
+      clamp(35px, 5vh, 50px);
+  }
+
+  .contact-panel {
+    width: 100%;
+
+    padding:
+      24px 16px;
+
+    border-radius: 20px;
+
+    background:
+      rgba(248, 240, 229, 0.28);
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .contact-header {
+    margin-bottom: 22px;
+  }
+
+  .contact-title {
+    font-size:
+      clamp(2.25rem, 12vw, 3.25rem);
+  }
+
+  .contact-subtitle {
+    max-width: 320px;
+
+    font-size: 0.62rem;
+  }
+
+  .contact-eyebrow {
+    font-size: 0.44rem;
+    letter-spacing: 0.15em;
+  }
+
+  .contact-top-label {
+    top: 20px;
+
+    font-size: 0.45rem;
+  }
+
+  .contact-top-label span {
+    width: 12px;
+  }
+
+  .contact-corner--tr {
+    top: 16px;
+    right: 16px;
+  }
+
+  .contact-corner--bl {
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .contact-field label {
+    font-size: 0.45rem;
+    letter-spacing: 0.12em;
+  }
+
+  .contact-input-wrap,
+  .contact-textarea-wrap {
+    border-radius: 11px;
+  }
+
+  .contact-input-wrap input {
+    padding: 10px 10px 10px 7px;
+  }
+
+  .contact-textarea-wrap textarea {
+    min-height: 100px;
+    padding: 11px 10px 11px 7px;
+  }
+
+  .contact-field-number {
+    margin-left: 10px;
+    font-size: 0.42rem;
+  }
+
+  .contact-textarea-wrap .contact-field-number {
+    margin-top: 12px;
+  }
+
+  .contact-submit {
+    padding: 13px 16px;
+    font-size: 0.6rem;
+  }
+
+  .contact-submit-arrow {
+    width: 20px;
+    height: 20px;
+  }
+
+  .contact-submit-note {
+    font-size: 0.44rem;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+  .contact-container {
+    padding: 35px 10px 35px;
+  }
+
+  .contact-panel {
+    padding: 20px 14px;
+    border-radius: 18px;
+  }
+
+  .contact-title {
+    font-size: 2.1rem;
+  }
+
+  .contact-form {
+    gap: 16px;
+  }
+
+  .contact-input-wrap,
+  .contact-textarea-wrap {
+    border-radius: 10px;
+  }
+
+  .contact-input-wrap input {
+    padding: 9px 9px 9px 6px;
+  }
+
+  .contact-textarea-wrap textarea {
+    min-height: 95px;
+    padding: 10px 9px 10px 6px;
+  }
+
+  .contact-submit {
+    padding: 12px 14px;
+    font-size: 0.58rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-submit,
+  .contact-submit-arrow,
+  .contact-input-wrap,
+  .contact-textarea-wrap {
+    transition: none;
+  }
+}

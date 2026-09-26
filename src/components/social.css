@@ -15,6 +15,8 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
 
   overflow: hidden;
 
@@ -62,8 +64,8 @@
 
   z-index: 1;
 
-  right: 22%;
-  bottom: 4%;
+  right: 5%;
+  bottom: 2%;
 
   font-family:
     "Shippori Mincho",
@@ -72,11 +74,7 @@
     Georgia,
     serif;
 
-  /*
-   * Slightly larger than before while preserving
-   * the same location and vertical orientation.
-   */
-  font-size: clamp(7rem, 15vw, 14rem);
+  font-size: clamp(4rem, 10vw, 10rem);
 
   font-weight: 700;
 
@@ -86,14 +84,7 @@
 
   color: var(--brown);
 
-  /*
-   * Previous opacity:
-   * 0.055
-   *
-   * Increased by 0.2:
-   * 0.255
-   */
-  opacity: 0.075;
+  opacity: 0.06;
 
   writing-mode: vertical-rl;
 
@@ -111,23 +102,23 @@
 
   z-index: 1;
 
-  left: -130px;
-  bottom: 8%;
+  left: -80px;
+  bottom: 5%;
 
-  width: clamp(250px, 28vw, 390px);
-  height: clamp(250px, 28vw, 390px);
+  width: clamp(180px, 20vw, 300px);
+  height: clamp(180px, 20vw, 300px);
 
   border-radius: 50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(248, 240, 229, 0.75) 0%,
-      rgba(248, 240, 229, 0.35) 55%,
+      rgba(248, 240, 229, 0.6) 0%,
+      rgba(248, 240, 229, 0.25) 55%,
       transparent 72%
     );
 
-  border: 1px solid rgba(43, 26, 15, 0.07);
+  border: 1px solid rgba(43, 26, 15, 0.05);
 
   pointer-events: none;
 }
@@ -136,11 +127,11 @@
   content: "";
 
   position: absolute;
-  inset: 25px;
+  inset: 20px;
 
   border-radius: 50%;
 
-  border: 1px solid rgba(43, 26, 15, 0.08);
+  border: 1px solid rgba(43, 26, 15, 0.06);
 }
 
 
@@ -153,17 +144,17 @@
 
   z-index: 1;
 
-  right: -130px;
-  bottom: -120px;
+  right: -80px;
+  bottom: -60px;
 
-  width: clamp(280px, 32vw, 440px);
-  height: clamp(280px, 32vw, 440px);
+  width: clamp(200px, 25vw, 350px);
+  height: clamp(200px, 25vw, 350px);
 
   border-radius: 50%;
 
-  background: rgba(248, 240, 229, 0.55);
+  background: rgba(248, 240, 229, 0.4);
 
-  border: 1px solid rgba(43, 26, 15, 0.06);
+  border: 1px solid rgba(43, 26, 15, 0.05);
 
   pointer-events: none;
 }
@@ -172,11 +163,11 @@
   content: "";
 
   position: absolute;
-  inset: 32px;
+  inset: 25px;
 
   border-radius: 50%;
 
-  border: 1px solid rgba(43, 26, 15, 0.08);
+  border: 1px solid rgba(43, 26, 15, 0.06);
 }
 
 
@@ -189,17 +180,17 @@
 
   z-index: 2;
 
-  width: clamp(55px, 7vw, 85px);
-  height: clamp(55px, 7vw, 85px);
+  width: clamp(40px, 5vw, 70px);
+  height: clamp(40px, 5vw, 70px);
 
-  opacity: 0.7;
+  opacity: 0.6;
 
   pointer-events: none;
 }
 
 .social-corner--tr {
-  top: 24px;
-  right: 24px;
+  top: 20px;
+  right: 20px;
 
   border-top: 2px solid var(--brown);
   border-right: 2px solid var(--brown);
@@ -210,8 +201,8 @@
 
   position: absolute;
 
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
 
   width: 65%;
   height: 65%;
@@ -221,8 +212,8 @@
 }
 
 .social-corner--bl {
-  left: 24px;
-  bottom: 24px;
+  left: 20px;
+  bottom: 20px;
 
   border-left: 2px solid var(--brown);
   border-bottom: 2px solid var(--brown);
@@ -233,8 +224,8 @@
 
   position: absolute;
 
-  left: 10px;
-  bottom: 10px;
+  left: 8px;
+  bottom: 8px;
 
   width: 65%;
   height: 65%;
@@ -245,15 +236,8 @@
 
 
 /* =========================================================
-   SAKURA / BOTTOM DECORATION
-   =========================================================
-
-   Removed.
-
-   The React element can remain in the JSX safely, but it is
-   hidden here so the decorative dots and stick underneath
-   the LinkedIn / GitHub area no longer appear.
-   */
+   SAKURA / BOTTOM DECORATION - HIDDEN
+   ========================================================= */
 
 .social-blossom {
   display: none;
@@ -267,7 +251,7 @@
 .social-dots {
   position: absolute;
 
-  top: 32px;
+  top: 24px;
   left: 50%;
 
   transform: translateX(-50%);
@@ -276,12 +260,12 @@
 
   display: flex;
 
-  gap: 9px;
+  gap: 7px;
 }
 
 .social-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 
   border-radius: 50%;
 
@@ -297,7 +281,7 @@
 .social-dot--active {
   opacity: 0.9;
 
-  transform: scale(1.3);
+  transform: scale(1.2);
 }
 
 
@@ -312,21 +296,25 @@
 
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
 
   display: grid;
 
   grid-template-columns:
-    minmax(420px, 1.05fr)
-    minmax(380px, 0.95fr);
+    minmax(0, 1.1fr)
+    minmax(0, 0.9fr);
 
   align-items: center;
 
-  gap: clamp(40px, 8vw, 120px);
+  gap: clamp(30px, 6vw, 80px);
 
   padding:
-    clamp(100px, 10vh, 130px)
-    clamp(40px, 8vw, 110px)
-    clamp(70px, 8vh, 100px);
+    clamp(80px, 8vh, 100px)
+    clamp(30px, 6vw, 80px)
+    clamp(60px, 6vh, 80px);
+
+  box-sizing: border-box;
 }
 
 
@@ -342,9 +330,10 @@
   align-items: center;
   justify-content: flex-start;
 
-  min-height: 600px;
+  min-height: 500px;
+  height: auto;
 
-  padding-left: clamp(35px, 5vw, 75px);
+  padding-left: clamp(20px, 4vw, 50px);
 }
 
 
@@ -358,7 +347,7 @@
 
   transform: translateY(-50%);
 
-  height: 330px;
+  height: 280px;
 
   display: flex;
   align-items: center;
@@ -374,13 +363,13 @@
     system-ui,
     sans-serif;
 
-  font-size: 0.65rem;
+  font-size: 0.55rem;
 
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
 
   color: var(--brown);
 
-  opacity: 0.58;
+  opacity: 0.5;
 
   white-space: nowrap;
 }
@@ -401,14 +390,14 @@
 .social-card {
   position: relative;
 
-  width: clamp(310px, 31vw, 410px);
+  width: clamp(280px, 30vw, 380px);
 
-  min-height: 500px;
+  min-height: 460px;
 
-  border-radius: 28px;
+  border-radius: 24px;
 
   padding:
-    clamp(28px, 3vw, 38px);
+    clamp(24px, 3vw, 32px);
 
   display: flex;
 
@@ -433,8 +422,8 @@
     rgba(255, 251, 245, 0.1);
 
   box-shadow:
-    0 30px 70px rgba(26, 10, 4, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 25px 60px rgba(26, 10, 4, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 
@@ -445,17 +434,17 @@
 
   position: absolute;
 
-  width: 180px;
-  height: 180px;
+  width: 150px;
+  height: 150px;
 
-  right: -80px;
-  top: -80px;
+  right: -60px;
+  top: -60px;
 
   border-radius: 50%;
 
   border:
     1px solid
-    rgba(255, 251, 245, 0.12);
+    rgba(255, 251, 245, 0.1);
 }
 
 .social-card::after {
@@ -463,17 +452,17 @@
 
   position: absolute;
 
-  width: 260px;
-  height: 260px;
+  width: 220px;
+  height: 220px;
 
-  right: -130px;
-  top: -130px;
+  right: -100px;
+  top: -100px;
 
   border-radius: 50%;
 
   border:
     1px solid
-    rgba(255, 251, 245, 0.06);
+    rgba(255, 251, 245, 0.05);
 }
 
 
@@ -490,7 +479,7 @@
 
   flex-direction: column;
 
-  gap: 7px;
+  gap: 6px;
 }
 
 .social-card-sub {
@@ -499,18 +488,18 @@
     system-ui,
     sans-serif;
 
-  font-size: 0.62rem;
+  font-size: 0.55rem;
 
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
 
   text-transform: uppercase;
 
   color:
-    rgba(255, 251, 245, 0.58);
+    rgba(255, 251, 245, 0.5);
 }
 
 .social-card-name {
-  margin: 5px 0 0;
+  margin: 4px 0 0;
 
   font-family:
     "Cormorant Garamond",
@@ -518,7 +507,7 @@
     serif;
 
   font-size:
-    clamp(2rem, 3vw, 2.6rem);
+    clamp(1.75rem, 2.5vw, 2.25rem);
 
   line-height: 1;
 
@@ -533,28 +522,28 @@
     system-ui,
     sans-serif;
 
-  font-size: 0.75rem;
+  font-size: 0.7rem;
 
   color:
-    rgba(255, 251, 245, 0.62);
+    rgba(255, 251, 245, 0.55);
 }
 
 .social-card-bio {
-  margin: 12px 0 0;
+  margin: 10px 0 0;
 
-  max-width: 330px;
+  max-width: 300px;
 
   font-family:
     "Plus Jakarta Sans",
     system-ui,
     sans-serif;
 
-  font-size: 0.82rem;
+  font-size: 0.75rem;
 
-  line-height: 1.65;
+  line-height: 1.6;
 
   color:
-    rgba(255, 251, 245, 0.7);
+    rgba(255, 251, 245, 0.65);
 }
 
 
@@ -572,9 +561,9 @@
   grid-template-columns:
     repeat(3, 1fr);
 
-  gap: 8px;
+  gap: 6px;
 
-  margin: 30px 0;
+  margin: 24px 0;
 }
 
 .social-stat-item {
@@ -584,19 +573,19 @@
 
   align-items: center;
 
-  gap: 5px;
+  gap: 4px;
 
   padding:
-    14px 5px;
+    12px 4px;
 
-  border-radius: 15px;
+  border-radius: 12px;
 
   background:
-    rgba(255, 251, 245, 0.07);
+    rgba(255, 251, 245, 0.06);
 
   border:
     1px solid
-    rgba(255, 251, 245, 0.07);
+    rgba(255, 251, 245, 0.06);
 }
 
 .social-stat-value {
@@ -605,7 +594,7 @@
     Georgia,
     serif;
 
-  font-size: 1.65rem;
+  font-size: 1.5rem;
 
   line-height: 1;
 
@@ -618,7 +607,7 @@
     system-ui,
     sans-serif;
 
-  font-size: 0.54rem;
+  font-size: 0.5rem;
 
   line-height: 1.2;
 
@@ -629,7 +618,7 @@
   text-transform: uppercase;
 
   color:
-    rgba(255, 251, 245, 0.64);
+    rgba(255, 251, 245, 0.6);
 }
 
 
@@ -649,22 +638,22 @@
   align-items: center;
   justify-content: center;
 
-  gap: 8px;
+  gap: 6px;
 
-  padding: 14px 20px;
+  padding: 12px 18px;
 
   border-radius: 999px;
 
   border:
     1px solid
-    rgba(255, 251, 245, 0.42);
+    rgba(255, 251, 245, 0.35);
 
   font-family:
     "Plus Jakarta Sans",
     system-ui,
     sans-serif;
 
-  font-size: 0.76rem;
+  font-size: 0.7rem;
 
   font-weight: 700;
 
@@ -694,7 +683,8 @@
 .social-right {
   position: relative;
 
-  min-height: 600px;
+  min-height: 500px;
+  height: auto;
 
   display: flex;
 
@@ -710,7 +700,9 @@
 
   align-items: flex-start;
 
-  gap: 24px;
+  gap: 20px;
+
+  width: 100%;
 }
 
 
@@ -722,15 +714,15 @@
     system-ui,
     sans-serif;
 
-  font-size: 0.68rem;
+  font-size: 0.6rem;
 
   font-weight: 600;
 
-  letter-spacing: 0.3em;
+  letter-spacing: 0.25em;
 
   color: var(--brown);
 
-  opacity: 0.55;
+  opacity: 0.5;
 }
 
 
@@ -758,7 +750,7 @@
     serif;
 
   font-size:
-    clamp(4.5rem, 8vw, 8.5rem);
+    clamp(3.5rem, 7vw, 7rem);
 
   line-height: 0.85;
 
@@ -774,20 +766,20 @@
 }
 
 .social-platform-title span {
-  margin-top: 12px;
+  margin-top: 10px;
 
   font-family:
     "Cormorant Garamond",
     Georgia,
     serif;
 
-  font-size: 1rem;
+  font-size: 0.9rem;
 
-  letter-spacing: 0.38em;
+  letter-spacing: 0.3em;
 
   color: var(--brown);
 
-  opacity: 0.62;
+  opacity: 0.6;
 }
 
 
@@ -800,23 +792,23 @@
 
   align-items: center;
 
-  gap: 10px;
+  gap: 8px;
 }
 
 .social-tab {
   padding:
-    11px 18px;
+    10px 16px;
 
   border-radius: 999px;
 
   border:
     1px solid
-    rgba(43, 26, 15, 0.22);
+    rgba(43, 26, 15, 0.2);
 
   background: transparent;
 
   color:
-    rgba(43, 26, 15, 0.55);
+    rgba(43, 26, 15, 0.5);
 
   cursor: pointer;
 
@@ -825,11 +817,11 @@
     system-ui,
     sans-serif;
 
-  font-size: 0.68rem;
+  font-size: 0.62rem;
 
   font-weight: 700;
 
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
 
   transition:
     background 0.3s ease,
@@ -842,7 +834,7 @@
   color: var(--brown);
 
   border-color:
-    rgba(43, 26, 15, 0.45);
+    rgba(43, 26, 15, 0.4);
 
   transform: translateY(-1px);
 }
@@ -865,82 +857,76 @@
 
   z-index: 7;
 
-  right: 38px;
-  bottom: 32px;
+  right: 30px;
+  bottom: 24px;
 
   display: flex;
 
-  gap: 8px;
+  gap: 6px;
 
   align-items: center;
 }
 
 .social-menu-icon span {
   width: 3px;
-  height: 26px;
+  height: 22px;
 
   border-radius: 2px;
 
   background: var(--brown);
 
-  opacity: 0.75;
+  opacity: 0.7;
 }
 
 
 /* =========================================================
-   TABLET
+   TABLET LANDSCAPE / SMALL DESKTOP
    ========================================================= */
 
-@media (max-width: 1000px) {
-
+@media (max-width: 1200px) {
   .social-container {
-    grid-template-columns: 1fr 1fr;
+    gap: clamp(20px, 4vw, 50px);
+    padding: clamp(60px, 6vh, 80px) clamp(24px, 4vw, 60px) clamp(50px, 5vh, 70px);
+  }
 
-    gap: 30px;
+  .social-card-area {
+    padding-left: clamp(16px, 3vw, 30px);
+  }
 
-    padding-left: 35px;
-    padding-right: 35px;
+  .social-sideline-text {
+    height: 240px;
   }
 
   .social-card {
-    width: min(100%, 370px);
+    width: clamp(260px, 32vw, 350px);
+    min-height: 440px;
+  }
+
+  .social-right {
+    min-height: 440px;
   }
 
   .social-platform-title h2 {
-    font-size: clamp(3.8rem, 7vw, 6rem);
+    font-size: clamp(3rem, 6vw, 5.5rem);
   }
-
 }
 
 
 /* =========================================================
-   MOBILE
+   TABLET PORTRAIT
    ========================================================= */
 
-@media (max-width: 720px) {
-
-  .social-section {
-    min-height: auto;
-  }
-
+@media (max-width: 900px) {
   .social-container {
     grid-template-columns: 1fr;
-
     min-height: auto;
-
     gap: 35px;
-
-    padding:
-      100px
-      25px
-      90px;
+    padding: clamp(60px, 8vh, 90px) clamp(20px, 4vw, 40px) clamp(50px, 6vh, 70px);
   }
 
   .social-card-area {
     min-height: auto;
-
-    padding-left: 20px;
-
+    padding-left: 0;
     justify-content: center;
   }
 
@@ -950,24 +936,24 @@
 
   .social-card-wrapper {
     justify-content: center;
+    width: 100%;
   }
 
   .social-card {
-    width: min(88vw, 380px);
-
+    width: min(90vw, 400px);
     min-height: 480px;
   }
 
   .social-right {
     min-height: auto;
-
     justify-content: center;
-
     text-align: center;
+    width: 100%;
   }
 
   .social-right-content {
     align-items: center;
+    width: 100%;
   }
 
   .social-platform-title {
@@ -975,79 +961,199 @@
   }
 
   .social-platform-title h2 {
-    font-size: clamp(3.3rem, 14vw, 5.5rem);
+    font-size: clamp(3.5rem, 12vw, 5.5rem);
+    text-align: center;
   }
 
   .social-platform-title span {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+  }
+
+  .social-tabs {
+    justify-content: center;
+    width: 100%;
   }
 
   .social-left-halo {
-    width: 230px;
-    height: 230px;
-
-    left: -120px;
-    bottom: 25%;
+    width: 200px;
+    height: 200px;
+    left: -60px;
+    bottom: 15%;
   }
 
   .social-lower-halo {
-    width: 240px;
-    height: 240px;
-
-    right: -120px;
-    bottom: -80px;
+    width: 220px;
+    height: 220px;
+    right: -60px;
+    bottom: -50px;
   }
 
-  .social-blossom {
-    display: none;
+  .social-watermark {
+    font-size: clamp(3rem, 8vw, 7rem);
+    right: 3%;
+    bottom: 1%;
   }
-
-  .social-menu-icon {
-    right: 20px;
-    bottom: 20px;
-  }
-
 }
 
 
 /* =========================================================
-   SMALL PHONES
+   MOBILE
    ========================================================= */
 
-@media (max-width: 450px) {
+@media (max-width: 600px) {
+  .social-section {
+    min-height: auto;
+  }
 
   .social-container {
-    padding-left: 18px;
-    padding-right: 18px;
+    min-height: auto;
+    padding: clamp(50px, 8vh, 70px) 16px clamp(40px, 6vh, 60px);
+    gap: 28px;
   }
 
   .social-card {
-    min-height: 450px;
+    width: 100%;
+    max-width: 360px;
+    min-height: 440px;
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
 
-    padding: 25px;
+  .social-card-name {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .social-card-bio {
+    font-size: 0.7rem;
+    max-width: 100%;
   }
 
   .social-stats-grid {
     gap: 5px;
+    margin: 20px 0;
   }
 
   .social-stat-item {
-    padding:
-      12px 3px;
+    padding: 10px 3px;
+    border-radius: 10px;
   }
 
   .social-stat-value {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   .social-stat-label {
-    font-size: 0.48rem;
+    font-size: 0.45rem;
+  }
+
+  .social-card-btn {
+    padding: 10px 16px;
+    font-size: 0.65rem;
+  }
+
+  .social-right {
+    width: 100%;
+  }
+
+  .social-right-eyebrow {
+    font-size: 0.55rem;
   }
 
   .social-platform-title h2 {
-    font-size: 3.3rem;
+    font-size: clamp(2.5rem, 14vw, 4rem);
+    white-space: normal;
+    text-align: center;
   }
 
+  .social-platform-title span {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+  }
+
+  .social-tab {
+    padding: 8px 12px;
+    font-size: 0.55rem;
+  }
+
+  .social-left-halo {
+    width: 160px;
+    height: 160px;
+    left: -40px;
+    bottom: 10%;
+  }
+
+  .social-lower-halo {
+    width: 180px;
+    height: 180px;
+    right: -40px;
+    bottom: -40px;
+  }
+
+  .social-watermark {
+    display: none;
+  }
+
+  .social-corner {
+    width: 32px;
+    height: 32px;
+  }
+
+  .social-corner--tr {
+    top: 16px;
+    right: 16px;
+  }
+
+  .social-corner--bl {
+    left: 16px;
+    bottom: 16px;
+  }
+
+  .social-menu-icon {
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .social-dots {
+    top: 16px;
+    gap: 5px;
+  }
+
+  .social-dot {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+  .social-container {
+    padding: 40px 12px 40px;
+  }
+
+  .social-card {
+    min-height: 400px;
+    padding: 20px 16px;
+  }
+
+  .social-card-name {
+    font-size: 1.5rem;
+  }
+
+  .social-card-bio {
+    font-size: 0.65rem;
+  }
+
+  .social-stat-value {
+    font-size: 1.15rem;
+  }
+
+  .social-platform-title h2 {
+    font-size: 2.5rem;
+  }
 }
 
 
@@ -1056,7 +1162,6 @@
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
   .social-card-btn,
   .social-tab,
   .social-dot {

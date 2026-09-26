@@ -14,14 +14,6 @@ export const ProjectsMetro = ({
 }: ProjectsMetroProps) => {
   const [activeProject, setActiveProject] = useState(0);
 
-  /*
-   * One project is displayed per metro panel.
-   *
-   * The metro takes 26 seconds to move by one full viewport,
-   * so the active project indicator changes at the same rate.
-   *
-   * There is no 5-second project switching anymore.
-   */
   useEffect(() => {
     if (projects.length <= 1) {
       return;
@@ -42,10 +34,6 @@ export const ProjectsMetro = ({
     return null;
   }
 
-  /*
-   * Opens the exact link belonging to the project whose
-   * window was clicked.
-   */
   const openProject = (project: Project) => {
     if (project.demoUrl) {
       window.open(
@@ -59,19 +47,12 @@ export const ProjectsMetro = ({
     onSelectProject(project);
   };
 
-  /*
-   * Creates one complete metro panel for one project.
-   *
-   * IMPORTANT:
-   * The project is passed directly into this function.
-   * Therefore House of Tassaya's window contains House of
-   * Tassaya's preview and clicking it opens House of Tassaya's
-   * demoUrl.
-   */
   const renderPanel = (
     project: Project,
     key: string
   ) => {
+    const [iframeError, setIframeError] = useState(false);
+
     return (
       <div
         className="projects-train-panel"
@@ -88,18 +69,10 @@ export const ProjectsMetro = ({
               type="button"
               className="projects-video-click"
               onClick={() => openProject(project)}
-              aria-label={`Open ${project.title} — ${
-                project.demoUrl
-                  ? 'live site'
-                  : 'case study'
-              }`}
-              title={
-                project.demoUrl
-                  ? `Open ${project.title}`
-                  : project.title
-              }
+              aria-label={`Open ${project.title} — ${project.demoUrl ? 'live site' : 'case study'}`}
+              title={project.demoUrl ? `Open ${project.title}` : project.title}
             >
-              {project.demoUrl ? (
+              {project.demoUrl && !iframeError ? (
                 <iframe
                   key={project.demoUrl}
                   src={project.demoUrl}
@@ -109,14 +82,13 @@ export const ProjectsMetro = ({
                   scrolling="no"
                   allow="fullscreen"
                   tabIndex={-1}
+                  onError={() => setIframeError(true)}
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
                 />
               ) : (
                 <img
                   src={project.image}
-                  alt={
-                    project.alt ||
-                    project.title
-                  }
+                  alt={project.alt || project.title}
                   className="projects-video-media"
                   loading="eager"
                 />
@@ -158,15 +130,6 @@ export const ProjectsMetro = ({
     );
   };
 
-  /*
-   * First complete set:
-   *
-   * Project 1
-   * Project 2
-   * Project 3
-   * ...
-   * Project 8
-   */
   const projectPanels = projects.map(
     (project, index) =>
       renderPanel(
@@ -175,12 +138,6 @@ export const ProjectsMetro = ({
       )
   );
 
-  /*
-   * Duplicate the complete sequence.
-   *
-   * This is what allows the metro animation to loop
-   * continuously without an empty section appearing.
-   */
   const duplicateProjectPanels = projects.map(
     (project, index) =>
       renderPanel(

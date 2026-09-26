@@ -30,6 +30,8 @@ WITH DARK BROWN FERRIS WHEEL + JAPANESE STAMPS
 
   width: 100%;
   min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
 
   overflow: hidden;
 
@@ -489,11 +491,13 @@ FERRIS WHEEL
   z-index: 2;
 
   pointer-events: none;
+  
+  will-change: transform;
 }
 
 
 /* =========================================================
-COASTAL BLUE BACKGROUND CIRCLE
+FERRIS WHEEL BACKGROUND CIRCLE
 ========================================================= */
 
 .ferris-wheel__background-circle {
@@ -716,6 +720,8 @@ CARDS
 
   z-index:
     10;
+  
+  will-change: transform;
 }
 
 .ferris-card--1 {
@@ -740,10 +746,10 @@ CARDS
   top: 50%;
 
   width:
-    clamp(200px, 22vw, 340px);
+    clamp(180px, 20vw, 320px);
 
   height:
-    clamp(140px, 15vw, 230px);
+    clamp(120px, 13vw, 210px);
 
   transform-origin:
     center center;
@@ -751,13 +757,15 @@ CARDS
   transform:
     translate(-50%, -50%)
     rotate(var(--card-angle))
-    translateX(min(85vw, 700px));
+    translateX(min(80vw, 650px));
 
   cursor:
     pointer;
 
   pointer-events:
     auto;
+  
+  will-change: transform;
 }
 
 
@@ -944,7 +952,7 @@ ABOUT CONTENT
     serif;
 
   font-size:
-    clamp(3.5rem, 6vw, 6.5rem);
+    clamp(2.5rem, 5vw, 5.5rem);
 
   font-weight:
     400;
@@ -978,7 +986,7 @@ ABOUT CONTENT
     sans-serif;
 
   font-size:
-    clamp(0.85rem, 1vw, 1rem);
+    clamp(0.8rem, 1vw, 1rem);
 
   font-weight:
     500;
@@ -1261,19 +1269,50 @@ MODAL ANIMATIONS
 
 
 /* =========================================================
+RESPONSIVE — LARGE TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .ferris-wheel {
+    width: 150vw;
+    height: 150vw;
+    left: -40vw;
+  }
+
+  .ferris-wheel__background-circle {
+    width: 58vw;
+    height: 58vw;
+  }
+
+  .ferris-card {
+    width: clamp(180px, 18vw, 280px);
+    height: clamp(120px, 12vw, 190px);
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--card-angle))
+      translateX(min(75vw, 600px));
+  }
+
+  .about__content {
+    width: min(550px, 45vw);
+    margin-right: 8vw;
+  }
+}
+
+/* =========================================================
 RESPONSIVE — TABLET
 ========================================================= */
 
 @media (max-width: 1000px) {
   .ferris-wheel {
     width:
-      85vw;
+      130vw;
 
     height:
-      85vw;
+      130vw;
 
     left:
-      -42vw;
+      -35vw;
 
     top:
       50%;
@@ -1325,6 +1364,15 @@ RESPONSIVE — TABLET
       220px;
   }
 
+  .ferris-card {
+    width: clamp(160px, 18vw, 260px);
+    height: clamp(110px, 12vw, 180px);
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--card-angle))
+      translateX(min(70vw, 550px));
+  }
+
   .word-stamp {
     min-width:
       64px;
@@ -1349,6 +1397,8 @@ RESPONSIVE — MOBILE
   .about {
     min-height:
       100svh;
+    min-height:
+      100dvh;
 
     align-items:
       flex-end;
@@ -1356,16 +1406,39 @@ RESPONSIVE — MOBILE
 
   .ferris-wheel {
     width:
-      115vw;
+      140vw;
 
     height:
-      115vw;
+      140vw;
 
     left:
-      -72vw;
+      -45vw;
 
     top:
       50%;
+  }
+
+  .ferris-wheel__background-circle {
+    width:
+      65vw;
+
+    height:
+      65vw;
+
+    min-width:
+      200px;
+
+    min-height:
+      200px;
+  }
+
+  .ferris-card {
+    width: clamp(140px, 22vw, 220px);
+    height: clamp(100px, 16vw, 160px);
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--card-angle))
+      translateX(min(65vw, 480px));
   }
 
   .about__content {
@@ -1376,7 +1449,7 @@ RESPONSIVE — MOBILE
       0;
 
     padding:
-      0 28px 70px;
+      0 24px 60px;
 
     z-index:
       10;
@@ -1384,7 +1457,7 @@ RESPONSIVE — MOBILE
 
   .about__title {
     font-size:
-      clamp(3rem, 12vw, 4.5rem);
+      clamp(2.5rem, 10vw, 4rem);
   }
 
   .about__stamp {
@@ -1409,20 +1482,6 @@ RESPONSIVE — MOBILE
   .stamp-row {
     gap:
       3px;
-  }
-
-  .ferris-wheel__background-circle {
-    width:
-      55vw;
-
-    height:
-      55vw;
-
-    min-width:
-      180px;
-
-    min-height:
-      180px;
   }
 
   /* More compact Japanese background */
@@ -1467,5 +1526,160 @@ RESPONSIVE — MOBILE
 
     letter-spacing:
       0.10em;
+  }
+}
+
+/* =========================================================
+RESPONSIVE — SMALL MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .ferris-wheel {
+    width: 160vw;
+    height: 160vw;
+    left: -55vw;
+  }
+
+  .ferris-wheel__background-circle {
+    width: 75vw;
+    height: 75vw;
+    min-width: 180px;
+    min-height: 180px;
+  }
+
+  .ferris-card {
+    width: clamp(120px, 25vw, 200px);
+    height: clamp(90px, 18vw, 140px);
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--card-angle))
+      translateX(min(60vw, 420px));
+  }
+
+  .about__content {
+    padding: 0 20px 50px;
+  }
+
+  .about__title {
+    font-size: clamp(2rem, 10vw, 3.5rem);
+  }
+
+  .about__stamp {
+    width: 32px;
+    height: 32px;
+    flex-basis: 32px;
+    font-size: 0.75rem;
+  }
+
+  .ferris-wheel__rim {
+    border-width: clamp(4px, 0.6vw, 8px);
+  }
+
+  .ferris-wheel__hub {
+    width: clamp(24px, 3.5vw, 50px);
+    height: clamp(24px, 3.5vw, 50px);
+  }
+}
+
+/* =========================================================
+RESPONSIVE — VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 360px) {
+  .ferris-wheel {
+    width: 180vw;
+    height: 180vw;
+    left: -65vw;
+  }
+
+  .ferris-wheel__background-circle {
+    width: 85vw;
+    height: 85vw;
+    min-width: 160px;
+    min-height: 160px;
+  }
+
+  .ferris-card {
+    width: clamp(100px, 28vw, 180px);
+    height: clamp(80px, 20vw, 120px);
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--card-angle))
+      translateX(min(55vw, 380px));
+  }
+
+  .about__content {
+    padding: 0 16px 40px;
+  }
+
+  .about__title {
+    font-size: clamp(1.75rem, 10vw, 3rem);
+  }
+
+  .about__stamp {
+    width: 28px;
+    height: 28px;
+    flex-basis: 28px;
+    font-size: 0.65rem;
+  }
+
+  .ferris-wheel__rim {
+    border-width: clamp(3px, 0.5vw, 6px);
+  }
+
+  .ferris-wheel__hub {
+    width: clamp(20px, 3vw, 40px);
+    height: clamp(20px, 3vw, 40px);
+  }
+
+  .ferris-wheel__spoke {
+    width: clamp(4px, 0.5vw, 6px);
+  }
+}
+
+/* =========================================================
+MODAL RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+  .card-modal__hero {
+    height: 30vh;
+    min-height: 180px;
+  }
+
+  .card-modal__body {
+    padding: clamp(24px, 4vw, 40px);
+  }
+
+  .card-modal__title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .card-modal__text {
+    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-modal__hero {
+    height: 25vh;
+    min-height: 160px;
+  }
+
+  .card-modal__body {
+    padding: 20px 16px;
+  }
+
+  .card-modal__title {
+    font-size: 1.6rem;
+  }
+
+  .card-modal__text {
+    font-size: 0.85rem;
+  }
+
+  .card-modal__back {
+    font-size: 0.85rem;
   }
 }

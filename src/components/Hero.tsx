@@ -61,7 +61,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const isMain = phase === 'main';
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative section-full vh-fix overflow-hidden">
 
       {/* =====================================================
           INTRO
@@ -94,7 +94,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               style={{
                 fontFamily: "'Times New Roman', Times, serif",
                 color: '#4a3040',
-                fontSize: 'clamp(4rem, 10vw, 8rem)',
+                fontSize: 'clamp(2.5rem, 14vw, 8rem)',
                 letterSpacing: '0.04em',
               }}
               animate={
@@ -149,14 +149,14 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           ===================================================== */}
 
       <div
-  className="relative min-h-screen w-full flex items-center justify-center"
-  style={{
-    backgroundImage: `url("${fuji3}")`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-  }}
->
+        className="relative w-full flex items-center justify-center section-full vh-fix"
+        style={{
+          backgroundImage: `url("${fuji3}")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
 
         {/* ===================================================
             GLASS CARD
@@ -165,8 +165,9 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         <motion.div
           className="relative z-10"
           style={{
-            width: 'min(90vw, 1200px)',
-            height: 'min(82vh, 750px)',
+            width: 'min(94vw, 1200px)',
+            height: 'min(88vh, 88svh, 800px)',
+            maxHeight: '88svh',
           }}
           initial={{
             scale: 0.92,
@@ -185,9 +186,9 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           <div
             className="w-full h-full relative"
             style={{
-              background: 'rgba(255, 255, 255, 0.12)',
-              border: '1px solid rgba(255, 255, 255, 0.4)',
-              borderRadius: '24px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: '1px solid rgba(255, 255, 255, 0.35)',
+              borderRadius: 'clamp(12px, 2vw, 24px)',
               boxShadow: '0 8px 32px rgba(0, 0, 0, 0.08)',
               overflow: 'hidden',
             }}
@@ -197,7 +198,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                 TEXT
                 ================================================= */}
 
-            <div className="absolute left-0 bottom-0 w-full px-8 sm:px-12 md:px-16 pb-24 sm:pb-28 md:pb-32">
+            <div className="absolute left-0 bottom-0 w-full px-5 sm:px-7 md:px-10 lg:px-14 pb-14 sm:pb-18 md:pb-22 lg:pb-26">
               <motion.div
                 className="text-left"
                 initial={{
@@ -214,46 +215,49 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                 }}
               >
                 <h2
-                  className="text-5xl sm:text-6xl md:text-7xl mb-2"
+                  className="mb-2"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     color: '#F3E9D7',
                     fontWeight: 800,
                     letterSpacing: '0.01em',
                     lineHeight: 1.1,
-                    transform: 'translate(60px, -65px)',
+                    fontSize: 'clamp(2.25rem, 5.5vw, 5rem)',
+                    transform: 'translate(clamp(16px, 3.5vw, 50px), clamp(-16px, -2.5vw, -50px))',
                   }}
                 >
                   Riya Jha
                 </h2>
 
                 <p
-                  className="text-xl sm:text-2xl md:text-3xl mb-4"
+                  className="mb-4"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     color: '#F3E9D7',
                     fontWeight: 700,
                     letterSpacing: '0.02em',
-                    lineHeight: 1.3,
-                    transform: 'translate(60px, -55px)',
+                    lineHeight: 1.25,
+                    fontSize: 'clamp(1.1rem, 2.8vw, 2.25rem)',
+                    transform: 'translate(clamp(16px, 3.5vw, 50px), clamp(-12px, -2vw, -40px))',
                   }}
                 >
                   Vibe Coder & Full-Stack Developer
                 </p>
 
                 <p
-                  className="text-sm sm:text-base md:text-lg max-w-md"
+                  className="max-w-md"
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     color: '#F3E9D7',
                     fontWeight: 900,
                     letterSpacing: '0.02em',
-                    lineHeight: 2,
+                    lineHeight: 1.7,
+                    fontSize: 'clamp(0.7rem, 1.2vw, 0.95rem)',
                     WebkitTextStroke: '0.25px #241310',
-                    transform: 'translate(60px, -65px)',
+                    transform: 'translate(clamp(16px, 3.5vw, 50px), clamp(-16px, -2.5vw, -50px))',
                   }}
                 >
-                  I'm a person with a lot of hobbies, and this is one of them
+                  I&apos;m a person with a lot of hobbies, and this is one of them
                   where I want to create and earn through it so I can support
                   my other hobbies and dreams too.
                 </p>

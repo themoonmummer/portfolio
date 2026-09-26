@@ -9,7 +9,6 @@ export interface Project {
   image: string;
   alt: string;
   demoUrl?: string;   // your Vercel link — clicking the window opens this
-  videoSrc?: string;  // e.g. '/videos/neo-zen.mp4' — plays inside the window
   caseStudy: {
     overview: string;
     challenge: string;

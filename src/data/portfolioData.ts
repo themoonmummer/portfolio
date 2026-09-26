@@ -12,7 +12,6 @@ export const PROJECTS: Project[] = [
   {
     id: "art-mail-club",
     demoUrl: "https://art-mail-club.vercel.app/",
-    videoSrc: "/videos/art-mail-club.mp4",
     title: "Art Mail Club",
     subtitle: "Currently Passing",
     category: "E-Commerce / Art",
@@ -36,7 +35,6 @@ export const PROJECTS: Project[] = [
   {
     id: "thetechartist",
     demoUrl: "https://thetechartist-website.vercel.app/",
-    videoSrc: "/videos/thetechartist.mp4",
     title: "The Tech Artist",
     subtitle: "Next Station",
     category: "Portfolio / Creative",
@@ -60,7 +58,6 @@ export const PROJECTS: Project[] = [
   {
     id: "wtsp",
     demoUrl: "https://wtsp-mbkrclb9i-moonlab1.vercel.app/",
-    videoSrc: "/videos/wtsp.mp4",
     title: "WTSP Studio",
     subtitle: "In Transit",
     category: "Landing / Studio",
@@ -84,7 +81,6 @@ export const PROJECTS: Project[] = [
   {
     id: "emilyartshop",
     demoUrl: "https://emilyartshop.vercel.app/",
-    videoSrc: "/videos/emilyartshop.mp4",
     title: "Emily Art Shop",
     subtitle: "Approaching",
     category: "E-Commerce / Boutique",
@@ -108,7 +104,6 @@ export const PROJECTS: Project[] = [
   {
     id: "lunacalmstudio",
     demoUrl: "https://lunacalmstudio.vercel.app/",
-    videoSrc: "/videos/lunacalmstudio.mp4",
     title: "Luna Calm Studio",
     subtitle: "Coastal View",
     category: "Wellness / Brand",
@@ -132,7 +127,6 @@ export const PROJECTS: Project[] = [
   {
     id: "house-of-tasya",
     demoUrl: "https://house-of-tasya.vercel.app/",
-    videoSrc: "/videos/house-of-tasya.mp4",
     title: "House of Tasya",
     subtitle: "Ocean Window",
     category: "Fashion / Lifestyle",
@@ -156,7 +150,6 @@ export const PROJECTS: Project[] = [
   {
     id: "silver-shades",
     demoUrl: "https://silver-shades.vercel.app/",
-    videoSrc: "/videos/silver-shades.mp4",
     title: "Silver Shades",
     subtitle: "Harbour Light",
     category: "Jewelry / Luxury",
@@ -180,7 +173,6 @@ export const PROJECTS: Project[] = [
   {
     id: "ecommerce-demo",
     demoUrl: "https://ecommerce-demo-liart-iota.vercel.app/",
-    videoSrc: "/videos/ecommerce-demo.mp4",
     title: "E-Commerce Demo",
     subtitle: "Next Departure",
     category: "E-Commerce / Demo",
