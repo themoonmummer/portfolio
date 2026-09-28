@@ -57,7 +57,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "wtsp",
-    demoUrl: "https://wtsp-mbkrclb9i-moonlab1.vercel.app/",
+    demoUrl: "https://wtsp-mbkrclb9i-moonlab1.vercel.app",
     title: "WTSP Studio",
     subtitle: "In Transit",
     category: "Landing / Studio",

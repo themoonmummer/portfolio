@@ -39,7 +39,7 @@
    * Each project stays visible for 26 seconds.
    * 8 projects × 26 seconds = 208 seconds.
    */
-  animation: projects-train-move 208s linear infinite;
+  animation: projects-train-move 110s linear infinite;
 
   will-change: transform;
 }
@@ -359,7 +359,7 @@
 
   transform: translate(-50%, -50%);
 
-  width: min(58vw, 760px);
+  width: min(65vw, 815px);
 }
 
 /* =========================================================
@@ -993,4 +993,51 @@
   .projects-window-frame {
     transition: none;
   }
+}
+
+/* =========================================================
+   FIX — FULL-BLEED PROJECT SECTION
+   ========================================================= */
+
+.projects-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+
+  overflow: hidden;
+
+  background: #080d18;
+  isolation: isolate;
+}
+
+.projects-train-track {
+  position: absolute;
+  inset: 0;
+
+  width: 1600vw;
+  height: 100%;
+  min-height: 100%;
+
+  z-index: 1;
+
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.projects-train-panel {
+  flex: 0 0 100vw;
+
+  width: 100vw;
+  height: 100%;
+  min-height: 100%;
+
+  background: #080d18;
+
+  backface-visibility: hidden;
 }

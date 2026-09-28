@@ -83,7 +83,8 @@ export const ProjectsMetro = ({
                   allow="fullscreen"
                   tabIndex={-1}
                   onError={() => setIframeError(true)}
-                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-presentation"
+
                 />
               ) : (
                 <img

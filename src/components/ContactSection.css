@@ -33,23 +33,11 @@
 
 /* =========================================================
    SEMI-CIRCLE PATTERN
-   
-   IMPORTANT:
-   This is intentionally OFFSET compared with
-   the Social Media first row.
-
-   Contact:
-   ROW 1 = offset / second Social row
-   ROW 2 = original / first Social row
-   ROW 3 = offset
-   ROW 4 = original
    ========================================================= */
 
 .contact-bg-pattern {
   position: absolute;
-
   inset: 0;
-
   z-index: -2;
 
   background-image:
@@ -57,11 +45,6 @@
 
   background-repeat: repeat;
 
-  /*
-   * Keep the pattern at a fixed geometric ratio.
-   * It scales gently on larger screens without
-   * stretching the individual semi-circles.
-   */
   background-size:
     clamp(140px, 10vw, 190px)
     clamp(70px, 5vw, 95px);
@@ -78,9 +61,7 @@
 
 .contact-bg-softness {
   position: absolute;
-
   inset: 0;
-
   z-index: -1;
 
   pointer-events: none;
@@ -118,13 +99,8 @@
   top: 20px;
   right: 20px;
 
-  border-top:
-    2px solid
-    var(--contact-brown);
-
-  border-right:
-    2px solid
-    var(--contact-brown);
+  border-top: 2px solid var(--contact-brown);
+  border-right: 2px solid var(--contact-brown);
 }
 
 .contact-corner--tr::before {
@@ -138,26 +114,16 @@
   width: 65%;
   height: 65%;
 
-  border-top:
-    1px solid
-    var(--contact-brown);
-
-  border-right:
-    1px solid
-    var(--contact-brown);
+  border-top: 1px solid var(--contact-brown);
+  border-right: 1px solid var(--contact-brown);
 }
 
 .contact-corner--bl {
   left: 20px;
   bottom: 20px;
 
-  border-left:
-    2px solid
-    var(--contact-brown);
-
-  border-bottom:
-    2px solid
-    var(--contact-brown);
+  border-left: 2px solid var(--contact-brown);
+  border-bottom: 2px solid var(--contact-brown);
 }
 
 .contact-corner--bl::before {
@@ -171,13 +137,8 @@
   width: 65%;
   height: 65%;
 
-  border-left:
-    1px solid
-    var(--contact-brown);
-
-  border-bottom:
-    1px solid
-    var(--contact-brown);
+  border-left: 1px solid var(--contact-brown);
+  border-bottom: 1px solid var(--contact-brown);
 }
 
 
@@ -191,11 +152,9 @@
   top: 24px;
   left: 50%;
 
-  transform:
-    translateX(-50%);
+  transform: translateX(-50%);
 
   display: flex;
-
   align-items: center;
 
   gap: 10px;
@@ -206,13 +165,11 @@
     sans-serif;
 
   font-size: 0.52rem;
-
   font-weight: 700;
 
   letter-spacing: 0.25em;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 
   opacity: 0.45;
 
@@ -225,8 +182,7 @@
   width: 18px;
   height: 1px;
 
-  background:
-    var(--contact-brown);
+  background: var(--contact-brown);
 
   opacity: 0.4;
 }
@@ -234,6 +190,10 @@
 
 /* =========================================================
    MAIN CONTAINER
+
+   FIX:
+   More top breathing room so the title does not sit
+   underneath the navbar.
    ========================================================= */
 
 .contact-container {
@@ -250,13 +210,12 @@
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   padding:
-    clamp(60px, 7vh, 90px)
+    clamp(105px, 11vh, 125px)
     clamp(16px, 4vw, 60px)
-    clamp(50px, 6vh, 80px);
+    clamp(45px, 5vh, 65px);
 
   box-sizing: border-box;
 }
@@ -265,33 +224,26 @@
 /* =========================================================
    CLEAR GLASS PANEL
 
-   Much more transparent than previous version.
+   FIX:
+   Wider + shorter.
    ========================================================= */
 
 .contact-panel {
   width:
     min(
-      clamp(520px, 50vw, 760px),
+      clamp(680px, 68vw, 980px),
       calc(100vw - 32px)
     );
 
-  /*
-   * Responsive vertical sizing.
-   * Prevents the panel from becoming huge on
-   * larger screens.
-   */
   min-height: 0;
-
+transform: translateY(25px);
   padding:
-    clamp(28px, 3vw, 44px)
-    clamp(24px, 3.5vw, 50px);
+    clamp(22px, 2.2vw, 32px)
+    clamp(28px, 3.5vw, 50px);
 
   border-radius:
     clamp(20px, 2.5vw, 32px);
 
-  /*
-   * CLEAR GLASS
-   */
   background:
     rgba(248, 240, 229, 0.25);
 
@@ -306,29 +258,30 @@
     inset 0 1px 0
     rgba(255, 255, 255, 0.6);
 
-  backdrop-filter:
-    blur(10px);
+  backdrop-filter: blur(10px);
 
-  -webkit-backdrop-filter:
-    blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 
 /* =========================================================
    HEADER
+
+   FIX:
+   Reduced vertical spacing.
    ========================================================= */
 
 .contact-header {
   text-align: center;
 
   margin-bottom:
-    clamp(20px, 2.5vw, 32px);
+    clamp(14px, 1.8vw, 22px);
 }
 
 .contact-eyebrow {
   display: block;
 
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 
   font-family:
     "Plus Jakarta Sans",
@@ -342,8 +295,7 @@
 
   letter-spacing: 0.22em;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 
   opacity: 0.5;
 }
@@ -356,27 +308,23 @@
     Georgia,
     serif;
 
-  /*
-   * Smaller and more controlled.
-   */
   font-size:
-    clamp(2.25rem, 4.5vw, 4rem);
+    clamp(2.15rem, 4vw, 3.6rem);
 
-  line-height: 0.95;
+  line-height: 0.9;
 
   font-weight: 700;
 
   letter-spacing: -0.03em;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 }
 
 .contact-subtitle {
-  max-width: 480px;
+  max-width: 560px;
 
   margin:
-    10px auto 0;
+    8px auto 0;
 
   font-family:
     "Plus Jakarta Sans",
@@ -384,9 +332,9 @@
     sans-serif;
 
   font-size:
-    clamp(0.65rem, 0.9vw, 0.75rem);
+    clamp(0.62rem, 0.8vw, 0.72rem);
 
-  line-height: 1.6;
+  line-height: 1.45;
 
   color:
     rgba(43, 26, 15, 0.58);
@@ -395,6 +343,9 @@
 
 /* =========================================================
    FORM
+
+   FIX:
+   Smaller vertical gaps.
    ========================================================= */
 
 .contact-form {
@@ -403,7 +354,7 @@
   flex-direction: column;
 
   gap:
-    clamp(14px, 1.8vw, 20px);
+    clamp(10px, 1.2vw, 15px);
 }
 
 .contact-form-row {
@@ -421,7 +372,7 @@
 
   flex-direction: column;
 
-  gap: 6px;
+  gap: 5px;
 }
 
 .contact-field label {
@@ -433,7 +384,7 @@
     sans-serif;
 
   font-size:
-    clamp(0.48rem, 0.6vw, 0.55rem);
+    clamp(0.45rem, 0.55vw, 0.52rem);
 
   font-weight: 700;
 
@@ -441,8 +392,7 @@
 
   letter-spacing: 0.15em;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 
   opacity: 0.55;
 }
@@ -467,8 +417,7 @@
     1px solid
     rgba(43, 26, 15, 0.12);
 
-  border-radius:
-    12px;
+  border-radius: 11px;
 
   transition:
     background 0.25s ease,
@@ -505,15 +454,13 @@
     system-ui,
     sans-serif;
 
-  font-size:
-    0.45rem;
+  font-size: 0.45rem;
 
   font-weight: 700;
 
   letter-spacing: 0.08em;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 
   opacity: 0.25;
 }
@@ -521,6 +468,9 @@
 
 /* =========================================================
    INPUTS
+
+   FIX:
+   Reduced height.
    ========================================================= */
 
 .contact-input-wrap input,
@@ -528,7 +478,6 @@
   width: 100%;
 
   border: none;
-
   outline: none;
 
   background: transparent;
@@ -539,15 +488,14 @@
     sans-serif;
 
   font-size:
-    clamp(0.65rem, 0.85vw, 0.72rem);
+    clamp(0.63rem, 0.8vw, 0.7rem);
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 }
 
 .contact-input-wrap input {
   padding:
-    11px 12px 11px 8px;
+    8px 12px 8px 8px;
 }
 
 .contact-textarea-wrap {
@@ -555,19 +503,19 @@
 }
 
 .contact-textarea-wrap .contact-field-number {
-  margin-top: 14px;
+  margin-top: 11px;
 }
 
 .contact-textarea-wrap textarea {
   min-height:
-    clamp(90px, 11vh, 120px);
+    clamp(65px, 8vh, 85px);
 
   resize: vertical;
 
   padding:
-    12px 12px 12px 8px;
+    9px 12px 9px 8px;
 
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 .contact-input-wrap input::placeholder,
@@ -579,6 +527,9 @@
 
 /* =========================================================
    SUBMIT BUTTON
+
+   FIX:
+   Slightly shorter.
    ========================================================= */
 
 .contact-submit {
@@ -591,11 +542,10 @@
 
   gap: 10px;
 
-  margin-top: 4px;
+  margin-top: 2px;
 
   padding:
-    clamp(12px, 1.2vw, 15px)
-    20px;
+    10px 20px;
 
   border:
     1px solid
@@ -617,7 +567,7 @@
     sans-serif;
 
   font-size:
-    clamp(0.6rem, 0.75vw, 0.68rem);
+    clamp(0.58rem, 0.7vw, 0.66rem);
 
   font-weight: 700;
 
@@ -630,11 +580,9 @@
 }
 
 .contact-submit:hover:not(:disabled) {
-  transform:
-    translateY(-2px);
+  transform: translateY(-2px);
 
-  background:
-    #3a2418;
+  background: #3a2418;
 
   box-shadow:
     0 10px 24px
@@ -642,19 +590,17 @@
 }
 
 .contact-submit:active:not(:disabled) {
-  transform:
-    translateY(0);
+  transform: translateY(0);
 }
 
 .contact-submit:disabled {
   opacity: 0.55;
-
   cursor: wait;
 }
 
 .contact-submit-arrow {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
 
   display: flex;
 
@@ -672,13 +618,12 @@
 
 .contact-submit:hover:not(:disabled)
 .contact-submit-arrow {
-  transform:
-    translateX(3px);
+  transform: translateX(3px);
 }
 
 .contact-submit-note {
   margin:
-    -6px 0 0;
+    -4px 0 0;
 
   text-align: center;
 
@@ -688,9 +633,9 @@
     sans-serif;
 
   font-size:
-    0.48rem;
+    0.45rem;
 
-  line-height: 1.4;
+  line-height: 1.3;
 
   color:
     rgba(43, 26, 15, 0.35);
@@ -703,29 +648,28 @@
 
 .contact-success {
   min-height:
-    clamp(220px, 30vh, 280px);
+    clamp(200px, 25vh, 250px);
 
   display: flex;
 
   flex-direction: column;
 
   align-items: center;
-
   justify-content: center;
 
   text-align: center;
 }
 
 .contact-success-mark {
-  width: 50px;
-  height: 50px;
+  width: 46px;
+  height: 46px;
 
   display: flex;
 
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 
   border-radius: 50%;
 
@@ -741,8 +685,7 @@
 }
 
 .contact-success-mark span {
-  font-size: 1.15rem;
-
+  font-size: 1.1rem;
   font-weight: 700;
 }
 
@@ -752,22 +695,19 @@
     system-ui,
     sans-serif;
 
-  font-size:
-    0.48rem;
+  font-size: 0.48rem;
 
   font-weight: 700;
 
   letter-spacing: 0.2em;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 
   opacity: 0.45;
 }
 
 .contact-success h3 {
-  margin:
-    6px 0 0;
+  margin: 6px 0 0;
 
   font-family:
     "Cormorant Garamond",
@@ -779,23 +719,20 @@
 
   line-height: 1;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 }
 
 .contact-success p {
   max-width: 380px;
 
-  margin:
-    8px auto 0;
+  margin: 8px auto 0;
 
   font-family:
     "Plus Jakarta Sans",
     system-ui,
     sans-serif;
 
-  font-size:
-    0.68rem;
+  font-size: 0.68rem;
 
   line-height: 1.5;
 
@@ -810,17 +747,15 @@
 
   gap: 6px;
 
-  margin-top: 16px;
+  margin-top: 14px;
 
-  padding:
-    7px 12px;
+  padding: 7px 12px;
 
   border: none;
 
   background: transparent;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 
   cursor: pointer;
 
@@ -829,8 +764,7 @@
     system-ui,
     sans-serif;
 
-  font-size:
-    0.52rem;
+  font-size: 0.52rem;
 
   font-weight: 700;
 
@@ -865,15 +799,13 @@
     system-ui,
     sans-serif;
 
-  font-size:
-    0.42rem;
+  font-size: 0.42rem;
 
   line-height: 1.3;
 
   letter-spacing: 0.12em;
 
-  color:
-    var(--contact-brown);
+  color: var(--contact-brown);
 
   opacity: 0.4;
 
@@ -886,7 +818,6 @@
 
 .contact-bottom-right {
   right: 24px;
-
   text-align: right;
 }
 
@@ -902,17 +833,27 @@
 
 @media (max-width: 1200px) {
   .contact-container {
-    padding: clamp(50px, 6vh, 70px) clamp(20px, 4vw, 40px) clamp(40px, 5vh, 60px);
+    padding:
+      clamp(95px, 10vh, 110px)
+      clamp(20px, 4vw, 40px)
+      clamp(40px, 5vh, 60px);
   }
 
   .contact-panel {
-    width: min(clamp(500px, 55vw, 700px), calc(100vw - 40px));
-    padding: clamp(26px, 3vw, 40px) clamp(22px, 3vw, 44px);
-    border-radius: clamp(18px, 2.5vw, 28px);
+    width:
+      min(
+        clamp(620px, 72vw, 900px),
+        calc(100vw - 40px)
+      );
+
+    padding:
+      24px
+      clamp(22px, 3vw, 42px);
   }
 
   .contact-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-size:
+      clamp(2rem, 4vw, 3.4rem);
   }
 }
 
@@ -923,12 +864,19 @@
 
 @media (max-width: 900px) {
   .contact-container {
-    padding: clamp(50px, 7vh, 70px) clamp(16px, 3vw, 30px) clamp(40px, 5vh, 60px);
+    padding:
+      90px
+      clamp(16px, 3vw, 30px)
+      45px;
   }
 
   .contact-panel {
-    width: min(600px, calc(100vw - 32px));
-    padding: 32px 28px;
+    width:
+      min(680px, calc(100vw - 32px));
+
+    padding:
+      26px 28px;
+
     border-radius: 24px;
   }
 
@@ -952,16 +900,16 @@
     min-height: auto;
 
     padding:
-      clamp(40px, 6vh, 60px)
+      85px
       12px
-      clamp(35px, 5vh, 50px);
+      40px;
   }
 
   .contact-panel {
     width: 100%;
 
     padding:
-      24px 16px;
+      22px 16px;
 
     border-radius: 20px;
 
@@ -971,23 +919,21 @@
 
   .contact-form-row {
     grid-template-columns: 1fr;
-
-    gap: 14px;
+    gap: 12px;
   }
 
   .contact-header {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
   }
 
   .contact-title {
     font-size:
-      clamp(2.25rem, 12vw, 3.25rem);
+      clamp(2.2rem, 11vw, 3.1rem);
   }
 
   .contact-subtitle {
     max-width: 320px;
-
-    font-size: 0.62rem;
+    font-size: 0.6rem;
   }
 
   .contact-eyebrow {
@@ -997,7 +943,6 @@
 
   .contact-top-label {
     top: 20px;
-
     font-size: 0.45rem;
   }
 
@@ -1026,12 +971,15 @@
   }
 
   .contact-input-wrap input {
-    padding: 10px 10px 10px 7px;
+    padding:
+      8px 10px 8px 7px;
   }
 
   .contact-textarea-wrap textarea {
-    min-height: 100px;
-    padding: 11px 10px 11px 7px;
+    min-height: 82px;
+
+    padding:
+      9px 10px 9px 7px;
   }
 
   .contact-field-number {
@@ -1040,11 +988,11 @@
   }
 
   .contact-textarea-wrap .contact-field-number {
-    margin-top: 12px;
+    margin-top: 11px;
   }
 
   .contact-submit {
-    padding: 13px 16px;
+    padding: 11px 16px;
     font-size: 0.6rem;
   }
 
@@ -1065,11 +1013,16 @@
 
 @media (max-width: 400px) {
   .contact-container {
-    padding: 35px 10px 35px;
+    padding:
+      80px
+      10px
+      35px;
   }
 
   .contact-panel {
-    padding: 20px 14px;
+    padding:
+      20px 14px;
+
     border-radius: 18px;
   }
 
@@ -1078,7 +1031,7 @@
   }
 
   .contact-form {
-    gap: 16px;
+    gap: 13px;
   }
 
   .contact-input-wrap,
@@ -1087,16 +1040,21 @@
   }
 
   .contact-input-wrap input {
-    padding: 9px 9px 9px 6px;
+    padding:
+      8px 9px 8px 6px;
   }
 
   .contact-textarea-wrap textarea {
-    min-height: 95px;
-    padding: 10px 9px 10px 6px;
+    min-height: 78px;
+
+    padding:
+      9px 9px 9px 6px;
   }
 
   .contact-submit {
-    padding: 12px 14px;
+    padding:
+      10px 14px;
+
     font-size: 0.58rem;
   }
 }

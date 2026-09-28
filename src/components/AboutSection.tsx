@@ -41,18 +41,24 @@ const About: React.FC = () => {
   const [isClosing, setIsClosing] = useState<boolean>(false);
   const [activeCardIndex, setActiveCardIndex] = useState<number>(0);
 
+  /*
+   * Keep the title synchronized with the Ferris wheel.
+   *
+   * The wheel has 3 positions and each position lasts 6 seconds:
+   *
+   * 0s - 6s   -> About Me
+   * 6s - 12s  -> Education
+   * 12s - 18s -> Experience
+   *
+   * No initial 5-second delay, otherwise the title gets ahead/behind
+   * the actual card position.
+   */
   useEffect(() => {
-    const initialTimer = setTimeout(() => {
+    const interval = window.setInterval(() => {
       setActiveCardIndex((prev) => (prev + 1) % CARDS.length);
+    }, 6000);
 
-      const interval = setInterval(() => {
-        setActiveCardIndex((prev) => (prev + 1) % CARDS.length);
-      }, 6000);
-
-      return () => clearInterval(interval);
-    }, 5000);
-
-    return () => clearTimeout(initialTimer);
+    return () => window.clearInterval(interval);
   }, []);
 
   const handleCardClick = (card: CardData) => {
@@ -66,7 +72,7 @@ const About: React.FC = () => {
 
     setIsClosing(true);
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       setActiveCard(null);
       setIsClosing(false);
     }, 350);
@@ -76,7 +82,6 @@ const About: React.FC = () => {
 
   return (
     <section className="about" id="about">
-
       {/* =====================================================
           BACKGROUND PETALS
       ===================================================== */}
@@ -95,7 +100,6 @@ const About: React.FC = () => {
       ===================================================== */}
       <div className="about__stamp-corner" aria-hidden="true">
         <div className="stamp-triangle">
-
           {/* Row 1 — 6 stamps */}
           <div className="stamp-row">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -147,7 +151,6 @@ const About: React.FC = () => {
               <span>桜</span>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -155,12 +158,9 @@ const About: React.FC = () => {
           FERRIS WHEEL
       ===================================================== */}
       <div className="ferris-wheel" aria-hidden="true">
-
-        {/* Large dusty-pink circle behind the Ferris wheel */}
         <div className="ferris-wheel__background-circle" />
 
         <div className="ferris-wheel__rim">
-
           <span className="ferris-wheel__spoke ferris-wheel__spoke--1" />
           <span className="ferris-wheel__spoke ferris-wheel__spoke--2" />
           <span className="ferris-wheel__spoke ferris-wheel__spoke--3" />
@@ -171,12 +171,10 @@ const About: React.FC = () => {
           <span className="ferris-wheel__spoke ferris-wheel__spoke--8" />
 
           <div className="ferris-wheel__hub" />
-
         </div>
 
         {/* THREE PHOTO CARDS */}
         <div className="ferris-wheel__cards">
-
           {CARDS.map((card, idx) => (
             <div
               key={card.id}
@@ -184,6 +182,12 @@ const About: React.FC = () => {
               onClick={() => handleCardClick(card)}
               role="button"
               tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleCardClick(card);
+                }
+              }}
             >
               <div className="ferris-card__inner">
                 <img
@@ -194,16 +198,13 @@ const About: React.FC = () => {
               </div>
             </div>
           ))}
-
         </div>
       </div>
-
 
       {/* =====================================================
           RIGHT SIDE CONTENT
       ===================================================== */}
       <div className="about__content">
-
         <h1 className="about__title" key={currentTitle}>
           {currentTitle}
         </h1>
@@ -211,7 +212,6 @@ const About: React.FC = () => {
         <p className="about__subtitle">
           Click card to know more
         </p>
-
       </div>
 
       {/* =====================================================
@@ -231,7 +231,6 @@ const About: React.FC = () => {
           </div>
 
           <div className="card-modal__body">
-
             <div>
               <h2 className="card-modal__title">
                 {activeCard.title}
@@ -249,11 +248,9 @@ const About: React.FC = () => {
             >
               &larr; back to section
             </button>
-
           </div>
         </div>
       )}
-
     </section>
   );
 };

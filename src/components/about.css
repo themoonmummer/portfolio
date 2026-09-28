@@ -5,10 +5,6 @@ WITH DARK BROWN FERRIS WHEEL + JAPANESE STAMPS
 ========================================================= */
 
 .about {
-  /* =======================================================
-     BLUE PALETTE
-     ======================================================= */
-
   --marine-blue: #28577A;
   --marine-blue-light: #3E6F8F;
 
@@ -17,10 +13,6 @@ WITH DARK BROWN FERRIS WHEEL + JAPANESE STAMPS
 
   --inkjet: #172B3A;
   --inkjet-soft: #223D50;
-
-  /* =======================================================
-     NEAR-BLACK BROWN
-     ======================================================= */
 
   --brown: #211D1B;
   --brown-dark: #171514;
@@ -45,13 +37,11 @@ WITH DARK BROWN FERRIS WHEEL + JAPANESE STAMPS
       rgba(95, 135, 163, 0.20) 28%,
       rgba(95, 135, 163, 0) 54%
     ),
-
     radial-gradient(
       circle at 28% 68%,
       rgba(176, 205, 224, 0.38) 0%,
       rgba(62, 111, 143, 0) 52%
     ),
-
     linear-gradient(
       135deg,
       var(--marine-blue) 0%,
@@ -60,8 +50,7 @@ WITH DARK BROWN FERRIS WHEEL + JAPANESE STAMPS
       var(--inkjet) 100%
     );
 
-  color:
-    var(--inkjet);
+  color: var(--inkjet);
 }
 
 
@@ -73,11 +62,9 @@ SUBTLE COASTAL ATMOSPHERE
   content: "";
 
   position: absolute;
-
   inset: 0;
 
   pointer-events: none;
-
   z-index: 0;
 
   background:
@@ -95,11 +82,9 @@ BACKGROUND PETALS
 
 .about__petals {
   position: absolute;
-
   inset: 0;
 
   pointer-events: none;
-
   z-index: 1;
 }
 
@@ -194,19 +179,12 @@ BACKGROUND PETALS
 
 /* =========================================================
 JAPANESE BACKGROUND WORD STAMPS
-STRAIGHT — DENSE — SUBTLE
-========================================================= */
-
-
-/* =========================================================
-STAMP ROW
 ========================================================= */
 
 .word-stamp-row {
   display: flex;
 
   align-items: center;
-
   justify-content: space-between;
 
   width: 100%;
@@ -216,15 +194,8 @@ STAMP ROW
   gap:
     clamp(35px, 6vw, 100px);
 
-  transform:
-    none;
+  transform: none;
 }
-
-
-/* =========================================================
-ALTERNATING ROW POSITION
-NO ROTATION
-========================================================= */
 
 .word-stamp-row:nth-child(even) {
   padding-left:
@@ -233,8 +204,7 @@ NO ROTATION
   padding-right:
     clamp(10px, 2vw, 30px);
 
-  transform:
-    none;
+  transform: none;
 }
 
 .word-stamp-row:nth-child(odd) {
@@ -244,14 +214,8 @@ NO ROTATION
   padding-right:
     clamp(30px, 5vw, 90px);
 
-  transform:
-    none;
+  transform: none;
 }
-
-
-/* =========================================================
-INDIVIDUAL JAPANESE STAMP
-========================================================= */
 
 .word-stamp {
   display: inline-flex;
@@ -259,17 +223,12 @@ INDIVIDUAL JAPANESE STAMP
   align-items: center;
   justify-content: center;
 
-  min-width:
-    74px;
+  min-width: 74px;
+  height: 30px;
 
-  height:
-    30px;
+  padding: 0 12px;
 
-  padding:
-    0 12px;
-
-  box-sizing:
-    border-box;
+  box-sizing: border-box;
 
   font-family:
     "Noto Serif JP",
@@ -281,11 +240,9 @@ INDIVIDUAL JAPANESE STAMP
   font-size:
     clamp(0.75rem, 0.95vw, 1rem);
 
-  font-weight:
-    600;
+  font-weight: 600;
 
-  letter-spacing:
-    0.18em;
+  letter-spacing: 0.18em;
 
   color:
     rgba(23, 21, 20, 0.62);
@@ -301,28 +258,18 @@ INDIVIDUAL JAPANESE STAMP
     inset 0 0 0 1px
     rgba(23, 21, 20, 0.08);
 
-  mix-blend-mode:
-    multiply;
+  mix-blend-mode: multiply;
 
-  user-select:
-    none;
+  user-select: none;
 
-  opacity:
-    0.72;
+  opacity: 0.72;
 
-  transform:
-    none;
+  transform: none;
 
   text-shadow:
     0 1px 1px
     rgba(255, 255, 255, 0.08);
 }
-
-
-/* =========================================================
-STAMP INNER BORDER
-DARK BROWN
-========================================================= */
 
 .word-stamp::before {
   content: "";
@@ -335,14 +282,8 @@ DARK BROWN
     1px solid
     rgba(23, 21, 20, 0.14);
 
-  pointer-events:
-    none;
+  pointer-events: none;
 }
-
-
-/* =========================================================
-VARIATION WITHOUT TILT
-========================================================= */
 
 .word-stamp-row:nth-child(2) .word-stamp,
 .word-stamp-row:nth-child(5) .word-stamp {
@@ -380,16 +321,10 @@ TOP-RIGHT TRIANGLE STAMP DECORATION
   width: max-content;
 }
 
-
-/* =========================================================
-STAMP TRIANGLE
-========================================================= */
-
 .stamp-triangle {
   display: flex;
 
   flex-direction: column;
-
   align-items: flex-end;
 
   gap: 5px;
@@ -402,12 +337,6 @@ STAMP TRIANGLE
 
   gap: 5px;
 }
-
-
-/* =========================================================
-INDIVIDUAL CORNER STAMP
-DARK BROWN
-========================================================= */
 
 .about__stamp {
   width: 60px;
@@ -440,11 +369,9 @@ DARK BROWN
     "Hiragino Mincho ProN",
     serif;
 
-  font-size:
-    1.4rem;
+  font-size: 1.4rem;
 
-  opacity:
-    0.82;
+  opacity: 0.82;
 
   box-shadow:
     inset 0 0 0 1px
@@ -464,37 +391,30 @@ DARK BROWN
 }
 
 .about__stamp span {
-  opacity:
-    0.82;
+  opacity: 0.82;
 }
-
-
-/* =========================================================
-FERRIS WHEEL
-========================================================= */
 
 .ferris-wheel {
   position: absolute;
 
-  left: -45vw;
+  left: -39vw;
   top: 50%;
 
-  width: 170vw;
-  height: 170vw;
+  /* Slightly smaller at 100% desktop */
+  width: 95vw;
+  height: 95vw;
 
-  max-width: 1400px;
-  max-height: 1400px;
+  max-width: 900px;
+  max-height: 900px;
 
-  transform:
-    translateY(-50%);
+  transform: translateY(-50%);
 
   z-index: 2;
 
   pointer-events: none;
-  
+
   will-change: transform;
 }
-
 
 /* =========================================================
 FERRIS WHEEL BACKGROUND CIRCLE
@@ -518,8 +438,7 @@ FERRIS WHEEL BACKGROUND CIRCLE
   transform:
     translate(-50%, -50%);
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
   background:
     radial-gradient(
@@ -538,17 +457,14 @@ FERRIS WHEEL BACKGROUND CIRCLE
     0 0 65px
     rgba(134, 166, 186, 0.16);
 
-  z-index:
-    0;
+  z-index: 0;
 
-  pointer-events:
-    none;
+  pointer-events: none;
 }
 
 
 /* =========================================================
 FERRIS WHEEL RIM
-NEAR-BLACK BROWN
 ========================================================= */
 
 .ferris-wheel__rim {
@@ -561,18 +477,20 @@ NEAR-BLACK BROWN
     solid
     var(--brown);
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
   animation:
     ferrisWheelRotate
-    18s ease-in-out infinite;
+    18s
+    linear
+    infinite;
 
   transform-origin:
     center center;
 
-  z-index:
-    2;
+  z-index: 2;
+
+  will-change: transform;
 }
 
 .ferris-wheel__rim::before {
@@ -580,16 +498,14 @@ NEAR-BLACK BROWN
 
   position: absolute;
 
-  inset:
-    4.5%;
+  inset: 4.5%;
 
   border:
     clamp(2px, 0.25vw, 4px)
     solid
     rgba(23, 21, 20, 0.76);
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 }
 
 
@@ -612,8 +528,7 @@ FERRIS WHEEL SPOKES
   background:
     var(--brown);
 
-  opacity:
-    0.94;
+  opacity: 0.94;
 }
 
 .ferris-wheel__spoke--1 {
@@ -684,8 +599,7 @@ FERRIS WHEEL HUB
   transform:
     translate(-50%, -50%);
 
-  border-radius:
-    50%;
+  border-radius: 50%;
 
   background:
     var(--brown-dark);
@@ -713,30 +627,28 @@ CARDS
 
   animation:
     ferrisWheelRotate
-    18s ease-in-out infinite;
+    18s
+    linear
+    infinite;
 
   transform-origin:
     center center;
 
-  z-index:
-    10;
-  
+  z-index: 10;
+
   will-change: transform;
 }
 
 .ferris-card--1 {
-  --card-angle:
-    0deg;
+  --card-angle: 0deg;
 }
 
 .ferris-card--2 {
-  --card-angle:
-    120deg;
+  --card-angle: 120deg;
 }
 
 .ferris-card--3 {
-  --card-angle:
-    240deg;
+  --card-angle: 240deg;
 }
 
 .ferris-card {
@@ -746,25 +658,27 @@ CARDS
   top: 50%;
 
   width:
-    clamp(180px, 20vw, 320px);
+    clamp(180px, 19vw, 300px);
 
   height:
-    clamp(120px, 13vw, 210px);
+    clamp(120px, 12.5vw, 200px);
 
   transform-origin:
     center center;
 
+  /*
+   * Reduced distance so the cards stay visually connected
+   * without crowding the right-side title.
+   */
   transform:
     translate(-50%, -50%)
     rotate(var(--card-angle))
-    translateX(min(80vw, 650px));
+    translateX(min(62vw, 500px));
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  pointer-events:
-    auto;
-  
+  pointer-events: auto;
+
   will-change: transform;
 }
 
@@ -791,11 +705,9 @@ CARD INNER
     3px solid
     var(--brown);
 
-  border-radius:
-    12px;
+  border-radius: 12px;
 
-  overflow:
-    hidden;
+  overflow: hidden;
 
   box-shadow:
     8px 10px 0
@@ -806,7 +718,9 @@ CARD INNER
 
   animation:
     ferrisCardUpright
-    18s ease-in-out infinite;
+    18s
+    linear
+    infinite;
 
   transition:
     transform 0.2s ease,
@@ -828,11 +742,9 @@ CARD IMAGE
   width: 100%;
   height: 100%;
 
-  object-fit:
-    cover;
+  object-fit: cover;
 
-  display:
-    block;
+  display: block;
 }
 
 
@@ -843,25 +755,21 @@ FERRIS WHEEL ANIMATION
 @keyframes ferrisWheelRotate {
   0%,
   28% {
-    transform:
-      rotate(0deg);
+    transform: rotate(0deg);
   }
 
   33.33%,
   61.33% {
-    transform:
-      rotate(-120deg);
+    transform: rotate(-120deg);
   }
 
   66.66%,
   94.66% {
-    transform:
-      rotate(-240deg);
+    transform: rotate(-240deg);
   }
 
   100% {
-    transform:
-      rotate(-360deg);
+    transform: rotate(-360deg);
   }
 }
 
@@ -920,17 +828,14 @@ ABOUT CONTENT
 ========================================================= */
 
 .about__content {
-  position:
-    relative;
+  position: relative;
 
-  z-index:
-    5;
+  z-index: 5;
 
   width:
     min(600px, 42vw);
 
-  margin-left:
-    auto;
+  margin-left: auto;
 
   margin-right:
     10vw;
@@ -940,11 +845,9 @@ ABOUT CONTENT
 }
 
 .about__title {
-  margin:
-    0;
+  margin: 0;
 
-  color:
-    #E5EDF2;
+  color: #E5EDF2;
 
   font-family:
     Georgia,
@@ -954,14 +857,11 @@ ABOUT CONTENT
   font-size:
     clamp(2.5rem, 5vw, 5.5rem);
 
-  font-weight:
-    400;
+  font-weight: 400;
 
-  line-height:
-    0.95;
+  line-height: 0.95;
 
-  letter-spacing:
-    -0.04em;
+  letter-spacing: -0.04em;
 
   animation:
     titleFadeIn
@@ -977,8 +877,7 @@ ABOUT CONTENT
   margin:
     16px 0 0;
 
-  color:
-    #D2E0E8;
+  color: #D2E0E8;
 
   font-family:
     "Helvetica Neue",
@@ -988,14 +887,11 @@ ABOUT CONTENT
   font-size:
     clamp(0.8rem, 1vw, 1rem);
 
-  font-weight:
-    500;
+  font-weight: 500;
 
-  letter-spacing:
-    0.05em;
+  letter-spacing: 0.05em;
 
-  opacity:
-    0.88;
+  opacity: 0.88;
 }
 
 @keyframes titleFadeIn {
@@ -1020,29 +916,21 @@ MODAL
 ========================================================= */
 
 .card-modal {
-  position:
-    absolute;
+  position: absolute;
 
-  inset:
-    0;
+  inset: 0;
 
-  z-index:
-    100;
+  z-index: 100;
 
-  display:
-    flex;
+  display: flex;
 
-  flex-direction:
-    column;
+  flex-direction: column;
 
   background:
     var(--marine-blue);
 
-  width:
-    100%;
-
-  height:
-    100%;
+  width: 100%;
+  height: 100%;
 
   transform-origin:
     20% 50%;
@@ -1067,39 +955,29 @@ MODAL
 }
 
 .card-modal__hero {
-  width:
-    100%;
+  width: 100%;
 
-  height:
-    35vh;
+  height: 35vh;
 
-  min-height:
-    200px;
+  min-height: 200px;
 
-  overflow:
-    hidden;
+  overflow: hidden;
 }
 
 .card-modal__hero img {
-  width:
-    100%;
+  width: 100%;
 
-  height:
-    100%;
+  height: 100%;
 
-  object-fit:
-    cover;
+  object-fit: cover;
 
-  object-position:
-    center;
+  object-position: center;
 
-  display:
-    block;
+  display: block;
 }
 
 .card-modal__body {
-  flex:
-    1;
+  flex: 1;
 
   background:
     linear-gradient(
@@ -1109,29 +987,22 @@ MODAL
       var(--inkjet) 100%
     );
 
-  color:
-    var(--inkjet);
+  color: var(--inkjet);
 
   padding:
     clamp(30px, 5vw, 60px);
 
-  display:
-    flex;
+  display: flex;
 
-  flex-direction:
-    column;
+  flex-direction: column;
 
-  justify-content:
-    space-between;
+  justify-content: space-between;
 
-  align-items:
-    flex-start;
+  align-items: flex-start;
 
-  box-sizing:
-    border-box;
+  box-sizing: border-box;
 
-  overflow-y:
-    auto;
+  overflow-y: auto;
 }
 
 .card-modal__title {
@@ -1158,11 +1029,9 @@ MODAL
   font-size:
     clamp(1rem, 1.15vw, 1.2rem);
 
-  line-height:
-    1.85;
+  line-height: 1.85;
 
-  max-width:
-    680px;
+  max-width: 680px;
 
   margin:
     0 0 30px;
@@ -1172,34 +1041,26 @@ MODAL
 }
 
 .card-modal__back {
-  background:
-    transparent;
+  background: transparent;
 
-  border:
-    none;
+  border: none;
 
-  color:
-    #E5EDF2;
+  color: #E5EDF2;
 
   font-family:
     "Helvetica Neue",
     Arial,
     sans-serif;
 
-  font-size:
-    0.92rem;
+  font-size: 0.92rem;
 
-  font-weight:
-    700;
+  font-weight: 700;
 
-  cursor:
-    pointer;
+  cursor: pointer;
 
-  padding:
-    8px 0;
+  padding: 8px 0;
 
-  letter-spacing:
-    0.05em;
+  letter-spacing: 0.05em;
 
   transition:
     opacity 0.2s,
@@ -1207,8 +1068,7 @@ MODAL
 }
 
 .card-modal__back:hover {
-  opacity:
-    0.7;
+  opacity: 0.7;
 
   transform:
     translateX(-4px);
@@ -1221,49 +1081,41 @@ MODAL ANIMATIONS
 
 @keyframes smoothExpand {
   0% {
-    opacity:
-      0;
+    opacity: 0;
 
     transform:
       scale(0.3);
 
-    border-radius:
-      24px;
+    border-radius: 24px;
   }
 
   100% {
-    opacity:
-      1;
+    opacity: 1;
 
     transform:
       scale(1);
 
-    border-radius:
-      0;
+    border-radius: 0;
   }
 }
 
 @keyframes smoothCollapse {
   0% {
-    opacity:
-      1;
+    opacity: 1;
 
     transform:
       scale(1);
 
-    border-radius:
-      0;
+    border-radius: 0;
   }
 
   100% {
-    opacity:
-      0;
+    opacity: 0;
 
     transform:
       scale(0.3);
 
-    border-radius:
-      24px;
+    border-radius: 24px;
   }
 }
 
@@ -1274,9 +1126,13 @@ RESPONSIVE — LARGE TABLET / SMALL DESKTOP
 
 @media (max-width: 1200px) {
   .ferris-wheel {
-    width: 150vw;
-    height: 150vw;
-    left: -40vw;
+    width: 128vw;
+    height: 128vw;
+
+    left: -37vw;
+
+    max-width: 1080px;
+    max-height: 1080px;
   }
 
   .ferris-wheel__background-circle {
@@ -1285,19 +1141,27 @@ RESPONSIVE — LARGE TABLET / SMALL DESKTOP
   }
 
   .ferris-card {
-    width: clamp(180px, 18vw, 280px);
-    height: clamp(120px, 12vw, 190px);
+    width:
+      clamp(180px, 18vw, 280px);
+
+    height:
+      clamp(120px, 12vw, 190px);
+
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(75vw, 600px));
+      translateX(min(58vw, 460px));
   }
 
   .about__content {
-    width: min(550px, 45vw);
-    margin-right: 8vw;
+    width:
+      min(550px, 45vw);
+
+    margin-right:
+      8vw;
   }
 }
+
 
 /* =========================================================
 RESPONSIVE — TABLET
@@ -1305,17 +1169,15 @@ RESPONSIVE — TABLET
 
 @media (max-width: 1000px) {
   .ferris-wheel {
-    width:
-      130vw;
+    width: 130vw;
+    height: 130vw;
 
-    height:
-      130vw;
+    left: -35vw;
 
-    left:
-      -35vw;
+    top: 50%;
 
-    top:
-      50%;
+    max-width: none;
+    max-height: none;
   }
 
   .about__content {
@@ -1327,46 +1189,37 @@ RESPONSIVE — TABLET
   }
 
   .about__stamp {
-    width:
-      48px;
+    width: 48px;
+    height: 48px;
 
-    height:
-      48px;
+    flex-basis: 48px;
 
-    flex-basis:
-      48px;
-
-    font-size:
-      1.1rem;
+    font-size: 1.1rem;
   }
 
   .stamp-triangle {
-    gap:
-      4px;
+    gap: 4px;
   }
 
   .stamp-row {
-    gap:
-      4px;
+    gap: 4px;
   }
 
   .ferris-wheel__background-circle {
-    width:
-      50vw;
+    width: 50vw;
+    height: 50vw;
 
-    height:
-      50vw;
-
-    min-width:
-      220px;
-
-    min-height:
-      220px;
+    min-width: 220px;
+    min-height: 220px;
   }
 
   .ferris-card {
-    width: clamp(160px, 18vw, 260px);
-    height: clamp(110px, 12vw, 180px);
+    width:
+      clamp(160px, 18vw, 260px);
+
+    height:
+      clamp(110px, 12vw, 180px);
+
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
@@ -1374,17 +1227,13 @@ RESPONSIVE — TABLET
   }
 
   .word-stamp {
-    min-width:
-      64px;
+    min-width: 64px;
 
-    height:
-      27px;
+    height: 27px;
 
-    padding:
-      0 8px;
+    padding: 0 8px;
 
-    font-size:
-      0.72rem;
+    font-size: 0.72rem;
   }
 }
 
@@ -1395,46 +1244,39 @@ RESPONSIVE — MOBILE
 
 @media (max-width: 700px) {
   .about {
-    min-height:
-      100svh;
-    min-height:
-      100dvh;
+    min-height: 100svh;
+    min-height: 100dvh;
 
-    align-items:
-      flex-end;
+    align-items: flex-end;
   }
 
   .ferris-wheel {
-    width:
-      140vw;
+    width: 140vw;
+    height: 140vw;
 
-    height:
-      140vw;
+    left: -45vw;
 
-    left:
-      -45vw;
+    top: 50%;
 
-    top:
-      50%;
+    max-width: none;
+    max-height: none;
   }
 
   .ferris-wheel__background-circle {
-    width:
-      65vw;
+    width: 65vw;
+    height: 65vw;
 
-    height:
-      65vw;
-
-    min-width:
-      200px;
-
-    min-height:
-      200px;
+    min-width: 200px;
+    min-height: 200px;
   }
 
   .ferris-card {
-    width: clamp(140px, 22vw, 220px);
-    height: clamp(100px, 16vw, 160px);
+    width:
+      clamp(140px, 22vw, 220px);
+
+    height:
+      clamp(100px, 16vw, 160px);
+
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
@@ -1442,17 +1284,14 @@ RESPONSIVE — MOBILE
   }
 
   .about__content {
-    width:
-      auto;
+    width: auto;
 
-    margin:
-      0;
+    margin: 0;
 
     padding:
       0 24px 60px;
 
-    z-index:
-      10;
+    z-index: 10;
   }
 
   .about__title {
@@ -1461,73 +1300,53 @@ RESPONSIVE — MOBILE
   }
 
   .about__stamp {
-    width:
-      36px;
+    width: 36px;
+    height: 36px;
 
-    height:
-      36px;
+    flex-basis: 36px;
 
-    flex-basis:
-      36px;
-
-    font-size:
-      0.85rem;
+    font-size: 0.85rem;
   }
 
   .stamp-triangle {
-    gap:
-      3px;
+    gap: 3px;
   }
 
   .stamp-row {
-    gap:
-      3px;
+    gap: 3px;
   }
 
-  /* More compact Japanese background */
-
   .about__word-stamps {
-    padding:
-      2vh 8px;
+    padding: 2vh 8px;
 
-    opacity:
-      0.46;
+    opacity: 0.46;
   }
 
   .word-stamp-row {
-    gap:
-      18px;
+    gap: 18px;
 
-    justify-content:
-      space-around;
+    justify-content: space-around;
   }
 
   .word-stamp-row:nth-child(even),
   .word-stamp-row:nth-child(odd) {
-    padding-left:
-      0;
-
-    padding-right:
-      0;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .word-stamp {
-    min-width:
-      52px;
+    min-width: 52px;
 
-    height:
-      24px;
+    height: 24px;
 
-    padding:
-      0 6px;
+    padding: 0 6px;
 
-    font-size:
-      0.62rem;
+    font-size: 0.62rem;
 
-    letter-spacing:
-      0.10em;
+    letter-spacing: 0.10em;
   }
 }
+
 
 /* =========================================================
 RESPONSIVE — SMALL MOBILE
@@ -1537,19 +1356,28 @@ RESPONSIVE — SMALL MOBILE
   .ferris-wheel {
     width: 160vw;
     height: 160vw;
+
     left: -55vw;
+
+    max-width: none;
+    max-height: none;
   }
 
   .ferris-wheel__background-circle {
     width: 75vw;
     height: 75vw;
+
     min-width: 180px;
     min-height: 180px;
   }
 
   .ferris-card {
-    width: clamp(120px, 25vw, 200px);
-    height: clamp(90px, 18vw, 140px);
+    width:
+      clamp(120px, 25vw, 200px);
+
+    height:
+      clamp(90px, 18vw, 140px);
+
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
@@ -1557,29 +1385,38 @@ RESPONSIVE — SMALL MOBILE
   }
 
   .about__content {
-    padding: 0 20px 50px;
+    padding:
+      0 20px 50px;
   }
 
   .about__title {
-    font-size: clamp(2rem, 10vw, 3.5rem);
+    font-size:
+      clamp(2rem, 10vw, 3.5rem);
   }
 
   .about__stamp {
     width: 32px;
     height: 32px;
+
     flex-basis: 32px;
+
     font-size: 0.75rem;
   }
 
   .ferris-wheel__rim {
-    border-width: clamp(4px, 0.6vw, 8px);
+    border-width:
+      clamp(4px, 0.6vw, 8px);
   }
 
   .ferris-wheel__hub {
-    width: clamp(24px, 3.5vw, 50px);
-    height: clamp(24px, 3.5vw, 50px);
+    width:
+      clamp(24px, 3.5vw, 50px);
+
+    height:
+      clamp(24px, 3.5vw, 50px);
   }
 }
+
 
 /* =========================================================
 RESPONSIVE — VERY SMALL MOBILE
@@ -1589,19 +1426,28 @@ RESPONSIVE — VERY SMALL MOBILE
   .ferris-wheel {
     width: 180vw;
     height: 180vw;
+
     left: -65vw;
+
+    max-width: none;
+    max-height: none;
   }
 
   .ferris-wheel__background-circle {
     width: 85vw;
     height: 85vw;
+
     min-width: 160px;
     min-height: 160px;
   }
 
   .ferris-card {
-    width: clamp(100px, 28vw, 180px);
-    height: clamp(80px, 20vw, 120px);
+    width:
+      clamp(100px, 28vw, 180px);
+
+    height:
+      clamp(80px, 20vw, 120px);
+
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
@@ -1609,33 +1455,43 @@ RESPONSIVE — VERY SMALL MOBILE
   }
 
   .about__content {
-    padding: 0 16px 40px;
+    padding:
+      0 16px 40px;
   }
 
   .about__title {
-    font-size: clamp(1.75rem, 10vw, 3rem);
+    font-size:
+      clamp(1.75rem, 10vw, 3rem);
   }
 
   .about__stamp {
     width: 28px;
     height: 28px;
+
     flex-basis: 28px;
+
     font-size: 0.65rem;
   }
 
   .ferris-wheel__rim {
-    border-width: clamp(3px, 0.5vw, 6px);
+    border-width:
+      clamp(3px, 0.5vw, 6px);
   }
 
   .ferris-wheel__hub {
-    width: clamp(20px, 3vw, 40px);
-    height: clamp(20px, 3vw, 40px);
+    width:
+      clamp(20px, 3vw, 40px);
+
+    height:
+      clamp(20px, 3vw, 40px);
   }
 
   .ferris-wheel__spoke {
-    width: clamp(4px, 0.5vw, 6px);
+    width:
+      clamp(4px, 0.5vw, 6px);
   }
 }
+
 
 /* =========================================================
 MODAL RESPONSIVE
@@ -1644,19 +1500,24 @@ MODAL RESPONSIVE
 @media (max-width: 700px) {
   .card-modal__hero {
     height: 30vh;
+
     min-height: 180px;
   }
 
   .card-modal__body {
-    padding: clamp(24px, 4vw, 40px);
+    padding:
+      clamp(24px, 4vw, 40px);
   }
 
   .card-modal__title {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-size:
+      clamp(1.75rem, 3vw, 2.5rem);
   }
 
   .card-modal__text {
-    font-size: clamp(0.9rem, 1.1vw, 1rem);
+    font-size:
+      clamp(0.9rem, 1.1vw, 1rem);
+
     line-height: 1.7;
   }
 }
@@ -1664,11 +1525,13 @@ MODAL RESPONSIVE
 @media (max-width: 480px) {
   .card-modal__hero {
     height: 25vh;
+
     min-height: 160px;
   }
 
   .card-modal__body {
-    padding: 20px 16px;
+    padding:
+      20px 16px;
   }
 
   .card-modal__title {
