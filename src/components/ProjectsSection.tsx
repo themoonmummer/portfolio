@@ -8,6 +8,98 @@ interface ProjectsMetroProps {
   onSelectProject: (project: Project) => void;
 }
 
+interface ProjectPanelProps {
+  project: Project;
+  panelKey: string;
+  onOpenProject: (project: Project) => void;
+}
+
+const ProjectPanel = ({
+  project,
+  panelKey,
+  onOpenProject,
+}: ProjectPanelProps) => {
+  const [iframeError, setIframeError] = useState(false);
+
+  return (
+    <div
+      className="projects-train-panel"
+      key={panelKey}
+    >
+      <div className="projects-metro-stage">
+
+        {/* PROJECT WINDOW */}
+
+        <div className="projects-video-window">
+          <button
+            type="button"
+            className="projects-video-click"
+            onClick={() => onOpenProject(project)}
+            aria-label={`Open ${project.title} — ${
+              project.demoUrl
+                ? 'live site'
+                : 'case study'
+            }`}
+            title={
+              project.demoUrl
+                ? `Open ${project.title}`
+                : project.title
+            }
+          >
+            {project.demoUrl && !iframeError ? (
+              <iframe
+                key={project.demoUrl}
+                src={project.demoUrl}
+                title={`${project.title} live preview`}
+                className="projects-video-media projects-project-preview"
+                loading="eager"
+                scrolling="no"
+                allow="fullscreen"
+                tabIndex={-1}
+                onError={() => setIframeError(true)}
+                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-presentation"
+              />
+            ) : (
+              <img
+                src={project.image}
+                alt={project.alt || project.title}
+                className="projects-video-media"
+                loading="eager"
+              />
+            )}
+
+            <span
+              className="projects-video-glass"
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+
+        {/* METRO FRAME */}
+
+        <img
+          src={fuji2}
+          alt=""
+          className="projects-train-image"
+        />
+
+        {/* POLES */}
+
+        <span
+          className="projects-pole projects-pole--left"
+          aria-hidden="true"
+        />
+
+        <span
+          className="projects-pole projects-pole--right"
+          aria-hidden="true"
+        />
+
+      </div>
+    </div>
+  );
+};
+
 export const ProjectsMetro = ({
   projects,
   onSelectProject,
@@ -47,128 +139,38 @@ export const ProjectsMetro = ({
     onSelectProject(project);
   };
 
-  const renderPanel = (
-    project: Project,
-    key: string
-  ) => {
-    const [iframeError, setIframeError] = useState(false);
-
-    return (
-      <div
-        className="projects-train-panel"
-        key={key}
-      >
-        <div className="projects-metro-stage">
-
-          {/* =====================================================
-              PROJECT WINDOW
-              ===================================================== */}
-
-          <div className="projects-video-window">
-            <button
-              type="button"
-              className="projects-video-click"
-              onClick={() => openProject(project)}
-              aria-label={`Open ${project.title} — ${project.demoUrl ? 'live site' : 'case study'}`}
-              title={project.demoUrl ? `Open ${project.title}` : project.title}
-            >
-              {project.demoUrl && !iframeError ? (
-                <iframe
-                  key={project.demoUrl}
-                  src={project.demoUrl}
-                  title={`${project.title} live preview`}
-                  className="projects-video-media projects-project-preview"
-                  loading="eager"
-                  scrolling="no"
-                  allow="fullscreen"
-                  tabIndex={-1}
-                  onError={() => setIframeError(true)}
-                 sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-presentation"
-
-                />
-              ) : (
-                <img
-                  src={project.image}
-                  alt={project.alt || project.title}
-                  className="projects-video-media"
-                  loading="eager"
-                />
-              )}
-
-              <span
-                className="projects-video-glass"
-                aria-hidden="true"
-              />
-            </button>
-          </div>
-
-          {/* =====================================================
-              METRO FRAME
-              ===================================================== */}
-
-          <img
-            src={fuji2}
-            alt=""
-            className="projects-train-image"
-          />
-
-          {/* =====================================================
-              POLES
-              ===================================================== */}
-
-          <span
-            className="projects-pole projects-pole--left"
-            aria-hidden="true"
-          />
-
-          <span
-            className="projects-pole projects-pole--right"
-            aria-hidden="true"
-          />
-
-        </div>
-      </div>
-    );
-  };
-
-  const projectPanels = projects.map(
-    (project, index) =>
-      renderPanel(
-        project,
-        `project-panel-${project.id}-${index}`
-      )
-  );
-
-  const duplicateProjectPanels = projects.map(
-    (project, index) =>
-      renderPanel(
-        project,
-        `project-panel-duplicate-${project.id}-${index}`
-      )
-  );
-
   return (
     <section
-      id="projects"
+      id="work"
       className="projects-section"
     >
 
-      {/* =====================================================
-          MOVING METRO
-          ===================================================== */}
+      {/* MOVING METRO */}
 
       <div
         className="projects-train-track"
         aria-hidden="true"
       >
-        {projectPanels}
+        {projects.map((project, index) => (
+          <ProjectPanel
+            key={`project-panel-${project.id}-${index}`}
+            panelKey={`project-panel-${project.id}-${index}`}
+            project={project}
+            onOpenProject={openProject}
+          />
+        ))}
 
-        {duplicateProjectPanels}
+        {projects.map((project, index) => (
+          <ProjectPanel
+            key={`project-panel-duplicate-${project.id}-${index}`}
+            panelKey={`project-panel-duplicate-${project.id}-${index}`}
+            project={project}
+            onOpenProject={openProject}
+          />
+        ))}
       </div>
 
-      {/* =====================================================
-          PROJECT INDICATORS
-          ===================================================== */}
+      {/* PROJECT INDICATORS */}
 
       <div
         className="projects-indicators"
@@ -186,21 +188,11 @@ export const ProjectsMetro = ({
         ))}
       </div>
 
-      {/* =====================================================
-          SECTION TITLE
-          ===================================================== */}
+      {/* BOTTOM INSTRUCTION */}
 
-      <div className="projects-title">
-        <span className="projects-eyebrow">
-          PROJECTS
-        </span>
-
-        <h2>Projects.</h2>
-
-        <p>
-          A moving collection of things I have built.
-        </p>
-      </div>
+      <p className="projects-click-hint">
+        CLICK THE WINDOW TO SEE MORE
+      </p>
 
     </section>
   );

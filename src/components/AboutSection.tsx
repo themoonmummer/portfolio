@@ -18,22 +18,24 @@ const CARDS: CardData[] = [
     title: "About Me",
     image: img1,
     description:
-      "I am a passionate full-stack developer dedicated to crafting beautiful, intuitive, and high-performance digital experiences. I love blending creative design with sturdy engineering.",
+      "I’m a BCA student and frontend developer with a strong foundation in HTML, CSS, JavaScript, React, Python, C, C++, Java, DBMS, and Data Structures. I’ve been consistently coding and building practical projects for the past 8 months while currently pursuing my final year of BCA. I’m passionate about turning ideas into responsive, user-friendly, and functional web applications. I’m also experienced in accounting operations, GST compliance, content strategy, and digital marketing. I’m a vibe coder at heart—I learn by building, experimenting, and continuously improving. I take my work seriously and always give my best to deliver reliable and meaningful solutions.",
   },
   {
-    id: "education",
-    title: "Education",
-    image: img2,
-    description:
-      "Graduated with a Bachelor of Science in Computer Science. Focused coursework on Web Development, Algorithms, Human-Computer Interaction, and Software Architecture.",
-  },
+  id: "education",
+  title: "Education",
+  image: img2,
+  description:
+    "Currently pursuing a Bachelor of Computer Applications (BCA) from Indira Gandhi National Open University (IGNOU), developing a strong foundation in programming, software development, databases, and computer science concepts. Completed Senior Secondary education under CBSE in 2023 and High School under CBSE in 2021.",
+},
+
   {
-    id: "experience",
-    title: "Experience",
-    image: img3,
-    description:
-      "Worked across dynamic tech teams building modern web applications, scalable APIs, and user-centric frontend designs with React, TypeScript, and modern CSS practices.",
-  },
+  id: "experience",
+  title: "Experience",
+  image: img3,
+  description:
+    "Frontend Developer Intern at Parvati And Sons, contributing to modern web applications through responsive interfaces, reusable React components, debugging, and user experience improvements. Alongside my internship, I work independently as a Full Stack Developer, designing and building products such as AI-powered applications, CRM and sales tools, immersive web experiences, and responsive business websites using React, Next.js, Vite, Tailwind CSS, and modern web technologies. My experience also includes accounting operations, GST compliance, financial documentation, PR, brand collaborations, and digital marketing, giving me a diverse professional background and a strong understanding of both technology and business.",
+},
+
 ];
 
 const About: React.FC = () => {
@@ -44,14 +46,9 @@ const About: React.FC = () => {
   /*
    * Keep the title synchronized with the Ferris wheel.
    *
-   * The wheel has 3 positions and each position lasts 6 seconds:
-   *
    * 0s - 6s   -> About Me
    * 6s - 12s  -> Education
    * 12s - 18s -> Experience
-   *
-   * No initial 5-second delay, otherwise the title gets ahead/behind
-   * the actual card position.
    */
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -63,6 +60,16 @@ const About: React.FC = () => {
 
   const handleCardClick = (card: CardData) => {
     setIsClosing(false);
+
+    // Keep the title and clicked card synchronized.
+    const clickedIndex = CARDS.findIndex(
+      (item) => item.id === card.id
+    );
+
+    if (clickedIndex !== -1) {
+      setActiveCardIndex(clickedIndex);
+    }
+
     setActiveCard(card);
   };
 
@@ -100,7 +107,6 @@ const About: React.FC = () => {
       ===================================================== */}
       <div className="about__stamp-corner" aria-hidden="true">
         <div className="stamp-triangle">
-          {/* Row 1 — 6 stamps */}
           <div className="stamp-row">
             {Array.from({ length: 6 }).map((_, i) => (
               <div className="about__stamp" key={`row1-${i}`}>
@@ -109,7 +115,6 @@ const About: React.FC = () => {
             ))}
           </div>
 
-          {/* Row 2 — 5 stamps */}
           <div className="stamp-row">
             {Array.from({ length: 5 }).map((_, i) => (
               <div className="about__stamp" key={`row2-${i}`}>
@@ -118,7 +123,6 @@ const About: React.FC = () => {
             ))}
           </div>
 
-          {/* Row 3 — 4 stamps */}
           <div className="stamp-row">
             {Array.from({ length: 4 }).map((_, i) => (
               <div className="about__stamp" key={`row3-${i}`}>
@@ -127,7 +131,6 @@ const About: React.FC = () => {
             ))}
           </div>
 
-          {/* Row 4 — 3 stamps */}
           <div className="stamp-row">
             {Array.from({ length: 3 }).map((_, i) => (
               <div className="about__stamp" key={`row4-${i}`}>
@@ -136,7 +139,6 @@ const About: React.FC = () => {
             ))}
           </div>
 
-          {/* Row 5 — 2 stamps */}
           <div className="stamp-row">
             {Array.from({ length: 2 }).map((_, i) => (
               <div className="about__stamp" key={`row5-${i}`}>
@@ -145,7 +147,6 @@ const About: React.FC = () => {
             ))}
           </div>
 
-          {/* Row 6 — 1 stamp */}
           <div className="stamp-row">
             <div className="about__stamp">
               <span>桜</span>

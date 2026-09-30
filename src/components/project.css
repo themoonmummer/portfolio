@@ -1,17 +1,23 @@
 /* =========================================================
-   PROJECTS — MOVING METRO
+   PROJECTS — RESPONSIVE MOVING METRO
    ========================================================= */
 
 .projects-section {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100svh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+  min-height: 560px;
+
   overflow: hidden;
+
   background: #080d18;
   color: #f4eee4;
+
+  isolation: isolate;
 }
+
 
 /* =========================================================
    MOVING TRAIN
@@ -20,43 +26,48 @@
 .projects-train-track {
   position: absolute;
   inset: 0;
+
   z-index: 1;
 
   display: flex;
 
-  /*
-   * 8 project panels + 8 duplicated project panels.
-   *
-   * Each panel is 100vw.
-   * Total width = 16 × 100vw = 1600vw.
-   */
-  width: 1600vw;
+  width: max-content;
   height: 100%;
-  height: 100svh;
-  height: 100dvh;
 
-  /*
-   * Each project stays visible for 26 seconds.
-   * 8 projects × 26 seconds = 208 seconds.
-   */
   animation: projects-train-move 110s linear infinite;
 
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .projects-train-panel {
   position: relative;
+
   flex: 0 0 100vw;
+
   width: 100vw;
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
+  height: 100%;
+
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
   background: #080d18;
+
+  backface-visibility: hidden;
 }
+
+
+/* =========================================================
+   METRO STAGE
+   ========================================================= */
+
+.projects-metro-stage {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
 
 /* =========================================================
    METRO IMAGE
@@ -65,38 +76,45 @@
 .projects-train-image {
   position: absolute;
   inset: 0;
+
+  z-index: 1;
+
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   object-position: center;
+
   display: block;
-  z-index: 1;
+
   filter:
     saturate(0.88)
     brightness(0.82)
     contrast(1.02);
+
   user-select: none;
   pointer-events: none;
-  border-radius: 0;
 }
 
+
 /* =========================================================
-   VIDEO / LIVE PROJECT WINDOW
+   PROJECT WINDOW
    ========================================================= */
 
 .projects-video-window {
   position: absolute;
 
-  /* Window interior — measured from 1280x881 source */
-  left: 18%;
-  top: 3.5%;
-  width: 71.5%;
-  height: 75.3%;
-
   z-index: 2;
+
+  left: 18%;
+  top: 4%;
+
+  width: 71.5%;
+  height: 75%;
+
   overflow: hidden;
 
-  border-radius: 72px;
+  border-radius: clamp(30px, 5vw, 72px);
 
   background: #050a18;
 
@@ -129,9 +147,10 @@
 }
 
 .projects-video-click:focus-visible {
-  outline: 2px solid #ffe68c;
+  outline: 2px solid #ffb000;
   outline-offset: 3px;
 }
+
 
 /* =========================================================
    PROJECT PREVIEW
@@ -152,15 +171,10 @@
   background: #0b1220;
 
   transition:
-    transform 0.7s ease,
+    transform 0.5s ease,
     filter 0.4s ease;
 }
 
-/*
- * The live Vercel iframe must NOT receive the click.
- * The parent button handles the click and opens the exact
- * demoUrl belonging to that project.
- */
 .projects-project-preview {
   pointer-events: none;
   border: 0;
@@ -168,63 +182,51 @@
 
 .projects-video-click:hover .projects-video-media,
 .projects-video-click:focus-visible .projects-video-media {
-  transform: scale(1.04);
-  filter: brightness(1.04) saturate(1.05);
+  transform: scale(1.025);
+
+  filter:
+    brightness(1.04)
+    saturate(1.04);
 }
 
-/* =========================================================
-   FALLBACK IMAGE
-   ========================================================= */
-
-.projects-video-fallback {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover;
-  object-position: center;
-
-  display: block;
-}
 
 /* =========================================================
-   GLASS REFLECTION
+   GLASS
    ========================================================= */
 
 .projects-video-glass {
   position: absolute;
   inset: 0;
 
+  z-index: 1;
+
   pointer-events: none;
 
   background:
     linear-gradient(
       118deg,
-      rgba(255,255,255,0.14) 0%,
-      rgba(255,255,255,0.03) 28%,
+      rgba(255,255,255,0.12) 0%,
+      rgba(255,255,255,0.025) 28%,
       transparent 52%
     );
 
   mix-blend-mode: screen;
-
-  z-index: 1;
 }
 
+
 /* =========================================================
-   POLES — ABOVE VIDEO
+   POLES
    ========================================================= */
 
 .projects-pole {
   position: absolute;
 
-  top: 3.5%;
-  bottom: 10.5%;
-
-  width: clamp(8px, 1.1vw, 14px);
-
   z-index: 3;
+
+  top: 4%;
+  bottom: 10%;
+
+  width: clamp(7px, 1vw, 13px);
 
   pointer-events: none;
 
@@ -233,12 +235,12 @@
   background:
     linear-gradient(
       90deg,
-      #7a7a7a 0%,
+      #777 0%,
       #c8c8c8 18%,
       #f0f0f0 34%,
       #a8a8a8 52%,
       #d8d8d8 68%,
-      #8a8a8a 100%
+      #888 100%
     );
 
   box-shadow:
@@ -255,414 +257,143 @@
   right: 16.95%;
 }
 
-/* Horizontal top rail highlight */
-.projects-pole::before {
-  content: "";
-
-  position: absolute;
-
-  top: -1.5%;
-  left: 50%;
-
-  transform: translateX(-50%);
-
-  width: 1px;
-  height: 4%;
-
-  background: rgba(255,255,255,0);
-}
 
 /* =========================================================
-   8-PROJECT METRO LOOP
-   =========================================================
-
-   The track contains:
-
-   Project 1
-   Project 2
-   Project 3
-   Project 4
-   Project 5
-   Project 6
-   Project 7
-   Project 8
-
-   followed by:
-
-   Project 1
-   Project 2
-   Project 3
-   Project 4
-   Project 5
-   Project 6
-   Project 7
-   Project 8
-
-   The animation starts on the duplicated set at -800vw
-   and finishes at 0vw on the original set.
-
-   This creates:
-
-   1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 → 1 → ...
+   TRAIN LOOP
    ========================================================= */
 
 @keyframes projects-train-move {
-  0% {
+  from {
     transform: translate3d(-800vw, 0, 0);
   }
 
-  100% {
+  to {
     transform: translate3d(0, 0, 0);
   }
 }
 
+
 /* =========================================================
-   ATMOSPHERE
+   DESTINATION / PROJECT BOARD
    ========================================================= */
 
-.projects-atmosphere {
+.projects-destination-board {
   position: absolute;
-  inset: 0;
-  z-index: 2;
+
+  z-index: 12;
+
+  top: clamp(28px, 5vh, 60px);
+  left: clamp(20px, 5vw, 72px);
+
+  width: clamp(230px, 25vw, 350px);
+
+  padding: 16px 20px;
+
+  background: #050505;
+
+  border: 1px solid #191919;
+
+  border-radius: 0;
+
+  box-shadow:
+    0 8px 22px rgba(0,0,0,0.45);
 
   pointer-events: none;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(5, 10, 20, 0.72) 0%,
-      rgba(5, 10, 20, 0.12) 20%,
-      transparent 42%,
-      transparent 58%,
-      rgba(5, 10, 20, 0.12) 80%,
-      rgba(5, 10, 20, 0.72) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(5, 10, 20, 0.52) 0%,
-      transparent 25%,
-      transparent 72%,
-      rgba(5, 10, 20, 0.72) 100%
-    );
 }
 
-/* =========================================================
-   PROJECT WINDOW POSITION
-   ========================================================= */
+.projects-board-title {
+  margin: 0;
 
-.projects-window-position {
-  position: absolute;
-  z-index: 5;
-
-  left: 50%;
-  top: 50%;
-
-  transform: translate(-50%, -50%);
-
-  width: min(65vw, 815px);
-}
-
-/* =========================================================
-   OUTER WINDOW
-   ========================================================= */
-
-.projects-window {
-  display: block;
-
-  width: 100%;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  cursor: pointer;
-
-  text-align: left;
-
-  outline: none;
-}
-
-/* =========================================================
-   METAL WINDOW FRAME
-   ========================================================= */
-
-.projects-window-frame {
-  position: relative;
-
-  display: block;
-
-  padding: 16px;
-
-  border-radius: 34px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #e4ded1 0%,
-      #b9b1a1 25%,
-      #777164 58%,
-      #aaa292 78%,
-      #625e53 100%
-    );
-
-  box-shadow:
-    0 35px 90px rgba(0, 0, 0, 0.58),
-    inset 0 2px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -4px 8px rgba(0, 0, 0, 0.42);
-
-  transition:
-    transform 0.45s ease,
-    box-shadow 0.45s ease;
-}
-
-/* Four tiny metallic rivets */
-
-.projects-window-frame::before,
-.projects-window-frame::after {
-  content: "";
-
-  position: absolute;
-
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle at 30% 30%,
-      #fff8e8 0%,
-      #a59d8c 45%,
-      #5b564c 100%
-    );
-
-  box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-.projects-window-frame::before {
-  top: 8px;
-  left: 11px;
-}
-
-.projects-window-frame::after {
-  top: 8px;
-  right: 11px;
-}
-
-/* =========================================================
-   INNER WINDOW LIP
-   ========================================================= */
-
-.projects-window-glass {
-  position: relative;
-
-  display: block;
-
-  width: 100%;
-
-  aspect-ratio: 16 / 9;
-
-  overflow: hidden;
-
-  border-radius: 24px;
-
-  background: #050912;
-
-  border: 4px solid #464239;
-
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 255, 255, 0.12),
-    inset 0 0 60px rgba(0, 0, 0, 0.65);
-}
-
-/* =========================================================
-   PROJECT IMAGE / VIDEO
-   ========================================================= */
-
-.projects-window-media {
-  position: absolute;
-  inset: 0;
-
-  width: 100%;
-  height: 100%;
-
-  display: block;
-
-  object-fit: cover;
-
-  transition:
-    opacity 0.7s ease,
-    transform 1s ease;
-
-  animation: projects-window-enter 0.8s ease both;
-}
-
-@keyframes projects-window-enter {
-  from {
-    opacity: 0;
-    transform: scale(1.035);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* =========================================================
-   PROJECT PLACEHOLDER
-   ========================================================= */
-
-.projects-window-placeholder {
-  position: absolute;
-  inset: 0;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 30px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #17243d,
-      #080d18
-    );
-
-  color: rgba(255, 230, 140, 0.85);
+  color: #ffb000;
 
   font-family:
-    "Plus Jakarta Sans",
-    system-ui,
-    sans-serif;
+    "Courier New",
+    Courier,
+    monospace;
 
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: clamp(1.35rem, 2.7vw, 2.15rem);
 
-  font-weight: 700;
+  font-weight: 900;
 
-  text-align: center;
-}
+  line-height: 1;
 
-/* =========================================================
-   GLASS REFLECTION
-   ========================================================= */
+  letter-spacing: 0.12em;
 
-.projects-window-reflection {
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      116deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0.07) 18%,
-      transparent 42%
-    );
-
-  mix-blend-mode: screen;
-}
-
-/* =========================================================
-   WINDOW VIGNETTE
-   ========================================================= */
-
-.projects-window-vignette {
-  position: absolute;
-  inset: 0;
-
-  pointer-events: none;
-
-  box-shadow:
-    inset 0 0 70px rgba(0, 0, 0, 0.62),
-    inset 0 -35px 45px rgba(0, 0, 0, 0.38);
-}
-
-/* =========================================================
-   PROJECT LABEL
-   ========================================================= */
-
-.projects-window-label {
-  position: absolute;
-
-  left: 24px;
-  right: 24px;
-  bottom: 20px;
-
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-
-  gap: 20px;
-
-  pointer-events: none;
-}
-
-.projects-window-number {
-  font-family:
-    "Plus Jakarta Sans",
-    system-ui,
-    sans-serif;
-
-  font-size: 10px;
-
-  letter-spacing: 0.22em;
-
-  color: rgba(255, 230, 140, 0.78);
-}
-
-.projects-window-title {
-  max-width: 60%;
-
-  font-family:
-    "Plus Jakarta Sans",
-    system-ui,
-    sans-serif;
-
-  font-size: clamp(0.8rem, 1.4vw, 1rem);
-
-  font-weight: 700;
-
-  letter-spacing: 0.06em;
-
-  color: #fff8e9;
-
-  text-align: right;
+  text-transform: uppercase;
 
   text-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.75);
+    1px 0 0 #ff8a00,
+    0 1px 0 #ff8a00,
+    0 0 5px rgba(255,145,0,0.22);
 }
 
+.projects-board-subtitle {
+  margin-top: 10px;
+
+  color: #ffd45a;
+
+  font-family:
+    "Courier New",
+    Courier,
+    monospace;
+
+  font-size: clamp(0.52rem, 0.75vw, 0.68rem);
+
+  font-weight: 700;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+
 /* =========================================================
-   WINDOW HOVER
+   CLICK HINT
    ========================================================= */
 
-.projects-window:hover .projects-window-frame,
-.projects-window:focus-visible .projects-window-frame {
-  transform: translateY(-6px);
+.projects-click-hint {
+  position: absolute;
 
-  box-shadow:
-    0 45px 100px rgba(0, 0, 0, 0.68),
-    inset 0 2px 0 rgba(255, 255, 255, 0.75),
-    inset 0 -4px 8px rgba(0, 0, 0, 0.42);
+  z-index: 20;
+
+  left: 50%;
+  bottom: 58px;
+
+  transform: translateX(-50%);
+
+  width: max-content;
+  max-width: calc(100% - 40px);
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-family:
+    "Courier New",
+    Courier,
+    monospace;
+
+  font-size: clamp(0.62rem, 0.8vw, 0.78rem);
+
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 2px 8px rgba(0,0,0,0.85);
+
+  pointer-events: none;
 }
 
-.projects-window:focus-visible {
-  outline: none;
-}
-
-.projects-window:focus-visible .projects-window-frame {
-  outline: 2px solid #ffe68c;
-  outline-offset: 8px;
-}
 
 /* =========================================================
-   PROJECT INDICATORS
+   INDICATORS
    ========================================================= */
 
 .projects-indicators {
@@ -671,12 +402,11 @@
   z-index: 10;
 
   left: 50%;
-  bottom: 32px;
+  bottom: 28px;
 
   transform: translateX(-50%);
 
   display: flex;
-
   align-items: center;
 
   gap: 7px;
@@ -690,7 +420,7 @@
 
   border-radius: 50%;
 
-  background: rgba(255, 230, 140, 0.38);
+  background: rgba(255,174,0,0.35);
 
   transition:
     width 0.35s ease,
@@ -702,263 +432,173 @@
 
   border-radius: 999px;
 
-  background: #ffe68c;
+  background: #ffb000;
 }
 
 /* =========================================================
-   TITLE
+   TABLET ONLY — 601px TO 900px
    ========================================================= */
 
-.projects-title {
-  position: absolute;
-
-  z-index: 8;
-
-  top: clamp(32px, 7vh, 76px);
-  left: clamp(24px, 6vw, 90px);
-
-  pointer-events: none;
-}
-
-.projects-eyebrow {
-  display: block;
-
-  font-family:
-    "Plus Jakarta Sans",
-    system-ui,
-    sans-serif;
-
-  font-size: 10px;
-
-  font-weight: 700;
-
-  letter-spacing: 0.38em;
-
-  color: rgba(255, 230, 140, 0.72);
-}
-
-.projects-title h2 {
-  margin: 8px 0 0;
-
-  font-family:
-    "Cormorant Garamond",
-    Georgia,
-    serif;
-
-  font-size: clamp(2.4rem, 5vw, 5rem);
-
-  font-style: italic;
-
-  font-weight: 600;
-
-  line-height: 0.95;
-
-  color: rgba(255, 246, 226, 0.94);
-}
-
-.projects-title p {
-  margin: 10px 0 0;
-
-  font-family:
-    "Cormorant Garamond",
-    Georgia,
-    serif;
-
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-
-  color: rgba(255, 230, 140, 0.62);
-}
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-  .projects-train-image {
-    object-position: center;
-  }
-
-  .projects-metro-stage {
-    width: min(94vw, 860px);
-    max-height: 68vh;
-    max-height: 68svh;
-  }
+@media (min-width: 601px) and (max-width: 900px) {
 
   .projects-video-window {
-    border-radius: clamp(14px, 3vw, 32px);
+    position: absolute;
+
+    /* smaller + centered */
+    left: 20%;
+    top: 11%;
+
+    width: 64%;
+    height: 58%;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    box-sizing: border-box;
   }
 
-  .projects-pole {
-    width: clamp(7px, 1vw, 12px);
-  }
-
-  .projects-window-position {
-    width: min(72vw, 650px);
-  }
-
-  .projects-window-frame {
-    padding: 12px;
-
-    border-radius: 28px;
-  }
-
-  .projects-window-glass {
-    border-radius: 20px;
-  }
-}
-
-/* =========================================================
-   LARGE TABLET / SMALL DESKTOP
-   ========================================================= */
-
-@media (max-width: 1200px) {
-  .projects-metro-stage {
-    width: min(90vw, 900px);
-    max-height: 72vh;
-    max-height: 72svh;
-  }
-
-  .projects-video-window {
-    border-radius: clamp(16px, 2.5vw, 36px);
-  }
-
-  .projects-pole {
-    width: clamp(8px, 1vw, 13px);
-  }
-}
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 600px) {
-  .projects-section {
-    min-height: 100svh;
-  }
-
-  .projects-train-panel {
-    height: 100svh;
-  }
-
-  .projects-metro-stage {
-    width: 94vw;
-    max-height: 56svh;
-  }
-
-  .projects-train-image {
+  .projects-video-click {
     width: 100%;
     height: 100%;
 
-    object-fit: cover;
-    object-position: center;
+    overflow: hidden;
+
+    border-radius: inherit;
   }
 
-  .projects-video-window {
-    border-radius: 18px;
+  .projects-video-media,
+  .projects-project-preview {
+    position: absolute;
 
-    left: 17.1%;
-    top: 19.7%;
-    width: 72.6%;
-    height: 49.2%;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: cover;
+    object-position: center top;
+
+    display: block;
+
+    border: 0;
   }
 
   .projects-pole {
+    top: 9%;
+    bottom: 13%;
+
     width: 8px;
-    top: 5%;
-    bottom: 12%;
   }
 
-  .projects-window-position {
-    width: calc(100vw - 42px);
+  .projects-pole--left {
+    left: 13%;
   }
 
-  .projects-window-frame {
-    padding: 8px;
-
-    border-radius: 22px;
+  .projects-pole--right {
+    right: 13%;
   }
 
-  .projects-window-glass {
-    border-width: 3px;
-    border-radius: 16px;
-  }
-
-  .projects-window-label {
-    left: 14px;
-    right: 14px;
-    bottom: 12px;
-  }
-
-  .projects-title {
-    top: 28px;
+  .projects-destination-board {
+    top: 24px;
     left: 24px;
+
+    width: min(300px, 40vw);
+
+    padding: 13px 15px;
   }
 
-  .projects-title h2 {
-    font-size: 2.6rem;
+  .projects-board-title {
+    font-size: clamp(1.2rem, 3.5vw, 1.7rem);
   }
 
-  .projects-title p {
-    max-width: 220px;
+  .projects-board-subtitle {
+    font-size: 0.54rem;
+  }
+
+  .projects-click-hint {
+    bottom: 7%;
+
+    font-size: 0.58rem;
+  }
+
+  .projects-indicators {
+    bottom: 24px;
+  }
+}
+
+/* =========================================================
+   MOBILE LANDSCAPE / LARGE PHONE
+   481px — 600px
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 600px) {
+
+  .projects-section {
+    min-height: 560px;
+  }
+
+  .projects-video-window {
+    left: 9%;
+    top: 24%;
+
+    width: 82%;
+    height: 45%;
+
+    border-radius: 24px;
+  }
+
+  .projects-pole {
+    top: 20%;
+    bottom: 15%;
+
+    width: 6px;
+  }
+
+  .projects-pole--left {
+    left: 6%;
+  }
+
+  .projects-pole--right {
+    right: 6%;
+  }
+
+  .projects-destination-board {
+    top: 16px;
+    left: 16px;
+
+    width: calc(100vw - 32px);
+    max-width: 290px;
+
+    padding: 11px 13px;
+  }
+
+  .projects-board-title {
+    font-size: 1.2rem;
+  }
+
+  .projects-board-subtitle {
+    margin-top: 6px;
+
+    font-size: 0.48rem;
+  }
+
+  .projects-click-hint {
+    bottom: 53px;
+
+    max-width: calc(100vw - 32px);
+
+    font-size: 0.55rem;
+
+    letter-spacing: 0.1em;
   }
 
   .projects-indicators {
     bottom: 22px;
-  }
-}
 
-/* =========================================================
-   SMALL MOBILE
-   ========================================================= */
-
-@media (max-width: 480px) {
-  .projects-metro-stage {
-    width: 96vw;
-    max-height: 52svh;
-  }
-
-  .projects-video-window {
-    border-radius: 16px;
-    left: 16%;
-    top: 22%;
-    width: 74%;
-    height: 46%;
-  }
-
-  .projects-pole {
-    width: 7px;
-  }
-
-  .projects-window-position {
-    width: calc(100vw - 32px);
-  }
-
-  .projects-window-frame {
-    padding: 6px;
-    border-radius: 20px;
-  }
-
-  .projects-window-glass {
-    border-width: 2px;
-    border-radius: 14px;
-  }
-
-  .projects-title {
-    top: 20px;
-    left: 20px;
-  }
-
-  .projects-title h2 {
-    font-size: 2.2rem;
-  }
-
-  .projects-title p {
-    max-width: 180px;
-    font-size: 0.8rem;
-  }
-
-  .projects-indicators {
-    bottom: 18px;
     gap: 5px;
   }
 
@@ -968,76 +608,226 @@
   }
 
   .projects-indicator--active {
-    width: 20px;
+    width: 19px;
   }
 }
+
+
+/* =========================================================
+   MOBILE PORTRAIT
+   361px — 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .projects-section {
+    min-height: 600px;
+  }
+
+  /*
+   * IMPORTANT:
+   * The window is intentionally wider and lower on mobile.
+   * This prevents the original narrow/tall metro look.
+   */
+
+  .projects-video-window {
+    left: 7%;
+    top: 28%;
+
+    width: 86%;
+    height: 40%;
+
+    border-radius: 18px;
+  }
+
+  .projects-pole {
+    top: 25%;
+    bottom: 17%;
+
+    width: 5px;
+  }
+
+  .projects-pole--left {
+    left: 4%;
+  }
+
+  .projects-pole--right {
+    right: 4%;
+  }
+
+  /*
+   * Board becomes compact.
+   */
+
+  .projects-destination-board {
+    top: 14px;
+    left: 14px;
+
+    width: calc(100vw - 28px);
+
+    max-width: none;
+
+    padding: 10px 12px;
+  }
+
+  .projects-board-title {
+    font-size: 1.05rem;
+
+    letter-spacing: 0.1em;
+  }
+
+  .projects-board-subtitle {
+    margin-top: 6px;
+
+    font-size: 0.43rem;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.06em;
+  }
+
+  /*
+   * Bottom instruction.
+   */
+
+  .projects-click-hint {
+    bottom: 51px;
+
+    width: calc(100% - 28px);
+
+    font-size: 0.52rem;
+
+    letter-spacing: 0.08em;
+
+    white-space: normal;
+  }
+
+  .projects-indicators {
+    bottom: 21px;
+
+    gap: 5px;
+  }
+
+  .projects-indicator {
+    width: 5px;
+    height: 5px;
+  }
+
+  .projects-indicator--active {
+    width: 18px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   360px AND BELOW
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .projects-section {
+    min-height: 560px;
+  }
+
+  .projects-video-window {
+    left: 6%;
+    top: 29%;
+
+    width: 88%;
+    height: 38%;
+
+    border-radius: 15px;
+  }
+
+  .projects-pole {
+    top: 26%;
+    bottom: 17%;
+
+    width: 4px;
+  }
+
+  .projects-pole--left {
+    left: 3%;
+  }
+
+  .projects-pole--right {
+    right: 3%;
+  }
+
+  .projects-destination-board {
+    top: 12px;
+    left: 12px;
+
+    width: calc(100vw - 24px);
+
+    padding: 9px 10px;
+  }
+
+  .projects-board-title {
+    font-size: 0.92rem;
+  }
+
+  .projects-board-subtitle {
+    font-size: 0.4rem;
+
+    max-width: 220px;
+  }
+
+  .projects-click-hint {
+    bottom: 48px;
+
+    width: calc(100% - 24px);
+
+    font-size: 0.47rem;
+
+    letter-spacing: 0.06em;
+  }
+
+  .projects-indicators {
+    bottom: 19px;
+  }
+}
+
+
+/* =========================================================
+   SHORT SCREENS
+   ========================================================= */
+
+@media (max-height: 650px) and (max-width: 768px) {
+
+  .projects-video-window {
+    top: 25%;
+    height: 44%;
+  }
+
+  .projects-destination-board {
+    top: 10px;
+  }
+
+  .projects-click-hint {
+    bottom: 43px;
+  }
+
+  .projects-indicators {
+    bottom: 16px;
+  }
+}
+
 
 /* =========================================================
    REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   .projects-train-track {
     animation: none;
-
-    /*
-     * Show the beginning of the original 8-project sequence.
-     */
-    transform: translateX(-800vw);
+    transform: translate3d(-800vw, 0, 0);
   }
 
-  .projects-window-media {
-    animation: none;
-  }
-
-  .projects-window-frame {
+  .projects-video-media,
+  .projects-indicator {
     transition: none;
   }
-}
-
-/* =========================================================
-   FIX — FULL-BLEED PROJECT SECTION
-   ========================================================= */
-
-.projects-section {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
-
-  min-height: 100vh;
-  min-height: 100svh;
-  min-height: 100dvh;
-
-  overflow: hidden;
-
-  background: #080d18;
-  isolation: isolate;
-}
-
-.projects-train-track {
-  position: absolute;
-  inset: 0;
-
-  width: 1600vw;
-  height: 100%;
-  min-height: 100%;
-
-  z-index: 1;
-
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-}
-
-.projects-train-panel {
-  flex: 0 0 100vw;
-
-  width: 100vw;
-  height: 100%;
-  min-height: 100%;
-
-  background: #080d18;
-
-  backface-visibility: hidden;
 }

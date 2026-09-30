@@ -72,7 +72,7 @@ export const SocialMedia: React.FC = () => {
   }, []);
 
   return (
-    <section className="social-section" id="social">
+    <section className="social-section" id="social-media">
       {/* Background pattern */}
       <div className="social-bg-pattern" aria-hidden="true" />
 

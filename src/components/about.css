@@ -21,6 +21,9 @@ WITH DARK BROWN FERRIS WHEEL + JAPANESE STAMPS
   position: relative;
 
   width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
   min-height: 100vh;
   min-height: 100svh;
   min-height: 100dvh;
@@ -394,13 +397,17 @@ TOP-RIGHT TRIANGLE STAMP DECORATION
   opacity: 0.82;
 }
 
+
+/* =========================================================
+FERRIS WHEEL
+========================================================= */
+
 .ferris-wheel {
   position: absolute;
 
   left: -39vw;
   top: 50%;
 
-  /* Slightly smaller at 100% desktop */
   width: 95vw;
   height: 95vw;
 
@@ -415,6 +422,7 @@ TOP-RIGHT TRIANGLE STAMP DECORATION
 
   will-change: transform;
 }
+
 
 /* =========================================================
 FERRIS WHEEL BACKGROUND CIRCLE
@@ -666,10 +674,6 @@ CARDS
   transform-origin:
     center center;
 
-  /*
-   * Reduced distance so the cards stay visually connected
-   * without crowding the right-side title.
-   */
   transform:
     translate(-50%, -50%)
     rotate(var(--card-angle))
@@ -838,10 +842,12 @@ ABOUT CONTENT
   margin-left: auto;
 
   margin-right:
-    10vw;
+    5vw;
 
   padding:
     80px 0;
+
+  box-sizing: border-box;
 }
 
 .about__title {
@@ -931,6 +937,7 @@ MODAL
 
   width: 100%;
   height: 100%;
+  height: 100dvh;
 
   transform-origin:
     20% 50%;
@@ -978,6 +985,8 @@ MODAL
 
 .card-modal__body {
   flex: 1;
+
+  min-height: 0;
 
   background:
     linear-gradient(
@@ -1031,7 +1040,7 @@ MODAL
 
   line-height: 1.85;
 
-  max-width: 680px;
+  max-width: none;
 
   margin:
     0 0 30px;
@@ -1158,7 +1167,7 @@ RESPONSIVE — LARGE TABLET / SMALL DESKTOP
       min(550px, 45vw);
 
     margin-right:
-      8vw;
+      5vw;
   }
 }
 
@@ -1168,11 +1177,22 @@ RESPONSIVE — TABLET
 ========================================================= */
 
 @media (max-width: 1000px) {
-  .ferris-wheel {
-    width: 130vw;
-    height: 130vw;
+  .about {
+    min-height: 100svh;
+    min-height: 100dvh;
 
-    left: -35vw;
+    align-items: center;
+  }
+
+  /*
+   * Only roughly 40% of the wheel is visible.
+   * The center of the wheel sits outside the left edge.
+   */
+  .ferris-wheel {
+    width: 100vw;
+    height: 100vw;
+
+    left: -60vw;
 
     top: 50%;
 
@@ -1180,12 +1200,55 @@ RESPONSIVE — TABLET
     max-height: none;
   }
 
-  .about__content {
-    width:
-      min(560px, 50vw);
+  .ferris-wheel__background-circle {
+    width: 62vw;
+    height: 62vw;
 
-    margin-right:
-      7vw;
+    min-width: 220px;
+    min-height: 220px;
+  }
+
+  /*
+   * Keep the cards close enough to the visible wheel
+   * that they don't disappear outside the viewport.
+   */
+  .ferris-card {
+    width:
+      clamp(130px, 20vw, 220px);
+
+    height:
+      clamp(90px, 13vw, 150px);
+
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--card-angle))
+      translateX(min(34vw, 300px));
+  }
+
+  /*
+   * Content becomes the right-side column.
+   */
+  .about__content {
+    position: absolute;
+
+    right: 5vw;
+    top: 50%;
+
+    width: 43vw;
+    max-width: 480px;
+
+    margin: 0;
+
+    padding: 0;
+
+    transform: translateY(-50%);
+
+    box-sizing: border-box;
+  }
+
+  .about__title {
+    font-size:
+      clamp(2.3rem, 6vw, 4.5rem);
   }
 
   .about__stamp {
@@ -1203,27 +1266,6 @@ RESPONSIVE — TABLET
 
   .stamp-row {
     gap: 4px;
-  }
-
-  .ferris-wheel__background-circle {
-    width: 50vw;
-    height: 50vw;
-
-    min-width: 220px;
-    min-height: 220px;
-  }
-
-  .ferris-card {
-    width:
-      clamp(160px, 18vw, 260px);
-
-    height:
-      clamp(110px, 12vw, 180px);
-
-    transform:
-      translate(-50%, -50%)
-      rotate(var(--card-angle))
-      translateX(min(70vw, 550px));
   }
 
   .word-stamp {
@@ -1247,14 +1289,18 @@ RESPONSIVE — MOBILE
     min-height: 100svh;
     min-height: 100dvh;
 
-    align-items: flex-end;
+    align-items: center;
   }
 
+  /*
+   * The wheel is deliberately positioned outside the viewport.
+   * Approximately 40% of it remains visible on the left.
+   */
   .ferris-wheel {
-    width: 140vw;
-    height: 140vw;
+    width: 100vw;
+    height: 100vw;
 
-    left: -45vw;
+    left: -60vw;
 
     top: 50%;
 
@@ -1263,40 +1309,63 @@ RESPONSIVE — MOBILE
   }
 
   .ferris-wheel__background-circle {
-    width: 65vw;
-    height: 65vw;
+    width: 60vw;
+    height: 60vw;
 
     min-width: 200px;
     min-height: 200px;
   }
 
+  /*
+   * Smaller cards, positioned inside the visible portion
+   * of the wheel.
+   */
   .ferris-card {
     width:
-      clamp(140px, 22vw, 220px);
+      clamp(105px, 24vw, 180px);
 
     height:
-      clamp(100px, 16vw, 160px);
+      clamp(75px, 16vw, 125px);
 
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(65vw, 480px));
+      translateX(min(34vw, 260px));
   }
 
+  /*
+   * Title stays on the right side of the visible card/wheel.
+   */
   .about__content {
-    width: auto;
+    position: absolute;
+
+    top: 50%;
+    right: 5vw;
+
+    width: 42vw;
 
     margin: 0;
+    padding: 0;
 
-    padding:
-      0 24px 60px;
+    transform: translateY(-50%);
 
     z-index: 10;
   }
 
   .about__title {
     font-size:
-      clamp(2.5rem, 10vw, 4rem);
+      clamp(2rem, 9vw, 3.5rem);
+
+    line-height: 0.92;
+  }
+
+  .about__subtitle {
+    margin-top: 12px;
+
+    font-size:
+      clamp(0.65rem, 2vw, 0.85rem);
+
+    line-height: 1.35;
   }
 
   .about__stamp {
@@ -1345,6 +1414,47 @@ RESPONSIVE — MOBILE
 
     letter-spacing: 0.10em;
   }
+
+  /*
+   * Full-screen opened card on mobile.
+   */
+  .card-modal {
+    position: fixed;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    min-height: 100svh;
+
+    z-index: 1000;
+  }
+
+  .card-modal__hero {
+    height: 30vh;
+
+    min-height: 180px;
+  }
+
+  .card-modal__body {
+    min-height: 0;
+
+    padding:
+      clamp(24px, 4vw, 40px);
+  }
+
+  .card-modal__title {
+    font-size:
+      clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .card-modal__text {
+    font-size:
+      clamp(0.9rem, 1.1vw, 1rem);
+
+    line-height: 1.7;
+  }
 }
 
 
@@ -1354,18 +1464,15 @@ RESPONSIVE — SMALL MOBILE
 
 @media (max-width: 480px) {
   .ferris-wheel {
-    width: 160vw;
-    height: 160vw;
+    width: 100vw;
+    height: 100vw;
 
-    left: -55vw;
-
-    max-width: none;
-    max-height: none;
+    left: -62vw;
   }
 
   .ferris-wheel__background-circle {
-    width: 75vw;
-    height: 75vw;
+    width: 64vw;
+    height: 64vw;
 
     min-width: 180px;
     min-height: 180px;
@@ -1373,25 +1480,31 @@ RESPONSIVE — SMALL MOBILE
 
   .ferris-card {
     width:
-      clamp(120px, 25vw, 200px);
+      clamp(100px, 25vw, 155px);
 
     height:
-      clamp(90px, 18vw, 140px);
+      clamp(72px, 17vw, 110px);
 
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(60vw, 420px));
+      translateX(min(33vw, 220px));
   }
 
   .about__content {
-    padding:
-      0 20px 50px;
+    right: 4vw;
+
+    width: 43vw;
   }
 
   .about__title {
     font-size:
-      clamp(2rem, 10vw, 3.5rem);
+      clamp(1.8rem, 9vw, 3rem);
+  }
+
+  .about__subtitle {
+    font-size:
+      clamp(0.58rem, 2.4vw, 0.75rem);
   }
 
   .about__stamp {
@@ -1415,6 +1528,29 @@ RESPONSIVE — SMALL MOBILE
     height:
       clamp(24px, 3.5vw, 50px);
   }
+
+  .card-modal__hero {
+    height: 25vh;
+
+    min-height: 160px;
+  }
+
+  .card-modal__body {
+    padding:
+      20px 16px;
+  }
+
+  .card-modal__title {
+    font-size: 1.6rem;
+  }
+
+  .card-modal__text {
+    font-size: 0.85rem;
+  }
+
+  .card-modal__back {
+    font-size: 0.85rem;
+  }
 }
 
 
@@ -1424,18 +1560,15 @@ RESPONSIVE — VERY SMALL MOBILE
 
 @media (max-width: 360px) {
   .ferris-wheel {
-    width: 180vw;
-    height: 180vw;
+    width: 100vw;
+    height: 100vw;
 
-    left: -65vw;
-
-    max-width: none;
-    max-height: none;
+    left: -64vw;
   }
 
   .ferris-wheel__background-circle {
-    width: 85vw;
-    height: 85vw;
+    width: 68vw;
+    height: 68vw;
 
     min-width: 160px;
     min-height: 160px;
@@ -1443,25 +1576,31 @@ RESPONSIVE — VERY SMALL MOBILE
 
   .ferris-card {
     width:
-      clamp(100px, 28vw, 180px);
+      clamp(95px, 26vw, 140px);
 
     height:
-      clamp(80px, 20vw, 120px);
+      clamp(70px, 18vw, 105px);
 
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(55vw, 380px));
+      translateX(min(32vw, 190px));
   }
 
   .about__content {
-    padding:
-      0 16px 40px;
+    right: 3vw;
+
+    width: 44vw;
   }
 
   .about__title {
     font-size:
-      clamp(1.75rem, 10vw, 3rem);
+      clamp(1.65rem, 9.5vw, 2.6rem);
+  }
+
+  .about__subtitle {
+    font-size:
+      clamp(0.52rem, 2.5vw, 0.68rem);
   }
 
   .about__stamp {
@@ -1489,60 +1628,5 @@ RESPONSIVE — VERY SMALL MOBILE
   .ferris-wheel__spoke {
     width:
       clamp(4px, 0.5vw, 6px);
-  }
-}
-
-
-/* =========================================================
-MODAL RESPONSIVE
-========================================================= */
-
-@media (max-width: 700px) {
-  .card-modal__hero {
-    height: 30vh;
-
-    min-height: 180px;
-  }
-
-  .card-modal__body {
-    padding:
-      clamp(24px, 4vw, 40px);
-  }
-
-  .card-modal__title {
-    font-size:
-      clamp(1.75rem, 3vw, 2.5rem);
-  }
-
-  .card-modal__text {
-    font-size:
-      clamp(0.9rem, 1.1vw, 1rem);
-
-    line-height: 1.7;
-  }
-}
-
-@media (max-width: 480px) {
-  .card-modal__hero {
-    height: 25vh;
-
-    min-height: 160px;
-  }
-
-  .card-modal__body {
-    padding:
-      20px 16px;
-  }
-
-  .card-modal__title {
-    font-size: 1.6rem;
-  }
-
-  .card-modal__text {
-    font-size: 0.85rem;
-  }
-
-  .card-modal__back {
-    font-size: 0.85rem;
   }
 }
