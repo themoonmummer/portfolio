@@ -677,7 +677,7 @@ CARDS
   transform:
     translate(-50%, -50%)
     rotate(var(--card-angle))
-    translateX(min(62vw, 500px));
+    translateX(min(47.5vw, 450px));
 
   cursor: pointer;
 
@@ -1159,7 +1159,7 @@ RESPONSIVE — LARGE TABLET / SMALL DESKTOP
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(58vw, 460px));
+      translateX(min(64vw, 540px));
   }
 
   .about__content {
@@ -1180,6 +1180,12 @@ RESPONSIVE — TABLET
   .about {
     min-height: 100svh;
     min-height: 100dvh;
+    height: 100svh;
+    height: 100dvh;
+    max-height: 100svh;
+    max-height: 100dvh;
+
+    overflow: hidden;
 
     align-items: center;
   }
@@ -1187,12 +1193,15 @@ RESPONSIVE — TABLET
   /*
    * Only roughly 40% of the wheel is visible.
    * The center of the wheel sits outside the left edge.
+   * min() with svh keeps the exact same look in portrait
+   * but stops the wheel overflowing the screen height
+   * in landscape / short viewports.
    */
   .ferris-wheel {
-    width: 100vw;
-    height: 100vw;
+    width: min(100vw, 78svh);
+    height: min(100vw, 78svh);
 
-    left: -60vw;
+    left: -62vw;
 
     top: 50%;
 
@@ -1201,8 +1210,8 @@ RESPONSIVE — TABLET
   }
 
   .ferris-wheel__background-circle {
-    width: 62vw;
-    height: 62vw;
+    width: min(62vw, 48svh);
+    height: min(62vw, 48svh);
 
     min-width: 220px;
     min-height: 220px;
@@ -1222,11 +1231,13 @@ RESPONSIVE — TABLET
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(34vw, 300px));
+      translateX(min(50vw, 39svh));
   }
 
   /*
    * Content becomes the right-side column.
+   * max-height + overflow guarantees it stays
+   * inside exactly one screen on tablets.
    */
   .about__content {
     position: absolute;
@@ -1236,6 +1247,10 @@ RESPONSIVE — TABLET
 
     width: 43vw;
     max-width: 480px;
+    max-height: 92svh;
+    max-height: 92dvh;
+
+    overflow: hidden;
 
     margin: 0;
 
@@ -1288,6 +1303,12 @@ RESPONSIVE — MOBILE
   .about {
     min-height: 100svh;
     min-height: 100dvh;
+    height: 100svh;
+    height: 100dvh;
+    max-height: 100svh;
+    max-height: 100dvh;
+
+    overflow: hidden;
 
     align-items: center;
   }
@@ -1295,12 +1316,14 @@ RESPONSIVE — MOBILE
   /*
    * The wheel is deliberately positioned outside the viewport.
    * Approximately 40% of it remains visible on the left.
+   * min() with svh keeps the portrait look identical
+   * while fitting short / landscape phone screens.
    */
   .ferris-wheel {
-    width: 100vw;
-    height: 100vw;
+    width: min(100vw, 56svh);
+    height: min(100vw, 56svh);
 
-    left: -60vw;
+    left: -62vw;
 
     top: 50%;
 
@@ -1309,8 +1332,8 @@ RESPONSIVE — MOBILE
   }
 
   .ferris-wheel__background-circle {
-    width: 60vw;
-    height: 60vw;
+    width: min(60vw, 34svh);
+    height: min(60vw, 34svh);
 
     min-width: 200px;
     min-height: 200px;
@@ -1330,11 +1353,12 @@ RESPONSIVE — MOBILE
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(34vw, 260px));
+      translateX(min(50vw, 28svh));
   }
 
   /*
    * Title stays on the right side of the visible card/wheel.
+   * Locked inside one screen height.
    */
   .about__content {
     position: absolute;
@@ -1343,6 +1367,10 @@ RESPONSIVE — MOBILE
     right: 5vw;
 
     width: 42vw;
+    max-height: 92svh;
+    max-height: 92dvh;
+
+    overflow: hidden;
 
     margin: 0;
     padding: 0;
@@ -1350,6 +1378,8 @@ RESPONSIVE — MOBILE
     transform: translateY(-50%);
 
     z-index: 10;
+
+    box-sizing: border-box;
   }
 
   .about__title {
@@ -1463,16 +1493,25 @@ RESPONSIVE — SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 480px) {
-  .ferris-wheel {
-    width: 100vw;
-    height: 100vw;
+  .about {
+    height: 100svh;
+    height: 100dvh;
+    max-height: 100svh;
+    max-height: 100dvh;
 
-    left: -62vw;
+    overflow: hidden;
+  }
+
+  .ferris-wheel {
+    width: min(100vw, 54svh);
+    height: min(100vw, 54svh);
+
+    left: -64vw;
   }
 
   .ferris-wheel__background-circle {
-    width: 64vw;
-    height: 64vw;
+    width: min(64vw, 33svh);
+    height: min(64vw, 33svh);
 
     min-width: 180px;
     min-height: 180px;
@@ -1488,13 +1527,17 @@ RESPONSIVE — SMALL MOBILE
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(33vw, 220px));
+      translateX(min(50vw, 27svh));
   }
 
   .about__content {
     right: 4vw;
 
     width: 43vw;
+    max-height: 92svh;
+    max-height: 92dvh;
+
+    overflow: hidden;
   }
 
   .about__title {
@@ -1559,16 +1602,25 @@ RESPONSIVE — VERY SMALL MOBILE
 ========================================================= */
 
 @media (max-width: 360px) {
-  .ferris-wheel {
-    width: 100vw;
-    height: 100vw;
+  .about {
+    height: 100svh;
+    height: 100dvh;
+    max-height: 100svh;
+    max-height: 100dvh;
 
-    left: -64vw;
+    overflow: hidden;
+  }
+
+  .ferris-wheel {
+    width: min(100vw, 52svh);
+    height: min(100vw, 52svh);
+
+    left: -66vw;
   }
 
   .ferris-wheel__background-circle {
-    width: 68vw;
-    height: 68vw;
+    width: min(68vw, 32svh);
+    height: min(68vw, 32svh);
 
     min-width: 160px;
     min-height: 160px;
@@ -1584,13 +1636,17 @@ RESPONSIVE — VERY SMALL MOBILE
     transform:
       translate(-50%, -50%)
       rotate(var(--card-angle))
-      translateX(min(32vw, 190px));
+      translateX(min(50vw, 26svh));
   }
 
   .about__content {
     right: 3vw;
 
     width: 44vw;
+    max-height: 92svh;
+    max-height: 92dvh;
+
+    overflow: hidden;
   }
 
   .about__title {

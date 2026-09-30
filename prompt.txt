@@ -1,27 +1,40 @@
-Please complete the following two tasks in the project:
+Use the attached desktop screenshot of my portfolio website as the exact visual reference and create a realistic mobile homepage version of the same website.
 
-TASK 1: Fix App.tsx Module Import Error
-- Resolve the runtime error: "Uncaught SyntaxError: The requested module '/src/components/ProjectsSection.tsx' does not provide an export named 'ProjectsMetro'".
-- Update `src/App.tsx` line 3 to use default import: `import ProjectsMetro from "./components/ProjectsSection";` (or ensure `ProjectsSection.tsx` correctly exports `ProjectsMetro` as a named export).
-- Ensure explicit TypeScript typing for any callback parameters (such as `project: any` or `project: Project`) to eliminate TS7006 implicit 'any' warnings.
+Do NOT redesign the website or change its identity. Preserve the exact:
 
-TASK 2: Implement Interactive Ferris Wheel About Section
-Replace/update the About component to match the visual aesthetic and interaction pattern from `assets/inspo/From Klickpin.com- Fresh tiny apartment decor that combine popular trends with useful details you can actually use for your next inspiration board.gif`:
+- background image of Mount Fuji and the Japanese temple
+- color palette
+- typography and elegant serif style
+- cream/white text
+- glassmorphism/translucent UI
+- thin borders and rounded corners
+- overall calm Japanese aesthetic
+- visual hierarchy and spacing style
 
-1. Visual Theme & Color Palette:
-   - Palette: Soft pastel pink (#FFD1DC), pastel blue, pastel yellow, and soft lilac/purple with subtle Japanese aesthetic details (cherry blossom accents, minimal line art, vaporwave/lo-fi vibe).
-   - Graphic Element: Build an interactive, spinning animated Ferris Wheel (replacing a bicycle wheel layout) in the center/side of the section using SVG/Framer Motion.
+Adapt the desktop layout intelligently for a modern smartphone screen in portrait orientation (9:19.5).
 
-2. Ferris Wheel Interactive Nodes / Cabins:
-   - Attach clickable interactive nodes/cabins on the Ferris wheel corresponding to three main categories:
-     1. "About Me"
-     2. "Education"
-     3. "Experience"
-   - Add continuous smooth rotation to the wheel. Hovering over a cabin pauses/highlights it, and clicking a cabin activates that category.
+Mobile layout
 
-3. Content Panel Overlay / Drawer (Triggered on Click):
-   - Clicking a node opens a clear pastel glass modal/card displaying the content:
-     * About Me: Include the bio paragraph: "I'm a person with a lot of hobbies, and this is one of them where I want to create and earn through it so I can support my other hobbies and dreams too."
-     * Education: Add structured placeholder items (e.g., Degree, Institution, Timeline) ready for editing.
-     * Experience: Add structured placeholder items (e.g., Role, Projects Built, Key Skills applied) ready for editing.
-   - Match the exact motion timing, smooth entry/exit transitions, and tiny decorative detail aesthetic seen in the reference GIF file.
+At the top:
+
+- Keep the portfolio name “Riya Jha”
+- Place a clean hamburger menu icon on the right
+- Do not force the desktop navigation links into one cramped horizontal row
+- The navigation should become a compact mobile-friendly menu/hamburger interaction
+
+Hero section:
+
+- Keep “Riya Jha”
+- Keep the exact headline “Vibe Coder & Full-Stack Developer”
+- Keep the existing introductory paragraph from the desktop site
+- Preserve the elegant typography and cream-colored text
+- Scale the typography naturally for mobile
+- Make the hero content readable without covering the important parts of the Mount Fuji/temple background
+- Maintain the cinematic full-screen background image with a subtle dark overlay for readability
+
+The final result should look like the same portfolio website viewed on a phone, rather than a completely new design.
+
+Show the result as a realistic smartphone browser/mobile website screenshot, portrait orientation, with the entire first viewport visible. Make it polished, responsive, premium, minimal, and believable as an actual deployed website.
+
+IMPORTANT:
+Use the supplied desktop screenshot as the source of truth for the website's appearance. Do not invent a different brand, different background, different colors, different typography, or different content. Only adapt the existing desktop design to a mobile viewport.

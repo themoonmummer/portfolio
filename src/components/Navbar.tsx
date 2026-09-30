@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import {
   motion,
+  AnimatePresence,
   useScroll,
   useTransform,
   useMotionValueEvent,
 } from 'motion/react';
+import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   visible: boolean;
@@ -28,6 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const [activeTab, setActiveTab] = useState('home');
   const [isMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const { scrollY } = useScroll();
 
@@ -42,7 +45,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   // Check mobile viewport
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) setMenuOpen(false);
     };
 
     checkMobile();
@@ -53,6 +58,16 @@ export const Navbar: React.FC<NavbarProps> = ({
       window.removeEventListener('resize', checkMobile);
     };
   }, []);
+
+  // Close mobile menu on Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
 
   // Interpolate properties based on scroll progress
   const paddingTop = 2.5 + progress * 4;
@@ -103,6 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const handleNavClick = useCallback(
     (id: string) => {
       setActiveTab(id);
+      setMenuOpen(false);
 
       /*
        * Directly scroll to the section when it exists.
@@ -129,34 +145,205 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   if (!visible) return null;
 
-  // Mobile styles - SAME existing bottom fixed nav bar
-  const mobileStyles = {
-    position: 'fixed' as const,
-    top: 'auto',
-    bottom: 'env(safe-area-inset-bottom, 16px)',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    zIndex: 50,
-    paddingTop: '10px',
-    paddingBottom: '10px',
-    paddingLeft: '20px',
-    paddingRight: '20px',
-    background: 'rgba(255, 255, 255, 0.9)',
-    backdropFilter: 'blur(20px) saturate(180%)',
-    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
-    border: '1px solid rgba(255, 255, 255, 0.7)',
-    borderRadius: '999px',
-    boxShadow: '0 -4px 32px rgba(0, 0, 0, 0.1)',
-    width: 'calc(100% - 32px)',
-    maxWidth: '520px',
-  };
+  // --- Mobile: compact top bar with brand + hamburger ---
+  if (isMobile) {
+    return (
+      <>
+        <motion.header
+          className="pointer-events-auto"
+          style={{
+            position: 'fixed',
+            top: 'max(12px, env(safe-area-inset-top, 12px))',
+            left: '12px',
+            right: '12px',
+            zIndex: 60,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingLeft: '18px',
+            paddingRight: '8px',
+            paddingTop: '8px',
+            paddingBottom: '8px',
+            minHeight: '56px',
+            background: `rgba(255, 255, 255, ${0.22 + progress * 0.6})`,
+            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+            border: '1px solid rgba(255, 255, 255, 0.45)',
+            borderRadius: '16px',
+            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.10)',
+          }}
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
+        >
+          <button
+            type="button"
+            onClick={() => handleNavClick('home')}
+            aria-label="Go to home — Riya Jha portfolio"
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              color: BROWN,
+              fontWeight: 700,
+              fontSize: '1.2rem',
+              letterSpacing: '0.02em',
+              lineHeight: 1,
+              background: 'transparent',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '10px 4px',
+              minHeight: '44px',
+            }}
+          >
+            Riya Jha
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
+            style={{
+              width: '44px',
+              height: '44px',
+              minWidth: '44px',
+              minHeight: '44px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: '12px',
+              border: menuOpen
+                ? '1px solid rgba(74, 46, 43, 0.32)'
+                : '1px solid rgba(74, 46, 43, 0.18)',
+              background: menuOpen
+                ? 'rgba(74, 46, 43, 0.12)'
+                : 'rgba(255, 255, 255, 0.38)',
+              color: BROWN,
+              cursor: 'pointer',
+            }}
+          >
+            {menuOpen ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
+          </button>
+        </motion.header>
+
+        <AnimatePresence>
+          {menuOpen && (
+            <>
+              <motion.div
+                key="mobile-menu-backdrop"
+                style={{
+                  position: 'fixed',
+                  inset: 0,
+                  zIndex: 55,
+                  background: 'rgba(23, 20, 18, 0.28)',
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => setMenuOpen(false)}
+              />
+              <motion.nav
+                key="mobile-menu"
+                aria-label="Mobile navigation"
+                style={{
+                  position: 'fixed',
+                  top: 'calc(max(12px, env(safe-area-inset-top, 12px)) + 64px)',
+                  left: '12px',
+                  right: '12px',
+                  zIndex: 56,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '2px',
+                  padding: '8px',
+                  background: 'rgba(255, 255, 255, 0.94)',
+                  backdropFilter: 'blur(24px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+                  border: '1px solid rgba(255, 255, 255, 0.7)',
+                  borderRadius: '18px',
+                  boxShadow: '0 24px 60px rgba(0, 0, 0, 0.18)',
+                  overflow: 'hidden',
+                }}
+                initial={{ opacity: 0, y: -10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.98 }}
+                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {NAV_ITEMS.map((item, index) => {
+                  const isActive = activeTab === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => handleNavClick(item.id)}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        textAlign: 'left',
+                        padding: '13px 14px',
+                        minHeight: '50px',
+                        borderRadius: '12px',
+                        border: isActive
+                          ? '1px solid rgba(74, 46, 43, 0.22)'
+                          : '1px solid transparent',
+                        background: isActive
+                          ? 'rgba(74, 46, 43, 0.10)'
+                          : 'transparent',
+                        color: isActive ? BROWN : 'rgba(74, 46, 43, 0.72)',
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontWeight: isActive ? 700 : 500,
+                        fontSize: '1.08rem',
+                        letterSpacing: '0.02em',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <span>
+                        <span
+                          style={{
+                            display: 'inline-block',
+                            width: '26px',
+                            marginRight: '10px',
+                            fontSize: '0.78rem',
+                            opacity: 0.5,
+                            fontFamily: "'Manrope', sans-serif",
+                            fontWeight: 600,
+                          }}
+                        >
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        {item.label}
+                      </span>
+                      <span
+                        aria-hidden
+                        style={{
+                          width: '7px',
+                          height: '7px',
+                          borderRadius: '999px',
+                          background: isActive ? BROWN : 'transparent',
+                          border: isActive
+                            ? 'none'
+                            : '1px solid rgba(74, 46, 43, 0.3)',
+                          flexShrink: 0,
+                        }}
+                      />
+                    </button>
+                  );
+                })}
+              </motion.nav>
+            </>
+          )}
+        </AnimatePresence>
+      </>
+    );
+  }
 
   // Desktop styles - SAME existing top-left floating pill
   const desktopStyles = {
     position: 'fixed' as const,
     top: `${95 - progress * 55}px`,
-    left: '35%',
-    transform: 'translateX(-50%)',
+    left: '30%',
+    transform: 'translateX(-40%)',
     zIndex: 50,
     paddingTop: `${paddingTop * 4}px`,
     paddingBottom: `${paddingTop * 4}px`,
@@ -182,10 +369,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <motion.div
       className="pointer-events-auto"
-      style={isMobile ? mobileStyles : desktopStyles}
+      style={desktopStyles}
       initial={{
         opacity: 0,
-        y: isMobile ? 20 : -20,
+        y: -20,
       }}
       animate={{
         opacity: 1,
@@ -199,11 +386,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       <nav
         className="flex flex-row items-center relative"
         style={{
-          gap: isMobile ? '0.35rem' : `${navGap}rem`,
-          justifyContent: isMobile
-            ? 'space-around'
-            : 'flex-start',
-          width: isMobile ? '100%' : 'auto',
+          gap: `${navGap}rem`,
+          justifyContent: 'flex-start',
+          width: 'auto',
         }}
       >
         {NAV_ITEMS.map((item) => (
@@ -222,22 +407,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 activeTab === item.id ? 600 : 400,
               letterSpacing: '0.02em',
               transition: 'color 0.3s',
-              fontSize: isMobile
-                ? '0.7rem'
-                : `${fontSize}rem`,
-              padding: isMobile
-                ? '0.5rem 0.85rem'
-                : `${0.375 + progress * 0.25}rem ${
-                    0.75 + progress * 0.25
-                  }rem`,
-              minHeight: isMobile ? '44px' : 'auto',
+              fontSize: `${fontSize}rem`,
+              padding: `${0.375 + progress * 0.25}rem ${
+                0.75 + progress * 0.25
+              }rem`,
+              minHeight: 'auto',
               minWidth: 'auto',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
             }}
           >
-            {activeTab === item.id && !isMobile && (
+            {activeTab === item.id && (
               <motion.div
                 layoutId="navbar-pill"
                 className="absolute inset-0 rounded-full"
@@ -248,24 +429,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                     '1px solid rgba(255, 255, 255, 0.6)',
                   boxShadow:
                     '0 2px 8px rgba(0,0,0,0.06)',
-                }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 400,
-                  damping: 30,
-                }}
-              />
-            )}
-
-            {isMobile && activeTab === item.id && (
-              <motion.div
-                layoutId="navbar-pill-mobile"
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background:
-                    'rgba(74, 46, 43, 0.15)',
-                  border:
-                    '1px solid rgba(74, 46, 43, 0.3)',
                 }}
                 transition={{
                   type: 'spring',

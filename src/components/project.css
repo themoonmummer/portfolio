@@ -444,16 +444,17 @@
   .projects-video-window {
     position: absolute;
 
-    /* smaller + centered */
-    left: 20%;
-    top: 11%;
+    /* portrait crop: train window bleeds off both sides,
+       video tracks the real opening — full-bleed, top ~19% */
+    left: 4%;
+    top: 19%;
 
-    width: 64%;
-    height: 58%;
+    width: 92%;
+    height: 47%;
 
     overflow: hidden;
 
-    border-radius: 30px;
+    border-radius: 28px;
 
     box-sizing: border-box;
   }
@@ -488,18 +489,18 @@
   }
 
   .projects-pole {
-    top: 9%;
-    bottom: 13%;
+    top: 17%;
+    bottom: 26%;
 
     width: 8px;
   }
 
   .projects-pole--left {
-    left: 13%;
+    left: 1.8%;
   }
 
   .projects-pole--right {
-    right: 13%;
+    right: 1.8%;
   }
 
   .projects-destination-board {
@@ -542,28 +543,28 @@
   }
 
   .projects-video-window {
-    left: 9%;
-    top: 24%;
+    left: 5%;
+    top: 20%;
 
-    width: 82%;
-    height: 45%;
+    width: 90%;
+    height: 46%;
 
     border-radius: 24px;
   }
 
   .projects-pole {
-    top: 20%;
-    bottom: 15%;
+    top: 18%;
+    bottom: 26%;
 
     width: 6px;
   }
 
   .projects-pole--left {
-    left: 6%;
+    left: 2.5%;
   }
 
   .projects-pole--right {
-    right: 6%;
+    right: 2.5%;
   }
 
   .projects-destination-board {
@@ -631,28 +632,28 @@
    */
 
   .projects-video-window {
-    left: 7%;
-    top: 28%;
+    left: 3%;
+    top: 20.5%;
 
-    width: 86%;
-    height: 40%;
+    width: 94%;
+    height: 45.5%;
 
     border-radius: 18px;
   }
 
   .projects-pole {
-    top: 25%;
-    bottom: 17%;
+    top: 18.5%;
+    bottom: 27%;
 
     width: 5px;
   }
 
   .projects-pole--left {
-    left: 4%;
+    left: 1.2%;
   }
 
   .projects-pole--right {
-    right: 4%;
+    right: 1.2%;
   }
 
   /*
@@ -731,28 +732,28 @@
   }
 
   .projects-video-window {
-    left: 6%;
-    top: 29%;
+    left: 2.5%;
+    top: 21%;
 
-    width: 88%;
-    height: 38%;
+    width: 95%;
+    height: 45%;
 
     border-radius: 15px;
   }
 
   .projects-pole {
-    top: 26%;
-    bottom: 17%;
+    top: 19%;
+    bottom: 27%;
 
     width: 4px;
   }
 
   .projects-pole--left {
-    left: 3%;
+    left: 1%;
   }
 
   .projects-pole--right {
-    right: 3%;
+    right: 1%;
   }
 
   .projects-destination-board {

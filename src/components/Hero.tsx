@@ -61,7 +61,7 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const isMain = phase === 'main';
 
   return (
-    <section className="relative section-full vh-fix overflow-hidden">
+    <section id="home" className="relative section-full vh-fix overflow-hidden">
 
       {/* =====================================================
           INTRO
@@ -149,14 +149,24 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           ===================================================== */}
 
       <div
-        className="relative w-full flex items-center justify-center section-full vh-fix"
+        className="relative w-full flex items-center justify-center section-full vh-fix px-3 pt-[86px] pb-4 md:p-0"
         style={{
           backgroundImage: `url("${fuji3}")`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: '50% 32%',
           backgroundRepeat: 'no-repeat',
         }}
       >
+        {/* Cinematic dark overlay — keeps Fuji/temple visible up top,
+            deepens bottom for cream text readability */}
+        <div
+          aria-hidden
+          className="absolute inset-0 z-[1] pointer-events-none"
+          style={{
+            background:
+              'linear-gradient(to bottom, rgba(12,10,10,0.28) 0%, rgba(12,10,10,0.08) 38%, rgba(12,10,10,0.02) 55%, rgba(18,10,8,0.42) 82%, rgba(18,10,8,0.58) 100%)',
+          }}
+        />
 
         {/* ===================================================
             GLASS CARD
@@ -166,8 +176,8 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
           className="relative z-10"
           style={{
             width: 'min(94vw, 1200px)',
-            height: 'min(88vh, 88svh, 800px)',
-            maxHeight: '88svh',
+            height: 'min(82vh, 82svh, 800px)',
+            maxHeight: '82svh',
           }}
           initial={{
             scale: 0.92,
@@ -194,11 +204,23 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             }}
           >
 
+            {/* Readability gradient inside glass — bottom only,
+                Fuji/temple stays clear up top */}
+            <div
+              aria-hidden
+              className="absolute inset-x-0 bottom-0 pointer-events-none"
+              style={{
+                height: '58%',
+                background:
+                  'linear-gradient(to top, rgba(15,8,7,0.52) 0%, rgba(15,8,7,0.22) 55%, transparent 100%)',
+              }}
+            />
+
             {/* =================================================
                 TEXT
                 ================================================= */}
 
-            <div className="absolute left-0 bottom-0 w-full px-5 sm:px-7 md:px-10 lg:px-14 pb-14 sm:pb-18 md:pb-22 lg:pb-26">
+            <div className="absolute left-0 bottom-0 w-full px-5 sm:px-7 md:px-10 lg:px-14 pb-8 sm:pb-14 md:pb-20 lg:pb-24">
               <motion.div
                 className="text-left"
                 initial={{
@@ -221,9 +243,9 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                     color: '#F3E9D7',
                     fontWeight: 800,
                     letterSpacing: '0.01em',
-                    lineHeight: 1.1,
-                    fontSize: 'clamp(2.25rem, 5.5vw, 5rem)',
-                    transform: 'translate(clamp(16px, 3.5vw, 50px), clamp(-16px, -2.5vw, -50px))',
+                    lineHeight: 1.05,
+                    fontSize: 'clamp(2.6rem, 11vw, 5rem)',
+                    textShadow: '0 2px 18px rgba(0,0,0,0.45)',
                   }}
                 >
                   Riya Jha
@@ -237,8 +259,9 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                     fontWeight: 700,
                     letterSpacing: '0.02em',
                     lineHeight: 1.25,
-                    fontSize: 'clamp(1.1rem, 2.8vw, 2.25rem)',
-                    transform: 'translate(clamp(16px, 3.5vw, 50px), clamp(-12px, -2vw, -40px))',
+                    fontSize: 'clamp(1.25rem, 5.4vw, 2.25rem)',
+                    textShadow: '0 2px 14px rgba(0,0,0,0.45)',
+                    maxWidth: '16ch',
                   }}
                 >
                   Vibe Coder & Full-Stack Developer
@@ -249,12 +272,12 @@ export const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     color: '#F3E9D7',
-                    fontWeight: 900,
+                    fontWeight: 600,
                     letterSpacing: '0.02em',
-                    lineHeight: 1.7,
-                    fontSize: 'clamp(0.7rem, 1.2vw, 0.95rem)',
-                    WebkitTextStroke: '0.25px #241310',
-                    transform: 'translate(clamp(16px, 3.5vw, 50px), clamp(-16px, -2.5vw, -50px))',
+                    lineHeight: 1.65,
+                    fontSize: 'clamp(0.88rem, 3.7vw, 0.95rem)',
+                    textShadow: '0 1px 12px rgba(0,0,0,0.55)',
+                    maxWidth: '34ch',
                   }}
                 >
                   I&apos;m a person with a lot of hobbies, and this is one of them
