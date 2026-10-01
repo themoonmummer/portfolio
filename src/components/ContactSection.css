@@ -862,7 +862,7 @@ transform: translateY(25px);
    TABLET PORTRAIT
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .contact-container {
     padding:
       90px

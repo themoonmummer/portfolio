@@ -1011,10 +1011,12 @@ transition:
 
 
 /* =========================================================
-   MOBILE
-========================================================= */
+   TABLET + MOBILE — unified to iPad Mini (768px):
+   all 601–1024px render identically (stacked).
+   Mobile (<=600px) untouched via overrides below.
+======================================================== */
 
-@media (max-width: 850px) {
+@media (max-width: 1024px) {
 
   .skills-landing-content {
     width: min(90vw, 600px);
@@ -1201,7 +1203,8 @@ transition:
    TABLET
 ========================================================= */
 
-@media (max-width: 1024px) and (min-width: 851px) {
+/* TABLET 851-1024 removed: inherits unified iPad Mini stacked layout. */
+@media (min-width: 20000px) {
   .skills-expanded-inner {
     width: min(1100px, 90vw);
     column-gap: clamp(40px, 6vw, 80px);

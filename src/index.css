@@ -805,8 +805,8 @@ RESPONSIVE BREAKPOINT ADJUSTMENTS
 These change the GLOBAL system, not individual sections.
 ========================================================= */
 
-/* Tablet */
-@media (max-width: 768px) {
+/* Tablet — unified to iPad Mini (768px): all 601–1024px render identically */
+@media (max-width: 1024px) {
 :root {
 --page-padding: clamp(1rem, 5vw, 2rem);
 
@@ -871,4 +871,33 @@ Prevent oversized layouts when viewport becomes huge.
 --text-5xl: clamp(3rem, 3.5vw, 6rem);
 
 }
+}
+
+/* =========================================================
+TABLET NORMALIZATION — iPad Mini (768px) is the reference.
+All tablet widths 601–1024px must render identically.
+Mobile (<=600px) and desktop (>=1025px) are untouched.
+========================================================= */
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  /* Hero outer wrapper: lock to md:p-0 (iPad Mini) instead of
+     sm/mobile paddings (<768px) — 768px+ already has p-0. */
+  #home > div.relative.w-full {
+    padding: 0 !important;
+  }
+
+  /* Hero text block: lock to md values (px-10 / pb-20) instead of
+     sm values (<768px) or lg values (1024px). */
+  #home .absolute.left-0.bottom-0 {
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+    padding-bottom: 5rem !important;
+  }
+
+  /* Footer: lock to sm:text-sm (iPad Mini) for 601–639px
+     where sm does not apply yet. 640px+ already text-sm. */
+  footer p {
+    font-size: 0.875rem !important;
+    line-height: 1.25rem !important;
+  }
 }

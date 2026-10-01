@@ -1173,10 +1173,10 @@ RESPONSIVE — LARGE TABLET / SMALL DESKTOP
 
 
 /* =========================================================
-RESPONSIVE — TABLET
-========================================================= */
+RESPONSIVE — TABLET (unified to iPad Mini 768px: 601–1024px identical)
+======================================================== */
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .about {
     min-height: 100svh;
     min-height: 100dvh;
@@ -1296,10 +1296,10 @@ RESPONSIVE — TABLET
 
 
 /* =========================================================
-RESPONSIVE — MOBILE
-========================================================= */
+RESPONSIVE — MOBILE (<=600px untouched)
+======================================================== */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .about {
     min-height: 100svh;
     min-height: 100dvh;

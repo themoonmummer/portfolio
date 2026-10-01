@@ -42,10 +42,10 @@ export const Navbar: React.FC<NavbarProps> = ({
     setProgress(v);
   });
 
-  // Check mobile viewport
+  // Check mobile viewport — tablets (601–1024px) use desktop pill like iPad Mini (768px)
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth < 768;
+      const mobile = window.innerWidth < 601;
       setIsMobile(mobile);
       if (!mobile) setMenuOpen(false);
     };

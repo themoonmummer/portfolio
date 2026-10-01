@@ -436,10 +436,10 @@
 }
 
 /* =========================================================
-   TABLET ONLY — 601px TO 900px
+   TABLET ONLY — 601px TO 1024px (unified to iPad Mini 768px)
    ========================================================= */
 
-@media (min-width: 601px) and (max-width: 900px) {
+@media (min-width: 601px) and (max-width: 1024px) {
 
   .projects-video-window {
     position: absolute;
@@ -796,6 +796,28 @@
    ========================================================= */
 
 @media (max-height: 650px) and (max-width: 768px) {
+
+  .projects-video-window {
+    top: 25%;
+    height: 44%;
+  }
+
+  .projects-destination-board {
+    top: 10px;
+  }
+
+  .projects-click-hint {
+    bottom: 43px;
+  }
+
+  .projects-indicators {
+    bottom: 16px;
+  }
+}
+
+/* Tablet short screens 769–1024px: same handling as iPad Mini
+   so landscape tablets stay identical. Mobile/desktop untouched. */
+@media (max-height: 650px) and (min-width: 769px) and (max-width: 1024px) {
 
   .projects-video-window {
     top: 25%;

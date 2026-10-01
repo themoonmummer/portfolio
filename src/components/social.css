@@ -954,7 +954,7 @@
    TABLET PORTRAIT
    ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .social-container {
     grid-template-columns: 1fr;
 
